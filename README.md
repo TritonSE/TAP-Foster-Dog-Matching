@@ -14,6 +14,7 @@ Install all necessary packages for both frontend and backend using `npm install`
 For frontend, do the following:
 
 `cd client`
+
 `npm start`
 
 Open http://localhost:3000 to see it in the browser.
