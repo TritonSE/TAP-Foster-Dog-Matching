@@ -1,0 +1,12 @@
+#default-body {
+  display: grid;
+  grid-template-columns: 17% 83%;
+}
+
+#default-body-navbar {
+  grid-column: 1;
+}
+
+#default-body-container {
+  grid-column: 2;
+}
