@@ -1,6 +1,7 @@
 #default-body {
   display: grid;
-  grid-template-columns: 17% 83%;
+  grid-template-columns: 300px auto;
+  padding: 100px 65px 0 65px;
 }
 
 #default-body-navbar {
