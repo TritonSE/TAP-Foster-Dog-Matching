@@ -1,0 +1,35 @@
+#header {
+  background-color: black;
+  color: white;
+  padding: 30px 0px;
+  display: grid;
+  grid-template-columns: max(100px, 15%) max(300px, 65%) max(70px, 10%);
+  column-gap: 5%;
+}
+
+.header-welcome {
+  grid-column: 1;
+  text-align: right;
+  font-size: 25px;
+}
+
+#foster-text {
+  color: #8dc442;
+}
+
+.header-message {
+  grid-column: 2;
+  font-size: 24px;
+  position: relative;
+}
+
+.header-message-text {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.header-sign-out {
+  grid-column: 3;
+  font-size: 25px;
+}
