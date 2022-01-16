@@ -8,11 +8,11 @@ function getDogs() {
 }
 
 /**
- * Returns a specific dog profile according to provided dog_id
- * @param dog_id - _id of dog
+ * Returns a specific dog profile according to provided dog id
+ * @param dogId - _id of dog
  */
-function getDog(dog_id) {
-  return Dog.findById(dog_id).exec();
+function getDog(dogId) {
+  return Dog.findById(dogId).exec();
 }
 
 /**
