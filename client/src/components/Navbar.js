@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  Nav,
-  NavLink,
-  NavMenu,
-} from './Navbar_styled';
-
+import { Nav, NavLink, NavMenu } from "./Navbar_styled";
 
 function Navbar(props) {
   // Pages will be a dictionary with {key: value} = {Page Name: Path to page}
