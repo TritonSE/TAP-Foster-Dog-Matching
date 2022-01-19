@@ -29,7 +29,7 @@ module.exports = mongoose.model(
       required: true,
     },
     imageUrl: {
-      type: String,
+      type: [String],
       required: true,
     },
     backgroundInfo: {
@@ -42,7 +42,6 @@ module.exports = mongoose.model(
     },
     internalNotes: {
       type: String,
-      required: true,
     },
   })
 );

@@ -11,10 +11,10 @@ const validators = [
   body("gender").notEmpty().isString(),
   body("weight").notEmpty().isNumeric(),
   body("breed").notEmpty().isString(),
-  body("imageUrl").notEmpty().isURL(),
+  body("imageUrl").notEmpty().isArray().isURL(),
   body("backgroundInfo").notEmpty().isString(),
   body("vettingInfo").notEmpty().isString(),
-  body("internalNotes").notEmpty().isString(),
+  body("internalNotes").optional().isString(),
 ];
 
 /**
