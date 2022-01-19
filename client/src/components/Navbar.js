@@ -5,20 +5,25 @@ function Navbar(props) {
   // Pages will be a dictionary with {key: value} = {Page Name: Path to page}
   /*
   Example usage:
+    At top of file:
+    import Navbar from "../components/Navbar";
+
+    In JSX:
     <Navbar
-    pages={{
-      "Pending Applications": "/dashboard",
-      "Current Fosters": "/fosters",
-      "Calendar": "/calendar",
-    }}
-  />
+      pages={{
+        "Pending Applications": "/dashboard",
+        "Current Fosters": "/fosters",
+        "Calendar": "/calendar",
+      }}
+    />
+    
+    The pages prop will contain the elements of the navbar and their routes
   */
-  const pages = props.pages;
 
   return (
     <Nav>
       <NavMenu>
-        {Object.entries(pages).map(([page, path]) => (
+        {Object.entries(props.pages).map(([page, path]) => (
           <NavLink to={path} activeStyle>
             {page}
           </NavLink>
