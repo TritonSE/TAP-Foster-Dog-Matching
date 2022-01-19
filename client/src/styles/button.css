@@ -1,0 +1,25 @@
+.button-border {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 20px 60px;
+  background: #8dc442;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+}
+
+.button-name {
+  position: static;
+  width: 62px;
+  height: 29px;
+  left: 60px;
+  top: 20px;
+
+  font-family: Myriad Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 29px;
+
+  color: #ffffff;
+}

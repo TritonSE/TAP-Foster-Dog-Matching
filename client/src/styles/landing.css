@@ -1,0 +1,80 @@
+.landing-right-panel {
+  position: absolute;
+  width: 892px;
+  height: 950px;
+  left: 891px;
+  top: 130px;
+
+  background: #8dc442;
+}
+
+.dog-image {
+  position: absolute;
+  width: 672px;
+  height: 770px;
+  left: 1000px;
+  top: 220px;
+}
+
+.copyright {
+  position: absolute;
+  width: 383px;
+  height: 49px;
+  left: 1379px;
+  top: 1011px;
+
+  font-family: Myriad Pro;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 18px;
+  text-align: right;
+
+  color: #000000;
+}
+
+.form-login-container {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  left: 124px;
+  top: 305px;
+
+  background: #ffffff;
+  border: 0.25px solid #000000;
+  box-sizing: border-box;
+  box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+}
+
+.form-header {
+  position: absolute;
+  width: 134px;
+  height: 40px;
+  left: 356px;
+  top: 365px;
+
+  font-family: Myriad Pro;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 33px;
+  line-height: 40px;
+
+  color: #000000;
+}
+
+#form-landing-question {
+  position: absolute;
+  width: 91px;
+  height: 24px;
+  left: 378px;
+  top: 493px;
+
+  font-family: Myriad Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 24px;
+
+  color: #000000;
+}
