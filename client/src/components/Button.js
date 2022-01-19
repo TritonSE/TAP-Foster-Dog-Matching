@@ -5,7 +5,7 @@ function Button(props) {
   return (
     <div className="button-border" style={props.styleBorder}>
       <div className="button-name" style={props.styleText}>
-        {props.buttonName}
+        {props.name}
       </div>
     </div>
   );
