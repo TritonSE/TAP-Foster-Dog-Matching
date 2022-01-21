@@ -65,20 +65,24 @@ router.post("/", [...validators, validateRequest], (req, res, next) => {
 /**
  * PUT /dogs/:dogId - Update a dog profile
  */
-router.put("/:dogId", [...validators, validateRequest], (req, res, next) => {
-  updateDog(req.params.dogId, req.body)
-    .then((dog) => {
-      if (dog) {
-        res.status(200).json({
-          dog,
-        });
-      } else {
-        throw new Error("Dog profile was not updated.");
-      }
-    })
-    .catch((err) => {
-      next(err);
-    });
-});
+router.put(
+  "/:dogId",
+  [...validators.map((validator) => validator.optional()), validateRequest], // all fields for update are optional
+  (req, res, next) => {
+    updateDog(req.params.dogId, req.body)
+      .then((dog) => {
+        if (dog) {
+          res.status(200).json({
+            dog,
+          });
+        } else {
+          throw new Error("Dog profile was not updated.");
+        }
+      })
+      .catch((err) => {
+        next(err);
+      });
+  }
+);
 
 module.exports = router;
