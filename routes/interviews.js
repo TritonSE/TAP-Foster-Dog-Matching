@@ -19,10 +19,13 @@ const validators = [
 
 /**
  * GET /interview/:interviewId - Return an interview by ID
+ *
+ * @queryParam stage - Current stage of the interview
  */
 router.get("/:interviewId", (req, res, next) => {
-  getInterview(req.params.interviewId)
+  getInterview(req.params.interviewId, req.query.stage)
     .then((interview) => {
+      if (!interview) throw new Error("Interview does not exist!");
       res.status(200).json({ interview });
     })
     .catch((err) => {

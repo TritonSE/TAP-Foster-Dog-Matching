@@ -3,9 +3,10 @@ const { Interview } = require("../models");
 /**
  * Retrieves the corresponding interview given an interview id
  * @param interviewId - _id of interview
+ * @param interviewStage - stage of interview
  */
-function getInterview(interviewId) {
-  return Interview.findById(interviewId).exec();
+function getInterview(interviewId, interviewStage) {
+  return Interview.findOne({ _id: interviewId, stage: interviewStage }).exec();
 }
 
 /**
