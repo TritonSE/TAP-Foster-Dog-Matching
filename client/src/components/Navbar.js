@@ -27,9 +27,8 @@ function Navbar(props) {
       {/* <ToggleNavbar onClick={() => setRenderNav(!renderNav)}>
         <Burger src={burger} />
       </ToggleNavbar> */}
-      
 
-      { /* Conditionally Rendered Navigation Panel */ }
+      {/* Conditionally Rendered Navigation Panel */}
       {renderNav ? (
         <Nav>
           <NavMenu>
@@ -41,8 +40,7 @@ function Navbar(props) {
           </NavMenu>
         </Nav>
       ) : (
-        <>
-        </>
+        <></>
       )}
     </>
   );
