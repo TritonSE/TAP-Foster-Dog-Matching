@@ -1,19 +1,19 @@
 import React from "react";
 import logo from "../images/logo.png";
-import "../styles/header.css";
+import "../styles/loginheader.css";
 
-function Header() {
+function LoginHeader() {
   return (
     <div id="header">
       <img id="header-logo" src={logo} alt="The Animal Pad" />
-      <div>
-        <span id="header-message-text">
+      <div id="header-message">
+        <span>
           TAP is an all-breed, non-profit Dog Rescue Organization based in San Diego, Ca.{" "}
-          <strong>Learn how you can help us right now!</strong>
+          <span id="header-bold-message">Learn how you can help us right now!</span>
         </span>
       </div>
     </div>
   );
 }
 
-export default Header;
+export default LoginHeader;

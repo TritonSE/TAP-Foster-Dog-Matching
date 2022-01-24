@@ -3,11 +3,9 @@ import "../styles/button.css";
 
 function Button(props) {
   return (
-    <div className="button-border" style={props.styleBorder}>
-      <div className="button-name" style={props.styleText}>
-        {props.name}
-      </div>
-    </div>
+    <a href={props.buttonLink} className="button-border" style={props.styleBorder}>
+      <div className="button-name">{props.name}</div>
+    </a>
   );
 }
 

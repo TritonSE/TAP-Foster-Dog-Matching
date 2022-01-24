@@ -1,80 +1,83 @@
-.landing-right-panel {
-  position: absolute;
-  width: 892px;
-  height: 950px;
-  left: 891px;
-  top: 130px;
-
+.right-panel {
   background: #8dc442;
+
+  position: absolute;
+  width: 50%;
+  right: 0px;
+  top: 130px;
+  bottom: 0px;
+
+  display: flex;
+  justify-content: center;
 }
 
 .dog-image {
-  position: absolute;
-  width: 672px;
-  height: 770px;
-  left: 1000px;
-  top: 220px;
+  height: auto;
+  width: auto;
+  max-height: 80%;
+  max-width: 80%;
+  margin: auto;
 }
 
 .copyright {
   position: absolute;
-  width: 383px;
-  height: 49px;
-  left: 1379px;
-  top: 1011px;
+  width: 80%;
+  right: 3%;
+  bottom: 2%;
 
-  font-family: Myriad Pro;
-  font-style: normal;
+  color: black;
   font-weight: bold;
   font-size: 15px;
-  line-height: 18px;
   text-align: right;
-
-  color: #000000;
+  line-height: 2;
 }
 
-.form-login-container {
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  left: 124px;
-  top: 305px;
+.left-panel {
+  background: white;
 
-  background: #ffffff;
-  border: 0.25px solid #000000;
+  position: absolute;
+  width: 50%;
+  left: 0px;
+  top: 130px;
+  bottom: 0px;
+
+  display: flex;
+  justify-content: center;
+}
+
+.form-container {
+  position: relative;
+  width: 63%;
+  height: 65%;
+  margin: auto;
+
+  background: white;
+  border: 0.25px solid rgba(0, 0, 0, 0.493);
   box-sizing: border-box;
   box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
+
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .form-header {
   position: absolute;
-  width: 134px;
+  bottom: 85%;
   height: 40px;
-  left: 356px;
-  top: 365px;
 
-  font-family: Myriad Pro;
-  font-style: normal;
+  color: black;
   font-weight: bold;
   font-size: 33px;
-  line-height: 40px;
-
-  color: #000000;
 }
 
-#form-landing-question {
+.form-landing-question {
   position: absolute;
-  width: 91px;
+  bottom: 65%;
+  width: 100px;
   height: 24px;
-  left: 378px;
-  top: 493px;
 
-  font-family: Myriad Pro;
-  font-style: normal;
-  font-weight: normal;
+  color: black;
   font-size: 20px;
-  line-height: 24px;
-
-  color: #000000;
 }
