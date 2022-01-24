@@ -5,15 +5,6 @@ import dog from "../images/dog.png";
 import "../styles/landing.css";
 
 function Landing() {
-  const fosterBorder = {
-    position: "absolute",
-    bottom: "45%",
-  };
-  const adminBorder = {
-    position: "absolute",
-    bottom: "25%",
-  };
-
   return (
     <div>
       <Header />
@@ -21,8 +12,12 @@ function Landing() {
         <div className="form-container">
           <b className="form-header">Welcome</b>
           <div className="form-landing-question">Are you a...</div>
-          <Button buttonLink="/login" styleBorder={fosterBorder} name="Foster" />
-          <Button buttonLink="/login" styleBorder={adminBorder} name="Admin" />
+          <Button buttonLink="/login" class="foster" name="Foster" />
+          <Button buttonLink="/login" class="admin" name="Admin" />
+        </div>
+        <div className="copyright">
+          © 2020 The Animal Pad | All rights reserved
+          <div>The Animal Pad is a 501c3 Organization EIN #45-4902841.</div>
         </div>
       </div>
       <div className="right-panel">

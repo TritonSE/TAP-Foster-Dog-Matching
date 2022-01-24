@@ -25,3 +25,30 @@
 #header-bold-message {
   font-weight: bold;
 }
+
+@media only screen and (max-width: 750px) {
+  #header {
+    display: grid;
+    grid-template-columns: 0.2fr 5fr 0.2fr;
+    grid-column-gap: 5%;
+    background-color: black;
+    height: 97px;
+  }
+
+  #header-logo {
+    margin-left: 9px;
+    margin-bottom: 12px;
+    width: 55px;
+  }
+
+  #header-bold-message {
+    display: none;
+  }
+
+  #header-message {
+    font-size: 14px;
+    width: 100%;
+    margin: auto;
+    margin-bottom: 10px;
+  }
+}

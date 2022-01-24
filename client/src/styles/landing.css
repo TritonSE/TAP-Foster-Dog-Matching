@@ -32,6 +32,10 @@
   line-height: 2;
 }
 
+.left-panel > .copyright {
+  display: none;
+}
+
 .left-panel {
   background: white;
 
@@ -80,4 +84,99 @@
 
   color: black;
   font-size: 20px;
+}
+
+.button-border-foster {
+  position: absolute;
+  bottom: 45%;
+  min-width: 175px;
+}
+
+.button-border-admin {
+  position: absolute;
+  bottom: 25%;
+  min-width: 175px;
+}
+
+@media only screen and (max-width: 750px) {
+  .right-panel,
+  .dog-image {
+    display: none;
+  }
+
+  .left-panel > .copyright {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: auto;
+    bottom: 15px;
+    right: 10px;
+
+    font-size: 13px;
+    line-height: 2;
+  }
+
+  .left-panel {
+    background-color: #8dc442;
+    width: 100%;
+    top: 97px;
+  }
+
+  .form-container {
+    width: 74%;
+    height: 45%;
+    position: absolute;
+    bottom: 32.5%;
+
+    border: none;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+  }
+
+  .form-header {
+    color: black;
+    font-weight: bold;
+    font-size: 33px;
+
+    position: absolute;
+    top: 5%;
+
+    height: 40px;
+  }
+
+  .form-landing-question {
+    color: black;
+    font-size: 20px;
+
+    position: absolute;
+    top: 28%;
+
+    width: 100px;
+    height: 24px;
+  }
+
+  .button-name-foster,
+  .button-name-admin {
+    font-size: 17px;
+  }
+
+  .button-border-foster,
+  .button-border-admin {
+    box-shadow: 0px 2.85714px 2.85714px rgba(0, 0, 0, 0.25);
+    border-radius: 14.2857px;
+
+    max-width: 142.5px;
+    width: 52.5%;
+    height: 50px;
+  }
+
+  .button-border-foster {
+    position: absolute;
+    bottom: 39%;
+  }
+
+  .button-border-admin {
+    position: absolute;
+    bottom: 13%;
+  }
 }

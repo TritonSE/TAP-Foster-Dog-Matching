@@ -4,18 +4,11 @@ import LoginForm from "../components/LoginForm";
 import dog from "../images/dog.png";
 
 function Login() {
-  const loginStyle = {
-    position: "absolute",
-    top: "67.5%",
-    height: "45px",
-    width: "52%",
-  };
-
   return (
     <div>
       <Header />
       <div>
-        <LoginForm loginType="Foster" buttonStyle={loginStyle} />
+        <LoginForm loginType="Foster" />
         <div className="right-panel">
           <img className="dog-image" src={dog} alt="Cute dog!" />
           <div className="copyright">
