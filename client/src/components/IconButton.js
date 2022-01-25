@@ -1,3 +1,14 @@
+/**
+ * Reusable button with an icon image that takes a target for its link and
+ * optionally supports absolute offsets to position it if given a
+ * relatively positioned parent. Used primarily in DashboardCards.
+ *
+ *
+ * @summary     Reusable Button with an icon image.
+ * @author      Andrew Masek
+ *
+ */
+
 import React from "react";
 import background from "../images/greenbutton.png";
 import "../styles/iconbutton.css";

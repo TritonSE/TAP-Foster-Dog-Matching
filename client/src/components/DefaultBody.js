@@ -1,3 +1,10 @@
+/**
+ * Body component that includes the navbar and a container for child components.
+ *
+ * @summary     Body component that includes the navbar and a container for child components.
+ * @author      Andrew Masek
+ */
+
 import React from "react";
 import "../styles/defaultbody.css";
 import Navbar from "./Navbar";

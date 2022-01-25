@@ -1,6 +1,16 @@
+/**
+ * Header component that includes welcome message, call-to-action message, and sign out button
+ * for use on many pages starting with the Dashboard.
+ *
+ *
+ * @summary     Reusable Header component for use on dashboard pages.
+ * @author      Andrew Masek
+ *
+ * #TODO Signout button needs to be made functional
+ */
+
 import React from "react";
 import "../styles/header.css";
-// TODO Signout button needs to be made functional
 
 function Header(props) {
   return (

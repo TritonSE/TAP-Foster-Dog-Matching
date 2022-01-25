@@ -1,3 +1,10 @@
+/**
+ * Reusable card for the dashboard that contains an iconButton component, image, and text.
+ *
+ * @summary     Card meant for the dashboard.
+ * @author      Andrew Masek
+ */
+
 import React from "react";
 import "../styles/dashboardcard.css";
 
