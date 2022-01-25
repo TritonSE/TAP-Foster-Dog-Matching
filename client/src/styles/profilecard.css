@@ -1,0 +1,64 @@
+.profile-card {
+  position: relative;
+  width: 245.98px;
+  height: 140px;
+  padding: 0px 10px 10px 0px;
+  background: #ffffff;
+  border: 0.327103px solid #9b9a9a;
+  box-sizing: border-box;
+  box-shadow: 0px 2.61682px 2.61682px rgba(0, 0, 0, 0.5);
+  border-radius: 9.81308px;
+  margin-bottom: 40px;
+}
+
+.profile-card-name {
+  position: absolute;
+  width: 87px;
+  height: 19px;
+  left: 121px;
+  top: 21px;
+  font-family: Myriad Pro;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.profile-card-phonenumber {
+  position: absolute;
+  width: 94px;
+  height: 16px;
+  left: 121px;
+  top: 60px;
+  font-family: Myriad Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 16px;
+}
+
+.profile-card-email {
+  position: absolute;
+  width: 82px;
+  height: 16px;
+  left: 121px;
+  top: 96px;
+  font-family: Myriad Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 16px;
+  color: #000000;
+}
+
+.profile-card-image {
+  position: absolute;
+  width: 63px;
+  height: 63px;
+  left: 20px;
+  top: 20px;
+  border-radius: 50%;
+}

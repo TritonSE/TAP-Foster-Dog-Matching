@@ -1,0 +1,67 @@
+.profile-section {
+  position: relative;
+  width: auto;
+  height: 441px;
+  left: 300px;
+  top: 130px;
+  margin-bottom: 45px;
+}
+
+.profile-section-title {
+  position: relative;
+  font-family: Myriad Pro;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 37px;
+  line-height: 44px;
+  color: #000000;
+  top: 33px;
+  left: 57px;
+  width: auto;
+}
+
+.profile-section-divider {
+  position: absolute;
+  width: 481px;
+  height: 3px;
+  margin-top: 11px;
+  background: #000000;
+  border-radius: 50px;
+}
+
+.profile-section-link {
+  position: absolute;
+  width: auto;
+  height: auto;
+  font-family: Myriad Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  top: 45px;
+  left: 414px;
+  display: inline-block;
+}
+
+.profile-section-link a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.profile-section-link-arrow {
+  position: absolute;
+  margin-left: 10px;
+  display: inline-block;
+}
+
+.profile-section-cards-container {
+  position: absolute;
+  margin: 0 -5px;
+  top: 88px;
+}
+
+.profile-section-cards-column {
+  float: left;
+  height: auto;
+  width: auto;
+  padding: 0 10px;
+}
