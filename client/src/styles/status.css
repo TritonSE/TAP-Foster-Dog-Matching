@@ -1,0 +1,81 @@
+.status-card {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border-radius: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.card-title {
+  color: black;
+}
+
+.information-grid {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 50% 50%;
+  text-align: left;
+  margin: 20px;
+  padding: 15px;
+}
+
+.box {
+  padding: 20px;
+}
+
+.box-ambassador {
+  grid-row: 1;
+}
+
+.box-contact {
+  grid-row: 3;
+}
+
+.box-email {
+  grid-row: 4;
+  grid-column-start: 2;
+}
+
+.box-date {
+  grid-row: 6;
+}
+
+.box-time {
+  grid-row: 8;
+}
+
+.box-location {
+  grid-row: 10;
+}
+
+.line1 {
+  grid-row: 2;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+.line2 {
+  grid-row: 5;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+.line3 {
+  grid-row: 7;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+.line4 {
+  grid-row: 9;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+.line {
+  height: 2px;
+  color: #8dc442;
+  background-color: #8dc442;
+}
