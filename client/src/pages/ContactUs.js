@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./contactStyles/contactStyles.css";
 import cancel from "./contactStyles/cancel.png";
 import smallCancel from "./contactStyles/smallCancel.png";
@@ -9,17 +9,13 @@ function ContactUs() {
   const [sent, setSent] = useState(false);
   const [selection, setSelection] = useState("");
   const items = ["General", "Vetting Team", "Foster Team", "Adoption Team"];
-  
-  useEffect(() => {
-    console.log(inputMessage);
-  }, [inputMessage])
 
   const continueDecide = () => {
-    if (selection!== "") {
+    if (selection !== "") {
       setContinued(true);
       setSent(false);
     }
-  }
+  };
 
   const sendMessage = () => {
     setSent(true);
@@ -77,14 +73,14 @@ function ContactUs() {
             </option>
 
             {items.map((item) =>
-                selection === item ? (
-                  <option value={item} selected="selected">
-                    {item}
-                  </option>
-                ) : (
-                  <option value={item}>{item}</option>
-                )
-              )}
+              selection === item ? (
+                <option value={item} selected="selected">
+                  {item}
+                </option>
+              ) : (
+                <option value={item}>{item}</option>
+              )
+            )}
           </select>
           <textarea
             className="inputArea"
