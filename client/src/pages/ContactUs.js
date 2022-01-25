@@ -19,12 +19,11 @@ function ContactUs() {
 
   const sendMessage = () => {
     setSent(true);
-    console.log(selection);
     // Send message to backend
   };
 
   return (
-    <>
+    <div>
       {!continued ? (
         <div className="contactLanding">
           <div className="contactInfo">
@@ -34,7 +33,7 @@ function ContactUs() {
               className="selection"
               name="help"
               id="help"
-              onChange={() => setSelection(event.target.options[event.target.selectedIndex].text)}
+              onChange={(e) => setSelection(e.target.options[e.target.selectedIndex].text)}
             >
               <option value="" disabled selected>
                 Select your option
@@ -50,7 +49,7 @@ function ContactUs() {
               )}
             </select>
           </div>
-          <button className="continueButton" onClick={() => continueDecide()}>
+          <button type="button" className="continueButton" onClick={() => continueDecide()}>
             Continue
           </button>
         </div>
@@ -58,7 +57,7 @@ function ContactUs() {
         <div className="newMessage">
           <div className="topBar">
             <p>New Message</p>
-            <button className="cancel" onClick={() => setContinued(false)}>
+            <button type="button" className="cancel" onClick={() => setContinued(false)}>
               <img src={cancel} />
             </button>
           </div>
@@ -66,7 +65,7 @@ function ContactUs() {
             className="selection2"
             name="help"
             id="help"
-            onChange={() => setSelection(event.target.options[event.target.selectedIndex].text)}
+            onChange={(e) => setSelection(e.target.options[e.target.selectedIndex].text)}
           >
             <option value="" disabled selected>
               Select your option
@@ -85,25 +84,25 @@ function ContactUs() {
           <textarea
             className="inputArea"
             placeholder="Message Here"
-            onChange={(event) => setInputMessage(event.target.value)}
+            onChange={(e) => setInputMessage(e.target.value)}
           />
-          <button className="sendButton" onClick={sendMessage}>
+          <button type="button" className="sendButton" onClick={sendMessage}>
             Send
           </button>
 
           {sent ? (
             <div className="messageReceived">
-              <button className="smallCancel" onClick={() => setSent(false)}>
+              <button type="button" className="smallCancel" onClick={() => setSent(false)}>
                 <img src={smallCancel} />
               </button>
               <p>Thank you! Your message has been sent.</p>
             </div>
           ) : (
-            <></>
+            <div />
           )}
         </div>
       )}
-    </>
+    </div>
   );
 }
 
