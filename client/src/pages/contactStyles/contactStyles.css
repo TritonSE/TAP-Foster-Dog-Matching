@@ -131,6 +131,7 @@ html,
   direction: ltr;
   padding: 2%;
   outline: none;
+  resize: none;
 
   background: #ffffff;
   border: 0.5px solid #9b9a9a;
@@ -207,5 +208,8 @@ html,
   .selection2,
   .inputArea {
     font-size: 17px;
+  }
+  .selection2{
+    width: 250px;
   }
 }
