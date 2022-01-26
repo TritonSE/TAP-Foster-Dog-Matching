@@ -12,7 +12,9 @@ import Navbar from "./Navbar";
 function DefaultBody(props) {
   return (
     <div id="default-body">
-      <Navbar id="default-body-navbar" />
+      <div id="default-body-navbar">
+        <Navbar />
+      </div>
       <div id="default-body-container">{props.children}</div>
     </div>
   );

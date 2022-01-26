@@ -11,3 +11,13 @@
 #default-body-container {
   grid-column: 2;
 }
+
+@media only screen and (max-width: 800px) {
+  #default-body {
+    display: block;
+    padding: 50px 48px 69px 20px;
+  }
+  #default-body-navbar {
+    display: none;
+  }
+}
