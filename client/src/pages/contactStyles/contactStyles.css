@@ -1,6 +1,4 @@
 html,
-.selection,
-.selection2,
 .inputArea,
 .sendButton {
   font-family: Myriad Pro;
@@ -12,7 +10,7 @@ html,
 
 .contactLanding {
   position: absolute;
-  width: 36%;
+  width: max(400px, 36%);
   height: 55%;
   left: 42%;
   top: 27%;
@@ -25,14 +23,8 @@ html,
   text-align: center;
 }
 
-.contactInfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .helpQuestion {
-  margin: 10% 0%;
+  margin: 50px 0%;
   color: #000000;
 }
 
@@ -43,21 +35,22 @@ html,
   border: none;
   border-radius: 10px;
   width: 60%;
+  margin: 0% 20%;
   height: 55px;
   color: #53575a;
   padding: 0% 3%;
-  font-size: 20px;
   outline: none;
+  font-size: 27px;
 
   background: url("./dropdownArrow.png") no-repeat 90% #c6c6c6;
 }
 
 .continueButton {
-  position: relative;
-  width: 25%;
+  position: absolute;
+  width: max(130px, 25%);
   height: 10%;
-  left: 30%;
-  top: 46%;
+  right: 20px;
+  bottom: 20px;
   text-align: center;
   font-size: 30;
 
@@ -67,7 +60,7 @@ html,
   color: white;
   border: none;
   font-family: Nunito;
-  font-size: 18px;
+  font-size: 27px;
 }
 
 /* Styling for send message page */
@@ -124,6 +117,7 @@ html,
   position: relative;
   top: 112px;
   outline: none;
+  font-size: 27px;
 
   background: url("./dropdownArrow.png") no-repeat 90% #c6c6c6;
 }
@@ -163,15 +157,11 @@ html,
 .messageReceived {
   position: absolute;
   z-index: 3;
-  width: 20vw;
-  height: 15vh;
+  width: 21vw;
+  height: 16vh;
   left: 35%;
   top: 45%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   text-align: center;
-  padding: 1%;
   background-color: white;
 
   border: 5px solid #8dc442;
@@ -179,12 +169,16 @@ html,
   border-radius: 20px;
   font-size: 18px;
 }
+.message {
+  padding: 0%;
+}
 
 .smallCancel {
   border: none;
   background: none;
-  position: relative;
-  bottom: 40%;
+  position: absolute;
+  top: 5%;
+  left: 2%;
 }
 
 /* Mobile Views */
@@ -204,9 +198,14 @@ html,
   .messageReceived {
     width: 50%;
     left: 25%;
-    font-size: 20px;
+    font-size: 16px;
   }
   .sendButton {
-    font-size: 20;
+    font-size: 20px;
+  }
+  .selection,
+  .selection2,
+  .inputArea {
+    font-size: 17px;
   }
 }

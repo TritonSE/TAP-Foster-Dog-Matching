@@ -26,29 +26,27 @@ function ContactUs() {
     <div>
       {!continued ? (
         <div className="contactLanding">
-          <div className="contactInfo">
-            <p className="helpQuestion">What do you need help on?</p>
+          <p className="helpQuestion">What do you need help on?</p>
 
-            <select
-              className="selection"
-              name="help"
-              id="help"
-              onChange={(e) => setSelection(e.target.options[e.target.selectedIndex].text)}
-            >
-              <option value="" disabled selected>
-                Select your option
-              </option>
-              {items.map((item) =>
-                selection === item ? (
-                  <option value={item} selected="selected">
-                    {item}
-                  </option>
-                ) : (
-                  <option value={item}>{item}</option>
-                )
-              )}
-            </select>
-          </div>
+          <select
+            className="selection"
+            name="help"
+            id="help"
+            onChange={(e) => setSelection(e.target.options[e.target.selectedIndex].text)}
+          >
+            <option value="" disabled selected>
+              Select your option
+            </option>
+            {items.map((item) =>
+              selection === item ? (
+                <option value={item} selected="selected">
+                  {item}
+                </option>
+              ) : (
+                <option value={item}>{item}</option>
+              )
+            )}
+          </select>
           <button type="button" className="continueButton" onClick={() => continueDecide()}>
             Continue
           </button>
@@ -95,7 +93,7 @@ function ContactUs() {
               <button type="button" className="smallCancel" onClick={() => setSent(false)}>
                 <img src={smallCancel} />
               </button>
-              <p>Thank you! Your message has been sent.</p>
+              <p className="message">Thank you! Your message has been sent.</p>
             </div>
           ) : (
             <div />
