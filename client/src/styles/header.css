@@ -65,6 +65,8 @@
   .navbar-hamburger-button {
     display: block;
     grid-column: 2;
+    width: 43px;
+    padding-right: 15px;
   }
   .header-welcome-text {
     font-size: 20px;
@@ -78,7 +80,7 @@
   }
   #header {
     height: 97px;
-    grid-template-columns: 4fr 1fr;
+    grid-template-columns: auto 43px;
   }
   .header-welcome img {
     padding-top: 47px;
