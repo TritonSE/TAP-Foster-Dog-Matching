@@ -8,6 +8,10 @@
   color: #9b9a9a;
 }
 
+.form-container {
+  min-height: 400px;
+}
+
 .login-email {
   position: absolute;
   width: 55%;
