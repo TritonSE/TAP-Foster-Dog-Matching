@@ -11,15 +11,20 @@
 
 import React from "react";
 import "../styles/header.css";
+import logoImage from "../images/logo.png";
+import hamburgerIcon from "../images/hamburgermenuicon.png";
 
 function Header(props) {
   return (
     <div id="header">
       <div className="header-welcome">
-        Welcome {props.firstName} <br />
-        <strong>
-          <span id="foster-text">Foster</span>
-        </strong>
+        <img src={logoImage} alt="logo" />
+        <div className="header-welcome-text">
+          Welcome {props.firstName} <br />
+          <strong>
+            <span id="foster-text">Foster</span>
+          </strong>
+        </div>
       </div>
       <div className="header-message">
         <span className="header-message-text">
@@ -28,6 +33,9 @@ function Header(props) {
         </span>
       </div>
       <div className="header-sign-out">Sign out</div>
+      <div className="navbar-hamburger-button">
+        <img src={hamburgerIcon} alt="Mobile menu" />
+      </div>
     </div>
   );
 }

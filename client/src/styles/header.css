@@ -1,16 +1,28 @@
 #header {
   background-color: black;
   color: white;
-  padding: 30px 0px;
   display: grid;
-  grid-template-columns: max(100px, 15%) max(300px, 65%) max(70px, 10%);
+  grid-template-columns: 1.5fr 4fr 1fr;
   column-gap: 5%;
+  height: 130px;
+  box-sizing: border-box;
+}
+
+.header-welcome img {
+  height: inherit;
 }
 
 .header-welcome {
   grid-column: 1;
-  text-align: right;
+  text-align: left;
   font-size: 25px;
+  height: inherit;
+  display: flex;
+}
+
+.header-welcome-text {
+  padding-top: 20px;
+  text-align: right;
 }
 
 #foster-text {
@@ -24,12 +36,53 @@
 }
 
 .header-message-text {
+  padding-top: 10px;
   position: absolute;
   left: 0;
-  bottom: 0;
+  bottom: 10px;
 }
 
 .header-sign-out {
   grid-column: 3;
   font-size: 25px;
+}
+
+.navbar-hamburger-button {
+  grid-column: unset;
+  display: none;
+  padding-top: 63px;
+}
+
+@media only screen and (max-width: 800px) {
+  .header-message {
+    display: none;
+    grid-column: unset;
+  }
+  .header-sign-out {
+    display: none;
+    grid-column: unset;
+  }
+  .navbar-hamburger-button {
+    display: block;
+    grid-column: 2;
+  }
+  .header-welcome-text {
+    font-size: 20px;
+    padding-top: 48px;
+    padding-bottom: 3px;
+    line-height: 24px;
+  }
+  .foster-text {
+    font-size: 18px;
+    line-height: 21.6px;
+  }
+  #header {
+    height: 97px;
+    grid-template-columns: 4fr 1fr;
+  }
+  .header-welcome img {
+    padding-top: 47px;
+    width: 47px;
+    height: 40px;
+  }
 }
