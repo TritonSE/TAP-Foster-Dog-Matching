@@ -33,3 +33,9 @@
   height: 66px;
   line-height: 66px;
 }
+
+@media only screen and (max-width: 800px) {
+  .dashboard-card {
+    margin: 0 auto;
+  }
+}
