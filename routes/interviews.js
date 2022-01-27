@@ -5,15 +5,15 @@ const { validateRequest } = require("../middleware/validation");
 
 const router = express.Router();
 
+// TODO: Add verification to check if user and ambassador ids exist once
+// 	 their models are implemented
 const validators = [
   body("user").notEmpty().isMongoId(),
   body("ambassador").notEmpty().isMongoId(),
-  body("email").notEmpty().isEmail(),
-  body("phone").notEmpty().isMobilePhone("en-US"),
   body("date").notEmpty().isDate({ format: "MM/DD/YYYY" }),
   body("time").notEmpty().matches("^([0-1][0-9]|2[0-3]):([0-5][0-9])$"),
   body("location").notEmpty().isString(),
-  body("internalNotes").notEmpty().isString(),
+  body("internalNotes").optional().isString(),
   body("stage").notEmpty().isString(),
 ];
 

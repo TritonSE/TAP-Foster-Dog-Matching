@@ -17,14 +17,6 @@ module.exports = mongoose.model(
       type: ObjectId,
       required: true,
     },
-    email: {
-      type: String,
-      required: true,
-    },
-    phone: {
-      type: String,
-      required: true,
-    },
     date: {
       type: String,
       required: true,
@@ -39,7 +31,6 @@ module.exports = mongoose.model(
     },
     internalNotes: {
       type: String,
-      required: true,
     },
     stage: {
       type: String,
