@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Nav, NavLink, NavMenu, ToggleNavbar, Burger } from "./Navbar_styled";
+import { Nav, NavLink, NavMenu, ToggleNavbar, Burger, SignOut } from "./Navbar_styled";
 import burger from "./burger.png";
 
 function Navbar(props) {
@@ -20,16 +20,33 @@ function Navbar(props) {
     
     The pages prop will contain the elements of the navbar and their routes
   */
-  const [renderNav, setRenderNav] = useState(true);
+  const [renderNav, setRenderNav] = useState(false);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  // Update screenHeight to viewport size
+  useEffect(() => {
+    const changeWidth = () => {
+      setScreenWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", changeWidth);
+    return () => {
+      window.removeEventListener("resize", changeWidth);
+    };
+  }, []);
+
+  // logout function
+  const logout = () => {
+    // code to log user out of page
+  };
 
   return (
     <>
-      {/* <ToggleNavbar onClick={() => setRenderNav(!renderNav)}>
+      <ToggleNavbar onClick={() => setRenderNav(!renderNav)}>
         <Burger src={burger} />
-      </ToggleNavbar> */}
+      </ToggleNavbar>
 
       {/* Conditionally Rendered Navigation Panel */}
-      {renderNav ? (
+      {renderNav || screenWidth > 750 ? (
         <Nav>
           <NavMenu>
             {Object.entries(props.pages).map(([page, path]) => (
@@ -37,6 +54,7 @@ function Navbar(props) {
                 {page}
               </NavLink>
             ))}
+            {screenWidth < 750 ? <SignOut onClick={() => logout()}>Sign Out</SignOut> : <></>}
           </NavMenu>
         </Nav>
       ) : (

@@ -1,9 +1,16 @@
 import { NavLink as Link } from "react-router-dom";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const slideIn = keyframes`
+ 0% { right: -100%;}
+ 30% { right: -75%; }
+ 40% { right: -50%; }
+ 100% { right: 0% }
+`;
 
 export const Nav = styled.nav`
   position: absolute;
-  width: min(350px, 22vw);
+  width: max(250px, 22vw);
   height: 85%;
   top: 15%;
   background-color: #000000;
@@ -11,7 +18,11 @@ export const Nav = styled.nav`
   @media screen and (max-width: 750px) {
     top: 15%;
     right: 0%;
-    width: 25%;
+    width: max(250px, 22vw);
+
+    animation-name: ${slideIn};
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
 
     }
   }
@@ -34,6 +45,8 @@ export const ToggleNavbar = styled.button`
     font: inherit;
     cursor: pointer;
     outline: inherit;
+
+
 }
   }
 `;
@@ -62,4 +75,27 @@ export const NavLink = styled(Link)`
   &.active {
     background-color: #8dc442;
   }
+`;
+
+export const SignOut = styled.button`
+  text-decoration: none;
+
+  font-family: Myriad Pro;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 29px;
+  text-align: center;
+  background-color: #000000;
+  background: none;
+  color: #ffffff;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+
+  position: absolute;
+  bottom: 0;
+  left: 34%;
+
+  padding: 25px 0px;
 `;
