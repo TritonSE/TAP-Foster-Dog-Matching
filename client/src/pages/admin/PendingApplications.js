@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Select from "../../components/Select";
 import Table from "../../components/Table";
 import { Colors, Typography } from "../../components/Theme";
 
@@ -66,6 +67,53 @@ function CompletedActionItemsCell({ completed }) {
   );
 }
 
+function CoordinatorSelect() {
+  const [value, setValue] = React.useState();
+
+  const handleSelect = React.useCallback((val) => {
+    setValue(val);
+  }, []);
+
+  return (
+    <Select
+      value={value}
+      options={[
+        // TODO: Replace with data
+        { label: "Kristin", value: "Kristin" },
+        { label: "Amy", value: "Amy" },
+        { label: "Kristin", value: "Kristin" },
+        { label: "Amy", value: "Amy" },
+      ]}
+      onChange={handleSelect}
+      placeholder="N/A"
+    />
+  );
+}
+
+function AmbassadorSelect() {
+  const [value, setValue] = React.useState();
+
+  const handleSelect = React.useCallback((val) => {
+    setValue(val);
+  }, []);
+
+  return (
+    <Select
+      value={value}
+      options={[
+        // TODO: Replace with data
+        { label: "Kristin", value: "Kristin" },
+        { label: "Amy", value: "Amy" },
+        { label: "Kristin", value: "Kristin" },
+        { label: "Amy", value: "Amy" },
+      ]}
+      onChange={handleSelect}
+      placeholder="N/A"
+    />
+  );
+}
+
+const role = "management"; // OR "ambassador" TODO: Replace with actual user role
 function PendingApplications() {
   const columns = React.useMemo(
     () => [
@@ -92,8 +140,9 @@ function PendingApplications() {
     () =>
       DUMMY_DATA.map((row) => ({
         ...row,
-        ambassador: row.ambassador || "Not Assigned",
-        coordinator: row.coordinator || "Not Assigned",
+        ambassador: role === "ambassador" ? row.ambassador || "Not Assigned" : <AmbassadorSelect />,
+        coordinator:
+          role === "ambassador" ? row.coordinator || "Not Assigned" : <CoordinatorSelect />,
         completedActionItems: <CompletedActionItemsCell completed={row.completedActionItems} />,
       })),
     []
