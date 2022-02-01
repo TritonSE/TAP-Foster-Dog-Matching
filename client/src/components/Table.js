@@ -1,6 +1,6 @@
 /**
  * Table Component
- * Used on: PendingApplications
+ * Used on: PendingApplications, Fosters
  *
  * Props:
  *  - columns [{ header: string, accessor: string }[]]
