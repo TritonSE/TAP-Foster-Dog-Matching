@@ -20,8 +20,10 @@ function Profile() {
             email="Clara@tap.com"
           />
         }
+        myProfileButton={
+          <MyProfileButton buttonText="My Profile" imagePath={pfp} href="Profile/EditProfile" />
+        }
       />
-      <MyProfileButton buttonText="My Profile" imagePath={pfp} href="Profile/EditProfile" />
       <ProfileSection
         titleText="Ambassadors"
         linkText="View All"

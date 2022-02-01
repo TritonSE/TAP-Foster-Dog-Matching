@@ -1,34 +1,40 @@
 .myprofile-button {
-  position: absolute;
   width: 232px;
   height: 74px;
   background: #c6e2a1;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 50px;
-  left: 1489px;
-  top: 150px;
   float: right;
-}
-
-.myprofile-button-text {
-  position: absolute;
-  width: auto;
-  height: auto;
-  left: 27px;
-  top: 22px;
   font-family: Myriad Pro;
   font-style: normal;
   font-weight: normal;
   font-size: 25px;
-  line-height: 30px;
+}
+
+.myprofile-button-text {
+  float: left;
   color: #000000;
+  line-height: 74px;
+  padding-left: 27px;
+}
+
+.myprofile-button-image-container {
+  float: right;
+  border-radius: 50%;
+  padding-right: 20px;
+  line-height: 110px;
 }
 
 .myprofile-button-image {
-  position: absolute;
-  width: 54px;
-  height: 54px;
-  border-radius: 50%;
-  right: 20px;
-  top: 10px;
+  max-width: 54px;
+  max-height: 54px;
+  object-fit: cover;
+}
+
+@media only screen and (max-width: 875px) {
+  .myprofile-button {
+    float: none;
+    position: absolute;
+    margin-left: -5px;
+  }
 }

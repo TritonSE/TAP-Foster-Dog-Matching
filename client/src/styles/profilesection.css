@@ -1,27 +1,26 @@
 .profile-section {
   position: relative;
-  width: auto;
+  display: block;
+  width: 90%;
   height: 441px;
-  left: 300px;
-  top: 130px;
+  top: 33px;
+  left: 55px;
   margin-bottom: 45px;
+  white-space: nowrap;
 }
 
 .profile-section-title {
-  position: relative;
+  display: inline-block;
   font-family: Myriad Pro;
   font-style: normal;
   font-weight: bold;
   font-size: 37px;
   line-height: 44px;
   color: #000000;
-  top: 33px;
-  left: 57px;
   width: auto;
 }
 
 .profile-section-divider {
-  position: absolute;
   width: 481px;
   height: 3px;
   margin-top: 11px;
@@ -30,16 +29,12 @@
 }
 
 .profile-section-link {
-  position: absolute;
-  width: auto;
-  height: auto;
+  display: inline-block;
   font-family: Myriad Pro;
   font-style: normal;
   font-weight: normal;
   font-size: 20px;
-  top: 45px;
-  left: 414px;
-  display: inline-block;
+  margin-left: 120px;
 }
 
 .profile-section-link a {
@@ -54,9 +49,9 @@
 }
 
 .profile-section-cards-container {
-  position: absolute;
-  margin: 0 -5px;
-  top: 88px;
+  display: flex;
+  margin: 30px -5px;
+  width: max-content;
 }
 
 .profile-section-cards-column {
@@ -64,4 +59,28 @@
   height: auto;
   width: auto;
   padding: 0 10px;
+}
+
+@media only screen and (max-width: 849px) {
+  .profile-section-cards-column:nth-child(3) {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 875px) {
+  .profile-section-title {
+    margin-top: 100px;
+  }
+}
+
+@media only screen and (max-width: 1116px) {
+  .profile-section-cards-column:nth-child(4) {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 1384px) {
+  .profile-section-cards-column:nth-child(5) {
+    display: none;
+  }
 }

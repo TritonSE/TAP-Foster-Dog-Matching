@@ -6,7 +6,9 @@ function MyProfileButton(props) {
     <a href={props.href}>
       <div className="myprofile-button">
         <div className="myprofile-button-text">{props.buttonText}</div>
-        <img className="myprofile-button-image" src={props.imagePath} alt=" " />
+        <div className="myprofile-button-image-container">
+          <img className="myprofile-button-image" src={props.imagePath} alt=" " />
+        </div>
       </div>
     </a>
   );
