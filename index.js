@@ -16,6 +16,7 @@ mongoose.connection.once("open", async () => {
 
 // Routes
 app.use("/api/dogs", require("./routes/dogs"));
+app.use("/api/application", require("./routes/application"));
 
 // Error handling
 app.use((err, req, res) => {
