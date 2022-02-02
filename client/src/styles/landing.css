@@ -186,3 +186,13 @@
     line-height: 2;
   }
 }
+
+@media only screen and (max-height: 750px) {
+  .left-panel {
+    top: 95px;
+  }
+
+  .right-panel {
+    top: 95px;
+  }
+}

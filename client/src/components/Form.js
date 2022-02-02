@@ -41,8 +41,11 @@ function Form(props) {
 
   return (
     <div className="left-panel">
-      <div className="form-container">
-        <b className="form-header"> {props.header} </b>
+      <div className="form-container" id={"form-container-" + props.formType}>
+        <b className="form-header" id={"form-header-" + props.formType}>
+          {" "}
+          {props.header}{" "}
+        </b>
         {content}
       </div>
       <div className="copyright-mobile">

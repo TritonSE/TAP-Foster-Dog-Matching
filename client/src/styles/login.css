@@ -1,21 +1,22 @@
 .form-container input::placeholder {
   position: absolute;
   left: 8%;
-  bottom: 19px;
+  bottom: 23%;
 
-  font-size: 24px;
+  font-size: 100%;
   line-height: 29px;
   color: #9b9a9a;
 }
 
-.form-container {
-  min-height: 400px;
+#form-container-login {
+  min-height: 425px;
 }
 
 .login-email {
   position: absolute;
-  width: 55%;
-  height: 68px;
+  width: 59%;
+  height: 11.4%;
+  min-height: 52.5px;
   bottom: 60%;
 
   background: white;
@@ -29,8 +30,9 @@
 
 .login-password {
   position: absolute;
-  width: 55%;
-  height: 68px;
+  width: 59%;
+  height: 11.4%;
+  min-height: 52.5px;
   bottom: 42.5%;
 
   background: white;
