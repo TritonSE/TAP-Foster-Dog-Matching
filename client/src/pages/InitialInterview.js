@@ -7,7 +7,7 @@ function InitialInterview() {
   return (
     <div>
       <h1>Initial Interview</h1>
-      <Meeting
+      {/* <Meeting
         imagePath={Doggo}
         textCard={
           <div>
@@ -16,7 +16,7 @@ function InitialInterview() {
             <p>The Animal Pad Team</p>
           </div>
         }
-      />
+      /> */}
 
       <Meeting
         title="Interview Confirmed"
