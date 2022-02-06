@@ -1,4 +1,6 @@
 .myprofile-button {
+  cursor: pointer;
+  outline: none;
   width: 232px;
   height: 74px;
   background: #c6e2a1;
