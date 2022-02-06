@@ -11,6 +11,7 @@
  *      - value [any] - default value. leave as null to show placeholder
  *      - onChange [function] - function to set value on change
  *      - height [string] - height of select. ie. '100px' or '10%'. optional.
+ *      - width [string] - width of select. ie. '100px' or '10%'. optional.
  *      - backgroundColor [string] - background color of placeholder
  */
 
