@@ -54,7 +54,11 @@ function Navbar(props) {
                 {page}
               </NavLink>
             ))}
-            {screenWidth < 750 ? <SignOut onClick={() => logout()}>Sign Out</SignOut> : <></>}
+            {screenWidth < 750 || renderNav ? (
+              <SignOut onClick={() => logout()}>Sign Out</SignOut>
+            ) : (
+              <></>
+            )}
           </NavMenu>
         </Nav>
       ) : (

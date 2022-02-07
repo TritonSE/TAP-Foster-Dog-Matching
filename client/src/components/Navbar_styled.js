@@ -10,7 +10,7 @@ const slideIn = keyframes`
 
 export const Nav = styled.nav`
   position: absolute;
-  width: max(250px, 22vw);
+  width: max(250px, 16vw);
   height: 85%;
   top: 15%;
   background-color: #000000;
@@ -18,7 +18,7 @@ export const Nav = styled.nav`
   @media screen and (max-width: 750px) {
     top: 15%;
     right: 0%;
-    width: max(250px, 22vw);
+    width: 45vw;
 
     animation-name: ${slideIn};
     animation-duration: 0.5s;
@@ -57,6 +57,7 @@ export const NavMenu = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  align-items: center;
 `;
 
 export const NavLink = styled(Link)`
@@ -65,37 +66,43 @@ export const NavLink = styled(Link)`
   font-family: Myriad Pro;
   font-style: normal;
   font-weight: bold;
-  font-size: 24px;
+  font-size: max(18px, min(24px, 2vw));
   line-height: 29px;
   text-align: center;
   color: #ffffff;
 
+  width: 100%;
   padding: 25px 0px;
 
   &.active {
     background-color: #8dc442;
   }
+  @media screen and (max-width: 750px) {
+    font-size: min(18px, 4vw);
+  }
 `;
 
 export const SignOut = styled.button`
-  text-decoration: none;
+  display: none;
+  @media screen and (max-width: 750px) {
+    display: block;
+    text-decoration: none;
 
-  font-family: Myriad Pro;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 24px;
-  line-height: 29px;
-  text-align: center;
-  background-color: #000000;
-  background: none;
-  color: #ffffff;
-  border: none;
-  padding: 0;
-  cursor: pointer;
+    font-family: Myriad Pro;
+    font-style: normal;
+    font-weight: bold;
+    font-size: max(14px, min(18px, 4vw));
+    line-height: 29px;
+    background-color: #000000;
+    background: none;
+    color: #ffffff;
+    border: none;
+    padding: 0;
+    cursor: pointer;
 
-  position: absolute;
-  bottom: 0;
-  left: 34%;
+    position: absolute;
+    bottom: 0;
 
-  padding: 25px 0px;
+    padding: 25px 0px;
+  }
 `;
