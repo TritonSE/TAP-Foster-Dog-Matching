@@ -20,7 +20,7 @@ export const Nav = styled.nav`
   @media screen and (max-width: 750px) {
     top: 15%;
     right: 0%;
-    width: 45vw;
+    width: min(300px, 45vw);
 
     animation-name: ${slideIn};
     animation-duration: 0.5s;
