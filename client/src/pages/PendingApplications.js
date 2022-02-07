@@ -67,8 +67,8 @@ function CompletedActionItemsCell({ completed }) {
   );
 }
 
-function CoordinatorSelect() {
-  const [value, setValue] = React.useState();
+function CoordinatorSelect({ initialValue }) {
+  const [value, setValue] = React.useState(initialValue);
 
   const handleSelect = React.useCallback((val) => {
     setValue(val);
@@ -90,8 +90,8 @@ function CoordinatorSelect() {
   );
 }
 
-function AmbassadorSelect() {
-  const [value, setValue] = React.useState();
+function AmbassadorSelect({ initialValue }) {
+  const [value, setValue] = React.useState(initialValue);
 
   const handleSelect = React.useCallback((val) => {
     setValue(val);
@@ -102,7 +102,7 @@ function AmbassadorSelect() {
       value={value}
       options={[
         // TODO: Replace with data
-        { label: "Kristin", value: "Kristin" },
+        { label: "Shelby", value: "Shelby" },
         { label: "Amy", value: "Amy" },
         { label: "Kristin", value: "Kristin" },
         { label: "Amy", value: "Amy" },
@@ -140,9 +140,18 @@ function PendingApplications() {
     () =>
       DUMMY_DATA.map((row) => ({
         ...row,
-        ambassador: role === "ambassador" ? row.ambassador || "Not Assigned" : <AmbassadorSelect />,
+        ambassador:
+          role === "ambassador" ? (
+            row.ambassador || "Not Assigned"
+          ) : (
+            <AmbassadorSelect initialValue={row.ambassador} />
+          ),
         coordinator:
-          role === "ambassador" ? row.coordinator || "Not Assigned" : <CoordinatorSelect />,
+          role === "ambassador" ? (
+            row.coordinator || "Not Assigned"
+          ) : (
+            <CoordinatorSelect initialValue={row.coordinator} />
+          ),
         completedActionItems: <CompletedActionItemsCell completed={row.completedActionItems} />,
       })),
     []
