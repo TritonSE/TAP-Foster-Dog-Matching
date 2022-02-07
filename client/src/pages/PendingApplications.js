@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import Select from "../../components/Select";
-import Table from "../../components/Table";
-import { Colors, Typography } from "../../components/Theme";
+import Select from "../components/Select";
+import Table from "../components/Table";
+import { Colors, Typography } from "../components/Theme";
 
 const DUMMY_DATA = [
   {

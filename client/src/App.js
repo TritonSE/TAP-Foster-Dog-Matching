@@ -11,7 +11,7 @@ import Landing from "./pages/Landing";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import PendingApplications from "./pages/admin/PendingApplications";
+import PendingApplications from "./pages/PendingApplications";
 
 function App() {
   return (
