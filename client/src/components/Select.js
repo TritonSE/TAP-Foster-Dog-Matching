@@ -11,6 +11,7 @@
  *      - value [any] - default value. leave as null to show placeholder
  *      - onChange [function] - function to set value on change
  *      - height [string] - height of select. ie. '100px' or '10%'. optional.
+ *      - width [string] - width of select. ie. '100px' or '10%'. optional.
  *      - backgroundColor [string] - background color of placeholder
  */
 
@@ -23,6 +24,9 @@ const SelectContainer = styled.div`
 `;
 
 const StyledSelect = styled.div`
+  display: flex;
+  flex: 1;
+  width: ${(props) => props.width || "unset"};
   height: ${(props) => (props.height ? props.height : "50px")};
   padding: 6px 15px;
   border: 1px solid black;
@@ -66,7 +70,7 @@ const OptionText = styled.span`
   display: flex;
 `;
 
-function Select({ placeholder, options, value, onChange, height, backgroundColor }) {
+function Select({ placeholder, options, value, onChange, height, width, backgroundColor }) {
   const [openMenu, setOpenMenu] = React.useState(false);
 
   const handleSelect = (newValue) => {
@@ -86,6 +90,7 @@ function Select({ placeholder, options, value, onChange, height, backgroundColor
       <SelectContainer>
         <StyledSelect
           open={openMenu}
+          width={width}
           onClick={() => {
             setOpenMenu((open) => !open);
           }}
