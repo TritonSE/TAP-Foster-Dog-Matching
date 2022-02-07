@@ -2,10 +2,12 @@ import { NavLink as Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 
 const slideIn = keyframes`
- 0% { right: -100%;}
- 30% { right: -75%; }
- 40% { right: -50%; }
- 100% { right: 0% }
+ 0% { right: -50%; }
+ 20% { right: -40%; }
+ 40% { right: -30%; }
+ 60% { right: -20%; }
+ 80% { right: -10%; }
+ 100% { right: 0%; }
 `;
 
 export const Nav = styled.nav`
@@ -23,7 +25,6 @@ export const Nav = styled.nav`
     animation-name: ${slideIn};
     animation-duration: 0.5s;
     animation-iteration-count: 1;
-
     }
   }
 `;
@@ -45,7 +46,6 @@ export const ToggleNavbar = styled.button`
     font: inherit;
     cursor: pointer;
     outline: inherit;
-
 
 }
   }
