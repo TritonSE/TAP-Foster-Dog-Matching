@@ -25,6 +25,9 @@ const SelectContainer = styled.div`
 
 const StyledSelect = styled.div`
   height: ${(props) => (props.height ? props.height : "50px")};
+  display: flex;
+  flex: 1;
+  width: ${(props) => props.width || "unset"};
   padding: 6px 15px;
   border: 1px solid black;
   border-radius: 10px;
@@ -67,7 +70,7 @@ const OptionText = styled.span`
   display: flex;
 `;
 
-function Select({ placeholder, options, value, onChange, height, backgroundColor }) {
+function Select({ placeholder, options, value, onChange, height, width, backgroundColor }) {
   const [openMenu, setOpenMenu] = React.useState(false);
 
   const handleSelect = (newValue) => {
@@ -87,6 +90,7 @@ function Select({ placeholder, options, value, onChange, height, backgroundColor
       <SelectContainer>
         <StyledSelect
           open={openMenu}
+          width={width}
           onClick={() => {
             setOpenMenu((open) => !open);
           }}

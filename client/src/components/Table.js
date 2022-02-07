@@ -1,5 +1,6 @@
 /**
  * Table Component
+ *
  * Used on: PendingApplications, Fosters
  *
  * Props:
@@ -23,7 +24,13 @@ const tableBorder = css`
   border-collapse: collapse;
 `;
 
+<<<<<<< HEAD
 const TableContainer = styled.div``;
+=======
+const TableContainer = styled.div`
+  overflow: visible;
+`;
+>>>>>>> 78daff5 (finish fosters pages and conditional rendering by role)
 
 const StyledTable = styled.table`
   ${tableBorder}
@@ -68,12 +75,19 @@ function Table({ columns, rows }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow>
-              {columns.map((column) => (
-                <TableCell key={row[column.accessor]}>{row[column.accessor]}</TableCell>
-              ))}
-            </TableRow>
+          {rows.map((row, index) => (
+            <>
+              {/* eslint-disable react/no-array-index-key */}
+              <TableRow
+                key={`${JSON.stringify(
+                  Object.values(row).filter((val) => typeof val !== "object")
+                )}-${index}`}
+              >
+                {columns.map((column) => (
+                  <TableCell key={row[column.accessor]}>{row[column.accessor]}</TableCell>
+                ))}
+              </TableRow>
+            </>
           ))}
         </TableBody>
       </StyledTable>
