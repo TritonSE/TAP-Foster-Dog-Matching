@@ -11,7 +11,9 @@ const validators = [
   body("user").notEmpty().isMongoId(),
   body("ambassador").notEmpty().isMongoId(),
   body("date").notEmpty().isDate({ format: "MM/DD/YYYY" }),
-  body("time").notEmpty().matches("^([0-1][0-9]|2[0-3]):([0-5][0-9])$"),
+  body("time")
+    .notEmpty()
+    .matches("^((1[0-2]|0?[1-9]):([0-5][0-9]) - (1[0-2]|0?[1-9]):([0-5][0-9])([AaPp][Mm]))$"),
   body("location").notEmpty().isString(),
   body("internalNotes").optional().isString(),
   body("stage").notEmpty().isString(),
@@ -25,7 +27,7 @@ const validators = [
 router.get("/:interviewId", (req, res, next) => {
   getInterview(req.params.interviewId, req.query.stage)
     .then((interview) => {
-      if (!interview) throw new Error("Interview does not exist!");
+      if (!interview) res.status(500).send("Interview does not exist!");
       res.status(200).json({ interview });
     })
     .catch((err) => {
