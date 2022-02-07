@@ -77,14 +77,16 @@ function Profile() {
           contactMethod2="Email:"
           phone="123-456-7890"
           email="Clara@tap.com"
-          buttonLabel="Change Password"
+          changeButtonLabel="Change Password"
           pfpPath={pfp}
           pfpAltText="My Profile picture"
           name="Clara Adams"
           handleClose={togglePopup}
-          editText="Edit Profile"
-          editImage={edit}
-          editAltText="Edit Profile picture"
+          editProfileButtonLabel="Edit Profile"
+          editProfileButtonImage={edit}
+          editProfileButtonAltText="Edit Profile picture"
+          saveButtonLabel="Save Changes"
+          editPfpButtonLabel="Edit"
         />
       )}
     </div>
