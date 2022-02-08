@@ -48,25 +48,6 @@ function ContactUs() {
               placeholder={"Select your option"}
             />
           </div>
-          {/* <select
-            className="selection"
-            name="help"
-            id="help"
-            onChange={(e) => setSelection(e.target.options[e.target.selectedIndex].text)}
-          >
-            <option value="" disabled selected>
-              Select your option
-            </option>
-            {items.map((item) =>
-              selection === item ? (
-                <option value={item} selected="selected">
-                  {item}
-                </option>
-              ) : (
-                <option value={item}>{item}</option>
-              )
-            )}
-          </select> */}
           <button type="button" className="continueButton" onClick={() => continueDecide()}>
             Continue
           </button>
@@ -88,26 +69,6 @@ function ContactUs() {
               placeholder={"Select your option"}
             />
           </div>
-          {/* <select
-            className="selection2"
-            name="help"
-            id="help"
-            onChange={(e) => setSelection(e.target.options[e.target.selectedIndex].text)}
-          >
-            <option value="" disabled selected>
-              Select your option
-            </option>
-
-            {items.map((item) =>
-              selection === item ? (
-                <option value={item} selected="selected">
-                  {item}
-                </option>
-              ) : (
-                <option value={item}>{item}</option>
-              )
-            )}
-          </select> */}
           <textarea
             className="inputArea"
             placeholder="Message Here"
