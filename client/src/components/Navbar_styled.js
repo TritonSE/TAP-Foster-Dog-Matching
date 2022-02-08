@@ -21,6 +21,7 @@ export const Nav = styled.nav`
     top: 15%;
     right: 0%;
     width: min(300px, 45vw);
+    z-index: 5;
 
     animation-name: ${slideIn};
     animation-duration: 0.5s;
