@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import "./contactStyles/contactStyles.css";
 import cancel from "./contactStyles/cancel.png";
 import smallCancel from "./contactStyles/smallCancel.png";
+import Select from "../components/Select";
 
 function ContactUs() {
   const [continued, setContinued] = useState(false);
@@ -10,11 +11,16 @@ function ContactUs() {
   const [selection, setSelection] = useState("");
   const items = ["General", "Vetting Team", "Foster Team", "Adoption Team"];
 
+  const toSelect = [
+    { label: "General", value: "General" },
+    { label: "Vetting Team", value: "Vetting Team" },
+    { label: "Foster Team", value: "Foster Team" },
+    { label: "Adoption Team", value: "Adoption Team" },
+  ];
+
   const continueDecide = () => {
-    if (selection !== "") {
-      setContinued(true);
-      setSent(false);
-    }
+    setContinued(true);
+    setSent(false);
   };
 
   const sendMessage = () => {
@@ -22,13 +28,27 @@ function ContactUs() {
     // Send message to backend
   };
 
+  const [value, setValue] = React.useState("");
+
+  const handleSelect = React.useCallback((val) => {
+    setValue(val);
+  }, []);
+
   return (
     <div>
       {!continued ? (
         <div className="contactLanding">
           <p className="helpQuestion">What do you need help on?</p>
 
-          <select
+          <div className="selection">
+            <Select
+              value={value}
+              options={toSelect}
+              onChange={handleSelect}
+              placeholder={"Select your option"}
+            />
+          </div>
+          {/* <select
             className="selection"
             name="help"
             id="help"
@@ -46,7 +66,7 @@ function ContactUs() {
                 <option value={item}>{item}</option>
               )
             )}
-          </select>
+          </select> */}
           <button type="button" className="continueButton" onClick={() => continueDecide()}>
             Continue
           </button>
@@ -59,7 +79,16 @@ function ContactUs() {
               <img src={cancel} />
             </button>
           </div>
-          <select
+
+          <div className = "selection2">
+            <Select
+              value={value}
+              options={toSelect}
+              onChange={handleSelect}
+              placeholder={"Select your option"}
+            />
+          </div>
+          {/* <select
             className="selection2"
             name="help"
             id="help"
@@ -78,7 +107,7 @@ function ContactUs() {
                 <option value={item}>{item}</option>
               )
             )}
-          </select>
+          </select> */}
           <textarea
             className="inputArea"
             placeholder="Message Here"

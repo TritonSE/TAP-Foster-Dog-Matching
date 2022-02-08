@@ -29,20 +29,11 @@ html,
 }
 
 .selection {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border: none;
-  border-radius: 10px;
   width: 60%;
   margin: 0% 20%;
   height: 55px;
-  color: #53575a;
   padding: 0% 3%;
-  outline: none;
   font-size: 27px;
-
-  background: url("./dropdownArrow.png") no-repeat 90% #c6c6c6;
 }
 
 .continueButton {
@@ -105,21 +96,15 @@ html,
 }
 
 .selection2 {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border: none;
   border-radius: 10px;
   width: 300px;
   height: 55px;
-  color: #53575a;
   padding: 0% 3%;
   position: relative;
   top: 112px;
   outline: none;
   font-size: 27px;
 
-  background: url("./dropdownArrow.png") no-repeat 90% #c6c6c6;
 }
 
 .inputArea {
