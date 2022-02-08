@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import "./contactStyles/contactStyles.css";
 import cancel from "./contactStyles/cancel.png";
 import smallCancel from "./contactStyles/smallCancel.png";
@@ -8,8 +8,6 @@ function ContactUs() {
   const [continued, setContinued] = useState(false);
   const [inputMessage, setInputMessage] = useState("");
   const [sent, setSent] = useState(false);
-  const [selection, setSelection] = useState("");
-  const items = ["General", "Vetting Team", "Foster Team", "Adoption Team"];
 
   const toSelect = [
     { label: "General", value: "General" },
@@ -45,7 +43,7 @@ function ContactUs() {
               value={value}
               options={toSelect}
               onChange={handleSelect}
-              placeholder={"Select your option"}
+              placeholder="Select your option"
             />
           </div>
           <button type="button" className="continueButton" onClick={() => continueDecide()}>
@@ -66,7 +64,7 @@ function ContactUs() {
               value={value}
               options={toSelect}
               onChange={handleSelect}
-              placeholder={"Select your option"}
+              placeholder="Select your option"
             />
           </div>
           <textarea
