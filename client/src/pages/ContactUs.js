@@ -61,7 +61,7 @@ function ContactUs() {
             </button>
           </div>
 
-          <div className = "selection2">
+          <div className="selection2">
             <Select
               value={value}
               options={toSelect}
