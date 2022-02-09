@@ -3,6 +3,13 @@
  *
  * Component that renders the navbar
  *
+ * @summary    resuable and responsive navbar component
+ * @author     Parth Patel
+ *
+ */
+
+/**
+ * Navbar usage:
  * Pages will be a dictionary with {key: value} = {Page Name: Path to page}
  * The pages prop will contain the elements of the navbar and their routes
  *
