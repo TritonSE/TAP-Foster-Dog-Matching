@@ -1,7 +1,17 @@
+/**
+ * Contact page that allows fosters to send messages to different admin departments
+ *
+ *
+ * @summary     Contact page implementation
+ * @author      Parth Patel
+ *
+ * #TODO Send message needs to be functional
+ */
+
 import React, { useState } from "react";
-import "./contactStyles/contactStyles.css";
-import cancel from "./contactStyles/cancel.png";
-import smallCancel from "./contactStyles/smallCancel.png";
+import "../css/contactStyles.css";
+import cancel from "../images/cancel.png";
+import smallCancel from "../images/smallCancel.png";
 import Select from "../components/Select";
 
 function ContactUs() {
