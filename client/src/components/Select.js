@@ -31,6 +31,7 @@ const StyledSelect = styled.div`
   justify-content: space-between;
   position: relative;
   cursor: pointer;
+  background-color: #C6C6C6;
   z-index: ${(props) => (props.open ? 3 : 1)};
 `;
 

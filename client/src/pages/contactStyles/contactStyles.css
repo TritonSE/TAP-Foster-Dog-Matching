@@ -33,7 +33,7 @@ html,
   margin: 0% 20%;
   height: 55px;
   padding: 0% 3%;
-  font-size: 27px;
+  font-size: min(25px, 2vw);
 }
 
 .continueButton {
@@ -99,12 +99,10 @@ html,
   border-radius: 10px;
   width: 300px;
   height: 55px;
-  padding: 0% 3%;
   position: relative;
   top: 112px;
   outline: none;
-  font-size: 27px;
-  margin-top: 5%;
+  font-size: min(25px, 2vw);
 }
 
 .inputArea {
