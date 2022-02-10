@@ -11,54 +11,77 @@
   margin-bottom: 40px;
 }
 
-.profile-card-name {
-  position: absolute;
-  width: 87px;
-  height: 19px;
-  left: 121px;
-  top: 21px;
+.profile-card-text {
   font-family: Myriad Pro;
   font-style: normal;
+  font-weight: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #000000;
+  margin-left: 121px;
+  padding-top: 21px;
+  padding-bottom: 26px;
+}
+
+.profile-card-name {
   font-weight: 600;
   font-size: 16px;
   line-height: 19px;
-  color: #000000;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  width: 135px;
 }
 
-.profile-card-phonenumber {
-  position: absolute;
-  width: 94px;
-  height: 16px;
-  left: 121px;
-  top: 60px;
-  font-family: Myriad Pro;
-  font-style: normal;
-  font-weight: normal;
+.profile-card-contact-info {
   font-size: 13px;
   line-height: 16px;
+  margin-top: 20px;
+  width: 135px;
 }
 
-.profile-card-email {
-  position: absolute;
-  width: 82px;
-  height: 16px;
-  left: 121px;
-  top: 96px;
-  font-family: Myriad Pro;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 13px;
-  line-height: 16px;
-  color: #000000;
+.profile-card-image-container {
+  float: left;
+  width: 63px;
+  height: 63px;
+  margin-left: 20px;
+  margin-top: 20px;
+  border-radius: 50%;
 }
 
 .profile-card-image {
-  position: absolute;
-  width: 63px;
-  height: 63px;
-  left: 20px;
-  top: 20px;
-  border-radius: 50%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+@media only screen and (max-width: 630px) {
+  .profile-card {
+    width: 39vw;
+    height: 22.222vw;
+    padding: 0px 1.587vw 1.587vw 0px;
+    margin-bottom: 6.349vw;
+  }
+
+  .profile-card-text {
+    margin-left: 19.206vw;
+    padding-top: 3.333vw;
+    padding-bottom: 4.127vw;
+  }
+
+  .profile-card-name {
+    font-size: 2.54vw;
+    line-height: 3.016vw;
+  }
+
+  .profile-card-contact-info {
+    font-size: 2.063vw;
+    line-height: 2.54vw;
+    margin-top: 3.175vw;
+  }
+
+  .profile-card-image-container {
+    width: 10vw;
+    height: 10vw;
+    margin-left: 3.175vw;
+    margin-top: 3.175vw;
+  }
 }
