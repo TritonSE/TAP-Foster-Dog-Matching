@@ -54,7 +54,7 @@ export const Nav = styled.nav`
     animation-name: ${slideIn};
     animation-duration: 0.5s;
     animation-iteration-count: 1;
-    }
+    
   }
 `;
 
@@ -76,7 +76,7 @@ export const ToggleNavbar = styled.button`
     cursor: pointer;
     outline: inherit;
 
-}
+
   }
 `;
 
