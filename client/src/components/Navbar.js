@@ -54,13 +54,11 @@ export const Nav = styled.nav`
     animation-name: ${slideIn};
     animation-duration: 0.5s;
     animation-iteration-count: 1;
-    
   }
 `;
 
 export const ToggleNavbar = styled.button`
   display: none;
-
 
   @media screen and (max-width: 750px) {
     display: inline;
@@ -75,8 +73,6 @@ export const ToggleNavbar = styled.button`
     font: inherit;
     cursor: pointer;
     outline: inherit;
-
-
   }
 `;
 
