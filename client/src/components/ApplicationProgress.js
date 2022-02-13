@@ -33,15 +33,15 @@ const ProgressMilestoneBarSection = styled.div`
   width: calc(100% + 20px);
   margin: 0 -10px;
   background: ${(props) => (props.completed ? Colors.green : "black")};
-  height: 20px;
+  height: 16px;
 `;
 
 const ProgressMilestone = styled.div`
   z-index: 2;
   font-weight: bold;
-  font-size: 18px;
-  width: 71px;
-  height: 71px;
+  font-size: 16px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   background: ${(props) => (props.active ? Colors.green : props.unlocked ? "white" : "black")};
   ${(props) =>
