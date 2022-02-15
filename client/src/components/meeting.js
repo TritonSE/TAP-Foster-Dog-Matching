@@ -9,7 +9,6 @@ function Meetings(props) {
         <div className="break" />
         <div className="text-card">{props.textCard}</div>
         <div className="image-card">
-          {/* <img className="image" src={props.imagePath} alt="" /> */}
           <div className="status">{props.status}</div>
         </div>
       </div>
@@ -24,10 +23,12 @@ function Meetings(props) {
       <div className="text-card">{props.textCard}</div>
       <div className="image-card">
         <img className="image" src={props.imagePath} alt="" />
-        {/* <div className="status">{props.status}</div> */}
       </div>
     </div>
   );
 }
 
 export default Meetings;
+
+
+
