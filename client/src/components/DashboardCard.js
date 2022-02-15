@@ -6,7 +6,7 @@
  */
 
 import React from "react";
-import "../styles/dashboardcard.css";
+import "../css/dashboardcard.css";
 
 function DashboardCard(props) {
   return (

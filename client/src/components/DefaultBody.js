@@ -6,7 +6,7 @@
  */
 
 import React from "react";
-import "../styles/defaultbody.css";
+import "../css/defaultbody.css";
 import Navbar from "./Navbar";
 
 function DefaultBody(props) {

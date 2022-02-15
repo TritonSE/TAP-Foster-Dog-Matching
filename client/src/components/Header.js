@@ -10,7 +10,7 @@
  */
 
 import React from "react";
-import "../styles/header.css";
+import "../css/header.css";
 import logoImage from "../images/logo.png";
 import hamburgerIcon from "../images/hamburgermenuicon.png";
 
