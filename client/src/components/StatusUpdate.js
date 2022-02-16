@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/status.css";
+import "../css/status.css";
 
 function Meetings(props) {
   return (

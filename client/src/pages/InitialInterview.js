@@ -1,7 +1,6 @@
 import React from "react";
 import Meeting from "../components/meeting";
 import StatusUpdate from "../components/StatusUpdate";
-import Doggo from "../images/good-boi.png";
 import pfp from "../images/eren.png";
 
 function InitialInterview() {

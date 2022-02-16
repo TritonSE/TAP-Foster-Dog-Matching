@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/meeting.css";
+import "../css/meeting.css";
 
 function Meetings(props) {
   if (props.status) {

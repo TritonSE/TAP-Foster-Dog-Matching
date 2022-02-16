@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write .",
     "lint-fix": "(eslint --fix --cache --report-unused-disable-directives . || true) && prettier --write .",
@@ -16,6 +16,7 @@
   "dependencies": {
     "dotenv": "^11.0.0",
     "express": "^4.17.2",
+    "express-validator": "^6.14.0",
     "mongoose": "^6.1.6"
   },
   "devDependencies": {
@@ -24,6 +25,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.4",
     "husky": "^7.0.4",
+    "nodemon": "^2.0.15",
     "prettier": "^2.5.1"
   }
 }
