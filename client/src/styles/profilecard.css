@@ -2,13 +2,11 @@
   position: relative;
   width: 245.98px;
   height: 140px;
-  padding: 0px 10px 10px 0px;
   background: #ffffff;
   border: 0.327103px solid #9b9a9a;
   box-sizing: border-box;
   box-shadow: 0px 2.61682px 2.61682px rgba(0, 0, 0, 0.5);
   border-radius: 9.81308px;
-  margin-bottom: 40px;
 }
 
 .profile-card-text {
@@ -58,7 +56,6 @@
     width: 39vw;
     height: 22.222vw;
     padding: 0px 1.587vw 1.587vw 0px;
-    margin-bottom: 6.349vw;
   }
 
   .profile-card-text {

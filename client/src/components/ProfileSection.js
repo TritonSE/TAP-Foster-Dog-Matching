@@ -2,6 +2,10 @@ import React from "react";
 import "../styles/profilesection.css";
 
 function ProfileSection(props) {
+  const cards = props.profileCards.map((card) => (
+    <div className="profile-section-card">{card}</div>
+  ));
+
   return (
     <div className="profile-section">
       {props.myProfileButton}
@@ -11,28 +15,7 @@ function ProfileSection(props) {
         <div className="profile-section-link-arrow">{props.linkArrow}</div>
       </span>
       <div className="profile-section-divider" />
-      <div className="profile-section-cards-container">
-        <div className="profile-section-cards-column">
-          {props.profileCard}
-          {props.profileCard}
-        </div>
-        <div className="profile-section-cards-column">
-          {props.profileCard}
-          {props.profileCard}
-        </div>
-        <div className="profile-section-cards-column">
-          {props.profileCard}
-          {props.profileCard}
-        </div>
-        <div className="profile-section-cards-column">
-          {props.profileCard}
-          {props.profileCard}
-        </div>
-        <div className="profile-section-cards-column">
-          {props.profileCard}
-          {props.profileCard}
-        </div>
-      </div>
+      <div className="profile-section-cards-container">{cards}</div>
     </div>
   );
 }

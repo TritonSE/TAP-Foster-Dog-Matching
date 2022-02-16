@@ -14,6 +14,208 @@ function Profile() {
     document.body.style.overflow = isOpen ? "unset" : "hidden";
   };
 
+  const manageProf = [
+    <ProfileCard
+      imagePath={pfp}
+      name="Clara Adams"
+      phonenumber="(917)-392-8936"
+      email="Clara@tap.com"
+    />,
+    <ProfileCard
+      imagePath={pfp}
+      name="Clara Adams"
+      phonenumber="(917)-392-8936"
+      email="Clara@tap.com"
+    />,
+    <ProfileCard
+      imagePath={pfp}
+      name="Clara Adams"
+      phonenumber="(917)-392-8936"
+      email="Clara@tap.com"
+    />,
+    <ProfileCard
+      imagePath={pfp}
+      name="Clara Adams"
+      phonenumber="(917)-392-8936"
+      email="Clara@tap.com"
+    />,
+    <ProfileCard
+      imagePath={pfp}
+      name="Clara Adams"
+      phonenumber="(917)-392-8936"
+      email="Clara@tap.com"
+    />,
+    <ProfileCard
+      imagePath={pfp}
+      name="Clara Adams"
+      phonenumber="(917)-392-8936"
+      email="Clara@tap.com"
+    />,
+    <ProfileCard
+      imagePath={pfp}
+      name="Clara Adams"
+      phonenumber="(917)-392-8936"
+      email="Clara@tap.com"
+    />,
+    <ProfileCard
+      imagePath={pfp}
+      name="Clara Adams"
+      phonenumber="(917)-392-8936"
+      email="Clara@tap.com"
+    />,
+    <ProfileCard
+      imagePath={pfp}
+      name="Clara Adams"
+      phonenumber="(917)-392-8936"
+      email="Clara@tap.com"
+    />,
+  ];
+
+  const ambassProf = [
+    <ProfileCard
+      imagePath={pfp}
+      name="Clara Adams"
+      phonenumber="(917)-392-8936"
+      email="Clara@tap.com"
+    />,
+    <ProfileCard
+      imagePath={pfp}
+      name="Clara Adams"
+      phonenumber="(917)-392-8936"
+      email="Clara@tap.com"
+    />,
+    <ProfileCard
+      imagePath={pfp}
+      name="Clara Adams"
+      phonenumber="(917)-392-8936"
+      email="Clara@tap.com"
+    />,
+    <ProfileCard
+      imagePath={pfp}
+      name="Clara Adams"
+      phonenumber="(917)-392-8936"
+      email="Clara@tap.com"
+    />,
+    <ProfileCard
+      imagePath={pfp}
+      name="Clara Adams"
+      phonenumber="(917)-392-8936"
+      email="Clara@tap.com"
+    />,
+    <ProfileCard
+      imagePath={pfp}
+      name="Clara Adams"
+      phonenumber="(917)-392-8936"
+      email="Clara@tap.com"
+    />,
+    <ProfileCard
+      imagePath={pfp}
+      name="Clara Adams"
+      phonenumber="(917)-392-8936"
+      email="Clara@tap.com"
+    />,
+    <ProfileCard
+      imagePath={pfp}
+      name="Clara Adams"
+      phonenumber="(917)-392-8936"
+      email="Clara@tap.com"
+    />,
+  ];
+
+  const coordProf = [
+    <ProfileCard
+      imagePath={pfp}
+      imageAltText="Profile picture"
+      name="Clara Adams"
+      phonenumber="(917)-392-8936"
+      email="Clara@tap.com"
+    />,
+    <ProfileCard
+      imagePath={pfp}
+      imageAltText="Profile picture"
+      name="Clara Adams"
+      phonenumber="(917)-392-8936"
+      email="Clara@tap.com"
+    />,
+    <ProfileCard
+      imagePath={pfp}
+      imageAltText="Profile picture"
+      name="Clara Adams"
+      phonenumber="(917)-392-8936"
+      email="Clara@tap.com"
+    />,
+    <ProfileCard
+      imagePath={pfp}
+      imageAltText="Profile picture"
+      name="Clara Adams"
+      phonenumber="(917)-392-8936"
+      email="Clara@tap.com"
+    />,
+    <ProfileCard
+      imagePath={pfp}
+      imageAltText="Profile picture"
+      name="Clara Adams"
+      phonenumber="(917)-392-8936"
+      email="Clara@tap.com"
+    />,
+    <ProfileCard
+      imagePath={pfp}
+      imageAltText="Profile picture"
+      name="Clara Adams"
+      phonenumber="(917)-392-8936"
+      email="Clara@tap.com"
+    />,
+    <ProfileCard
+      imagePath={pfp}
+      imageAltText="Profile picture"
+      name="Clara Adams"
+      phonenumber="(917)-392-8936"
+      email="Clara@tap.com"
+    />,
+    <ProfileCard
+      imagePath={pfp}
+      imageAltText="Profile picture"
+      name="Clara Adams"
+      phonenumber="(917)-392-8936"
+      email="Clara@tap.com"
+    />,
+    <ProfileCard
+      imagePath={pfp}
+      imageAltText="Profile picture"
+      name="Clara Adams"
+      phonenumber="(917)-392-8936"
+      email="Clara@tap.com"
+    />,
+    <ProfileCard
+      imagePath={pfp}
+      imageAltText="Profile picture"
+      name="Clara Adams"
+      phonenumber="(917)-392-8936"
+      email="Clara@tap.com"
+    />,
+    <ProfileCard
+      imagePath={pfp}
+      imageAltText="Profile picture"
+      name="Clara Adams"
+      phonenumber="(917)-392-8936"
+      email="Clara@tap.com"
+    />,
+    <ProfileCard
+      imagePath={pfp}
+      imageAltText="Profile picture"
+      name="Clara Adams"
+      phonenumber="(917)-392-8936"
+      email="Clara@tap.com"
+    />,
+    <ProfileCard
+      imagePath={pfp}
+      imageAltText="Profile picture"
+      name="Clara Adams"
+      phonenumber="(917)-392-8936"
+      email="Clara@tap.com"
+    />,
+  ];
+
   return (
     <div>
       <ProfileSection
@@ -21,14 +223,7 @@ function Profile() {
         linkText="View All"
         linkArrow="&#8594;"
         href="Profile/Management"
-        profileCard={
-          <ProfileCard
-            imagePath={pfp}
-            name="Clara Adams"
-            phonenumber="(917)-392-8936"
-            email="Clara@tap.com"
-          />
-        }
+        profileCards={manageProf}
         myProfileButton={
           <MyProfileButton
             buttonText="My Profile"
@@ -43,31 +238,15 @@ function Profile() {
         linkText="View All"
         linkArrow="&#8594;"
         href="Profile/Ambassadors"
-        profileCard={
-          <ProfileCard
-            imagePath={pfp}
-            name="Clara Adams"
-            phonenumber="(917)-392-8936"
-            email="Clara@tap.com"
-          />
-        }
+        profileCards={ambassProf}
       />
       <ProfileSection
         titleText="Coordinators"
         linkText="View All"
         linkArrow="&#8594;"
         href="Profile/Coordinators"
-        profileCard={
-          <ProfileCard
-            imagePath={pfp}
-            imageAltText="Profile picture"
-            name="Clara Adams"
-            phonenumber="(917)-392-8936"
-            email="Clara@tap.com"
-          />
-        }
+        profileCards={coordProf}
       />
-
       {isOpen && (
         <Popup
           section1Name="Role: "
