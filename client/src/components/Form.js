@@ -37,6 +37,55 @@ function Form(props) {
       );
       break;
     }
+    case "signup": {
+      content = (
+        <>
+          <div className="form-signup-question"> I am a... </div>
+          <select className="selector">
+            <option value="" disabled selected>
+              Select an option
+            </option>
+            <option value="manager">Manager</option>
+            <option value="ambassador">Ambassador</option>
+            <option value="coordinator">Coordinator</option>
+          </select>
+          <input className="signup-first-name" placeholder="First Name" />
+          <input className="signup-last-name" placeholder="Last Name" />
+          <input type="email" className="signup-email" placeholder="Email" />
+          <input type="password" className="signup-password" placeholder="Password" />
+          <input type="password" className="signup-re-password" placeholder="Re-enter Password" />
+          {/* TODO: Make Signup button work */}
+          <Button className="signup" name="Sign Up" />
+          <a href="/login" className="log-in">
+            Log In
+          </a>
+        </>
+      );
+      break;
+    }
+    case "signup-key": {
+      content = (
+        <>
+          <a href="/register" className="back-to-register">
+            Back
+          </a>
+          <div className="form-signup-key-text">
+            {" "}
+            Please enter the correct {props.accountType} sign up key to complete account creation.{" "}
+          </div>
+          <div className="key-input">
+            <input type="text" maxLength="1" className="key-1" />
+            <input type="text" maxLength="1" className="key-2" />
+            <input type="text" maxLength="1" className="key-3" />
+            <input type="text" maxLength="1" className="key-4" />
+            <input type="text" maxLength="1" className="key-5" />
+          </div>
+          {/* TODO: Make Confirm button work */}
+          <Button className="confirm" name="Confirm" />
+        </>
+      );
+      break;
+    }
   }
 
   return (
