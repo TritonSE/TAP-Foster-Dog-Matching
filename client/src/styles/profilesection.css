@@ -25,21 +25,18 @@
   border-radius: 50px;
 }
 
-.profile-section-link {
+.profile-section-button {
+  cursor: pointer;
   display: inline-block;
   font-family: Myriad Pro;
   font-style: normal;
   font-weight: normal;
   font-size: 20px;
-  margin-left: 120px;
+  margin-left: 100px;
+  outline: none;
 }
 
-.profile-section-link a {
-  color: #000000;
-  text-decoration: none;
-}
-
-.profile-section-link-arrow {
+.profile-section-button-arrow {
   position: absolute;
   margin-left: 10px;
   display: inline-block;
@@ -54,60 +51,85 @@
   width: max-content;
 }
 
+.profile-section-cards-container .profile-section-card:nth-child(n + 11) {
+  display: none;
+}
+
+.profile-section-cards-container-view-all {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  row-gap: 40px;
+  column-gap: 26px;
+  margin: 35px -5px;
+  width: max-content;
+}
+
 .profile-section-card {
   height: auto;
   width: auto;
   display: inline;
 }
 
-@media only screen and (max-width: 1384px) {
-  .profile-section-card:nth-child(5n) {
+@media only screen and (max-width: 1398px) {
+  .profile-section-cards-container .profile-section-card:nth-child(5n) {
     display: none;
   }
   .profile-section-cards-container {
     grid-template-columns: repeat(4, 1fr);
   }
+  .profile-section-cards-container-view-all {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
-@media only screen and (max-width: 1116px) {
-  .profile-section-card:nth-child(5n - 1) {
+@media only screen and (max-width: 1126px) {
+  .profile-section-cards-container .profile-section-card:nth-child(5n - 1) {
     display: none;
   }
   .profile-section-cards-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .profile-section-cards-container-view-all {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media only screen and (max-width: 875px) {
   .profile-section {
-    height: 441px;
+    height: auto;
   }
-  .profile-section-title {
+  .profile-section:nth-child(1) .profile-section-title {
     margin-top: 100px;
   }
 }
 
-@media only screen and (max-width: 849px) {
-  .profile-section-card:nth-child(5n - 2) {
+@media only screen and (max-width: 854px) {
+  .profile-section-cards-container .profile-section-card:nth-child(5n - 2) {
     display: none;
   }
   .profile-section-cards-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .profile-section-cards-container-view-all {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media only screen and (max-width: 630px) {
   .profile-section {
-    height: 70vw;
     margin-top: 5.238vw;
     margin-left: 8.73vw;
     margin-bottom: 7.143vw;
   }
 
+  .profile-section:nth-child(1) .profile-section-title {
+    margin-top: 15.873vw;
+  }
+
   .profile-section-title {
     font-size: 5.873vw;
     line-height: 6.984vw;
-    margin-top: 15.873vw;
   }
 
   .profile-section-divider {
@@ -116,11 +138,20 @@
     margin-top: 1.746vw;
   }
 
-  .profile-section-link {
+  .profile-section-button {
     font-size: 3.175vw;
-    margin-left: 19vw;
+    margin-left: 15.873vw;
+  }
+  .profile-section-button-arrow {
+    margin-left: 1.587vw;
   }
   .profile-section-cards-container {
+    row-gap: 6.349vw;
+    column-gap: 4.127vw;
+    margin: 5.556vw -0.794vw;
+  }
+
+  .profile-section-cards-container-view-all {
     row-gap: 6.349vw;
     column-gap: 4.127vw;
     margin: 5.556vw -0.794vw;

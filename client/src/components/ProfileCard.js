@@ -8,9 +8,15 @@ function ProfileCard(props) {
         <img className="profile-card-image" src={props.imagePath} alt={props.imageAltText} />
       </div>
       <div className="profile-card-text">
-        <div className="profile-card-name">{props.name}</div>
-        <div className="profile-card-contact-info">{props.phonenumber}</div>{" "}
-        <div className="profile-card-contact-info">{props.email}</div>
+        <div className="profile-card-name" title={props.name}>
+          {props.name}
+        </div>
+        <div className="profile-card-contact-info" title={props.phonenumber}>
+          {props.phonenumber}
+        </div>{" "}
+        <div className="profile-card-contact-info" title={props.email}>
+          {props.email}
+        </div>
       </div>
     </div>
   );

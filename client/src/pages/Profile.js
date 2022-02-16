@@ -120,6 +120,24 @@ function Profile() {
       phonenumber="(917)-392-8936"
       email="Clara@tap.com"
     />,
+    <ProfileCard
+      imagePath={pfp}
+      name="Clara Adams"
+      phonenumber="(917)-392-8936"
+      email="Clara@tap.com"
+    />,
+    <ProfileCard
+      imagePath={pfp}
+      name="Clara Adams"
+      phonenumber="(917)-392-8936"
+      email="Clara@tap.com"
+    />,
+    <ProfileCard
+      imagePath={pfp}
+      name="Clara Adams"
+      phonenumber="(917)-392-8936"
+      email="Clara@tap.com"
+    />,
   ];
 
   const coordProf = [
@@ -220,9 +238,9 @@ function Profile() {
     <div>
       <ProfileSection
         titleText="Management"
-        linkText="View All"
-        linkArrow="&#8594;"
-        href="Profile/Management"
+        buttonText="View All"
+        buttonAltText="View Less"
+        buttonArrow="&#8594;"
         profileCards={manageProf}
         myProfileButton={
           <MyProfileButton
@@ -235,16 +253,16 @@ function Profile() {
       />
       <ProfileSection
         titleText="Ambassadors"
-        linkText="View All"
-        linkArrow="&#8594;"
-        href="Profile/Ambassadors"
+        buttonText="View All"
+        buttonAltText="View Less"
+        buttonArrow="&#8594;"
         profileCards={ambassProf}
       />
       <ProfileSection
         titleText="Coordinators"
-        linkText="View All"
-        linkArrow="&#8594;"
-        href="Profile/Coordinators"
+        buttonText="View All"
+        buttonAltText="View Less"
+        buttonArrow="&#8594;"
         profileCards={coordProf}
       />
       {isOpen && (
