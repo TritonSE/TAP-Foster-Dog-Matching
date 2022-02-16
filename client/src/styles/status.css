@@ -8,6 +8,14 @@
   padding-bottom: 10px;
 }
 
+.pfp {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  margin-right: 5px;
+  float: left;
+}
+
 .card-title {
   color: black;
 }
@@ -21,32 +29,43 @@
   padding: 15px;
 }
 
-.box {
-  padding: 20px;
+.ambassador-left {
+  padding-top: 20px;
+}
+
+.ambassador-right {
+  padding-top: 20px;
+  float: left;
 }
 
 .box-ambassador {
+  padding-left: 20px;
   grid-row: 1;
 }
 
 .box-contact {
+  padding-left: 20px;
   grid-row: 3;
 }
 
 .box-email {
   grid-row: 4;
   grid-column-start: 2;
+  padding-left: 20px;
 }
 
 .box-date {
+  padding-left: 20px;
   grid-row: 6;
 }
 
 .box-time {
+  padding-left: 20px;
   grid-row: 8;
 }
 
 .box-location {
+  padding-left: 20px;
   grid-row: 10;
 }
 

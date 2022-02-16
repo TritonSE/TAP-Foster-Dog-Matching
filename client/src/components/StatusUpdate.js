@@ -4,12 +4,17 @@ import "../styles/status.css";
 function Meetings(props) {
   return (
     <div className="status-card">
-      <div className="card-itle">
+      <div className="card-title">
         <h3>{props.title}</h3>
       </div>
       <div className="information-grid">
-        <div className="box-ambassador">Ambassador:</div>
-        <div className="box-ambassador">{props.ambassador}</div>
+        <div className="box-ambassador">
+          <div className="ambassador-left">Ambassador:</div>
+        </div>
+        <div className="box-ambassador">
+          <img className="pfp" src={props.image} alt="" />
+          <div className="ambassador-right">{props.ambassador}</div>
+        </div>
         <div className="line1">
           <hr className="line" />
         </div>

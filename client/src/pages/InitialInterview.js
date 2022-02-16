@@ -1,6 +1,8 @@
 import React from "react";
 import Meeting from "../components/meeting";
 import StatusUpdate from "../components/StatusUpdate";
+import Doggo from "../images/good-boi.png";
+import pfp from "../images/eren.png";
 
 function InitialInterview() {
   return (
@@ -25,6 +27,7 @@ function InitialInterview() {
             date="1/1/2022"
             time="6-7:00PM"
             location="Zoom"
+            image={pfp}
           />
         }
       />
