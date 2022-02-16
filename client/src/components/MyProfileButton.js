@@ -1,6 +1,7 @@
 import React from "react";
-import "../styles/myprofilebutton.css";
+import "../css/myprofilebutton.css";
 
+// Used in Profile.js to open a popup for viewing user's profile
 function MyProfileButton(props) {
   return (
     <div

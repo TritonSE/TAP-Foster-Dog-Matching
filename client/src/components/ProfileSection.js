@@ -1,13 +1,17 @@
 import React, { useState } from "react";
-import "../styles/profilesection.css";
+import "../css/profilesection.css";
 
+// Used in Profile.js to divide the page into sections based on role
 function ProfileSection(props) {
   const [viewAll, setViewAll] = useState(false);
 
+  // Event to change states (viewing less, viewing all) based on showing
+  // more or less profile cards
   const toggleViewAll = () => {
     setViewAll(!viewAll);
   };
 
+  // Maps the array of profile cards to individual card objects
   const cards = props.profileCards.map((card) => (
     <div className="profile-section-card">{card}</div>
   ));

@@ -1,6 +1,7 @@
 import React from "react";
-import "../styles/profilecard.css";
+import "../css/profilecard.css";
 
+// Used in Profile.js to display an individual's profile
 function ProfileCard(props) {
   return (
     <div className="profile-card">

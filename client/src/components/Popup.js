@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import "../styles/popup.css";
+import "../css/popup.css";
 
+// Used to Profile.js for viewing and editing user's profile
 function Popup(props) {
   const [editing, setEditing] = useState(false);
 
+  // Event to change states (not editing, editing) based on whether or not
+  // user is editing profile
   const toggleEditing = () => {
     setEditing(!editing);
   };
