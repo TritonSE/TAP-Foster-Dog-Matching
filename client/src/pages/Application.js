@@ -3,9 +3,22 @@ import ApplicationProgress from "../components/ApplicationProgress";
 import Form from "../components/Form";
 import { ControlledInput, InputLabel } from "../components/Input";
 import { useForm } from "react-hook-form";
+import PageSections from "../components/PageSections";
 
-function Application() {
-  const { control, watch, handleSubmit, setValue, getValues, reset, formState } = useForm();
+function FosterApplication() {
+  const personalInfoRef = React.useRef();
+  const fosterInfoRef = React.useRef();
+  const outsideInfoRef = React.useRef();
+  const { control, handleSubmit } = useForm();
+
+  const applicationSections = React.useMemo(
+    () => ({
+      "Personal Information": personalInfoRef,
+      "Foster Information": fosterInfoRef,
+      "Outside Information": outsideInfoRef,
+    }),
+    []
+  );
 
   const onSubmit = (data) => {
     console.log(data);
@@ -14,13 +27,11 @@ function Application() {
   const onError = (errors) => {
     console.log(errors);
   };
-
   return (
-    <div>
-      <ApplicationProgress currentStep={0} completedUpToStep={undefined} unlockedUpToStep={0} />'
+    <PageSections sections={applicationSections}>
       <Form.Container>
         <Form.Title>Foster Application</Form.Title>
-        <Form.Section title="Personal Information" id="personal-information">
+        <Form.Section title="Personal Information" ref={personalInfoRef}>
           <Form.SubSection title="Name">
             <ControlledInput control={control} label="First Name" name="firstname" required />
             <ControlledInput control={control} label="Last Name" name="lastname" required />
@@ -75,7 +86,7 @@ function Application() {
           </Form.SubSection>
         </Form.Section>
 
-        <Form.Section title="Foster Information" id="foster-information">
+        <Form.Section title="Foster Information" ref={fosterInfoRef}>
           <Form.SubSection>
             <ControlledInput
               control={control}
@@ -150,7 +161,7 @@ function Application() {
           </Form.SubSection>
         </Form.Section>
 
-        <Form.Section title="Outside Information" id="outside-information">
+        <Form.Section title="Outside Information" ref={outsideInfoRef}>
           <Form.SubSection>
             <InputLabel>Please provide a personal reference </InputLabel>
             <Form.Row>
@@ -205,7 +216,18 @@ function Application() {
         {/* TODO: replace with button component */}
         <button onClick={handleSubmit(onSubmit, onError)}>Continue</button>
       </Form.Container>
-    </div>
+    </PageSections>
+  );
+}
+
+function FosterAgreement() {}
+
+function Application() {
+  return (
+    <>
+      <ApplicationProgress currentStep={2} completedUpToStep={1} unlockedUpToStep={3} />
+      <FosterApplication />
+    </>
   );
 }
 

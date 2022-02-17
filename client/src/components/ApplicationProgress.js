@@ -1,10 +1,14 @@
 /**
  * Application Progress Component
  *
+ * Component that renders the Foster Application progress bar
+ *
  * Used on: Applications
  *
  * Props:
- *  TODO
+ *  - currentStep [number] - int representing the current active step (0-indexed)
+ *  - unlockedUpToStep [number] - int representing the farthest unlocked step (0-indexed)
+ *  - completedUpToStep [number] - int representing the farthest completed step (0-indexed)
  */
 
 import styled, { css } from "styled-components";
@@ -26,6 +30,7 @@ const ProgressBarContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 20px;
+  margin-bottom: 40px;
 `;
 
 const ProgressMilestoneBarSection = styled.div`
@@ -40,12 +45,14 @@ const ProgressMilestone = styled.div`
   z-index: 2;
   font-weight: bold;
   font-size: 16px;
-  width: 60px;
-  height: 60px;
+  width: 64px;
+  height: 64px;
+  box-sizing: border-box;
   border-radius: 50%;
   background: ${(props) => (props.active ? Colors.green : props.unlocked ? "white" : "black")};
   ${(props) =>
     props.unlocked &&
+    !props.active &&
     css`
       border: 5px solid ${Colors.green};
     `}

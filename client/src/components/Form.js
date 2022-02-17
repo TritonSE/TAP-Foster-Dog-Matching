@@ -1,3 +1,21 @@
+/**
+ * Form Components
+ *
+ * Components that aid in making layouts for forms
+ *
+ * Used on: Application
+ *
+ * Props: [see components below for their props]
+ *
+ * Usage:
+ *     import Form from "../components/Form";
+ *     <Form.Container>
+ *        <Form.Title></Form.Title>
+ *        ....
+ *     </Form.Container>
+ */
+
+import React from "react";
 import styled from "styled-components";
 import { Colors } from "./Theme";
 
@@ -44,15 +62,26 @@ const SectionBorder = styled.div`
   margin-bottom: 10px;
 `;
 
-const Section = function ({ title, children, id }) {
+/**
+ * Section Component
+ *
+ * Renders a section title under a separating bar and the section contents
+ *
+ * Props:
+ *  - title [string] - title to display above contents
+ *  - children [ReactElement] - content of this section
+ *  - ref [ReactRef?] - optional. ref to attach (ie. for use with PageSections component)
+ */
+
+const Section = React.forwardRef(function ({ title, children }, ref) {
   return (
-    <SectionContainer id={id}>
+    <SectionContainer ref={ref}>
       <SectionBorder />
       <SectionTitle>{title}</SectionTitle>
       {children}
     </SectionContainer>
   );
-};
+});
 
 const SubSectionContainer = styled.div`
   display: flex;
@@ -73,12 +102,22 @@ const SubSectionChildren = styled.div`
   gap: 14px;
 `;
 
+/**
+ * SubSection Component
+ *
+ * Renders a sub-section title to the left of the contents
+ *
+ * Props:
+ *  - title [string] - title to display to the left of contents
+ *  - children [ReactElement] - content of this sub-section
+ */
+
 const SubSection = function ({ title, children }) {
   return (
     <SubSectionContainer>
       {title && <SubSectionLabel>{title}</SubSectionLabel>}
       <SubSectionChildren>{children}</SubSectionChildren>
-      <SubSectionChildren />
+      {title && <SubSectionChildren />}
     </SubSectionContainer>
   );
 };

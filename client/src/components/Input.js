@@ -1,7 +1,27 @@
+/**
+ * Input Component
+ *
+ * Component that renders a text input or text area
+ *
+ * Props:
+ *      - value [any] - default value
+ *      - onChange [function] - function to set value on change
+ *      - onBlur [function] - function to run on input blur
+ *      - invalid [boolean] - if field should show red error border
+ *      - label [string] - label to show above input
+ *      - helpText [string] - info text to display under input
+ *      - placeholder [string] - value to show when no input
+ *      - numLines [number] - rows to show if a textarea is desired
+ *      - type [string] - input type (ie. text, number, etc). default: text
+ *      - width [string] - width of input (ie. '100px' or '30%')
+ *      - disabled [boolean] - if input should be disabled
+ *      - autoFocus [boolean] - if input should autofocus
+ */
+
 import React from "react";
 import styled, { css } from "styled-components";
 import withControl from "../utils/withControl";
-import { Colors, Typography } from "./Theme";
+import { Colors } from "./Theme";
 
 const InputContainer = styled.div``;
 
@@ -33,26 +53,6 @@ const TextAreaField = styled(InputField).attrs({
 })`
   resize: none;
 `;
-
-/*
- * Props:
- *      - value [any] - default value
- *      - onChange [function] - function to set value on change
- *      - onBlur [function] - function to run on input blur
- *      - invalid [boolean] - if field should show red error border
- *      - showCounter [boolean] - show char counter
- *      - maxChars [number] - max chars to display on char counter
- *      - label [string] - label to show above input
- *      - helpText [string] - info text to display under input
- *      - placeholder [string] - value to show when no input
- *      - numLines [number] - rows to show if a textarea is desired
- *      - type [string] - input type (ie. text, number, etc). default: text
- *      - width [string] - width of input (ie. '100px' or '30%')
- *      - textAlign [string] - text alignment of input
- *      - disabled [boolean] - if input should be disabled
- *      - autoFocus [boolean] - if input should autofocus
- *      - variant [string] - variant of input - 'compact'
- */
 
 const Input = React.forwardRef(
   (
