@@ -74,8 +74,7 @@ const Input = React.forwardRef(
     ref
   ) => {
     const handleChange = (event) => {
-      let value = event.target.value;
-      onChange(value);
+      onChange(event.target.value);
     };
 
     return (

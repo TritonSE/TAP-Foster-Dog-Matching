@@ -16,12 +16,19 @@
  *      - * all other props from Component are supported
  *      - * more info about Controller props: https://react-hook-form.com/api/usecontroller/controller
  */
-
+import React from "react";
 import { useController } from "react-hook-form";
 
-const withControl =
-  (Component) =>
-  ({ control, name, defaultValue = "", rules = {}, onChange, required, ...inputProps }) => {
+function withControl(Component) {
+  function controlledComponent({
+    control,
+    name,
+    defaultValue = "",
+    rules = {},
+    onChange,
+    required,
+    ...inputProps
+  }) {
     rules.required = required;
 
     const {
@@ -45,6 +52,9 @@ const withControl =
         }}
       />
     );
-  };
+  }
+
+  return controlledComponent;
+}
 
 export default withControl;

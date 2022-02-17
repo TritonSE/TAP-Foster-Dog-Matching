@@ -1,8 +1,8 @@
+import { useForm } from "react-hook-form";
 import React from "react";
 import ApplicationProgress from "../components/ApplicationProgress";
 import Form from "../components/Form";
 import { ControlledInput, InputLabel } from "../components/Input";
-import { useForm } from "react-hook-form";
 import PageSections from "../components/PageSections";
 
 function FosterApplication() {
@@ -27,6 +27,7 @@ function FosterApplication() {
   const onError = (errors) => {
     console.log(errors);
   };
+
   return (
     <PageSections sections={applicationSections}>
       <Form.Container>
@@ -72,7 +73,7 @@ function FosterApplication() {
             <InputLabel>Do you own or rent your home?</InputLabel>
           </Form.SubSection>
           <Form.SubSection>
-            <InputLabel>Landlord's Name (if you own, just write n/a)*</InputLabel>
+            <InputLabel>Landlord&apos;s Name (if you own, just write n/a)*</InputLabel>
             <Form.Row>
               <Form.Column>
                 <ControlledInput control={control} label="First Name" />
@@ -214,19 +215,24 @@ function FosterApplication() {
           </Form.SubSection>
         </Form.Section>
         {/* TODO: replace with button component */}
-        <button onClick={handleSubmit(onSubmit, onError)}>Continue</button>
+        <button type="button" onClick={handleSubmit(onSubmit, onError)}>
+          Continue
+        </button>
       </Form.Container>
     </PageSections>
   );
 }
 
-function FosterAgreement() {}
+function FosterAgreement() {
+  return null;
+}
 
 function Application() {
   return (
     <>
-      <ApplicationProgress currentStep={2} completedUpToStep={1} unlockedUpToStep={3} />
+      <ApplicationProgress currentStep={1} completedUpToStep={0} unlockedUpToStep={2} />
       <FosterApplication />
+      <FosterAgreement />
     </>
   );
 }

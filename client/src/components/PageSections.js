@@ -64,11 +64,6 @@ function PageSections({ sections, children }) {
   const contentRef = React.useRef();
   const [currentSection, setCurrentSection] = React.useState(Object.keys(sections)[0]);
 
-  React.useEffect(() => {
-    contentRef.current.addEventListener("scroll", handleScroll);
-    return () => contentRef.current.removeEventListener("scroll", handleScroll);
-  }, []);
-
   function handleScroll() {
     const contentContainerTop = contentRef.current.getBoundingClientRect().top;
 
@@ -77,6 +72,11 @@ function PageSections({ sections, children }) {
       if (sectionTop - 20 < contentContainerTop) setCurrentSection(section);
     });
   }
+
+  React.useEffect(() => {
+    contentRef.current.addEventListener("scroll", handleScroll);
+    return () => contentRef.current.removeEventListener("scroll", handleScroll);
+  }, []);
 
   function scrollSectionIntoView(section) {
     sections[section].current.scrollIntoView({ behavior: "smooth" });
@@ -88,6 +88,7 @@ function PageSections({ sections, children }) {
         <SectionButtonContainer>
           {Object.keys(sections).map((section) => (
             <SectionButton
+              key={section}
               onClick={() => scrollSectionIntoView(section)}
               active={currentSection === section}
             >

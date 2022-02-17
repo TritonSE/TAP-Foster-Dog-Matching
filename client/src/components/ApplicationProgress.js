@@ -10,7 +10,7 @@
  *  - unlockedUpToStep [number] - int representing the farthest unlocked step (0-indexed)
  *  - completedUpToStep [number] - int representing the farthest completed step (0-indexed)
  */
-
+import React from "react";
 import styled, { css } from "styled-components";
 import { Colors } from "./Theme";
 import check from "../images/check.png";
@@ -49,14 +49,22 @@ const ProgressMilestone = styled.div`
   height: 64px;
   box-sizing: border-box;
   border-radius: 50%;
-  background: ${(props) => (props.active ? Colors.green : props.unlocked ? "white" : "black")};
+  background: ${(props) => {
+    if (props.active) return Colors.green;
+    if (props.unlocked) return "white";
+    return "black";
+  }};
   ${(props) =>
     props.unlocked &&
     !props.active &&
     css`
       border: 5px solid ${Colors.green};
     `}
-  color: ${(props) => (props.active ? "white" : props.unlocked ? "black" : "white")};
+  color: ${(props) => {
+    if (props.active) return "white";
+    if (props.unlocked) return "black";
+    return "white";
+  }};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -76,13 +84,13 @@ function ApplicationProgress({ currentStep, unlockedUpToStep, completedUpToStep 
   return (
     <ProgressBarContainer>
       {MILESTONES.map((milestone, index) => (
-        <>
+        <React.Fragment key={milestone}>
           <ProgressMilestone
             active={index === currentStep || index <= completedUpToStep}
             unlocked={index === unlockedUpToStep}
             clickable={index <= unlockedUpToStep}
           >
-            {index <= completedUpToStep ? <img src={check} /> : index + 1}
+            {index <= completedUpToStep ? <img src={check} alt="check mark" /> : index + 1}
             <ProgressMilestoneText>{milestone}</ProgressMilestoneText>
           </ProgressMilestone>
           {index < MILESTONES.length - 1 && (
@@ -90,7 +98,7 @@ function ApplicationProgress({ currentStep, unlockedUpToStep, completedUpToStep 
               completed={index < completedUpToStep || index < unlockedUpToStep}
             />
           )}
-        </>
+        </React.Fragment>
       ))}
     </ProgressBarContainer>
   );

@@ -73,15 +73,13 @@ const SectionBorder = styled.div`
  *  - ref [ReactRef?] - optional. ref to attach (ie. for use with PageSections component)
  */
 
-const Section = React.forwardRef(function ({ title, children }, ref) {
-  return (
-    <SectionContainer ref={ref}>
-      <SectionBorder />
-      <SectionTitle>{title}</SectionTitle>
-      {children}
-    </SectionContainer>
-  );
-});
+const Section = React.forwardRef(({ title, children }, ref) => (
+  <SectionContainer ref={ref}>
+    <SectionBorder />
+    <SectionTitle>{title}</SectionTitle>
+    {children}
+  </SectionContainer>
+));
 
 const SubSectionContainer = styled.div`
   display: flex;
@@ -112,7 +110,7 @@ const SubSectionChildren = styled.div`
  *  - children [ReactElement] - content of this sub-section
  */
 
-const SubSection = function ({ title, children }) {
+function SubSection({ title, children }) {
   return (
     <SubSectionContainer>
       {title && <SubSectionLabel>{title}</SubSectionLabel>}
@@ -120,7 +118,7 @@ const SubSection = function ({ title, children }) {
       {title && <SubSectionChildren />}
     </SubSectionContainer>
   );
-};
+}
 
 const Form = {
   Container,
