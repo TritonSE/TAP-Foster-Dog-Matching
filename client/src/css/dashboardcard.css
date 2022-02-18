@@ -1,5 +1,5 @@
 .dashboard-card {
-  width: 376px;
+  width: min(100vw, 376px);
   height: 214px;
   border-radius: 15px;
   background: #ffffff;
@@ -23,6 +23,7 @@
 }
 
 .dashboard-card-image {
+  width: calc(100% - 10px);
   position: absolute;
   bottom: 0;
   left: 6px;
@@ -31,7 +32,7 @@
 
 .dashboard-card-text {
   height: 66px;
-  line-height: 66px;
+  line-height: calc(20px + 0.2vw);
 }
 
 @media only screen and (max-width: 750px) {

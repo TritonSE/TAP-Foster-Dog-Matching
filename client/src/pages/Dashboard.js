@@ -17,7 +17,12 @@ function Dashboard() {
           cardText="Start Your Application"
           // TODO Give IconButton link href so it can function
           iconButton={
-            <IconButton icon={plus} altText="ContinueButton" leftOffset="304px" topOffset="156px" />
+            <IconButton
+              icon={plus}
+              altText="ContinueButton"
+              leftOffset="min(calc(100vw - 60px), 316px)"
+              topOffset="156px"
+            />
           }
         />
       </DefaultBody>

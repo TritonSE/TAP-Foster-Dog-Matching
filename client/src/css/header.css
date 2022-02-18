@@ -16,7 +16,7 @@
 .header-welcome {
   grid-column: 1;
   text-align: left;
-  font-size: 25px;
+  font-size: calc(15px + 0.61vw);
   height: inherit;
   display: flex;
 }
@@ -32,7 +32,7 @@
 
 .header-message {
   grid-column: 2;
-  font-size: 24px;
+  font-size: calc(14px + 0.6vw);
   position: relative;
 }
 
@@ -45,7 +45,7 @@
 
 .header-sign-out {
   grid-column: 3;
-  font-size: 25px;
+  font-size: calc(14px + 0.6vw);
 }
 
 .navbar-hamburger-button {
@@ -84,7 +84,7 @@
     grid-template-columns: auto 55px;
   }
   .header-welcome img {
-    width: 47px;
+    max-width: 100%;
     height: inherit;
   }
 }
