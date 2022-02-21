@@ -54,6 +54,7 @@ function ContactUs() {
               options={toSelect}
               onChange={handleSelect}
               placeholder="Select your option"
+              backgroundColor="#C6C6C6"
             />
           </div>
           <button type="button" className="continueButton" onClick={() => continueDecide()}>
@@ -65,7 +66,7 @@ function ContactUs() {
           <div className="topBar">
             <p>New Message</p>
             <button type="button" className="cancel" onClick={() => setContinued(false)}>
-              <img src={cancel} />
+              <img className="cancelImg" src={cancel} />
             </button>
           </div>
 
@@ -75,6 +76,8 @@ function ContactUs() {
               options={toSelect}
               onChange={handleSelect}
               placeholder="Select your option"
+              backgroundColor="#C6C6C6"
+              color="#53575A"
             />
           </div>
           <textarea

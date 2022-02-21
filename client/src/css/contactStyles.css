@@ -26,6 +26,7 @@ html,
 .helpQuestion {
   margin: 50px 0%;
   color: #000000;
+  font-size: min(30px, 2.5vw);
 }
 
 .selection {
@@ -34,32 +35,32 @@ html,
   height: 55px;
   padding: 0% 3%;
   font-size: min(25px, 2vw);
+  color: #53575a;
 }
-
 .continueButton {
   position: absolute;
-  width: max(130px, 25%);
+  width: max(100px, 25%);
   height: 10%;
   right: 20px;
   bottom: 20px;
   text-align: center;
-  font-size: 30;
 
   background: #8dc442;
+  padding: 3px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   color: white;
   border: none;
   font-family: Nunito;
-  font-size: 27px;
+  font-size: 20px;
 }
 
 /* Styling for send message page */
 
 .newMessage {
   position: absolute;
-  width: 65%;
-  height: 600px;
+  width: min(1090px, 65%);
+  height: 60vh;
   left: 30vw;
   top: 27%;
 
@@ -73,18 +74,16 @@ html,
 .topBar {
   position: absolute;
   width: 100%;
-  height: 112px;
+  height: 10vh;
   font-weight: 700;
+  font-size: max(20px, min(30px, 3.5vw));
   padding-left: 4%;
-  padding-top: 1%;
   padding-right: 1%;
   background: #8dc442;
-  border: 1px solid #000000;
   box-sizing: border-box;
   border-radius: 15px 15px 0px 0px;
 
   color: #ffffff;
-
   display: flex;
   justify-content: space-between;
 }
@@ -94,27 +93,31 @@ html,
   background: none;
   border: none;
 }
+.cancelImg {
+  width: max(18px, min(30px, 3vw));
+}
 
 .selection2 {
   border-radius: 10px;
-  width: 300px;
-  height: 55px;
   position: relative;
-  top: 112px;
+  width: max(250px, 20vw);
+  top: 10vh;
   outline: none;
   font-size: min(25px, 2vw);
+  color: #53575a;
 }
 
 .inputArea {
   position: relative;
   width: 96%;
-  height: 397px;
-  top: 125px;
+  height: 39vh;
+  top: 11vh;
   left: 2%;
   direction: ltr;
   padding: 2%;
   outline: none;
   resize: none;
+  font-size: min(30px, max(20px, 2vw));
 
   background: #ffffff;
   border: 0.5px solid #9b9a9a;
@@ -129,18 +132,19 @@ html,
   border: none;
 
   color: white;
-  width: min(18vw, 191px);
-  height: 59px;
+  width: min(10vh, 191px);
+  height: 5vh;
   z-index: 2;
   position: relative;
   float: right;
   margin-right: 5%;
-  top: 7%;
+  top: 6%;
+  font-size: 20px;
 }
 
 .messageReceived {
   position: absolute;
-  z-index: 3;
+  z-index: 1;
   width: 21vw;
   height: 16vh;
   left: 35%;
@@ -151,10 +155,10 @@ html,
   border: 5px solid #8dc442;
   box-sizing: border-box;
   border-radius: 20px;
-  font-size: 18px;
 }
 .message {
   padding: 0%;
+  font-size: min(18px, 2vh);
 }
 
 .smallCancel {
@@ -173,11 +177,17 @@ html,
     margin: 0% 5%;
     padding: 5%;
     left: 0;
+    top: 23%;
+  }
+
+  .helpQuestion {
+    font-size: 5vw;
   }
   .newMessage {
     left: 0;
     width: 90%;
     margin: 0% 5%;
+    top: 15%;
   }
   .messageReceived {
     width: 50%;
@@ -194,5 +204,8 @@ html,
   }
   .selection2 {
     width: 250px;
+  }
+  .continueButton {
+    padding: 0px;
   }
 }
