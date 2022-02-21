@@ -13,6 +13,7 @@ import "../css/contactStyles.css";
 import cancel from "../images/cancel.png";
 import smallCancel from "../images/smallCancel.png";
 import Select from "../components/Select";
+import Navbar from "../components/Navbar";
 
 function ContactUs() {
   const [continued, setContinued] = useState(false);
@@ -44,6 +45,12 @@ function ContactUs() {
 
   return (
     <div>
+      <Navbar
+        pages={{
+          Dashboard: "/dashboard",
+          "Contact Us": "/contact",
+        }}
+      />
       {!continued ? (
         <div className="contactLanding">
           <p className="helpQuestion">What do you need help on?</p>
