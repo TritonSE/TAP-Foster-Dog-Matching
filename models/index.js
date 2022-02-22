@@ -1,7 +1,7 @@
 const Dog = require("./dog");
 const Interview = require("./interview");
 
-const Admin = requrie("./admin.js");
+const Admin = require("./admin.js");
 
 module.exports = {
   Dog,

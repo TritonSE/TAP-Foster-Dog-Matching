@@ -22,7 +22,7 @@ module.exports = mongoose.model(
       required: true,
       unique: true,
     },
-    phone: {
+    phone:  {
       type: String,
       required: true,
     },
