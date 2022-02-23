@@ -1,11 +1,13 @@
 import { useForm } from "react-hook-form";
 import React from "react";
+import styled from "styled-components";
 import ApplicationProgress from "../components/ApplicationProgress";
 import Form from "../components/Form";
 import { ControlledInput, InputLabel } from "../components/Input";
 import PageSections from "../components/PageSections";
+import { FOSTER_AGREEMENT_CONTENT } from "../constants/FOSTER_AGREEMENT";
 
-function FosterApplication() {
+function FosterApplication({ setView }) {
   const personalInfoRef = React.useRef();
   const fosterInfoRef = React.useRef();
   const outsideInfoRef = React.useRef();
@@ -22,10 +24,12 @@ function FosterApplication() {
 
   const onSubmit = (data) => {
     console.log(data);
+    setView("agreement");
   };
 
   const onError = (errors) => {
     console.log(errors);
+    setView("agreement");
   };
 
   return (
@@ -223,16 +227,72 @@ function FosterApplication() {
   );
 }
 
-function FosterAgreement() {
-  return null;
+const FosterAgreementContainer = styled.div`
+  height: 80vh;
+  overflow-y: scroll;
+`;
+
+const FosterAgreementContent = styled.pre`
+  font-family: inherit;
+  font-size: 16px;
+  white-space: pre-wrap;
+`;
+
+const SignatureContainer = styled.div`
+  width: 60%;
+  margin: auto;
+`;
+
+function FosterAgreement({ setView }) {
+  const { control, handleSubmit } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
+  const onError = (errors) => {
+    console.log(errors);
+  };
+
+  return (
+    <FosterAgreementContainer>
+      <Form.Container>
+        <Form.Title>Foster Agreement</Form.Title>
+        <FosterAgreementContent>{FOSTER_AGREEMENT_CONTENT}</FosterAgreementContent>
+        <SignatureContainer>
+          <Form.SubSection>
+            <ControlledInput control={control} name="name" label="Print your name" required />
+          </Form.SubSection>
+          <Form.SubSection>
+            <ControlledInput control={control} name="date" label="Date" type="date" required />
+          </Form.SubSection>
+          <Form.SubSection>
+            <ControlledInput control={control} name="signature" label="Signature" required />
+          </Form.SubSection>
+        </SignatureContainer>
+        {/* TODO: replace with button component */}
+        <button type="button" onClick={() => setView("application")}>
+          Back
+        </button>
+        <button type="button" onClick={handleSubmit(onSubmit, onError)}>
+          Submit Application
+        </button>
+      </Form.Container>
+    </FosterAgreementContainer>
+  );
 }
 
 function Application() {
+  const [view, setView] = React.useState("application");
+
   return (
     <>
-      <ApplicationProgress currentStep={1} completedUpToStep={0} unlockedUpToStep={2} />
-      <FosterApplication />
-      <FosterAgreement />
+      <ApplicationProgress currentStep={0} />
+      {view === "application" ? (
+        <FosterApplication setView={setView} />
+      ) : (
+        <FosterAgreement setView={setView} />
+      )}
     </>
   );
 }
