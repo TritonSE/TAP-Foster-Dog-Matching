@@ -63,7 +63,10 @@ const validators = [
     .notEmpty()
     .isArray()
     .custom((input) => input.every((value) => typeof value === "string")),
-  body("preference").notEmpty().isArray().custom((input) => input.every((value) => typeof value === "string")),
+  body("preference")
+    .notEmpty()
+    .isArray()
+    .custom((input) => input.every((value) => typeof value === "string")),
 ];
 
 /**
