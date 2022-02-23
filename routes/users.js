@@ -20,7 +20,7 @@ const validators = [
 ];
 
 /**
- * POST /user - Create an user
+ * POST /users - Create an user
  */
 router.post("/", [...validators, validateRequest], (req, res, next) => {
   createUser(req.body)
@@ -33,7 +33,7 @@ router.post("/", [...validators, validateRequest], (req, res, next) => {
 });
 
 /**
- * POST /user - Login user by verifying email and password
+ * POST /users/login - Login user by verifying email and password
  */
 router.post("/login", [...validators, validateRequest], (req, res, next) => {
   checkCredentials(req.body)
