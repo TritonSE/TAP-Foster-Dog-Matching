@@ -60,6 +60,7 @@ module.exports = mongoose.model(
         required: true,
       },
       landlord: {
+        // TODO should this also be required?
         firstName: {
           type: String,
           required: true,
