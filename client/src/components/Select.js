@@ -10,7 +10,7 @@
  *      - options [object[]] - array of object representing options with two keys: label and value
  *      - value [any] - default value. leave as null to show placeholder
  *      - onChange [function] - function to set value on change
- *      - width [string] - width of select. ie. '100px' or '10%'. optional.
+ *      - height [string] - height of select. ie. '100px' or '10%'. optional.
  *      - backgroundColor [string] - background color of placeholder
  */
 
@@ -23,7 +23,7 @@ const SelectContainer = styled.div`
 `;
 
 const StyledSelect = styled.div`
-  max-height: 50px;
+  height: ${(props) => (props.height ? props.height : "50px")};
   padding: 6px 15px;
   border: 1px solid black;
   border-radius: 10px;
@@ -66,7 +66,7 @@ const OptionText = styled.span`
   display: flex;
 `;
 
-function Select({ placeholder, options, value, onChange, backgroundColor }) {
+function Select({ placeholder, options, value, onChange, height, backgroundColor }) {
   const [openMenu, setOpenMenu] = React.useState(false);
 
   const handleSelect = (newValue) => {
@@ -90,6 +90,7 @@ function Select({ placeholder, options, value, onChange, backgroundColor }) {
             setOpenMenu((open) => !open);
           }}
           backColor={backgroundColor}
+          height={height}
         >
           {!value || value.length === 0 ? <span>{placeholder}</span> : <span>{displayValue}</span>}▼
         </StyledSelect>
