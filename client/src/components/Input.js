@@ -52,6 +52,7 @@ const TextAreaField = styled(InputField).attrs({
   as: "textarea",
 })`
   resize: none;
+  font-family: inherit;
 `;
 
 const Input = React.forwardRef(

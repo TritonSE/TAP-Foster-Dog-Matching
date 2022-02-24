@@ -17,10 +17,12 @@
 
 import React from "react";
 import styled from "styled-components";
+import withControl from "../utils/withControl";
 import ClickAwayListener from "./ClickAwayListener";
 
 const SelectContainer = styled.div`
   position: relative;
+  width: ${(props) => props.width || "unset"};
 `;
 
 const StyledSelect = styled.div`
@@ -42,6 +44,7 @@ const StyledSelect = styled.div`
 
 const OptionsContainer = styled.div`
   position: absolute;
+  max-height: 300px;
   width: 100%;
   top: calc(100% + 5px);
   background: white;
@@ -87,10 +90,9 @@ function Select({ placeholder, options, value, onChange, height, width, backgrou
 
   return (
     <ClickAwayListener onClickAway={() => setOpenMenu(false)}>
-      <SelectContainer>
+      <SelectContainer width={width}>
         <StyledSelect
           open={openMenu}
-          width={width}
           onClick={() => {
             setOpenMenu((open) => !open);
           }}
@@ -117,5 +119,7 @@ function Select({ placeholder, options, value, onChange, height, width, backgrou
     </ClickAwayListener>
   );
 }
+
+export const ControlledSelect = withControl(Select);
 
 export default Select;

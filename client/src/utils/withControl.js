@@ -23,7 +23,7 @@ function withControl(Component) {
   function controlledComponent({
     control,
     name,
-    defaultValue = "",
+    defaultValue,
     rules = {},
     onChange,
     required,

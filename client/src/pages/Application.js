@@ -6,12 +6,16 @@ import Form from "../components/Form";
 import { ControlledInput, InputLabel } from "../components/Input";
 import PageSections from "../components/PageSections";
 import { FOSTER_AGREEMENT_CONTENT } from "../constants/FOSTER_AGREEMENT";
+import { ControlledCheckboxes } from "../components/Checkboxes";
+import { ControlledRadios } from "../components/Radios";
 
 function FosterApplication({ setView }) {
   const personalInfoRef = React.useRef();
   const fosterInfoRef = React.useRef();
   const outsideInfoRef = React.useRef();
-  const { control, handleSubmit } = useForm();
+  const { control, handleSubmit } = useForm({
+    reValidateMode: "onChange",
+  });
 
   const applicationSections = React.useMemo(
     () => ({
@@ -58,8 +62,23 @@ function FosterApplication({ setView }) {
               <ControlledInput control={control} label="State" name="address.state" required />
             </Form.Row>
             <Form.Row>
-              <ControlledInput control={control} label="Zipcode" name="address.zipcode" required />
-              <ControlledInput control={control} label="Country" name="address.country" required />
+              <ControlledInput
+                control={control}
+                label="Zipcode"
+                name="address.zipcode"
+                type="number"
+                rules={{
+                  maxLength: 5,
+                }}
+                required
+              />
+              <ControlledInput
+                control={control}
+                label="Country"
+                name="address.country"
+                defaultValue="United States"
+                required
+              />
             </Form.Row>
           </Form.SubSection>
           <Form.SubSection title="E-mail">
@@ -67,15 +86,33 @@ function FosterApplication({ setView }) {
               control={control}
               label="ex: myname@example.com"
               name="email"
+              rules={{
+                pattern:
+                  /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
+              }}
               required
             />
           </Form.SubSection>
           <Form.SubSection title="Date of Birth">
-            <ControlledInput control={control} label="mm-dd-yyyy" name="dateOfBirth" required />
+            <ControlledInput
+              control={control}
+              label="mm-dd-yyyy"
+              name="dateOfBirth"
+              rules={{
+                maxLength: 10,
+                pattern: /(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])-\d{4}/g,
+              }}
+              required
+            />
           </Form.SubSection>
           <Form.SubSection>
             <InputLabel>Do you own or rent your home?</InputLabel>
-            {/* TODO: radios name="homeType" required  */}
+            <ControlledRadios
+              control={control}
+              options={["Own", "Rent"]}
+              name="homeType"
+              required
+            />
           </Form.SubSection>
           <Form.SubSection>
             <InputLabel>Landlord&apos;s Name (if you own, just write n/a)*</InputLabel>
@@ -91,6 +128,9 @@ function FosterApplication({ setView }) {
                   control={control}
                   label="Landlord's Phone Number"
                   name="landlord.phone"
+                  rules={{
+                    pattern: /^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}/,
+                  }}
                   required
                 />
               </Form.Column>
@@ -105,6 +145,10 @@ function FosterApplication({ setView }) {
                   control={control}
                   label="Landlord's Email Address"
                   name="landlord.email"
+                  rules={{
+                    pattern:
+                      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
+                  }}
                   required
                 />
               </Form.Column>
@@ -135,6 +179,8 @@ function FosterApplication({ setView }) {
               control={control}
               label="How many hours are you home a day?"
               name="fosterInfo.hoursAtHome"
+              type="number"
+              rules={{ max: 24 }}
               required
             />
           </Form.SubSection>
@@ -160,11 +206,21 @@ function FosterApplication({ setView }) {
               If you reside with other adults in the household, are they onboard to bring in a
               foster dog?
             </InputLabel>
-            {/* TODO: radios name="fosterInfo.othersOnboard" required*/}
+            <ControlledRadios
+              control={control}
+              options={["Yes", "No", "Don't know, haven't asked them"]}
+              name="fosterInfo.othersOnboard"
+              required
+            />
           </Form.SubSection>
           <Form.SubSection>
             <InputLabel>Do we have permission to do a home visit?</InputLabel>
-            {/* TODO: radios name="fosterInfo.permissionToVisit" required*/}
+            <ControlledRadios
+              control={control}
+              options={["Yes", "No"]}
+              name="fosterInfo.permissionToVisit"
+              required
+            />
           </Form.SubSection>
           <Form.SubSection>
             <ControlledInput
@@ -191,20 +247,41 @@ function FosterApplication({ setView }) {
               and 2 DHPP vaccines for puppies under 4 months. Are you able to make at least a 1
               month commitment to care for your foster dog?*
             </InputLabel>
-            {/* TODO: radios name="fosterInfo.oneMonthCommitment"
-              required */}
+            <ControlledRadios
+              control={control}
+              options={["Yes", "No"]}
+              name="fosterInfo.oneMonthCommitment"
+              required
+            />
           </Form.SubSection>
           <Form.SubSection>
             <InputLabel>
               Size of Dog you are willing to foster (please mark all that apply): *
             </InputLabel>
-            {/* TODO: checkboxes name="fosterInfo.sizeOfDog" required*/}
+            <ControlledCheckboxes
+              control={control}
+              name="fosterInfo.sizeOfDog"
+              required
+              options={["Under 25 lbs", "25-50 lbs", "Over 50 lbs", "Open"]}
+            />
           </Form.SubSection>
           <Form.SubSection>
             <InputLabel>
               Age of Dog you are willing to foster (please mark all that apply): *
             </InputLabel>
-            {/* TODO: checkboxes name="fosterInfo.ageOfDog" required */}
+            <ControlledCheckboxes
+              control={control}
+              name="fosterInfo.ageOfDog"
+              required
+              options={[
+                "Nursing litter/bottle feeders",
+                "8 weeks - 6 months",
+                "6 months - 1 year",
+                "1 - 6 years",
+                "6+ years",
+                "Open",
+              ]}
+            />
           </Form.SubSection>
         </Form.Section>
 
@@ -223,6 +300,9 @@ function FosterApplication({ setView }) {
                   control={control}
                   label="Reference's Phone Number"
                   name="reference.phone"
+                  rules={{
+                    pattern: /^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}/,
+                  }}
                   required
                 />
                 <ControlledInput
@@ -243,6 +323,10 @@ function FosterApplication({ setView }) {
                   control={control}
                   label="Reference's Email Address"
                   name="reference.email"
+                  rules={{
+                    pattern:
+                      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
+                  }}
                   required
                 />
                 <ControlledInput
@@ -284,7 +368,12 @@ function FosterApplication({ setView }) {
           </Form.SubSection>
           <Form.SubSection>
             <InputLabel>If you have other dogs in the home, are they spayed/neutered?</InputLabel>
-            {/* TODO: radios name="otherInfo.dogsNeutered" required*/}
+            <ControlledRadios
+              control={control}
+              options={["Yes", "No"]}
+              name="fosterInfo.dogsNeutered"
+              required
+            />
           </Form.SubSection>
           <Form.SubSection>
             <ControlledInput
