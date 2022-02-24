@@ -35,18 +35,22 @@ router.post("/", [...validators, validateRequest], (req, res, next) => {
 /**
  * POST /users/login - Login user by verifying email and password
  */
-router.post("/login", [...validators, validateRequest], (req, res, next) => {
-  checkCredentials(req.body)
-    .then((output) => {
-      if (output) {
-        res.status(200).json({ output });
-      } else {
-        throw new Error("Username or password is invalid");
-      }
-    })
-    .catch((err) => {
-      next(err);
-    });
-});
+router.post(
+  "/login",
+  [...validators.map((validator) => validator.optional()), validateRequest],
+  (req, res, next) => {
+    checkCredentials(req.body)
+      .then((output) => {
+        if (output) {
+          res.status(200).json({ output });
+        } else {
+          throw new Error("Email or Password is incorrect");
+        }
+      })
+      .catch((err) => {
+        next(err);
+      });
+  }
+);
 
 module.exports = router;

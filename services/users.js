@@ -15,7 +15,9 @@ async function createUser(rawUser) {
  */
 async function checkCredentials(emailPass) {
   const userObject = await User.findOne({ email: emailPass.email }).exec();
-
+  if (userObject === null) {
+    return false;
+  }
   if (emailPass.password === userObject.password) {
     return true;
   }
