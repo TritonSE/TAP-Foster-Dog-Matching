@@ -14,8 +14,8 @@ const validators = [
   body("lastActive").notEmpty().isDate(),
   body("currentlyFostering").notEmpty().isBoolean(),
   body("pastFosters").notEmpty().isNumeric(),
-  body("ambassador").notEmpty().isObjectId(),
-  body("coordinator").notEmpty().isObjectId(),
+  body("ambassador").notEmpty().isMongoId(),
+  body("coordinator").notEmpty().isMongoId(),
   body("accountStatus").notEmpty().isString(),
 ];
 
