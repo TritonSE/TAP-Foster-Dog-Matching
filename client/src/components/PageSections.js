@@ -19,11 +19,19 @@
 import React from "react";
 import styled from "styled-components";
 import { Colors } from "./Theme";
+import { device } from "../utils/useResponsive";
 
 const Container = styled.div`
   display: flex;
-  height: 80vh;
+  flex: 1;
+  max-height: 80vh;
   gap: 80px;
+  ${device.mobile} {
+    flex-direction: column;
+    flex: 5;
+    gap: 10px;
+    max-height: 85vh;
+  }
 `;
 
 const Content = styled.div`
@@ -35,12 +43,22 @@ const SidebarContainer = styled.div`
   flex-direction: row;
   height: fit-content;
   margin-top: 80px;
+  ${device.mobile} {
+    flex-direction: column;
+    margin: 5px;
+    width: 80%;
+    align-self: end;
+  }
 `;
 
 const SidebarBorder = styled.div`
   background: ${Colors.green};
   border-radius: 5px;
   width: 10px;
+  ${device.mobile} {
+    height: 5px;
+    width: 100%;
+  }
 `;
 
 const SectionButtonContainer = styled.div`
@@ -48,6 +66,12 @@ const SectionButtonContainer = styled.div`
   flex-direction: column;
   gap: 10px;
   margin: 20px 0;
+  ${device.mobile} {
+    flex: 1;
+    flex-direction: row;
+    margin: 0;
+    gap: 0;
+  }
 `;
 
 const SectionButton = styled.div`
@@ -58,6 +82,12 @@ const SectionButton = styled.div`
   text-align: center;
   font-size: 18px;
   cursor: pointer;
+  flex: 1;
+  ${device.mobile} {
+    border-radius: 4px;
+    padding: 10px 2px;
+    font-size: 3vw;
+  }
 `;
 
 function PageSections({ sections, children }) {
@@ -75,7 +105,6 @@ function PageSections({ sections, children }) {
 
   React.useEffect(() => {
     contentRef.current.addEventListener("scroll", handleScroll);
-    return () => contentRef.current.removeEventListener("scroll", handleScroll);
   }, []);
 
   function scrollSectionIntoView(section) {

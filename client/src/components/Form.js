@@ -17,6 +17,7 @@
 
 import React from "react";
 import styled from "styled-components";
+import useResponsive, { device } from "../utils/useResponsive";
 import { Colors } from "./Theme";
 
 const Container = styled.div`
@@ -44,6 +45,9 @@ const Title = styled.h1`
   font-weight: bold;
   font-size: 28px;
   text-align: center;
+  ${device.mobile} {
+    font-size: 5vw;
+  }
 `;
 
 const SectionContainer = styled.div`
@@ -54,6 +58,9 @@ const SectionTitle = styled.div`
   font-weight: bold;
   font-size: 24px;
   margin-bottom: 20px;
+  ${device.mobile} {
+    font-size: 4vw;
+  }
 `;
 
 const SectionBorder = styled.div`
@@ -91,6 +98,9 @@ const SubSectionLabel = styled.div`
   flex: 1;
   font-weight: bold;
   font-size: 20px;
+  ${device.mobile} {
+    font-size: 3vw;
+  }
 `;
 
 const SubSectionChildren = styled.div`
@@ -98,6 +108,9 @@ const SubSectionChildren = styled.div`
   display: flex;
   flex-direction: column;
   gap: 14px;
+  ${device.mobile} {
+    flex: 3;
+  }
 `;
 
 /**
@@ -111,11 +124,13 @@ const SubSectionChildren = styled.div`
  */
 
 function SubSection({ title, children }) {
+  const { isMobile } = useResponsive();
+
   return (
     <SubSectionContainer>
       {title && <SubSectionLabel>{title}</SubSectionLabel>}
       <SubSectionChildren>{children}</SubSectionChildren>
-      {title && <SubSectionChildren />}
+      {title && !isMobile && <SubSectionChildren />}
     </SubSectionContainer>
   );
 }

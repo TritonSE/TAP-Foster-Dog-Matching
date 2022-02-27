@@ -10,6 +10,7 @@ import styled, { css } from "styled-components";
 import { Colors } from "./Theme";
 import withControl from "../utils/withControl";
 import check from "../images/check.png";
+import useResponsive, { device } from "../utils/useResponsive";
 
 const CheckboxContainer = styled.div`
   display: flex;
@@ -26,6 +27,10 @@ const CheckboxContainer = styled.div`
     css`
       border: 2px solid ${Colors.salmon};
     `}
+  ${device.mobile} {
+    width: 15px;
+    height: 15px;
+  }
 `;
 
 /**
@@ -38,9 +43,10 @@ const CheckboxContainer = styled.div`
  */
 
 export function Checkbox({ value, onChange, invalid }) {
+  const { isMobile } = useResponsive();
   return (
     <CheckboxContainer checked={value} onClick={() => onChange(!value)} invalid={invalid}>
-      <img src={check} alt="check mark" width={20} />
+      <img src={check} alt="check mark" width={isMobile ? 15 : 20} />
     </CheckboxContainer>
   );
 }
@@ -50,12 +56,18 @@ const CheckboxesContainer = styled.div`
   flex-direction: row;
   gap: 100px;
   margin-top: 20px;
+  ${device.mobile} {
+    gap: 20px;
+  }
 `;
 
 const CheckboxesColumn = styled.div`
   display: flex;
   flex-direction: column;
   gap: 40px;
+  ${device.mobile} {
+    gap: 20px;
+  }
 `;
 
 const CheckboxGroup = styled.div`
@@ -63,11 +75,17 @@ const CheckboxGroup = styled.div`
   flex-direction: row;
   gap: 20px;
   align-items: center;
+  ${device.mobile} {
+    gap: 10px;
+  }
 `;
 
 const CheckboxLabel = styled.div`
   cursor: pointer;
   font-size: 18px;
+  ${device.mobile} {
+    font-size: 3vw;
+  }
 `;
 
 function Checkboxes({ options, value, onChange, invalid }) {

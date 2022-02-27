@@ -9,6 +9,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { Colors } from "./Theme";
 import withControl from "../utils/withControl";
+import { device } from "../utils/useResponsive";
 
 const RadioContainer = styled.div`
   display: flex;
@@ -26,6 +27,11 @@ const RadioContainer = styled.div`
     css`
       border: 3px solid ${Colors.salmon};
     `}
+  ${device.mobile} {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
 `;
 
 /**
@@ -45,6 +51,9 @@ const RadiosContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 80px;
+  ${device.mobile} {
+    gap: 20px;
+  }
 `;
 
 const RadioGroup = styled.div`
@@ -52,11 +61,17 @@ const RadioGroup = styled.div`
   flex-direction: row;
   gap: 20px;
   align-items: center;
+  ${device.mobile} {
+    gap: 10px;
+  }
 `;
 
 const RadioLabel = styled.div`
   cursor: pointer;
   font-size: 18px;
+  ${device.mobile} {
+    font-size: 3vw;
+  }
 `;
 
 function Radios({ options, value, onChange, invalid }) {

@@ -8,6 +8,7 @@ import PageSections from "../components/PageSections";
 import { FOSTER_AGREEMENT_CONTENT } from "../constants/FOSTER_AGREEMENT";
 import { ControlledCheckboxes } from "../components/Checkboxes";
 import { ControlledRadios } from "../components/Radios";
+import { device } from "../utils/useResponsive";
 
 function FosterApplication({ setView }) {
   const personalInfoRef = React.useRef();
@@ -33,7 +34,7 @@ function FosterApplication({ setView }) {
 
   const onError = (errors) => {
     console.log(errors);
-    // setView("agreement");
+    setView("agreement");
   };
 
   return (
@@ -404,8 +405,12 @@ function FosterApplication({ setView }) {
 }
 
 const FosterAgreementContainer = styled.div`
-  height: 80vh;
+  max-height: 80vh;
+  flex: 5;
   overflow-y: scroll;
+  ${device.mobile} {
+    margin-top: 60px;
+  }
 `;
 
 const FosterAgreementContent = styled.pre`
@@ -458,18 +463,27 @@ function FosterAgreement({ setView }) {
   );
 }
 
+const ApplicationContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: 100vw;
+  ${device.mobile} {
+    flex-direction: row;
+  }
+`;
+
 function Application() {
   const [view, setView] = React.useState("application");
 
   return (
-    <>
+    <ApplicationContainer>
       <ApplicationProgress currentStep={0} />
       {view === "application" ? (
         <FosterApplication setView={setView} />
       ) : (
         <FosterAgreement setView={setView} />
       )}
-    </>
+    </ApplicationContainer>
   );
 }
 

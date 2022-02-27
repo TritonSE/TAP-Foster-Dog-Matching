@@ -14,6 +14,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { Colors } from "./Theme";
 import check from "../images/check.png";
+import useResponsive, { device } from "../utils/useResponsive";
 
 const MILESTONES = [
   "Application Submitted",
@@ -31,6 +32,13 @@ const ProgressBarContainer = styled.div`
   align-items: center;
   padding: 20px;
   margin-bottom: 40px;
+  position: relative;
+  flex: 1;
+  ${device.mobile} {
+    flex-direction: column;
+    margin-bottom: 0;
+    padding: 5px;
+  }
 `;
 
 const ProgressMilestoneBarSection = styled.div`
@@ -39,6 +47,11 @@ const ProgressMilestoneBarSection = styled.div`
   margin: 0 -10px;
   background: ${(props) => (props.completed ? Colors.green : "black")};
   height: 16px;
+  ${device.mobile} {
+    margin: -10px 0;
+    width: 16px;
+    height: calc(100% + 20px);
+  }
 `;
 
 const ProgressMilestone = styled.div`
@@ -70,6 +83,11 @@ const ProgressMilestone = styled.div`
   justify-content: center;
   position: relative;
   cursor: ${(props) => (props.clickable ? "pointer" : "unset")};
+  ${device.mobile} {
+    font-size: 4vw;
+    width: 50px;
+    height: 50px;
+  }
 `;
 
 const ProgressMilestoneText = styled.div`
@@ -78,11 +96,19 @@ const ProgressMilestoneText = styled.div`
   color: black;
   top: calc(100% + 6px);
   text-align: center;
+  ${device.mobile} {
+    top: 20px;
+    left: 90%;
+    font-size: 3vw;
+  }
 `;
 
 function ApplicationProgress({ currentStep, unlockedUpToStep, completedUpToStep }) {
+  const { isMobile } = useResponsive();
+
   return (
     <ProgressBarContainer>
+      {isMobile && <ProgressMilestoneText>{MILESTONES[currentStep]}</ProgressMilestoneText>}
       {MILESTONES.map((milestone, index) => (
         <React.Fragment key={milestone}>
           <ProgressMilestone
@@ -91,7 +117,7 @@ function ApplicationProgress({ currentStep, unlockedUpToStep, completedUpToStep 
             clickable={index <= unlockedUpToStep}
           >
             {index <= completedUpToStep ? <img src={check} alt="check mark" /> : index + 1}
-            <ProgressMilestoneText>{milestone}</ProgressMilestoneText>
+            {!isMobile && <ProgressMilestoneText>{milestone}</ProgressMilestoneText>}
           </ProgressMilestone>
           {index < MILESTONES.length - 1 && (
             <ProgressMilestoneBarSection

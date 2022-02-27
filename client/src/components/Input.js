@@ -20,6 +20,7 @@
 
 import React from "react";
 import styled, { css } from "styled-components";
+import { device } from "../utils/useResponsive";
 import withControl from "../utils/withControl";
 import { Colors } from "./Theme";
 
@@ -29,6 +30,9 @@ export const InputLabel = styled.div`
   font-weight: normal;
   font-size: 18px;
   margin-bottom: 6px;
+  ${device.mobile} {
+    font-size: 3vw;
+  }
 `;
 
 export const InputHelpText = styled.span``;
@@ -46,6 +50,9 @@ const InputField = styled.input`
     css`
       border: 2px solid ${Colors.salmon};
     `}
+  ${device.mobile} {
+    font-size: 3vw;
+  }
 `;
 
 const TextAreaField = styled(InputField).attrs({
