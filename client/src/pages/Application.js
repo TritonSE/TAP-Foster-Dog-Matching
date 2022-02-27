@@ -34,7 +34,7 @@ function FosterApplication({ setView }) {
 
   const onError = (errors) => {
     console.log(errors);
-    setView("agreement");
+    // setView("agreement");
   };
 
   return (
@@ -89,7 +89,7 @@ function FosterApplication({ setView }) {
               name="email"
               rules={{
                 pattern:
-                  /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
+                  /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i,
               }}
               required
             />
@@ -101,7 +101,7 @@ function FosterApplication({ setView }) {
               name="dateOfBirth"
               rules={{
                 maxLength: 10,
-                pattern: /(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])-\d{4}/g,
+                pattern: /(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])-\d{4}/g,
               }}
               required
             />
@@ -130,7 +130,7 @@ function FosterApplication({ setView }) {
                   label="Landlord's Phone Number"
                   name="landlord.phone"
                   rules={{
-                    pattern: /^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}/,
+                    pattern: /^(\+\d{1,2}\s?)?1?-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}/,
                   }}
                   required
                 />
@@ -148,7 +148,7 @@ function FosterApplication({ setView }) {
                   name="landlord.email"
                   rules={{
                     pattern:
-                      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
+                      /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i,
                   }}
                   required
                 />
@@ -302,7 +302,7 @@ function FosterApplication({ setView }) {
                   label="Reference's Phone Number"
                   name="reference.phone"
                   rules={{
-                    pattern: /^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}/,
+                    pattern: /^(\+\d{1,2}\s?)?1?-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}/,
                   }}
                   required
                 />
@@ -326,7 +326,7 @@ function FosterApplication({ setView }) {
                   name="reference.email"
                   rules={{
                     pattern:
-                      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
+                      /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i,
                   }}
                   required
                 />
