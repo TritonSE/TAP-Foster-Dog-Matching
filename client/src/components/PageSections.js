@@ -30,7 +30,7 @@ const Container = styled.div`
     flex-direction: column;
     flex: 5;
     gap: 10px;
-    max-height: 85vh;
+    max-height: 100vh;
   }
 `;
 

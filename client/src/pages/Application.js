@@ -34,7 +34,7 @@ function FosterApplication({ setView }) {
 
   const onError = (errors) => {
     console.log(errors);
-    // setView("agreement");
+    setView("agreement");
   };
 
   return (
@@ -410,6 +410,7 @@ const FosterAgreementContainer = styled.div`
   overflow-y: scroll;
   ${device.mobile} {
     margin-top: 60px;
+    max-height: 90vh;
   }
 `;
 
