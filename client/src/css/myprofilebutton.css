@@ -11,6 +11,7 @@
   font-style: normal;
   font-weight: normal;
   font-size: 25px;
+  margin-right: 62px;
 }
 
 .myprofile-button-text {
@@ -35,32 +36,10 @@
   object-fit: cover;
 }
 
-@media only screen and (max-width: 630px) {
-  .myprofile-button {
-    width: max(63px, 36.825vw);
-    height: 11.746vw;
-    font-size: 3.968vw;
-    margin-left: -0.794vw;
-  }
-
-  .myprofile-button-text {
-    line-height: 11.746vw;
-    padding-left: 3.286vw;
-  }
-
-  .myprofile-button-image-container {
-    width: 8.571vw;
-    height: 8.571vw;
-    padding-right: 3.175vw;
-    line-height: 17.46vw;
-  }
-}
-
-@media only screen and (max-width: 875px) {
+@media only screen and (max-width: 1175px) {
   .myprofile-button {
     float: none;
     position: absolute;
-    margin-left: -5px;
-    margin-bottom: 1000px;
+    margin: 0 0 1000px -5px;
   }
 }

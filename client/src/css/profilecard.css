@@ -50,35 +50,3 @@
   max-height: 100%;
   object-fit: contain;
 }
-
-@media only screen and (max-width: 630px) {
-  .profile-card {
-    width: 39vw;
-    height: 22.222vw;
-    padding: 0px 1.587vw 1.587vw 0px;
-  }
-
-  .profile-card-text {
-    margin-left: 19.206vw;
-    padding-top: 3.333vw;
-    padding-bottom: 4.127vw;
-  }
-
-  .profile-card-name {
-    font-size: 2.54vw;
-    line-height: 3.016vw;
-  }
-
-  .profile-card-contact-info {
-    font-size: 2.063vw;
-    line-height: 2.54vw;
-    margin-top: 3.175vw;
-  }
-
-  .profile-card-image-container {
-    width: 10vw;
-    height: 10vw;
-    margin-left: 3.175vw;
-    margin-top: 3.175vw;
-  }
-}

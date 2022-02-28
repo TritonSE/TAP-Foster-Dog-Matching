@@ -1,9 +1,13 @@
 .profile-section {
-  width: 90%;
+  width: auto;
   height: auto;
   margin-top: 33px;
-  margin-left: 55px;
+  margin-left: 355px;
   margin-bottom: 45px;
+}
+
+.profile-section:nth-of-type(1) {
+  margin-top: 165px;
 }
 
 .profile-section-title {
@@ -34,6 +38,7 @@
   font-size: 20px;
   margin-left: 100px;
   outline: none;
+  white-space: nowrap;
 }
 
 .profile-section-button-arrow {
@@ -70,7 +75,7 @@
   display: inline;
 }
 
-@media only screen and (max-width: 1398px) {
+@media only screen and (max-width: 1698px) {
   .profile-section-cards-container .profile-section-card:nth-child(5n) {
     display: none;
   }
@@ -82,7 +87,7 @@
   }
 }
 
-@media only screen and (max-width: 1126px) {
+@media only screen and (max-width: 1426px) {
   .profile-section-cards-container .profile-section-card:nth-child(5n - 1) {
     display: none;
   }
@@ -94,16 +99,16 @@
   }
 }
 
-@media only screen and (max-width: 875px) {
+@media only screen and (max-width: 1175px) {
   .profile-section {
     height: auto;
   }
-  .profile-section:nth-child(1) .profile-section-title {
+  .profile-section:nth-of-type(1) .profile-section-title {
     margin-top: 100px;
   }
 }
 
-@media only screen and (max-width: 854px) {
+@media only screen and (max-width: 1154px) {
   .profile-section-cards-container .profile-section-card:nth-child(5n - 2) {
     display: none;
   }
@@ -116,44 +121,75 @@
   }
 }
 
-@media only screen and (max-width: 630px) {
-  .profile-section {
-    margin-top: 5.238vw;
-    margin-left: 8.73vw;
-    margin-bottom: 7.143vw;
-  }
-
-  .profile-section:nth-child(1) .profile-section-title {
-    margin-top: 15.873vw;
-  }
-
-  .profile-section-title {
-    font-size: 5.873vw;
-    line-height: 6.984vw;
-  }
-
-  .profile-section-divider {
-    width: 76.349vw;
-    height: 0.476vw;
-    margin-top: 1.746vw;
-  }
-
-  .profile-section-button {
-    font-size: 3.175vw;
-    margin-left: 15.873vw;
-  }
-  .profile-section-button-arrow {
-    margin-left: 1.587vw;
+@media only screen and (max-width: 882px) {
+  .profile-section-cards-container .profile-section-card:nth-child(5n - 3) {
+    display: none;
   }
   .profile-section-cards-container {
-    row-gap: 6.349vw;
-    column-gap: 4.127vw;
-    margin: 5.556vw -0.794vw;
+    grid-template-columns: repeat(1, 1fr);
   }
 
   .profile-section-cards-container-view-all {
-    row-gap: 6.349vw;
-    column-gap: 4.127vw;
-    margin: 5.556vw -0.794vw;
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .profile-section-divider {
+    width: max(232.906px, 94.3%);
+  }
+  .profile-section-button {
+    margin-left: 30px;
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  .profile-section {
+    margin-left: 55px;
+  }
+  .profile-section-cards-container .profile-section-card:nth-child(5n-3) {
+    display: inline;
+  }
+  .profile-section-cards-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .profile-section-cards-container-view-all {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .profile-section-divider {
+    width: 481px;
+  }
+  .profile-section-button {
+    margin-left: 100px;
+  }
+}
+
+@media only screen and (max-width: 582px) {
+  .profile-section-cards-container .profile-section-card:nth-child(5n - 3) {
+    display: none;
+  }
+  .profile-section-cards-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .profile-section-cards-container-view-all {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .profile-section-divider {
+    width: max(232.906px, 94.3%);
+  }
+
+  .profile-section-button {
+    margin-left: 30px;
+  }
+}
+
+@media only screen and (max-width: 465px) {
+  .profile-section-button {
+    display: block;
+    margin-top: 5px;
+  }
+
+  .profile-section {
+    margin-left: 11.828vw;
   }
 }

@@ -23,6 +23,7 @@ function Popup(props) {
         >
           ✕
         </span>
+        <br />
         <div className="box-section1">
           {!editing ? (
             <div className="pfp-container">
@@ -38,7 +39,7 @@ function Popup(props) {
           )}
           <div className="name-text">{props.name}</div>
           <div className="box-section1-text">
-            <div className="box-section1-text-bold">{props.section1Name}</div>
+            <div className="text-bold">{props.section1Name}</div>
             <div className="text-right">
               <div className="user-info">{props.userRole}</div>
             </div>
@@ -47,7 +48,8 @@ function Popup(props) {
         <div className="box-divider" />
         <div className="box-section2">
           <div className="box-section2-text">
-            <div className="box-section2-text-bold">{props.section2Name}</div>
+            <div className="text-bold">{props.section2Name}</div>
+            <br />
             <div className="text-left">
               {props.contactMethod1}
               <br />

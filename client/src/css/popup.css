@@ -6,7 +6,7 @@
   height: 100%;
   top: 0;
   left: 0;
-  overflow-y: hidden;
+  overflow: hidden;
 }
 
 .box {
@@ -16,8 +16,9 @@
   min-width: 767px;
   margin: 0 auto;
   height: auto;
-  max-height: 85vh;
-  margin-top: calc(100vh - 85vh - 40px);
+  max-height: 90vh;
+  top: 50%;
+  transform: translateY(-50%);
   background: #fff;
   border-radius: 54.1399px;
   overflow: auto;
@@ -32,24 +33,23 @@
   margin-top: 25px;
   border-radius: 50%;
   line-height: 20px;
-  font-size: 20px;
+  font-size: 30px;
   outline: none;
 }
 
 .box-divider {
   box-sizing: border-box;
   margin: 0 auto;
-  width: auto;
   max-width: 766px;
   height: 3px;
   background: #8dc442;
   border-radius: 13.535px;
   transform: matrix(1, 0, 0, -1, 0, 0);
-  width: 100%;
+  width: 85%;
 }
 
 .box-section1 {
-  padding: 77px 160px 29px 160px;
+  padding: 77px 160px 25px 160px;
 }
 
 .pfp-container {
@@ -111,20 +111,20 @@
 }
 
 .box-section1-text {
-  margin-top: 37px;
+  margin-top: 25px;
   font-family: Myriad Pro;
   font-style: normal;
   font-size: 27px;
   line-height: 36px;
 }
 
-.box-section1-text-bold {
+.text-bold {
   display: inline-block;
   font-weight: bold;
 }
 
 .box-section2 {
-  padding: 0px 160px 15px 160px;
+  padding: 0px 160px 0px 160px;
 }
 
 .box-section2-text {
@@ -132,10 +132,6 @@
   font-style: normal;
   font-size: 27px;
   line-height: 95px;
-}
-
-.box-section2-text-bold {
-  font-weight: bold;
 }
 
 .text-left {
@@ -172,7 +168,7 @@
 }
 
 .change-password-button {
-  margin-top: 62px;
+  margin-top: 50px;
   margin-left: auto;
   margin-right: auto;
   width: 329px;
@@ -197,8 +193,9 @@
   cursor: pointer;
   float: right;
   margin-right: 40px;
-  margin-top: 29px;
-  margin-bottom: 25px;
+  margin-top: 35px;
+  padding-bottom: 25px;
+  outline: none;
 }
 
 .edit-profile-text {
@@ -232,8 +229,8 @@
   cursor: pointer;
   float: right;
   margin-right: 40px;
-  margin-top: 117px;
-  margin-bottom: 36px;
+  margin-top: 111px;
+  margin-bottom: 37px;
   outline: none;
 }
 
@@ -247,130 +244,155 @@
   line-height: 74px;
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 850px) {
   .box {
-    width: 80%;
-    min-width: 0px;
-    margin-top: calc(100vh - 85vh - 5.333vw);
+    width: 97.5%;
+    min-width: 312px;
   }
-
-  .box-divider {
-    width: 85%;
+  .box-section1 {
+    padding: max(28.8px, 8vw) 0vw max(10px, 2.941vw) 0vw;
+    text-align: center;
   }
   .pfp-container {
-    width: max(42px, 13.333vw);
-    height: max(42px, 13.333vw);
-    margin-top: 20px;
-    margin-left: -2.4vw;
-    padding-right: 4vw;
-    line-height: 12vw;
+    padding-right: max(18.46px, 3.529vw);
   }
 
   .edit-pfp-button {
-    width: max(33px, 8.8vw);
-    height: max(12px, 3.067vw);
-    top: max(15px, 4.533vw);
-    margin: 0 max(5px, 1.6vw);
-  }
-
-  .edit-pfp-button-text {
-    font-size: 1.333vw;
-    line-height: max(8px, 3.067vw);
-    min-width: 21px;
-  }
-  .name-text {
-    font-size: 6.808vw;
-    line-height: 8.133vw;
-  }
-
-  .box-section1 {
-    padding: 10.267vw 5.333vw 3.867vw 5.333vw;
-  }
-
-  .close-icon {
-    line-height: 2.667vw;
-    margin-bottom: 10px;
-  }
-
-  .box-section1-text {
-    margin-top: 4.933vw;
-    font-family: Myriad Pro;
-    font-style: normal;
-    font-size: 3.6vw;
-    line-height: 4.8vw;
+    margin-left: 17px;
   }
 
   .box-section2 {
-    padding: 0vw 5.333vw 2vw 5.333vw;
+    padding: 0vw 0vw 0vw 0vw;
   }
 
   .box-section2-text {
-    font-family: Myriad Pro;
-    font-style: normal;
-    font-size: 3.6vw;
+    text-align: center;
+  }
 
-    line-height: 12.667vw;
+  .text-bold {
+    padding-right: max(0px, 40.4vw);
+    width: 19.647vw;
+    text-align: left;
+  }
+
+  .text-left {
+    text-align: left;
+    padding-right: max(0px, 38.124vw);
   }
 
   .text-right {
-    left: 33vw;
+    left: max(150.211px, 46.941vw);
+    margin-right: max(68.2656px, 21.333vw);
   }
 
   .user-info {
-    padding-left: 9.667vw;
-  }
-
-  .user-info-editable {
-    line-height: 9.067vw;
+    padding-left: max(27.2928px, 8.529vw);
+    padding-right: 5px;
   }
 
   .user-info-container {
-    display: inline-block;
-    margin-left: 10vw;
-    width: 30vw;
-    height: 9.067vw;
+    width: max(124.234px, 38.824vw);
+    margin-left: max(4.8px, 1.5vw);
   }
+}
+
+@media screen and (max-width: 520px) {
+  .pfp-container {
+    width: max(61.5px, 19.231vw);
+    height: max(61.5px, 19.231vw);
+    margin-left: max(6.4px, 2vw);
+    margin-top: 5px;
+    padding-right: max(18.4608px, 5.769vw);
+    line-height: max(55.3856px, 17.308vw);
+  }
+
+  .edit-pfp-button {
+    top: max(20.9216px, 6.538vw);
+    margin-left: max(10.4608px, 3.269vw);
+    width: max(40.6px, 12.692vw);
+    height: max(14.14px, 4.423vw);
+  }
+
+  .edit-pfp-button-text {
+    line-height: max(14.7728px, 4.423vw);
+  }
+
+  .name-text {
+    font-size: max(31.5222px, 9.82vw);
+    line-height: max(37.6565px, 11.731vw);
+  }
+
+  .box-section1-text {
+    font-size: max(16.6144px, 5.192vw);
+    line-height: max(58.46px, 6.923vw);
+  }
+
+  .text-bold {
+    width: max(102.766px, 32.115vw);
+  }
+
+  .box-divider {
+    min-width: 265px;
+  }
+
+  .box-section2-text {
+    font-size: max(16.6144px, 5.192vw);
+    line-height: max(58.4608px, 18.269vw);
+  }
+
+  .user-info-container {
+    height: max(41.8438px, 13.077vw);
+  }
+
+  .user-info-editable {
+    line-height: max(41.8438px, 13.077vw);
+    margin: 0px max(2.925px, 0.962vw);
+  }
+
   .change-password-button {
-    margin-top: 8.267vw;
-    width: 43.867vw;
-    height: 9.867vw;
-    overflow: hidden;
+    margin-top: max(30.768px, 9.615vw);
+    width: max(202.453px, 63.269vw);
+    height: max(45.5312px, 14.231vw);
   }
 
   .change-password-button-text {
-    font-size: 4.022vw;
-    line-height: 9.867vw;
+    font-size: max(18.5632px, 5.801vw);
+    line-height: max(45.54px, 14.231vw);
   }
 
   .edit-profile-button {
-    margin-right: 15vw;
-    margin-top: 3.867vw;
-    margin-bottom: 8vw;
-    outline: none;
+    margin-right: max(24.6144px, 7.692vw);
+    margin-top: max(21.5392px, 6.731vw);
+    padding-bottom: max(15.3856px, 4.808vw);
   }
 
   .edit-profile-text {
-    font-size: 4vw;
+    margin-left: max(3.0874px, 0.962vw);
+    font-size: max(18.4608px, 5.769vw);
   }
 
   .edit-profile-image-container {
-    display: inline-block;
-    width: 4.533vw;
-    height: 4.533vw;
+    width: max(20.9px, 6.538vw);
+    height: max(20.9px, 6.538vw);
   }
+
   .save-changes-button {
-    width: 31.333vw;
-    height: 9.867vw;
-    margin-right: 25vw;
-    margin-top: 15.6vw;
-    margin-bottom: 4.8vw;
+    width: max(144.609px, 45.192vw);
+    height: max(39.125px, 12.231vw);
+    margin-right: max(24.6144px, 7.692vw);
+    margin-top: max(74.7072px, 23.346vw);
+    margin-bottom: max(22.768px, 7.115vw);
   }
 
   .save-changes-text {
-    font-size: 4.022vw;
-    line-height: 9.867vw;
-    width: 31vw;
-    height: 9.867vw;
-    overflow: hidden;
+    font-size: max(18.5632px, 5.801vw);
+    line-height: max(40.74px, 12.731vw);
+  }
+
+  @media screen and (max-width: 320px) {
+    .box {
+      min-width: 0px;
+      overflow-x: scroll;
+    }
   }
 }
