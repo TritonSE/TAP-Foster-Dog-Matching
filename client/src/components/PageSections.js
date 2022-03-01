@@ -25,17 +25,19 @@ const Container = styled.div`
   display: flex;
   flex: 1;
   max-height: 80vh;
-  gap: 80px;
   ${device.mobile} {
     flex-direction: column;
     flex: 5;
-    gap: 10px;
     max-height: 100vh;
   }
 `;
 
 const Content = styled.div`
   overflow-y: scroll;
+  padding: 0 80px;
+  ${device.mobile} {
+    padding: 0 10px;
+  }
 `;
 
 const SidebarContainer = styled.div`
