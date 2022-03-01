@@ -227,7 +227,7 @@ html,
   .selection,
   .selection2,
   .inputArea {
-    font-size: min(10px, 4vw);
+    font-size: max(10px, 4vw);
   }
   .errorMessage {
     font-size: min(15px, 3.5vw);
