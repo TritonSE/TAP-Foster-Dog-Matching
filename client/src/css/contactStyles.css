@@ -93,6 +93,7 @@ html,
   padding-right: 10px;
   background: none;
   border: none;
+  cursor: pointer;
 }
 .cancelImg {
   width: max(18px, min(30px, 3vw));
