@@ -44,6 +44,7 @@ html,
   right: 20px;
   bottom: 20px;
   text-align: center;
+  cursor: pointer;
 
   background: #8dc442;
   padding: 3px;
