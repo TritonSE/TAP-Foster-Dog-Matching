@@ -1,7 +1,6 @@
 #default-body {
   display: grid;
   grid-template-columns: 300px auto;
-  padding: 100px 65px 0 65px;
 }
 
 #default-body-navbar {
@@ -10,12 +9,15 @@
 
 #default-body-container {
   grid-column: 2;
+  padding: 100px 0 0 65px;
 }
 
 @media only screen and (max-width: 750px) {
   #default-body {
     display: block;
-    padding: 50px 0px 69px 0px;
+  }
+  #default-body-container {
+    padding: 50px 0px 0px 69px;
   }
   #default-body-navbar {
     display: none;

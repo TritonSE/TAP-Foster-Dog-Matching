@@ -20,8 +20,8 @@ function Dashboard() {
             <IconButton
               icon={plus}
               altText="ContinueButton"
-              leftOffset="min(calc(100vw - 60px), 316px)"
-              topOffset="156px"
+              leftOffset="calc(78px + 12.675vw)"
+              topOffset="calc(23.6px + 7.2vw)"
             />
           }
         />

@@ -1,6 +1,6 @@
 .dashboard-card {
-  width: min(100vw, 376px);
-  height: 214px;
+  width: calc(150px + 12.675vw);
+  height: calc(85.6px + 7.2vw);
   border-radius: 15px;
   background: #ffffff;
   border: 0.5px solid #9b9a9a;
@@ -14,7 +14,7 @@
 
 .dashboard-card-image-container {
   width: 100%;
-  height: 133px;
+  height: calc(53.2px + 4.476vw);
   border: 0.5px solid #c4c4c4;
   box-sizing: border-box;
   border-radius: 15px;
@@ -32,11 +32,12 @@
 
 .dashboard-card-text {
   height: 66px;
-  line-height: calc(20px + 0.2vw);
+  padding-top: calc(4px + 0.9vw);
+  font-size: calc(12px + 0.449vw);
 }
 
 @media only screen and (max-width: 750px) {
   .dashboard-card {
-    margin: 0 auto;
+    margin: 0 0;
   }
 }

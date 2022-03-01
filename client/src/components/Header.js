@@ -11,7 +11,7 @@
 
 import React from "react";
 import "../css/header.css";
-import logoImage from "../images/logo.png";
+import logoImage from "../images/logo1.png";
 import hamburgerIcon from "../images/hamburgermenuicon.png";
 
 function Header(props) {
@@ -27,10 +27,10 @@ function Header(props) {
         </div>
       </div>
       <div className="header-message">
-        <span className="header-message-text">
+        <div className="header-message-text">
           TAP is an all-breed, non-profit Dog Rescue Organization based in San Diego, Ca.{" "}
           <strong>Learn how you can help us right now!</strong>
-        </span>
+        </div>
       </div>
       <div className="header-sign-out">Sign out</div>
       <div className="navbar-hamburger-button">

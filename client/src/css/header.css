@@ -2,15 +2,17 @@
   background-color: black;
   color: white;
   display: grid;
-  grid-template-columns: 1.5fr 4fr 1fr;
-  column-gap: 5%;
+  grid-template-columns: 1.5fr 4fr minmax(104px, auto);
+  column-gap: 1%;
   height: 130px;
   width: 100%;
   box-sizing: border-box;
 }
 
 .header-welcome img {
-  height: inherit;
+  width: 101px;
+  height: 84px;
+  padding: 12px calc(8px + 0.6vw) 0px 23px;
 }
 
 .header-welcome {
@@ -34,16 +36,19 @@
   grid-column: 2;
   font-size: calc(14px + 0.6vw);
   position: relative;
+  padding-left: calc(40px + 2.2vw);
 }
 
 .header-message-text {
   padding-top: 10px;
+  padding-left: inherit;
   position: absolute;
   left: 0;
   bottom: 10px;
 }
 
 .header-sign-out {
+  padding-top: 20px;
   grid-column: 3;
   font-size: calc(14px + 0.6vw);
 }
@@ -67,7 +72,12 @@
   .navbar-hamburger-button {
     display: block;
     grid-column: 2;
-    width: 43px;
+    width: 55px;
+    text-align: right;
+    padding-right: 15px;
+  }
+  .navbar-hamburger-button img {
+    padding-right: 0px;
   }
   .header-welcome-text {
     font-size: 20px;
@@ -81,10 +91,12 @@
   }
   #header {
     height: 97px;
-    grid-template-columns: auto 55px;
+    grid-template-columns: calc(100% - 70px) 70px;
+    column-gap: 0;
   }
   .header-welcome img {
-    max-width: 100%;
-    height: inherit;
+    padding: 42px 0px 0px 9px;
+    width: 55px;
+    height: 43px;
   }
 }
