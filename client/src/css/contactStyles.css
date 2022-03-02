@@ -7,11 +7,24 @@ html,
   font-size: 30px;
   line-height: 36px;
 }
+.wrapper {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.noTeamError {
+  color: red;
+  position: absolute;
+  left: 42%;
+  top: 20vh;
+  font-size: max(15px, 2.6vh);
+}
 
 .contactLanding {
   position: absolute;
   width: max(400px, 36%);
-  height: 55%;
+  height: 55vh;
   left: 42%;
   top: 27%;
 
@@ -72,6 +85,13 @@ html,
   border-radius: 15px;
 }
 
+.noInputError {
+  position: absolute;
+  color: red;
+  left: 35vw;
+  top: 20vh;
+  font-size: max(15px, 2.6vh);
+}
 .topBar {
   position: absolute;
   width: 100%;
@@ -109,27 +129,13 @@ html,
   color: #53575a;
 }
 
-.form {
+.inputArea {
   position: absolute;
   width: 96%;
-  height: 43vh;
-  bottom: 2vh;
+  height: 41vh;
+  bottom: 2%;
   left: 2%;
   font-size: min(30px, max(20px, 2vw));
-}
-
-.errorMessage {
-  position: absolute;
-  top: 0;
-  padding: 0;
-  margin: 0;
-  color: red;
-}
-.inputArea {
-  width: 100%;
-  height: 90%;
-  position: absolute;
-  bottom: 0;
 
   direction: ltr;
   padding: 2%;
@@ -200,21 +206,17 @@ html,
     margin: 0% 5%;
     padding: 5%;
     left: 0;
-    top: 23%;
+    top: 23vh;
   }
 
   .helpQuestion {
-    font-size: 5vw;
+    font-size: max(15px, 5vw);
   }
   .newMessage {
     left: 0;
     width: 90%;
     margin: 0% 5%;
-    top: 15%;
-  }
-  .messageReceived {
-    width: 75%;
-    left: 12.5%;
+    top: 20%;
   }
   .message {
     font-size: max(13px, min(20px, 3vw));
@@ -227,9 +229,27 @@ html,
   .selection,
   .selection2,
   .inputArea {
-    font-size: max(10px, 4vw);
+    font-size: max(15px, 1.5vh);
   }
-  .errorMessage {
-    font-size: min(15px, 3.5vw);
+  .selection {
+    width: 80%;
+    margin: 0% 10%;
+  }
+  .noTeamError {
+    left: 6%;
+    top: 16vh;
+    font-size: min(24px, max(15px, 2.6vh));
+  }
+  .noInputError {
+    left: 6%;
+    top: 13vh;
+    font-size: min(24px, max(15px, 2.6vh));
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .messageReceived {
+    width: 75%;
+    left: 12.5%;
   }
 }
