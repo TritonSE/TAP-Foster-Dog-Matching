@@ -17,8 +17,14 @@
   padding-left: 2%;
   padding-right: 2%;
   padding-top: 5px;
-  padding-bottom: 1.5%;
+  padding-bottom: 2%;
   overflow-x: hidden;
+  object-fit: contain;
+  word-wrap: break-word;
+}
+
+h2 {
+  font-size: 2em;
 }
 
 .title {
@@ -29,11 +35,11 @@
 
 .text-card {
   margin-top: 0px;
-  margin-right: 10px;
+  /* margin-right: 10px; */
   background: #fff;
   flex: 2;
   border-radius: 15px;
-  width: 60%;
+  width: 100%;
   padding: 2%;
   text-align: left;
   /* padding-left: 5%; */
@@ -41,7 +47,7 @@
 
 .image-card {
   margin-top: 0px;
-  margin-left: 10px;
+  margin-left: 2vw;
   flex: 2;
   border-radius: 15px;
   /* width:auto;
@@ -70,27 +76,45 @@
   .meeting-card {
     display: flex;
     flex-direction: column;
-    padding: 5px;
-    width: auto;
-    height: auto;
+    /* width: auto;
+    height: auto; */
+    padding-left: 4%;
+    padding-right: 5%;
+    padding-top: 5px;
+    padding-bottom: 3%;
+    font-size: 0.7em;
+  }
+
+  h2 {
+    font-size: 2em;
   }
 
   .text-card {
-    min-height: 300px;
+    min-height: 50vw;
     width: auto;
-    height: auto;
-    margin: 5px;
+    /* height: auto; */
+    /* margin-bottom: 30px; */
+    margin: 1% 1% 4% 1%;
   }
 
   .image-card {
     flex: 1;
-    width: auto;
-    height: auto;
-    margin: 5px;
+    /* width: auto;
+    height: auto; */
+    margin: 1%;
   }
 
   .image {
     width: auto;
     height: auto;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  h2 {
+    font-size: 2em;
+  }
+  .meeting-card {
+    font-size: 0.5em;
   }
 }
