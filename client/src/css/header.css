@@ -80,10 +80,10 @@
     padding-right: 0px;
   }
   .header-welcome-text {
-    font-size: 20px;
-    padding-top: 48px;
+    font-size: calc(10px + 2.2vw);
+    padding-top: 42px;
     padding-bottom: 3px;
-    line-height: 24px;
+    line-height: 1.05;
   }
   .foster-text {
     font-size: 18px;

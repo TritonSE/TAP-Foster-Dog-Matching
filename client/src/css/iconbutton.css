@@ -1,8 +1,16 @@
 .icon-button {
   position: relative;
+  width: 13.2%;
+  height: 23.32%;
 }
 .icon-button-icon {
   position: absolute;
-  left: 10px;
-  top: 10px;
+  left: 20%;
+  top: 20%;
+  width: 60%;
+  height: 60%;
+}
+.icon-button-background {
+  width: 100%;
+  height: 100%;
 }

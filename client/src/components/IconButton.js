@@ -1,10 +1,10 @@
 /**
- * Reusable button with an icon image that takes a target for its link and
+ * Button with an icon image that takes a target for its link and
  * optionally supports absolute offsets to position it if given a
  * relatively positioned parent. Used primarily in DashboardCards.
  *
  *
- * @summary     Reusable Button with an icon image.
+ * @summary     Button with an icon image.
  * @author      Andrew Masek
  *
  */
@@ -24,7 +24,7 @@ function IconButton(props) {
       }
     >
       <a href={props.href}>
-        <img src={background} alt={props.altText} />
+        <img className="icon-button-background" src={background} alt={props.altText} />
         <img className="icon-button-icon" src={props.icon} alt=" " />
       </a>
     </div>
