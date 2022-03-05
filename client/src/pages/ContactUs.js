@@ -52,6 +52,7 @@ function ContactUs() {
       setErrorMessage(emptyText);
     } else {
       setErrorMessage("");
+      setInputMessage("");
       setSent(true);
       // Send message to backend
     }
@@ -121,6 +122,7 @@ function ContactUs() {
               <textarea
                 className="inputArea"
                 placeholder="Message Here"
+                value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
               />
 
