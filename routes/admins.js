@@ -21,12 +21,12 @@ const validators = [
  */
 router.post("/", [...validators, validateRequest], (req, res, next) => {
   createAdmin(req.body)
-    .then((admin) => {  
+    .then((admin) => {
       res.status(200).json({ admin });
-      console.log('GOOD!');
+      console.log("GOOD!");
     })
     .catch((err) => {
-      console.log('HERE!');
+      console.log("HERE!");
       next(err);
     });
 });
@@ -57,18 +57,22 @@ router.put(
 /**
  * POST /admin/login - Login and check username and password
  */
-router.post("/login", [...validators.map((validator) => validator.optional()), validateRequest], (req, res, next) => {
-  validateCredenditals(req.body)
-    .then((admin) => {
-      if (admin) {
-        res.status(200).json({ admin });
-      } else {
-        throw new Error("Email or Password is incorrect");
-      }
-    })
-    .catch((err) => {
-      next(err);
-    });
-});
+router.post(
+  "/login",
+  [...validators.map((validator) => validator.optional()), validateRequest],
+  (req, res, next) => {
+    validateCredenditals(req.body)
+      .then((admin) => {
+        if (admin) {
+          res.status(200).json({ admin });
+        } else {
+          throw new Error("Email or Password is incorrect");
+        }
+      })
+      .catch((err) => {
+        next(err);
+      });
+  }
+);
 
 module.exports = router;

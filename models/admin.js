@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
-const ObjectId = Schema.Types.ObjectId;
 
 /**
  * Admin Model
@@ -22,7 +21,7 @@ module.exports = mongoose.model(
       required: true,
       unique: true,
     },
-    phone:  {
+    phone: {
       type: String,
       required: true,
     },
