@@ -82,7 +82,7 @@ h2 {
     padding-right: 5%;
     padding-top: 5px;
     padding-bottom: 3%;
-    font-size: 0.7em;
+    font-size: 1.2em;
   }
 
   h2 {
@@ -112,9 +112,9 @@ h2 {
 
 @media only screen and (max-width: 400px) {
   h2 {
-    font-size: 2em;
+    font-size: 1.5em;
   }
   .meeting-card {
-    font-size: 0.5em;
+    font-size: 1em;
   }
 }
