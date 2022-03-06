@@ -12,7 +12,7 @@ function Profile() {
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
-    document.body.style.overflow = isOpen ? "unset" : "hidden";
+    document.body.style.overflow = isOpen ? "auto" : "hidden";
   };
 
   const manageProf = [

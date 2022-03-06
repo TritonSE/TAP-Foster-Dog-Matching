@@ -1,3 +1,26 @@
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+::-webkit-scrollbar:vertical {
+  width: 12px;
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 4px solid transparent;
+  border-radius: 9px;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
 .popup-box {
   position: fixed;
   background: rgba(112, 112, 112, 0.1);
@@ -6,7 +29,6 @@
   height: 100%;
   top: 0;
   left: 0;
-  overflow: hidden;
 }
 
 .box {
@@ -17,7 +39,7 @@
   margin: 0 auto;
   height: auto;
   max-height: 90vh;
-  top: 50%;
+  top: 50%; /* TODO: move box lower when Header is merged  */
   transform: translateY(-50%);
   background: #fff;
   border-radius: 54.1399px;
@@ -167,8 +189,12 @@
   border-radius: 25px;
 }
 
+.box-section3 {
+  height: 181px;
+  padding-top: 50px;
+}
+
 .change-password-button {
-  margin-top: 50px;
   margin-left: auto;
   margin-right: auto;
   width: 329px;
@@ -229,7 +255,7 @@
   cursor: pointer;
   float: right;
   margin-right: 40px;
-  margin-top: 111px;
+  margin-top: 61px;
   margin-bottom: 37px;
   outline: none;
 }
@@ -269,9 +295,15 @@
     text-align: center;
   }
 
-  .text-bold {
+  .box-section1-text .text-bold {
     padding-right: max(0px, 40.4vw);
-    width: 19.647vw;
+    width: 19.547vw;
+    text-align: left;
+  }
+
+  .box-section2-text .text-bold {
+    padding-right: max(0px, 40.4vw);
+    width: fit-content;
     text-align: left;
   }
 
@@ -348,9 +380,11 @@
     line-height: max(41.8438px, 13.077vw);
     margin: 0px max(2.925px, 0.962vw);
   }
-
+  .box-section3 {
+    height: 34.808vw;
+    padding-top: 9.615vw;
+  }
   .change-password-button {
-    margin-top: max(30.768px, 9.615vw);
     width: max(202.453px, 63.269vw);
     height: max(45.5312px, 14.231vw);
   }
@@ -380,7 +414,7 @@
     width: max(144.609px, 45.192vw);
     height: max(39.125px, 12.231vw);
     margin-right: max(24.6144px, 7.692vw);
-    margin-top: max(74.7072px, 23.346vw);
+    margin-top: max(24.7072px, 11.731vw);
     margin-bottom: max(22.768px, 7.115vw);
   }
 
@@ -388,11 +422,32 @@
     font-size: max(18.5632px, 5.801vw);
     line-height: max(40.74px, 12.731vw);
   }
+}
 
-  @media screen and (max-width: 320px) {
-    .box {
-      min-width: 0px;
-      overflow-x: scroll;
-    }
+@media screen and (max-width: 320px) {
+  .box {
+    min-width: 0px;
+    overflow-x: auto;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .box-section2-text {
+    text-align: left;
+    margin-left: 15px;
+  }
+  .text-left {
+    padding-right: 10px;
+  }
+  .text-right {
+    left: 120px;
+    margin-right: max(68.2656px, 21.333vw);
+  }
+  .user-info-container {
+    margin-left: 20px;
+  }
+
+  .save-changes-button {
+    margin-top: 18.75vw;
   }
 }

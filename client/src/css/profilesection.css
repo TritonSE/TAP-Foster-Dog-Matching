@@ -144,6 +144,11 @@
   .profile-section {
     margin-left: 55px;
   }
+
+  .profile-section:nth-of-type(1) {
+    margin-top: 97px;
+  }
+
   .profile-section-cards-container .profile-section-card:nth-child(5n-3) {
     display: inline;
   }
