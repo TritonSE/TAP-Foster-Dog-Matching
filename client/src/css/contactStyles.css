@@ -160,7 +160,7 @@ html,
   float: right;
   color: white;
   width: min(15vw, 191px);
-  height: max(40px, 9%);
+  height: 50px;
   z-index: 1;
   font-size: 20px;
 }
