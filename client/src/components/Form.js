@@ -34,6 +34,12 @@ const Row = styled.div`
   justify-content: space-between;
 `;
 
+const Actions = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
 const Column = styled.div`
   display: flex;
   flex: 1;
@@ -142,6 +148,7 @@ const Form = {
   Column,
   Section,
   SubSection,
+  Actions,
 };
 
 export default Form;

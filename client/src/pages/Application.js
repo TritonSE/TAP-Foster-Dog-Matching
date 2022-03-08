@@ -9,6 +9,21 @@ import { FOSTER_AGREEMENT_CONTENT } from "../constants/FOSTER_AGREEMENT";
 import { ControlledCheckboxes } from "../components/Checkboxes";
 import { ControlledRadios } from "../components/Radios";
 import { device } from "../utils/useResponsive";
+import { Colors } from "../components/Theme";
+
+const Button = styled.div`
+  background: ${Colors.green};
+  font-size: 20px;
+  padding: 10px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  width: fit-content;
+  color: white;
+  cursor: pointer;
+  align-self: ${(props) => props.alignSelf || "unset"};
+`;
 
 function FosterApplication({ setView }) {
   const personalInfoRef = React.useRef();
@@ -34,7 +49,6 @@ function FosterApplication({ setView }) {
 
   const onError = (errors) => {
     console.log(errors);
-    setView("agreement");
   };
 
   return (
@@ -395,10 +409,10 @@ function FosterApplication({ setView }) {
             />
           </Form.SubSection>
         </Form.Section>
-        {/* TODO: replace with button component */}
-        <button type="button" onClick={handleSubmit(onSubmit, onError)}>
-          Continue
-        </button>
+        <Form.Actions>
+          <div /> {/* Spacer */}
+          <Button onClick={handleSubmit(onSubmit, onError)}>Continue</Button>
+        </Form.Actions>
       </Form.Container>
     </PageSections>
   );
@@ -452,13 +466,11 @@ function FosterAgreement({ setView }) {
             <ControlledInput control={control} name="signature" label="Signature" required />
           </Form.SubSection>
         </SignatureContainer>
-        {/* TODO: replace with button component */}
-        <button type="button" onClick={() => setView("application")}>
-          Back
-        </button>
-        <button type="button" onClick={handleSubmit(onSubmit, onError)}>
-          Submit Application
-        </button>
+        <Form.Actions>
+          <Button onClick={() => setView("application")}>Back</Button>
+          <Button onClick={handleSubmit(onSubmit, onError)}>Submit Application</Button>
+          <div /> {/* Spacer */}
+        </Form.Actions>
       </Form.Container>
     </FosterAgreementContainer>
   );

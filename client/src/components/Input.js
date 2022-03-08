@@ -45,6 +45,7 @@ const InputField = styled.input`
   font-size: 18px;
   padding: 4px;
   width: 100%;
+  box-sizing: border-box;
   ${(props) =>
     props.invalid &&
     css`

@@ -88,7 +88,7 @@ const CheckboxLabel = styled.div`
   }
 `;
 
-function Checkboxes({ options, value, onChange, invalid }) {
+const Checkboxes = React.forwardRef(({ options, value, onChange, invalid }, ref) => {
   const half = Math.ceil(options.length / 2);
 
   function handleSelect(newValue) {
@@ -104,7 +104,7 @@ function Checkboxes({ options, value, onChange, invalid }) {
   }
 
   return (
-    <CheckboxesContainer>
+    <CheckboxesContainer ref={ref}>
       {[options.slice(0, half), options.slice(half)].map((column) => (
         <CheckboxesColumn>
           {column.map((option) => (
@@ -121,7 +121,7 @@ function Checkboxes({ options, value, onChange, invalid }) {
       ))}
     </CheckboxesContainer>
   );
-}
+});
 
 export const ControlledCheckbox = withControl(Checkbox);
 

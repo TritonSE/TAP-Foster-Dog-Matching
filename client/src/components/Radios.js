@@ -74,7 +74,7 @@ const RadioLabel = styled.div`
   }
 `;
 
-function Radios({ options, value, onChange, invalid }) {
+const Radios = React.forwardRef(({ options, value, onChange, invalid }, ref) => {
   function handleSelect(newValue) {
     onChange(newValue);
   }
@@ -84,7 +84,7 @@ function Radios({ options, value, onChange, invalid }) {
   }
 
   return (
-    <RadiosContainer>
+    <RadiosContainer ref={ref}>
       {options.map((option) => (
         <RadioGroup key={option}>
           <Radio
@@ -97,7 +97,7 @@ function Radios({ options, value, onChange, invalid }) {
       ))}
     </RadiosContainer>
   );
-}
+});
 
 export const ControlledRadio = withControl(Radio);
 
