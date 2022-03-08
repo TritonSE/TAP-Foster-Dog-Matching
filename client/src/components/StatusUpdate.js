@@ -1,6 +1,26 @@
 import React from "react";
 import "../css/status.css";
 
+/**
+ * This component is to be used in conjunction with the meeting component to show
+ * the status of an upcoming meeting/appointment
+ *
+ * props - title, image (pfp), ambassador, phone, email, date, time, location
+ *
+ * Example:
+ * <StatusUpdate
+ *          title="Interview Info"
+ *          ambassador="Dhanush"
+ *          phone="123-456-7890"
+ *          email="test@tap.com"
+ *          date="1/1/2022"
+ *          time="6-7:00PM"
+ *          location="Zoom"
+ *          image={pfp}
+ *        />
+ *
+ */
+
 function Meetings(props) {
   return (
     <div className="status-card">

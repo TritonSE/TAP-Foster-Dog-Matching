@@ -11,7 +11,6 @@ import Landing from "./pages/Landing";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import InitialInterview from "./pages/InitialInterview";
 
 function App() {
   return (
@@ -26,7 +25,6 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/initialInterview" element={<InitialInterview />} />
       </Routes>
     </Router>
   );
