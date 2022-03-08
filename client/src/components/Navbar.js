@@ -39,7 +39,7 @@ const slideIn = keyframes`
 `;
 
 export const Nav = styled.nav`
-  position: absolute;
+  position: fixed;
   width: max(250px, 16vw);
   height: 85%;
   top: 15%;
