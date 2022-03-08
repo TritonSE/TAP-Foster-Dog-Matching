@@ -205,10 +205,10 @@ function RepeatFosters() {
   );
 
   return (
-    <>
+    <div>
       <Heading>My Repeat Fosters</Heading>
       <Table columns={columns} rows={rows} />
-    </>
+    </div>
   );
 }
 
@@ -277,7 +277,7 @@ function AllFosters() {
   );
 
   return (
-    <>
+    <div>
       <HeadingContainer>
         <Heading>{role === "management" ? "All Fosters" : "My Fosters Information"}</Heading>
         {role === "management" && (
@@ -294,16 +294,22 @@ function AllFosters() {
         )}
       </HeadingContainer>
       <Table columns={columns} rows={rows} />;
-    </>
+    </div>
   );
 }
 
+const FostersContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+`;
+
 function Fosters() {
   return (
-    <>
+    <FostersContainer>
       {(role === "ambassador" || role === "management") && <RepeatFosters />}
       {(role === "management" || role === "coordinator") && <AllFosters />}
-    </>
+    </FostersContainer>
   );
 }
 
