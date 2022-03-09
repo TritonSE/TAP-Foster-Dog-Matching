@@ -1,0 +1,120 @@
+.meeting-card {
+  border-radius: 15px;
+  background: #000000;
+  position: relative;
+  display: flex;
+  text-align: center;
+  flex-direction: row;
+  justify-content: left;
+  width: 80%;
+  height: 40%;
+  max-width: max-content;
+  max-height: max-content;
+  overflow: auto;
+  margin: 5px;
+  flex-wrap: wrap;
+  text-align: center;
+  padding-left: 2%;
+  padding-right: 2%;
+  padding-top: 5px;
+  padding-bottom: 2%;
+  overflow-x: hidden;
+  object-fit: contain;
+  word-wrap: break-word;
+}
+
+h2 {
+  font-size: 2em;
+}
+
+.title {
+  color: white;
+  text-align: center;
+  width: 100%;
+}
+
+.text-card {
+  margin-top: 0px;
+  /* margin-right: 10px; */
+  background: #fff;
+  flex: 2;
+  border-radius: 15px;
+  width: 100%;
+  padding: 2%;
+  text-align: left;
+  /* padding-left: 5%; */
+}
+
+.image-card {
+  margin-top: 0px;
+  margin-left: 2vw;
+  flex: 2;
+  border-radius: 15px;
+  /* width:auto;
+    height:auto; */
+  width: 100%;
+  height: 100%;
+}
+
+.image {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.status {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+}
+
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
+
+@media only screen and (max-width: 750px) {
+  .meeting-card {
+    display: flex;
+    flex-direction: column;
+    /* width: auto;
+    height: auto; */
+    padding-left: 4%;
+    padding-right: 5%;
+    padding-top: 5px;
+    padding-bottom: 3%;
+    font-size: 1.2em;
+  }
+
+  h2 {
+    font-size: 1.5em;
+  }
+
+  .text-card {
+    min-height: 50vw;
+    width: auto;
+    /* height: auto; */
+    /* margin-bottom: 30px; */
+    margin: 1% 1% 4% 1%;
+  }
+
+  .image-card {
+    flex: 1;
+    /* width: auto;
+    height: auto; */
+    margin: 1%;
+  }
+
+  .image {
+    width: auto;
+    height: auto;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  h2 {
+    font-size: 1.5em;
+  }
+  .meeting-card {
+    font-size: 1em;
+  }
+}
