@@ -1,6 +1,6 @@
 #default-body {
   display: grid;
-  grid-template-columns: 300px auto;
+  grid-template-columns: max(250px, 16vw) auto;
 }
 
 #default-body-navbar {
