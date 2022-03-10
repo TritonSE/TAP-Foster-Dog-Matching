@@ -12,7 +12,6 @@
 import React from "react";
 import "../css/header.css";
 import logoImage from "../images/logo1.png";
-import hamburgerIcon from "../images/hamburgermenuicon.png";
 
 function Header(props) {
   return (
@@ -33,9 +32,6 @@ function Header(props) {
         </div>
       </div>
       <div className="header-sign-out">Sign out</div>
-      <div className="navbar-hamburger-button">
-        <img src={hamburgerIcon} alt="Mobile menu" />
-      </div>
     </div>
   );
 }

@@ -3,10 +3,6 @@
   grid-template-columns: max(250px, 16vw) auto;
 }
 
-#default-body-navbar {
-  grid-column: 1;
-}
-
 #default-body-container {
   grid-column: 2;
   padding: 100px 0 0 65px;
@@ -18,8 +14,5 @@
   }
   #default-body-container {
     padding: 50px 0px 0px 16vw;
-  }
-  #default-body-navbar {
-    display: none;
   }
 }

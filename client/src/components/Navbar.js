@@ -39,10 +39,10 @@ const slideIn = keyframes`
 `;
 
 export const Nav = styled.nav`
-  position: absolute;
+  position: fixed;
   width: max(250px, 16vw);
-  height: 85%;
-  top: 15%;
+  height: calc(100% - 130px);
+  top: 130px;
   background-color: #000000;
 
   @media screen and (max-width: 750px) {
@@ -65,6 +65,7 @@ export const ToggleNavbar = styled.button`
     position: absolute;
     right: 5%;
     top: 5%;
+    z-index: 5;
 
     background: none;
     color: inherit;
@@ -76,7 +77,9 @@ export const ToggleNavbar = styled.button`
   }
 `;
 
-export const Burger = styled.img``;
+export const Burger = styled.img`
+  z-index: 5;
+`;
 
 export const NavMenu = styled.div`
   display: flex;
