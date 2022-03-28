@@ -28,16 +28,6 @@ import { NavLink as Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import burger from "../images/burger.png";
 
-// Styled components
-const slideIn = keyframes`
- 0% { right: -50%; }
- 20% { right: -40%; }
- 40% { right: -30%; }
- 60% { right: -20%; }
- 80% { right: -10%; }
- 100% { right: 0%; }
-`;
-
 export const Nav = styled.nav`
   position: fixed;
   width: max(250px, 16vw);
@@ -46,14 +36,18 @@ export const Nav = styled.nav`
   background-color: #000000;
 
   @media screen and (max-width: 750px) {
-    top: 15%;
-    right: 0%;
+    top: 97px;
+    right: -300px;
     width: min(300px, 45vw);
+    height: calc(100% - 97px);
     z-index: 5;
+    transform: translateX(0%);
+    transition: right 0.5s;
 
-    animation-name: ${slideIn};
-    animation-duration: 0.5s;
-    animation-iteration-count: 1;
+    &.active {
+      right: 0px;
+      transition: right 1s ease;
+    }
   }
 `;
 
@@ -162,20 +156,19 @@ function Navbar(props) {
       </ToggleNavbar>
 
       {/* Conditionally Rendered Navigation Panel */}
-      {renderNav || screenWidth > 750 ? (
-        <Nav>
-          <NavMenu>
-            {Object.entries(props.pages).map(([page, path]) => (
-              <NavLink to={path} activeStyle>
-                {page}
-              </NavLink>
-            ))}
-            {screenWidth < 750 || renderNav ? (
-              <SignOut onClick={() => logout()}>Sign Out</SignOut>
-            ) : undefined}
-          </NavMenu>
-        </Nav>
-      ) : undefined}
+
+      <Nav className={renderNav ? "active" : ""}>
+        <NavMenu>
+          {Object.entries(props.pages).map(([page, path]) => (
+            <NavLink to={path} activeStyle>
+              {page}
+            </NavLink>
+          ))}
+          {screenWidth < 750 || renderNav ? (
+            <SignOut onClick={() => logout()}>Sign Out</SignOut>
+          ) : undefined}
+        </NavMenu>
+      </Nav>
     </>
   );
 }
