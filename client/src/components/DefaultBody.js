@@ -6,7 +6,6 @@
  */
 
 import React from "react";
-import "../css/defaultbody.css";
 import Header from "./Header";
 import Navbar from "./Navbar";
 
