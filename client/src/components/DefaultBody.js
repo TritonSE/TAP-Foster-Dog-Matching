@@ -18,10 +18,13 @@ function DefaultBody(props) {
         <div id="default-body-navbar">
           <Navbar
             pages={{
-              "Pending Applications": "/dashboard",
+              Dashboard: "/dashboard",
+              "Contact Us": "/contact",
+              "Pending Applications": "/pending-applications",
               "Current Fosters": "/fosters",
               Calendar: "/calendar",
-              // TODO: change links depending on current role/status
+              // NOTE: showing all links for now for dev purposes
+              // TODO: only show links depending on current role/status once roles have been implemented
             }}
           />
         </div>
