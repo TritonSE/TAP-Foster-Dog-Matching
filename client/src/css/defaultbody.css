@@ -1,11 +1,14 @@
 #default-body {
   display: grid;
   grid-template-columns: max(250px, 16vw) auto;
+  height: 100%;
 }
 
 #default-body-container {
   grid-column: 2;
   padding: 65px;
+  overflow: auto;
+  height: 100%;
 }
 
 @media only screen and (max-width: 750px) {
@@ -13,6 +16,6 @@
     display: block;
   }
   #default-body-container {
-    padding: 50px 0px 0px 16vw;
+    padding: 30px;
   }
 }

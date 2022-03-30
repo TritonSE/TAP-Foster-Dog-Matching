@@ -23,9 +23,7 @@ const tableBorder = css`
   border-collapse: collapse;
 `;
 
-const TableContainer = styled.div`
-  overflow-x: scroll;
-`;
+const TableContainer = styled.div``;
 
 const StyledTable = styled.table`
   ${tableBorder}
