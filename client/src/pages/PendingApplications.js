@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import DefaultBody from "../components/DefaultBody";
 import Select from "../components/Select";
 import Table from "../components/Table";
 import { Colors, Typography } from "../components/Theme";
@@ -77,6 +78,7 @@ function CoordinatorSelect({ initialValue }) {
   return (
     <Select
       value={value}
+      height="20px"
       options={[
         // TODO: Replace with data
         { label: "Kristin", value: "Kristin" },
@@ -100,6 +102,7 @@ function AmbassadorSelect({ initialValue }) {
   return (
     <Select
       value={value}
+      height="20px"
       options={[
         // TODO: Replace with data
         { label: "Shelby", value: "Shelby" },
@@ -157,10 +160,10 @@ function PendingApplications() {
     []
   );
   return (
-    <div>
+    <DefaultBody>
       <Heading>Your Pending Applicants</Heading>
       <Table columns={columns} rows={rows} />
-    </div>
+    </DefaultBody>
   );
 }
 
