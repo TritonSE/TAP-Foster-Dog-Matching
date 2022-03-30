@@ -58,7 +58,7 @@ export const ToggleNavbar = styled.button`
     display: inline;
     position: absolute;
     right: 5%;
-    top: 5%;
+    top: 40px;
     z-index: 5;
 
     background: none;
