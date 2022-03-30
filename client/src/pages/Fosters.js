@@ -4,6 +4,7 @@ import Table from "../components/Table";
 import TableCellButton from "../components/TableCellButton";
 import Select from "../components/Select";
 import { Colors, Typography } from "../components/Theme";
+import DefaultBody from "../components/DefaultBody";
 
 const DUMMY_REPEAT_FOSTERS_DATA = [
   {
@@ -300,16 +301,19 @@ function AllFosters() {
 
 const FostersContainer = styled.div`
   display: flex;
+  flex: 1;
   flex-direction: column;
   gap: 40px;
 `;
 
 function Fosters() {
   return (
-    <FostersContainer>
-      {(role === "ambassador" || role === "management") && <RepeatFosters />}
-      {(role === "management" || role === "coordinator") && <AllFosters />}
-    </FostersContainer>
+    <DefaultBody>
+      <FostersContainer>
+        {(role === "ambassador" || role === "management") && <RepeatFosters />}
+        {(role === "management" || role === "coordinator") && <AllFosters />}
+      </FostersContainer>
+    </DefaultBody>
   );
 }
 

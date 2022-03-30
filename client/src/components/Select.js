@@ -27,7 +27,7 @@ const StyledSelect = styled.div`
   display: flex;
   flex: 1;
   width: ${(props) => props.width || "unset"};
-  height: ${(props) => (props.height ? props.height : "50px")};
+  height: ${(props) => (props.height ? props.height : "20px")};
   padding: 6px 15px;
   border: 1px solid black;
   border-radius: 10px;
