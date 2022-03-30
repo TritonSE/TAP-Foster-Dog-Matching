@@ -24,13 +24,7 @@ const tableBorder = css`
   border-collapse: collapse;
 `;
 
-<<<<<<< HEAD
 const TableContainer = styled.div``;
-=======
-const TableContainer = styled.div`
-  overflow: visible;
-`;
->>>>>>> 78daff5 (finish fosters pages and conditional rendering by role)
 
 const StyledTable = styled.table`
   ${tableBorder}

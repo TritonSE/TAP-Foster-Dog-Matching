@@ -10,6 +10,7 @@ import { ControlledCheckboxes } from "../components/Checkboxes";
 import { ControlledRadios } from "../components/Radios";
 import { device } from "../utils/useResponsive";
 import { Colors } from "../components/Theme";
+import DefaultBody from "../components/DefaultBody";
 
 const Button = styled.div`
   background: ${Colors.green};
@@ -49,6 +50,7 @@ function FosterApplication({ setView }) {
 
   const onError = (errors) => {
     console.log(errors);
+    setView("agreement");
   };
 
   return (
@@ -489,14 +491,16 @@ function Application() {
   const [view, setView] = React.useState("application");
 
   return (
-    <ApplicationContainer>
-      <ApplicationProgress currentStep={0} />
-      {view === "application" ? (
-        <FosterApplication setView={setView} />
-      ) : (
-        <FosterAgreement setView={setView} />
-      )}
-    </ApplicationContainer>
+    <DefaultBody>
+      <ApplicationContainer>
+        <ApplicationProgress currentStep={0} />
+        {view === "application" ? (
+          <FosterApplication setView={setView} />
+        ) : (
+          <FosterAgreement setView={setView} />
+        )}
+      </ApplicationContainer>
+    </DefaultBody>
   );
 }
 
