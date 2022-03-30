@@ -5,10 +5,18 @@ import DashboardCard from "../components/DashboardCard";
 import IconButton from "../components/IconButton";
 import dogCollage from "../images/dogcollage2.png";
 import plus from "../images/plus.png";
+import Navbar from "../components/Navbar";
 
 function Dashboard() {
   return (
     <div>
+      <Navbar
+        pages={{
+          "Pending Applications": "/dashboard",
+          "Current Fosters": "/fosters",
+          Calendar: "/calendar",
+        }}
+      />
       <Header firstName="Placeholder" />
       <DefaultBody>
         <DashboardCard
