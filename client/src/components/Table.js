@@ -32,6 +32,7 @@ const TableContainer = styled.div`
 
 const StyledTable = styled.table`
   ${tableBorder}
+  width: 100%;
 `;
 
 const TableHead = styled.thead``;
@@ -49,7 +50,7 @@ const TableHeader = styled.th`
   ${tableBorder}
   color: white;
   background: ${Colors.green};
-  padding: 20px 40px;
+  padding: 20px 30px;
 `;
 
 const TableBody = styled.tbody``;
@@ -57,7 +58,7 @@ const TableBody = styled.tbody``;
 const TableCell = styled.td`
   ${tableBorder}
   color: black;
-  padding: 20px 40px;
+  padding: 20px 30px;
   text-align: center;
 `;
 
