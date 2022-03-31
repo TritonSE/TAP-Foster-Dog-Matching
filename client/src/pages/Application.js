@@ -50,7 +50,7 @@ function FosterApplication({ setView }) {
 
   const onError = (errors) => {
     console.log(errors);
-    setView("agreement");
+    // setView("agreement"); // uncomment this to see the foster agreement w/o filling out the form
   };
 
   return (
@@ -421,7 +421,7 @@ function FosterApplication({ setView }) {
 }
 
 const FosterAgreementContainer = styled.div`
-  max-height: 80vh;
+  max-height: 52vh;
   flex: 5;
   overflow-y: scroll;
   ${device.mobile} {

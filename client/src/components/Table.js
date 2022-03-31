@@ -24,13 +24,12 @@ const tableBorder = css`
   border-collapse: collapse;
 `;
 
-const TableContainer = styled.div`
-  margin-right: 65px;
-  display: inline-block;
-`;
+const TableContainer = styled.div``;
 
 const StyledTable = styled.table`
   ${tableBorder}
+  margin-right: 65px;
+  display: inline-block;
 `;
 
 const TableHead = styled.thead``;
