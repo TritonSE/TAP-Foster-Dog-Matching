@@ -23,7 +23,10 @@ const tableBorder = css`
   border-collapse: collapse;
 `;
 
-const TableContainer = styled.div``;
+const TableContainer = styled.div`
+  margin-right: 65px;
+  display: inline-block;
+`;
 
 const StyledTable = styled.table`
   ${tableBorder}
