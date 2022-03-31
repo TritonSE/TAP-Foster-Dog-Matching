@@ -30,8 +30,7 @@ const ProgressBarContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
-  margin-bottom: 40px;
+  margin-bottom: 60px;
   position: relative;
   flex: 1;
   ${device.mobile} {

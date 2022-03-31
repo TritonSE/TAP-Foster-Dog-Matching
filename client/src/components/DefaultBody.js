@@ -12,13 +12,14 @@ import Navbar from "./Navbar";
 
 function DefaultBody(props) {
   return (
-    <>
+    <div id="default-body-container">
       <Header firstName="Placeholder" />
       <div id="default-body">
         <div id="default-body-navbar">
           <Navbar
             pages={{
               Dashboard: "/dashboard",
+              Application: "/application",
               "Contact Us": "/contact",
               "Pending Applications": "/pending-applications",
               "Current Fosters": "/fosters",
@@ -28,9 +29,9 @@ function DefaultBody(props) {
             }}
           />
         </div>
-        <div id="default-body-container">{props.children}</div>
+        <div id="default-body-content">{props.children}</div>
       </div>
-    </>
+    </div>
   );
 }
 
