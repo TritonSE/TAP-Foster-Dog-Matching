@@ -17,7 +17,6 @@
 
 import React from "react";
 import styled, { css } from "styled-components";
-import { device } from "../utils/useResponsive";
 import { Colors } from "./Theme";
 
 const tableBorder = css`

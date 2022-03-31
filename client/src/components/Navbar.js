@@ -25,7 +25,7 @@
 
 import React, { useState, useEffect } from "react";
 import { NavLink as Link } from "react-router-dom";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import burger from "../images/burger.png";
 
 export const Nav = styled.nav`
