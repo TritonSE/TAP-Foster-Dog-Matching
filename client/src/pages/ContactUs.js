@@ -14,6 +14,7 @@ import cancel from "../images/cancel.png";
 import smallCancel from "../images/smallCancel.png";
 import Select from "../components/Select";
 import Navbar from "../components/Navbar";
+import DefaultBody from "../components/DefaultBody";
 
 function ContactUs() {
   const [continued, setContinued] = useState(false);
@@ -59,13 +60,7 @@ function ContactUs() {
   };
 
   return (
-    <div>
-      <Navbar
-        pages={{
-          Dashboard: "/dashboard",
-          "Contact Us": "/contact",
-        }}
-      />
+    <DefaultBody>
       <div className="wrapper">
         {!continued ? (
           <>
@@ -145,7 +140,7 @@ function ContactUs() {
           </>
         )}
       </div>
-    </div>
+    </DefaultBody>
   );
 }
 

@@ -7,12 +7,30 @@
 
 import React from "react";
 import "../css/defaultbody.css";
+import Header from "./Header";
+import Navbar from "./Navbar";
 
 function DefaultBody(props) {
   return (
-    <div id="default-body">
-      <div id="default-body-container">{props.children}</div>
-    </div>
+    <>
+      <Header firstName="Placeholder" />
+      <div id="default-body">
+        <div id="default-body-navbar">
+          <Navbar
+            pages={{
+              Dashboard: "/dashboard",
+              "Contact Us": "/contact",
+              "Pending Applications": "/pending-applications",
+              "Current Fosters": "/fosters",
+              Calendar: "/calendar",
+              // NOTE: showing all links for now for dev purposes
+              // TODO: only show links depending on current role/status once roles have been implemented
+            }}
+          />
+        </div>
+        <div id="default-body-container">{props.children}</div>
+      </div>
+    </>
   );
 }
 

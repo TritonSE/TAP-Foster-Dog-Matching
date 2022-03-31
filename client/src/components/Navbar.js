@@ -56,10 +56,10 @@ export const ToggleNavbar = styled.button`
 
   @media screen and (max-width: 750px) {
     display: inline;
-    position: absolute;
+    position: fixed;
     right: 5%;
     top: 40px;
-    z-index: 5;
+    z-index: 101;
 
     background: none;
     color: inherit;

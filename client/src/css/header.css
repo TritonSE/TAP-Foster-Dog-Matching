@@ -1,4 +1,6 @@
 #header {
+  position: sticky;
+  top: 0;
   background-color: black;
   color: white;
   display: grid;
@@ -7,6 +9,7 @@
   height: 130px;
   width: 100%;
   box-sizing: border-box;
+  z-index: 100;
 }
 
 .header-welcome img {

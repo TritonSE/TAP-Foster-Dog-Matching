@@ -1,24 +1,23 @@
 import React from "react";
-import Header from "../components/Header";
+import styled from "styled-components";
 import DefaultBody from "../components/DefaultBody";
 import DashboardCard from "../components/DashboardCard";
 import IconButton from "../components/IconButton";
 import dogCollage from "../images/dogcollage2.png";
 import plus from "../images/plus.png";
-import Navbar from "../components/Navbar";
+import { device } from "../utils/useResponsive";
+
+const DashboardCardsContainer = styled.div`
+  display: flex;
+  ${device.mobile} {
+    justify-content: center;
+  }
+`;
 
 function Dashboard() {
   return (
-    <div>
-      <Navbar
-        pages={{
-          "Pending Applications": "/dashboard",
-          "Current Fosters": "/fosters",
-          Calendar: "/calendar",
-        }}
-      />
-      <Header firstName="Placeholder" />
-      <DefaultBody>
+    <DefaultBody>
+      <DashboardCardsContainer>
         <DashboardCard
           imagePath={dogCollage}
           imageAltText="Dog decoration image"
@@ -28,8 +27,8 @@ function Dashboard() {
             <IconButton icon={plus} altText="ContinueButton" leftOffset="83%" topOffset="72%" />
           }
         />
-      </DefaultBody>
-    </div>
+      </DashboardCardsContainer>
+    </DefaultBody>
   );
 }
 
