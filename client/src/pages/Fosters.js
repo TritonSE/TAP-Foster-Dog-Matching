@@ -1,11 +1,9 @@
 import React from "react";
+// import DogSelection from "../components/DogSelection";
+import DefaultBody from "../components/DefaultBody";
 
 function Fosters() {
-  return (
-    <div>
-      <h1>Fosters</h1>
-    </div>
-  );
+  return <DefaultBody>{/* <DogSelection /> */}</DefaultBody>;
 }
 
 export default Fosters;
