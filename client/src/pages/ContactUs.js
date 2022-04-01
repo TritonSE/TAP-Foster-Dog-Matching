@@ -13,7 +13,6 @@ import "../css/contactStyles.css";
 import cancel from "../images/cancel.png";
 import smallCancel from "../images/smallCancel.png";
 import Select from "../components/Select";
-import Navbar from "../components/Navbar";
 import DefaultBody from "../components/DefaultBody";
 
 function ContactUs() {
