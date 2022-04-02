@@ -35,6 +35,11 @@ const Container = styled.div`
 const Content = styled.div`
   overflow-y: scroll;
   padding: 0 80px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   ${device.mobile} {
     padding: 0 10px;
   }

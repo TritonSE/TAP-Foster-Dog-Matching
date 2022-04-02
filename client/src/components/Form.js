@@ -110,7 +110,7 @@ const SubSectionLabel = styled.div`
 `;
 
 const SubSectionChildren = styled.div`
-  flex: ${props => props.flex || 1};
+  flex: ${(props) => props.flex || 1};
   display: flex;
   flex-direction: column;
   gap: 14px;

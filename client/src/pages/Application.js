@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import ApplicationProgress from "../components/ApplicationProgress";
 import Form from "../components/Form";
 import { ControlledInput, InputLabel } from "../components/Input";
@@ -30,7 +31,7 @@ function FosterApplication({ setView }) {
   const personalInfoRef = React.useRef();
   const fosterInfoRef = React.useRef();
   const outsideInfoRef = React.useRef();
-  const { control, handleSubmit } = useForm({
+  const { control, watch, handleSubmit } = useForm({
     reValidateMode: "onChange",
   });
 
@@ -148,7 +149,7 @@ function FosterApplication({ setView }) {
                   rules={{
                     pattern: /^(\+\d{1,2}\s?)?1?-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}/,
                   }}
-                  required
+                  required={watch("landlord.firstName") !== "n/a"}
                 />
               </Form.Column>
               <Form.Column>
@@ -156,7 +157,7 @@ function FosterApplication({ setView }) {
                   control={control}
                   label="Last Name"
                   name="landlord.lastName"
-                  required
+                  required={watch("landlord.firstName") !== "n/a"}
                 />
                 <ControlledInput
                   control={control}
@@ -166,7 +167,7 @@ function FosterApplication({ setView }) {
                     pattern:
                       /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i,
                   }}
-                  required
+                  required={watch("landlord.firstName") !== "n/a"}
                 />
               </Form.Column>
             </Form.Row>
@@ -480,6 +481,7 @@ function FosterAgreement({ setView }) {
 
 const ApplicationContainer = styled.div`
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: space-between;
   max-width: 100vw;
@@ -490,12 +492,25 @@ const ApplicationContainer = styled.div`
   }
 `;
 
+const ExitButton = styled.div`
+  position: absolute;
+  top: -30px;
+  left: -10px;
+  font-size: 16px;
+  cursor: pointer;
+  ${device.mobile} {
+    top: -20px;
+  }
+`;
+
 function Application() {
+  const navigate = useNavigate();
   const [view, setView] = React.useState("application");
 
   return (
     <DefaultBody>
       <ApplicationContainer>
+        <ExitButton onClick={() => navigate("/dashboard")}>Exit</ExitButton>
         <ApplicationProgress currentStep={0} />
         {view === "application" ? (
           <FosterApplication setView={setView} />
