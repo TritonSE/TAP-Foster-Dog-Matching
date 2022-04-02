@@ -25,7 +25,7 @@ const tableBorder = css`
 `;
 
 const TableContainer = styled.div`
-  margin-right: 65px;
+  margin-right: 40px;
   display: inline-block;
 `;
 
@@ -49,7 +49,7 @@ const TableHeader = styled.th`
   ${tableBorder}
   color: white;
   background: ${Colors.green};
-  padding: 20px 30px;
+  padding: 20px 28px;
 `;
 
 const TableBody = styled.tbody``;
@@ -57,7 +57,7 @@ const TableBody = styled.tbody``;
 const TableCell = styled.td`
   ${tableBorder}
   color: black;
-  padding: 20px 30px;
+  padding: 20px 28px;
   text-align: center;
 `;
 

@@ -294,7 +294,7 @@ function AllFosters() {
           />
         )}
       </HeadingContainer>
-      <Table columns={columns} rows={rows} />;
+      <Table columns={columns} rows={rows} />
     </div>
   );
 }
