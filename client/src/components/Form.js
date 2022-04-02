@@ -110,7 +110,7 @@ const SubSectionLabel = styled.div`
 `;
 
 const SubSectionChildren = styled.div`
-  flex: 1;
+  flex: ${props => props.flex || 1};
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -135,7 +135,7 @@ function SubSection({ title, children }) {
   return (
     <SubSectionContainer>
       {title && <SubSectionLabel>{title}</SubSectionLabel>}
-      <SubSectionChildren>{children}</SubSectionChildren>
+      <SubSectionChildren flex={2}>{children}</SubSectionChildren>
       {title && !isMobile && <SubSectionChildren />}
     </SubSectionContainer>
   );

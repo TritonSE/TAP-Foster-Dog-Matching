@@ -421,7 +421,7 @@ function FosterApplication({ setView }) {
 }
 
 const FosterAgreementContainer = styled.div`
-  max-height: 52vh;
+  max-height: 60vh;
   flex: 5;
   overflow-y: scroll;
   ${device.mobile} {
@@ -481,7 +481,10 @@ function FosterAgreement({ setView }) {
 const ApplicationContainer = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   max-width: 100vw;
+  height: calc(100% + 50px);
+  margin-bottom: -50px;
   ${device.mobile} {
     flex-direction: row;
   }

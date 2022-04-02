@@ -51,6 +51,16 @@ const InputField = styled.input`
     css`
       border: 2px solid ${Colors.salmon};
     `}
+  ${(props) =>
+    props.type === "number" &&
+    css`
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      margin: 0;
+    `}
   ${device.mobile} {
     font-size: 3vw;
   }

@@ -24,7 +24,7 @@ import { device } from "../utils/useResponsive";
 const Container = styled.div`
   display: flex;
   flex: 1;
-  max-height: 55vh;
+  max-height: 60vh;
   ${device.mobile} {
     flex-direction: column;
     flex: 5;

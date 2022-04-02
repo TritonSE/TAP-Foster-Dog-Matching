@@ -13,7 +13,7 @@
 #default-body-content {
   display: flex;
   flex-direction: column;
-  padding: 65px;
+  padding: 50px 40px;
   overflow: auto;
 }
 
