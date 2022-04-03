@@ -33,8 +33,8 @@ const ProgressBarContainer = styled.div`
   position: relative;
   ${device.mobile} {
     flex-direction: column;
+    margin-top: 40px;
     margin-bottom: 0;
-    padding: 5px;
   }
 `;
 
@@ -94,8 +94,8 @@ const ProgressMilestoneText = styled.div`
   top: calc(100% + 6px);
   text-align: center;
   ${device.mobile} {
-    top: 20px;
-    left: 90%;
+    top: -30px;
+    left: 70%;
     font-size: 3vw;
   }
 `;
