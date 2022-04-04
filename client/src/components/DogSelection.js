@@ -111,6 +111,7 @@ const ActiveWrapper = styled.div`
   border-radius: 10px;
   border: 3px solid #8dc442;
   background: ${(props) => (props.active ? "rgba(141, 196, 66, 0.5)" : "white")};
+  cursor: pointer;
 `;
 
 const Button = styled.button`
@@ -119,6 +120,7 @@ const Button = styled.button`
   height: 52px;
   bottom: 0;
   margin-top: 15px;
+  border: none;
 
   background: #8dc442;
   border-radius: 10px;
@@ -177,7 +179,7 @@ function DogSelection() {
         })}
       </DogWrapper>
       <Button cursor={!(current === -1)} onClick={handleSubmit(current)}>
-        Submit
+        Confirm
       </Button>
     </Content>
   );
