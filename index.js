@@ -8,7 +8,7 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 mongoose.connect(process.env.MONGO_URI);
 mongoose.connection.once("open", async () => {
   console.log("Established connection to MongoDB.");
