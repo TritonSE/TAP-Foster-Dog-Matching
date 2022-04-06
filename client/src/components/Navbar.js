@@ -25,17 +25,18 @@
 
 import React, { useState, useEffect } from "react";
 import { NavLink as Link } from "react-router-dom";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import burger from "../images/burger.png";
 
 export const Nav = styled.nav`
-  position: fixed;
+  /* position: fixed; */
   width: max(250px, 16vw);
-  height: calc(100% - 130px);
-  top: 130px;
+  height: 100%;
+  /* top: 130px; */
   background-color: #000000;
 
   @media screen and (max-width: 750px) {
+    position: absolute;
     top: 97px;
     right: -300px;
     width: min(300px, 45vw);

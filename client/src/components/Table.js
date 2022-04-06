@@ -1,6 +1,7 @@
 /**
  * Table Component
- * Used on: PendingApplications
+ *
+ * Used on: PendingApplications, Fosters
  *
  * Props:
  *  - columns [{ header: string, accessor: string }[]]
@@ -23,13 +24,12 @@ const tableBorder = css`
   border-collapse: collapse;
 `;
 
-const TableContainer = styled.div`
-  margin-right: 65px;
-  display: inline-block;
-`;
+const TableContainer = styled.div``;
 
 const StyledTable = styled.table`
   ${tableBorder}
+  margin-right: 65px;
+  display: inline-block;
 `;
 
 const TableHead = styled.thead``;
@@ -71,12 +71,19 @@ function Table({ columns, rows }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow>
-              {columns.map((column) => (
-                <TableCell key={row[column.accessor]}>{row[column.accessor]}</TableCell>
-              ))}
-            </TableRow>
+          {rows.map((row, index) => (
+            <>
+              {/* eslint-disable react/no-array-index-key */}
+              <TableRow
+                key={`${JSON.stringify(
+                  Object.values(row).filter((val) => typeof val !== "object")
+                )}-${index}`}
+              >
+                {columns.map((column) => (
+                  <TableCell key={row[column.accessor]}>{row[column.accessor]}</TableCell>
+                ))}
+              </TableRow>
+            </>
           ))}
         </TableBody>
       </StyledTable>

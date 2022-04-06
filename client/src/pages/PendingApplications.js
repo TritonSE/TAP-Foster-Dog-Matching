@@ -3,6 +3,7 @@ import styled from "styled-components";
 import DefaultBody from "../components/DefaultBody";
 import Select from "../components/Select";
 import Table from "../components/Table";
+import TableCellButton from "../components/TableCellButton";
 import { Colors, Typography } from "../components/Theme";
 
 const DUMMY_DATA = [
@@ -37,17 +38,6 @@ const Heading = styled.div`
   margin-bottom: 30px;
 `;
 
-const CellButton = styled.div`
-  background: ${(props) => props.color};
-  border-radius: 5px;
-  width: 70px;
-  padding: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-`;
-
 const CompletedCellContainer = styled.div`
   display: flex;
   align-items: center;
@@ -60,9 +50,13 @@ function CompletedActionItemsCell({ completed }) {
     <CompletedCellContainer>
       {completed ? "Status updated" : "Waiting for update"}
       {completed ? (
-        <CellButton color={Colors.salmon}>Review</CellButton>
+        <TableCellButton color={Colors.salmon} onClick={() => {}}>
+          Review
+        </TableCellButton>
       ) : (
-        <CellButton color={Colors.lightBlue}>View</CellButton>
+        <TableCellButton color={Colors.lightBlue} onClick={() => {}}>
+          View
+        </TableCellButton>
       )}
     </CompletedCellContainer>
   );
