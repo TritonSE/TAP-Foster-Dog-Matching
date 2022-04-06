@@ -1,0 +1,60 @@
+.wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.toolbar-class {
+    border: 2px;
+    border-color: black;
+    border-width: 2px;
+}
+
+.editor-container {
+    border:3px;
+    border-color: black;
+}
+
+.editor-class {
+    background-color: white;
+    height: 50vh;
+    border: 5px;
+    border-color: black;
+    border-top: none;
+}
+
+.wrapper-class {
+    border: 2px;
+    border-color: black;
+    border-width: 2px;
+    outline: 5px black
+}
+
+.title {
+    font-size: 4.5vh;
+    
+}
+
+.button {
+    background: #8dc442;
+    border-radius: 15px;
+    width: 20.5vh;
+    height: 4.5vh;
+    color: white;
+    font-size: 2.7vh;
+    border-color: #8dc442;
+    box-shadow: 0;
+}
+
+.message {
+    text-align: left;
+    font-size: 2vh;
+    color:#8dc442;
+    align-self: left;
+    float:left;
+    margin-left:auto;
+    right:0;
+}
