@@ -2,41 +2,32 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    text-align: center;
-    justify-content: center;
     align-items: center;
 }
 
-.toolbar-class {
-    border: 2px;
-    border-color: black;
-    border-width: 2px;
+.editor-container{
+    margin-bottom: 2vh;
 }
 
-.editor-container {
-    border:3px;
-    border-color: black;
+.toolbar-class {
+    border: 1px solid lightgray;
+    border-width: 2px;
+    background-color: rgb(240, 240, 240);
 }
+
 
 .editor-class {
     background-color: white;
     height: 50vh;
-    border: 5px;
-    border-color: black;
-    border-top: none;
+    border: 1px solid lightgray;
+    
 }
 
 .wrapper-class {
-    border: 2px;
-    border-color: black;
-    border-width: 2px;
-    outline: 5px black
+    border: 2px solid lightgray;
+    padding:4px
 }
 
-.title {
-    font-size: 4.5vh;
-    
-}
 
 .button {
     background: #8dc442;
@@ -47,14 +38,24 @@
     font-size: 2.7vh;
     border-color: #8dc442;
     box-shadow: 0;
+    flex:1;
+
 }
 
-.message {
-    text-align: left;
+.messag {
     font-size: 2vh;
     color:#8dc442;
-    align-self: left;
-    float:left;
-    margin-left:auto;
-    right:0;
+    position: relative;
+    float:left !important;
+    justify-content:left !important;
+    align-items:left !important;
+    flex:1;
+
+}
+
+.title {
+    font-size: 45px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    flex:1;
 }

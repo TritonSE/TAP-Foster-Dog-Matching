@@ -24,13 +24,14 @@ function PassFail( {status, initialMessage} ) {
 
     return(
         <div className = "wrapper">
-            
+
             <div className="title">
                 <h3>{title}</h3>
             </div>
-            <div className="message">
-                <h3 >Message to the foster</h3>
+            <div className="messag">
+                <h3>Message to the foster</h3>
             </div>
+            
             <div className = "editor-container">
                 <Editor
                     editorState={editorState}
