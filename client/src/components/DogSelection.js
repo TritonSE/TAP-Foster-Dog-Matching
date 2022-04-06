@@ -172,10 +172,12 @@ function DogSelection() {
         {Object.entries(allDogs).map(([key, dog]) => {
           if (key === current) {
             // element is active
-            return <DogSummaryWrap onClick={() => setCurrent(-1)} active dog={dog} />;
+            return <DogSummaryWrap onClick={() => setCurrent(-1)} active dog={dog} key={key} />;
           }
           // element is not active
-          return <DogSummaryWrap onClick={() => setCurrent(key)} active={false} dog={dog} />;
+          return (
+            <DogSummaryWrap onClick={() => setCurrent(key)} active={false} dog={dog} key={key} />
+          );
         })}
       </DogWrapper>
       <Button cursor={!(current === -1)} onClick={handleSubmit(current)}>

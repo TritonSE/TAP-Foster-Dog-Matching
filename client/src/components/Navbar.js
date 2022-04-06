@@ -160,7 +160,7 @@ function Navbar(props) {
       <Nav className={renderNav ? "active" : ""}>
         <NavMenu>
           {Object.entries(props.pages).map(([page, path]) => (
-            <NavLink to={path} activeStyle>
+            <NavLink to={path} key={page}>
               {page}
             </NavLink>
           ))}
