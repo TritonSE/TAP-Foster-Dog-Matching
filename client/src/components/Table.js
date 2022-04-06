@@ -20,18 +20,34 @@ import styled, { css } from "styled-components";
 import { Colors } from "./Theme";
 
 const tableBorder = css`
-  border: 1px solid ${Colors.gray};
-  border-collapse: collapse;
+  border: 0.5px solid ${Colors.gray};
+  border-collapse: separate;
+  border-spacing: 0;
 `;
 
 const TableContainer = styled.div`
   margin-right: 40px;
-  display: inline-block;
+  display: inline-table;
 `;
 
 const StyledTable = styled.table`
   ${tableBorder}
+  border: 1px solid ${Colors.gray};
+  border-radius: 6px;
   width: 100%;
+  tr:first-child,
+  th:first-child {
+    border-top-left-radius: 5px;
+  }
+  tr:first-child th:last-child {
+    border-top-right-radius: 5px;
+  }
+  tr:last-child td:first-child {
+    border-bottom-left-radius: 5px;
+  }
+  tr:last-child td:last-child {
+    border-bottom-right-radius: 5px;
+  }
 `;
 
 const TableHead = styled.thead``;
@@ -43,10 +59,15 @@ const TableRow = styled.tr`
   &:nth-child(odd) {
     background: white;
   }
+  td:first-child {
+    border-left: 0;
+  }
+  td:last-child {
+    border-right: 0;
+  }
 `;
 
 const TableHeader = styled.th`
-  ${tableBorder}
   color: white;
   background: ${Colors.green};
   padding: 20px 28px;
