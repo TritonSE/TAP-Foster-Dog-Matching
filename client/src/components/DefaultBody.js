@@ -15,20 +15,18 @@ function DefaultBody(props) {
     <div id="default-body-container">
       <Header firstName="Placeholder" />
       <div id="default-body">
-        <div id="default-body-navbar">
-          <Navbar
-            pages={{
-              Dashboard: "/dashboard",
-              Application: "/application",
-              "Contact Us": "/contact",
-              "Pending Applications": "/pending-applications",
-              "Current Fosters": "/fosters",
-              Calendar: "/calendar",
-              // NOTE: showing all links for now for dev purposes
-              // TODO: only show links depending on current role/status once roles have been implemented
-            }}
-          />
-        </div>
+        <Navbar
+          pages={{
+            Dashboard: "/dashboard",
+            Application: "/application",
+            "Contact Us": "/contact",
+            "Pending Applications": "/pending-applications",
+            "Current Fosters": "/fosters",
+            Calendar: "/calendar",
+            // NOTE: showing all links for now for dev purposes
+            // TODO: only show links depending on current role/status once roles have been implemented
+          }}
+        />
         <div id="default-body-content">{props.children}</div>
       </div>
     </div>

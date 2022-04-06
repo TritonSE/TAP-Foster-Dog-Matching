@@ -5,6 +5,8 @@
 }
 
 #default-body {
+  position: relative;
+  overflow-x: hidden;
   display: flex;
   flex-direction: row;
   height: 100%;
