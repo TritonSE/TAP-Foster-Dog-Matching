@@ -1,53 +1,68 @@
-import React from "react"
-import { EditorState } from 'draft-js';
+/**
+ * PassFail Component that has Rich Text Editor
+ *
+ * @summary     Pass/Fail Component that has RICH text editor to send messages
+ * @author      Jacob Au
+ * 
+ * Props:
+ * -status: used as title, and the type of message to send ex: 'Pass', 'Fail'
+ * -initialMessage: starter message you want to send, must be in the form of html as string
+ * 
+ * Ex)
+ * <PassFail 
+        status = 'Pass'
+        initialMessage = '<p>Test Message, I love food!</p>'
+      />
+ */
+
+import React from "react";
+import { EditorState, ContentState, convertFromHTML } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "../css/passFail.css";
 
-function PassFail( {status, initialMessage} ) {
+function PassFail({ status, initialMessage }) {
+  const [editorState, setEditorState] = React.useState(
+    EditorState.createWithContent(
+      ContentState.createFromBlockArray(convertFromHTML(initialMessage))
+    )
+  );
 
-    const [editorState, setEditorState] = React.useState(EditorState.createEmpty());
-    const [title, setTitle] = React.useState(status);
+  const [title, setTitle] = React.useState(status);
 
-    const onChange = (change) => {
-        setEditorState(change);
-    }
+  const onChange = (change) => {
+    setEditorState(change);
+  };
 
-    // setEditorState(initialMessage)
-    // React.useEffect(() => {
-    //     setEditorState(initialMessage);
-    // }, [initialMessage]);
+  const onConfirm = () => {
+    // TODO
+    // console.log(editorState.getCurrentContent().getPlainText('\u0001'));
+  };
 
-    const onConfirm = () => {
+  return (
+    <div className="pass-fail-wrapper">
+      <div className="title">
+        <h3>{title}</h3>
+      </div>
+      <div className="editor-message">
+        <h3>Message to the foster</h3>
+      </div>
 
-    }
+      <div className="editor-container">
+        <Editor
+          editorState={editorState}
+          onEditorStateChange={onChange}
+          toolbarClassName="toolbar-class"
+          wrapperClassName="wrapper-class"
+          editorClassName="editor-class"
+        />
+      </div>
 
-    return(
-        <div className = "wrapper">
-
-            <div className="title">
-                <h3>{title}</h3>
-            </div>
-            <div className="messag">
-                <h3>Message to the foster</h3>
-            </div>
-            
-            <div className = "editor-container">
-                <Editor
-                    editorState={editorState}
-                    onEditorStateChange={onChange}
-                    toolbarClassName="toolbar-class"
-                    wrapperClassName="wrapper-class"
-                    editorClassName="editor-class"
-                />
-            </div>
-            
-           <button type="button" className="button" onClick={onConfirm}>
-                Confirm
-            </button>
-        </div>
-       
-    );
+      <button type="button" className="button" onClick={onConfirm}>
+        Confirm
+      </button>
+    </div>
+  );
 }
 
 export default PassFail;

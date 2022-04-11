@@ -1,0 +1,16 @@
+.loading-box-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  border-radius: 40px;
+  border: 5px solid #91c649;
+  padding: 2em;
+  margin: 1em;
+  max-width: max-content;
+}
+
+.loading-text {
+  text-align: left;
+  font-size: 2em;
+}

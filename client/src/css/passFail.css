@@ -1,61 +1,61 @@
-.wrapper {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.pass-fail-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  max-width: 1475px;
 }
 
-.editor-container{
-    margin-bottom: 2vh;
+.editor-container {
+  margin: 2vh;
+  margin-bottom: 2vh;
 }
 
 .toolbar-class {
-    border: 1px solid lightgray;
-    border-width: 2px;
-    background-color: rgb(240, 240, 240);
+  border: 1px solid lightgray;
+  border-width: 2px;
+  background-color: rgb(240, 240, 240);
 }
 
-
 .editor-class {
-    background-color: white;
-    height: 50vh;
-    border: 1px solid lightgray;
-    
+  background-color: white;
+  height: 50vh;
+  border: 1px solid lightgray;
+  padding: 1px;
 }
 
 .wrapper-class {
-    border: 2px solid lightgray;
-    padding:4px
+  border: 2px solid lightgray;
+  padding: 4px;
 }
-
 
 .button {
-    background: #8dc442;
-    border-radius: 15px;
-    width: 20.5vh;
-    height: 4.5vh;
-    color: white;
-    font-size: 2.7vh;
-    border-color: #8dc442;
-    box-shadow: 0;
-    flex:1;
-
+  background: #8dc442;
+  border-radius: 15px;
+  width: 20.5vh;
+  height: 4.5vh;
+  color: white;
+  font-size: 2.7vh;
+  border-color: #8dc442;
+  box-shadow: 0;
+  flex: 1;
 }
 
-.messag {
-    font-size: 2vh;
-    color:#8dc442;
-    position: relative;
+.editor-message {
+  font-size: 1em;
+  color: #8dc442;
+  /* position: relative;
     float:left !important;
     justify-content:left !important;
-    align-items:left !important;
-    flex:1;
-
+    align-items:left !important; */
+  margin-bottom: -3.5vh;
+  align-self: baseline;
+  margin-left: 2vw;
 }
 
 .title {
-    font-size: 45px;
-    margin-bottom: 0;
-    padding-bottom: 0;
-    flex:1;
+  font-size: 2.813em;
+  margin-bottom: -7vh;
+  padding-bottom: 0;
+  flex: 1;
 }
