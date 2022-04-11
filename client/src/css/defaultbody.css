@@ -1,0 +1,27 @@
+#default-body-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#default-body {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+#default-body-content {
+  display: flex;
+  flex-direction: column;
+  padding: 50px 40px;
+  overflow: auto;
+}
+
+@media only screen and (max-width: 750px) {
+  #default-body {
+    display: block;
+  }
+  #default-body-content {
+    padding: 20px;
+  }
+}

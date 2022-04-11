@@ -11,19 +11,25 @@
  *      - value [any] - default value. leave as null to show placeholder
  *      - onChange [function] - function to set value on change
  *      - height [string] - height of select. ie. '100px' or '10%'. optional.
+ *      - width [string] - width of select. ie. '100px' or '10%'. optional.
  *      - backgroundColor [string] - background color of placeholder
  */
 
 import React from "react";
 import styled from "styled-components";
+import withControl from "../utils/withControl";
 import ClickAwayListener from "./ClickAwayListener";
 
 const SelectContainer = styled.div`
   position: relative;
+  width: ${(props) => props.width || "unset"};
 `;
 
 const StyledSelect = styled.div`
   height: ${(props) => (props.height ? props.height : "50px")};
+  display: flex;
+  flex: 1;
+  width: ${(props) => props.width || "unset"};
   padding: 6px 15px;
   border: 1px solid black;
   border-radius: 10px;
@@ -38,6 +44,7 @@ const StyledSelect = styled.div`
 
 const OptionsContainer = styled.div`
   position: absolute;
+  max-height: 300px;
   width: 100%;
   top: calc(100% + 5px);
   background: white;
@@ -66,7 +73,7 @@ const OptionText = styled.span`
   display: flex;
 `;
 
-function Select({ placeholder, options, value, onChange, height, backgroundColor }) {
+function Select({ placeholder, options, value, onChange, height, width, backgroundColor }) {
   const [openMenu, setOpenMenu] = React.useState(false);
 
   const handleSelect = (newValue) => {
@@ -83,7 +90,7 @@ function Select({ placeholder, options, value, onChange, height, backgroundColor
 
   return (
     <ClickAwayListener onClickAway={() => setOpenMenu(false)}>
-      <SelectContainer>
+      <SelectContainer width={width}>
         <StyledSelect
           open={openMenu}
           onClick={() => {
@@ -112,5 +119,7 @@ function Select({ placeholder, options, value, onChange, height, backgroundColor
     </ClickAwayListener>
   );
 }
+
+export const ControlledSelect = withControl(Select);
 
 export default Select;

@@ -25,35 +25,30 @@
 
 import React, { useState, useEffect } from "react";
 import { NavLink as Link } from "react-router-dom";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import burger from "../images/burger.png";
 
-// Styled components
-const slideIn = keyframes`
- 0% { right: -50%; }
- 20% { right: -40%; }
- 40% { right: -30%; }
- 60% { right: -20%; }
- 80% { right: -10%; }
- 100% { right: 0%; }
-`;
-
 export const Nav = styled.nav`
-  position: fixed;
+  /* position: fixed; */
   width: max(250px, 16vw);
-  height: 85%;
-  top: 15%;
+  height: 100%;
+  /* top: 130px; */
   background-color: #000000;
 
   @media screen and (max-width: 750px) {
-    top: 15%;
-    right: 0%;
+    position: absolute;
+    top: 97px;
+    right: -300px;
     width: min(300px, 45vw);
+    height: calc(100% - 97px);
     z-index: 5;
+    transform: translateX(0%);
+    transition: right 0.5s;
 
-    animation-name: ${slideIn};
-    animation-duration: 0.5s;
-    animation-iteration-count: 1;
+    &.active {
+      right: 0px;
+      transition: right 1s ease;
+    }
   }
 `;
 
@@ -62,9 +57,10 @@ export const ToggleNavbar = styled.button`
 
   @media screen and (max-width: 750px) {
     display: inline;
-    position: absolute;
+    position: fixed;
     right: 5%;
-    top: 5%;
+    top: 40px;
+    z-index: 101;
 
     background: none;
     color: inherit;
@@ -76,7 +72,9 @@ export const ToggleNavbar = styled.button`
   }
 `;
 
-export const Burger = styled.img``;
+export const Burger = styled.img`
+  z-index: 5;
+`;
 
 export const NavMenu = styled.div`
   display: flex;
@@ -159,20 +157,19 @@ function Navbar(props) {
       </ToggleNavbar>
 
       {/* Conditionally Rendered Navigation Panel */}
-      {renderNav || screenWidth > 750 ? (
-        <Nav>
-          <NavMenu>
-            {Object.entries(props.pages).map(([page, path]) => (
-              <NavLink to={path} activeStyle>
-                {page}
-              </NavLink>
-            ))}
-            {screenWidth < 750 || renderNav ? (
-              <SignOut onClick={() => logout()}>Sign Out</SignOut>
-            ) : undefined}
-          </NavMenu>
-        </Nav>
-      ) : undefined}
+
+      <Nav className={renderNav ? "active" : ""}>
+        <NavMenu>
+          {Object.entries(props.pages).map(([page, path]) => (
+            <NavLink to={path} activeStyle>
+              {page}
+            </NavLink>
+          ))}
+          {screenWidth < 750 || renderNav ? (
+            <SignOut onClick={() => logout()}>Sign Out</SignOut>
+          ) : undefined}
+        </NavMenu>
+      </Nav>
     </>
   );
 }
