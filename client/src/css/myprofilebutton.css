@@ -39,7 +39,6 @@
 @media only screen and (max-width: 1175px) {
   .myprofile-button {
     float: none;
-    position: absolute;
     margin: 0 0 0 -5px;
   }
 }

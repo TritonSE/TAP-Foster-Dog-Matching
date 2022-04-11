@@ -3,7 +3,7 @@ import Popup from "../components/Popup";
 import ProfileCard from "../components/ProfileCard";
 import ProfileSection from "../components/ProfileSection";
 import MyProfileButton from "../components/MyProfileButton";
-import Navbar from "../components/Navbar";
+import DefaultBody from "../components/DefaultBody";
 import pfp from "../images/pfp.png";
 import edit from "../images/edit.png";
 
@@ -12,7 +12,6 @@ function Profile() {
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
-    document.body.style.overflow = isOpen ? "auto" : "hidden";
   };
 
   const manageProf = [
@@ -236,15 +235,7 @@ function Profile() {
   ];
 
   return (
-    <div>
-      <Navbar
-        pages={{
-          "Pending Applications": "/dashboard",
-          "Current Fosters": "/fosters",
-          Calendar: "/calendar",
-          Profile: "/profile",
-        }}
-      />
+    <DefaultBody>
       <ProfileSection
         titleText="Management"
         buttonText="View All"
@@ -295,7 +286,7 @@ function Profile() {
           editPfpButtonLabel="Edit"
         />
       )}
-    </div>
+    </DefaultBody>
   );
 }
 

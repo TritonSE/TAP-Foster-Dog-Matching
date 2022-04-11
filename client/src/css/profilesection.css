@@ -1,13 +1,16 @@
+body {
+  overflow: hidden;
+}
+
 .profile-section {
-  width: auto;
+  width: 78.125vw;
   height: auto;
-  margin-top: 33px;
-  margin-left: 355px;
+  margin-left: 25px;
   margin-bottom: 45px;
 }
 
-.profile-section:nth-of-type(1) {
-  margin-top: 165px;
+.profile-section:nth-of-type(3) {
+  margin-bottom: 90px;
 }
 
 .profile-section-title {
@@ -42,7 +45,6 @@
 }
 
 .profile-section-button-arrow {
-  position: absolute;
   margin-left: 10px;
   display: inline-block;
 }
@@ -104,7 +106,7 @@
     height: auto;
   }
   .profile-section:nth-of-type(1) .profile-section-title {
-    margin-top: 100px;
+    margin-top: 40px;
   }
 }
 
@@ -133,7 +135,7 @@
     grid-template-columns: repeat(1, 1fr);
   }
   .profile-section-divider {
-    width: max(232.906px, 94.3%);
+    width: 69.3%;
   }
   .profile-section-button {
     margin-left: 30px;
@@ -146,9 +148,11 @@
   }
 
   .profile-section:nth-of-type(1) {
-    margin-top: 97px;
+    margin-top: 30px;
   }
-
+  .profile-section:nth-of-type(3) {
+    margin-bottom: 0px;
+  }
   .profile-section-cards-container .profile-section-card:nth-child(5n-3) {
     display: inline;
   }
@@ -164,6 +168,10 @@
   }
   .profile-section-button {
     margin-left: 100px;
+  }
+
+  body {
+    overflow: scroll;
   }
 }
 
