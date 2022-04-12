@@ -29,6 +29,7 @@ const Container = styled.div`
     flex-direction: column;
     flex: 5;
     max-height: 100vh;
+    margin-top: -60px;
   }
 `;
 

@@ -15,6 +15,7 @@ import styled, { css } from "styled-components";
 import { Colors } from "./Theme";
 import check from "../images/check.png";
 import useResponsive, { device } from "../utils/useResponsive";
+import ApplicationContext from "../contexts/ApplicationContext";
 
 const MILESTONES = [
   "Application Submitted",
@@ -31,6 +32,7 @@ const ProgressBarContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   position: relative;
+  margin-bottom: 60px;
   ${device.mobile} {
     flex-direction: column;
     margin-top: 40px;
@@ -95,12 +97,13 @@ const ProgressMilestoneText = styled.div`
   text-align: center;
   ${device.mobile} {
     top: -30px;
-    left: 70%;
+    left: 90%;
     font-size: 3vw;
   }
 `;
 
 function ApplicationProgress({ currentStep, unlockedUpToStep, completedUpToStep }) {
+  const { setCurrentStep } = React.useContext(ApplicationContext);
   const { isMobile } = useResponsive();
 
   return (
@@ -112,6 +115,7 @@ function ApplicationProgress({ currentStep, unlockedUpToStep, completedUpToStep 
             active={index === currentStep || index <= completedUpToStep}
             unlocked={index === unlockedUpToStep}
             clickable={index <= unlockedUpToStep}
+            onClick={() => setCurrentStep(index)}
           >
             {index <= completedUpToStep ? <img src={check} alt="check mark" /> : index + 1}
             {!isMobile && <ProgressMilestoneText>{milestone}</ProgressMilestoneText>}
