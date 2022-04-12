@@ -1,3 +1,30 @@
+/**
+ *
+ * Application Page
+ *
+ * Content for each step goes in the ApplicationContent array.
+ * The indices represent each step of the application (0-indexed)
+ *
+ * ApplicationContext:
+ *
+ * Use this context to get the current step and to move to different steps of the application.
+ *
+ * Value:
+ *      - currentStep - number representing current step of the application (0-indexed)
+ *      - setCurrentStep(step: number) - go to step in the application. pass in step of the application you want to go to (0-indexed)
+ *      - goToNextStep - move to step directly after current step
+ *
+ * Usage:
+ *
+ * import ApplicationContext from "../contexts/ApplicationContext";
+ *
+ * In the component:
+ *
+ * const { setCurrentStep, setCurrentStep, goToNextStep } = React.useContext(ApplicationContext);
+ *
+ * (See components/ApplicationProgress.js for complete usage example)
+ */
+
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
@@ -6,8 +33,6 @@ import { device } from "../utils/useResponsive";
 import DefaultBody from "../components/DefaultBody";
 import FosterApplication from "../components/FosterApplication";
 import Meetings from "../components/Meeting";
-import StatusUpdate from "../components/StatusUpdate";
-import goodBoiPic from "../images/good-boi.png";
 import logo from "../images/logo-inverted.png";
 import ApplicationContext from "../contexts/ApplicationContext";
 
@@ -46,7 +71,10 @@ function Application() {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = React.useState(1);
 
-  const goToNextStep = React.useCallback(() => setCurrentStep(currentStep + 1), []);
+  const goToNextStep = React.useCallback(
+    () => setCurrentStep((step) => Math.min(step + 1, 5)),
+    [currentStep]
+  );
 
   const ApplicationContent = [
     <FosterApplication />, //  Step 1
@@ -69,22 +97,17 @@ function Application() {
           <img src={logo} alt="logo" />
         </div>
       }
-      // status={
-      //   <StatusUpdate
-      //     title="Interview Info"
-      //     ambassador="Dhanush"
-      //     phone="123-456-7890"
-      //     email="test@tap.com"
-      //     date="1/1/2022"
-      //     time="6-7:00PM"
-      //     location="Zoom"
-      //     image={goodBoiPic}
-      //   />
-      // }
     />, //  Step 6
   ];
 
-  const applicationData = React.useMemo({ currentStep, setCurrentStep, goToNextStep }, []);
+  const applicationData = React.useMemo(
+    () => ({
+      currentStep,
+      setCurrentStep,
+      goToNextStep,
+    }),
+    [currentStep, setCurrentStep, goToNextStep]
+  );
 
   return (
     <DefaultBody>

@@ -115,7 +115,7 @@ function ApplicationProgress({ currentStep, unlockedUpToStep, completedUpToStep 
             active={index === currentStep || index <= completedUpToStep}
             unlocked={index === unlockedUpToStep}
             clickable={index <= unlockedUpToStep}
-            onClick={() => setCurrentStep(index)}
+            onClick={() => setCurrentStep(index)} // TODO: Block onClick if step is not unlocked yet
           >
             {index <= completedUpToStep ? <img src={check} alt="check mark" /> : index + 1}
             {!isMobile && <ProgressMilestoneText>{milestone}</ProgressMilestoneText>}
