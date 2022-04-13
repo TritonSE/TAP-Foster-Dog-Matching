@@ -1,5 +1,5 @@
 /**
- * Form Component
+ * IntroForm Component
  *
  * @summary  Reusable form component for the landing, login and register page, with a custom header.
  * @author   Artyom Muradyan
@@ -9,7 +9,7 @@
 import React from "react";
 import Button from "./Button";
 
-function Form(props) {
+function IntroForm(props) {
   let content;
 
   switch (props.formType) {
@@ -56,4 +56,4 @@ function Form(props) {
   );
 }
 
-export default Form;
+export default IntroForm;

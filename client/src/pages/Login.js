@@ -9,7 +9,7 @@
 
 import React from "react";
 import StartHeader from "../components/StartHeader";
-import Form from "../components/Form";
+import IntroForm from "../components/IntroForm";
 import dog from "../images/dog.png";
 import "../styles/login.css";
 
@@ -17,7 +17,7 @@ function Login() {
   return (
     <div>
       <StartHeader />
-      <Form formType="login" header="Foster Log In" />
+      <IntroForm formType="login" header="Foster Log In" />
       <div className="right-panel">
         <img className="dog-image" src={dog} alt="Cute dog!" />
         <div className="copyright">
