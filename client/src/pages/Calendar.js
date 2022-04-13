@@ -3,7 +3,6 @@
 
 import React from "react";
 import MeetingScheduler from "../components/CalendarScheduling";
-import plus from "../images/plus.svg";
 
 function Calendar() {
   const meetTimes = [
@@ -21,12 +20,7 @@ function Calendar() {
 
   return (
     <div>
-      <MeetingScheduler
-        title="Interview Scheduling"
-        icon={plus}
-        date="Tuesday, March 22"
-        times={meetTimes}
-      />
+      <MeetingScheduler title="Interview Scheduling" times={meetTimes} />
     </div>
   );
 }

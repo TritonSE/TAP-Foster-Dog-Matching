@@ -67,8 +67,8 @@
   font-family: Myriad Pro;
   font-style: normal;
   font-weight: bold;
-  font-size: 1.161vw;
-  line-height: 1.406vw;
+  font-size: max(18px, 1.161vw);
+  line-height: max(22px, 1.406vw);
   color: #000000;
   text-align: center;
 }
@@ -78,8 +78,8 @@
   font-family: Myriad Pro;
   font-style: normal;
   font-weight: normal;
-  font-size: 1.042vw;
-  line-height: 1.25vw;
+  font-size: max(14px, 1.042vw);
+  line-height: max(17px, 1.25vw);
   text-align: center;
 }
 
@@ -87,10 +87,10 @@
   font-family: Myriad Pro;
   font-style: normal;
   font-weight: normal;
-  font-size: 1.161vw;
-  line-height: 1.406vw;
+  font-size: max(14px, 1.161vw);
+  line-height: max(17px, 1.406vw);
   color: #000000;
-  margin-left: 2.344vw;
+  margin-left: 2vw;
   margin-top: 1.3vw;
 }
 
@@ -100,7 +100,7 @@
   row-gap: 1.146vw;
   column-gap: 1.875vw;
   margin-top: 1.25vw;
-  margin-left: 2.344vw;
+  margin-left: 2vw;
   width: max-content;
 }
 
@@ -119,8 +119,8 @@
   font-family: Myriad Pro;
   font-style: normal;
   font-weight: normal;
-  font-size: 1.161vw;
-  line-height: 2.021vw;
+  font-size: max(14px, 1.161vw);
+  line-height: max(17px, 2.021vw);
   text-align: center;
   vertical-align: middle;
   color: #000000;
@@ -156,4 +156,93 @@
   text-align: center;
   vertical-align: middle;
   color: #ffffff;
+}
+
+@media screen and (max-width: 1200px) {
+  .container {
+    width: max(288px, 38.4vw);
+    height: max(619px, 82.533vw);
+  }
+  .container-text {
+    font-size: max(19px, 2.533vw);
+    line-height: max(23px, 2.083vw);
+  }
+
+  .calendar-box {
+    width: max(calc(265.28px - 0.729vw - 0.729vw), calc(35.371vw - 0.729vw - 0.729vw));
+    height: max(calc(220px - 0.729vw - 0.729vw), calc(29.333vw - 0.729vw - 0.729vw));
+    margin-left: max(11px, 1.467vw);
+    float: none;
+    margin-top: max(20px, 2.667vw);
+    margin-bottom: max(1.6vw, 12px);
+  }
+  .left-arrow {
+    width: max(8.595px, 1.146vw);
+    height: max(14.925px, 1.99vw);
+  }
+
+  .month {
+    font-size: max(18.1132px, 2.415vw);
+    line-height: max(22px, 2.933vw);
+  }
+  .right-arrow {
+    width: max(8.595px, 1.146vw);
+    height: max(14.925px, 1.99vw);
+  }
+  .times-box {
+    float: left;
+    width: max(267px, 35.6vw);
+    height: max(308px, 41.067vw);
+    margin-left: max(11px, 1.467vw);
+  }
+
+  .times-box-title {
+    margin-top: max(2.823vw, 13.6725px);
+    font-size: max(18px, 2.4vw);
+    line-height: max(22px, 2.933vw);
+  }
+
+  .times-box-description {
+    margin-top: max(3.375px, 0.45vw);
+    font-size: max(14px, 1.867vw);
+    line-height: max(17px, 2.267vw);
+  }
+
+  .date {
+    font-size: max(14px, 1.867vw);
+    line-height: max(17px, 2.267vw);
+    margin-left: max(23px, 3.067vw);
+    margin-top: max(15.75px, 2.1vw);
+  }
+
+  .meeting-times-container {
+    row-gap: max(11.09px, 1.479vw);
+    column-gap: max(18.15px, 2.42vw);
+    margin-top: max(9.375px, 1.25vw);
+    margin-left: max(23px, 3.067vw);
+  }
+
+  .meeting-time {
+    width: max(13.453vw, 100.8975px);
+    height: max(29.25px, 3.9vw);
+  }
+
+  .meeting-time-text {
+    font-size: max(14px, 1.867vw);
+    line-height: max(17px, 2.267vw);
+  }
+
+  .meeting-time-selected {
+    width: max(13.453vw, 100.8975px);
+    height: max(29.25px, 3.9vw);
+  }
+
+  .meeting-time-selected-text-container {
+    width: max(46.22px, 6.163vw);
+  }
+
+  .meeting-time-selected-text {
+    font-size: max(11.1971px, 1.493vw);
+    line-height: max(15px, 2vw);
+  }
 }
