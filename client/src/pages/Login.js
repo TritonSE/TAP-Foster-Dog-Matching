@@ -11,7 +11,7 @@ import React from "react";
 import StartHeader from "../components/StartHeader";
 import IntroForm from "../components/IntroForm";
 import dog from "../images/dog.png";
-import "../styles/login.css";
+import "../css/login.css";
 
 function Login() {
   return (

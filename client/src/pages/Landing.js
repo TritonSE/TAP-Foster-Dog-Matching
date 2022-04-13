@@ -10,7 +10,7 @@ import React from "react";
 import StartHeader from "../components/StartHeader";
 import IntroForm from "../components/IntroForm";
 import dog from "../images/dog.png";
-import "../styles/landing.css";
+import "../css/landing.css";
 
 function Landing() {
   return (
