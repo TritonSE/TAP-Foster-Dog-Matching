@@ -203,8 +203,8 @@
   .react-calendar__tile {
     max-width: max(26.79px, 3.572vw);
     height: max(26.79px, 3.572vw);
-    font-size: max(8.41px, 1.161vw);
-    line-height: max(10px, 1.333vw);
+    font-size: max(10.41px, 1.388vw);
+    line-height: max(26.79px, 3.572vw);
   }
 
   .react-calendar__tile.react-calendar__month-view__days__day--neighboringMonth {
