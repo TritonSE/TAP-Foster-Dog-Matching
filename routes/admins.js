@@ -1,6 +1,12 @@
 const express = require("express");
 const { body } = require("express-validator");
-const { validateCredenditals, updateAdmin, createAdmin, getAdmin, getAdmins } = require("../services/admins");
+const {
+  validateCredenditals,
+  updateAdmin,
+  createAdmin,
+  getAdmin,
+  getAdmins,
+} = require("../services/admins");
 const { validateRequest } = require("../middleware/validation");
 
 const router = express.Router();
@@ -57,48 +63,44 @@ router.put(
 /**
  * GET /admin/:adminId - get a admin profile based on its ID
  */
- router.get(
-  "/:adminId", (req, res, next) => {
-    getAdmin(req.params.adminId)
-      .then((admin) => {
-        if (admin) {
-          res.status(200).json({
-            admin,
-          });
-        } else {
-          res.status(500).json({
-            message: `Something went wrong, Admin could not be found`,
-          });
-        }
-      })
-      .catch((err) => {
-        next(err);
-      });
-  }
-);
+router.get("/:adminId", (req, res, next) => {
+  getAdmin(req.params.adminId)
+    .then((admin) => {
+      if (admin) {
+        res.status(200).json({
+          admin,
+        });
+      } else {
+        res.status(500).json({
+          message: `Something went wrong, Admin could not be found`,
+        });
+      }
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
 
 /**
  * GET /admin - get all admins
  */
- router.get("/", (req, res, next) => {
-    getAdmins()
-      .then((admin) => {
-        if (admin) {
-          res.status(200).json({
-            admin,
-          });
-        } else {
-          res.status(500).json({
-            message: `Something went wrong, Admins could not be got`,
-          });
-        }
-      })
-      .catch((err) => {
-        next(err);
-      });
-  }
-);
-
+router.get("/", (req, res, next) => {
+  getAdmins()
+    .then((admin) => {
+      if (admin) {
+        res.status(200).json({
+          admin,
+        });
+      } else {
+        res.status(500).json({
+          message: `Something went wrong, Admins could not be got`,
+        });
+      }
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
 
 /**
  * POST /admin/login - Login and check username and password
@@ -114,7 +116,7 @@ router.post(
         } else {
           res.status(500).json({
             message: `Something went wrong, Email or password is incorrect`,
-          });;
+          });
         }
       })
       .catch((err) => {
