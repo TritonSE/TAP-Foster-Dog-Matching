@@ -26,10 +26,10 @@ const SelectContainer = styled.div`
 `;
 
 const StyledSelect = styled.div`
-  height: ${(props) => (props.height ? props.height : "50px")};
   display: flex;
   flex: 1;
   width: ${(props) => props.width || "unset"};
+  height: ${(props) => (props.height ? props.height : "20px")};
   padding: 6px 15px;
   border: 1px solid black;
   border-radius: 10px;
@@ -93,6 +93,7 @@ function Select({ placeholder, options, value, onChange, height, width, backgrou
       <SelectContainer width={width}>
         <StyledSelect
           open={openMenu}
+          width={width}
           onClick={() => {
             setOpenMenu((open) => !open);
           }}
