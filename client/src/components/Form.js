@@ -38,6 +38,11 @@ const Actions = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  ${device.mobile} {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
 `;
 
 const Column = styled.div`

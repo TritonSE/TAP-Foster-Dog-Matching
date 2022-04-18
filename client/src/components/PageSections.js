@@ -43,6 +43,7 @@ const Content = styled.div`
   }
   ${device.mobile} {
     padding: 0 10px;
+    max-height: 80vh;
   }
 `;
 

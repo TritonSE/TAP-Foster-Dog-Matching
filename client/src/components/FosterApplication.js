@@ -423,7 +423,7 @@ const FosterAgreementContainer = styled.div`
   flex: 5;
   overflow-y: scroll;
   ${device.mobile} {
-    max-height: 90vh;
+    max-height: 80vh;
   }
 `;
 

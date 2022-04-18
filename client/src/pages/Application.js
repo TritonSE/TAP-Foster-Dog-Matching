@@ -46,6 +46,8 @@ const ApplicationContainer = styled.div`
   margin-bottom: -50px;
   ${device.mobile} {
     flex-direction: row;
+    max-height: 85vh;
+    gap: 10px;
   }
 `;
 
@@ -63,13 +65,13 @@ const ExitButton = styled.div`
   font-size: 16px;
   cursor: pointer;
   ${device.mobile} {
-    top: -20px;
+    top: -10px;
   }
 `;
 
 function Application() {
   const navigate = useNavigate();
-  const [currentStep, setCurrentStep] = React.useState(1);
+  const [currentStep, setCurrentStep] = React.useState(0);
 
   const goToNextStep = React.useCallback(
     () => setCurrentStep((step) => Math.min(step + 1, 5)),

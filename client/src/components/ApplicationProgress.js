@@ -97,8 +97,9 @@ const ProgressMilestoneText = styled.div`
   text-align: center;
   ${device.mobile} {
     top: -30px;
-    left: 90%;
+    left: 75%;
     font-size: 3vw;
+    min-width: 50px;
   }
 `;
 
@@ -117,7 +118,11 @@ function ApplicationProgress({ currentStep, unlockedUpToStep, completedUpToStep 
             clickable={index <= unlockedUpToStep}
             onClick={() => setCurrentStep(index)} // TODO: Block onClick if step is not unlocked yet
           >
-            {index <= completedUpToStep ? <img src={check} alt="check mark" /> : index + 1}
+            {index <= completedUpToStep ? (
+              <img src={check} alt="check mark" width={isMobile ? 40 : 50} />
+            ) : (
+              index + 1
+            )}
             {!isMobile && <ProgressMilestoneText>{milestone}</ProgressMilestoneText>}
           </ProgressMilestone>
           {index < MILESTONES.length - 1 && (
