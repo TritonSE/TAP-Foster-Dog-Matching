@@ -1,6 +1,6 @@
 const express = require("express");
 const { body } = require("express-validator");
-const { createUser, checkCredentials } = require("../services/users");
+const { createUser, checkCredentials, getUser } = require("../services/users");
 const { validateRequest } = require("../middleware/validation");
 
 const router = express.Router();
@@ -8,10 +8,10 @@ const router = express.Router();
 const validators = [
   body("firstName").notEmpty().isString(),
   body("lastName").notEmpty().isString(),
-  body("email").notEmpty().isString(),
+  body("email").notEmpty().isString().isEmail(),
   body("password").notEmpty().isString(),
   body("role").notEmpty().isString(),
-  body("lastActive").notEmpty().isDate(),
+  body("lastActive").notEmpty().isDate().matches('/^\d{2}\/\d{2}\/\d{4}$/'),
   body("currentlyFostering").notEmpty().isBoolean(),
   body("pastFosters").notEmpty().isNumeric(),
   body("ambassador").notEmpty().isMongoId(),
@@ -28,7 +28,7 @@ router.post("/", [...validators, validateRequest], (req, res, next) => {
       res.status(200).json({ user });
     })
     .catch((err) => {
-      next(err);
+      res.status(500);
     });
 });
 
@@ -48,9 +48,30 @@ router.post(
         }
       })
       .catch((err) => {
-        next(err);
+        res.status(500);
       });
   }
 );
+
+/**
+ * GET /users/:userId - get a user profile based on its ID
+ */
+ router.get("/:userId", (req, res, next) => {
+  getUser(req.params.userId)
+    .then((user) => {
+      if (user) {
+        res.status(200).json({
+          user,
+        });
+      } else {
+        res.status(500).json({
+          message: `Something went wrong, User could not be found`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500);
+    });
+});
 
 module.exports = router;

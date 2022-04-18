@@ -24,7 +24,16 @@ async function checkCredentials(emailPass) {
   return false;
 }
 
+/**
+ * Returns a specific user profile according to provided user id
+ * @param userId - user's ID
+ */
+ function getUser(userId) {
+  return User.findById(userId).exec();
+}
+
 module.exports = {
   createUser,
   checkCredentials,
+  getUser
 };
