@@ -7,7 +7,7 @@
   line-height: 1.125em;
   overflow-y: overlay;
   padding-right: 0.781vw;
-  margin-right: 0px;
+  margin-right: 0 auto;
 }
 .react-calendar--doubleView {
   width: 700px;
@@ -159,14 +159,13 @@
   background-color: #e6e6e6;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 750px) {
   .react-calendar {
     width: max(400.85625px, 39.677vw);
     height: 100%;
     max-width: 100%;
     line-height: 1.125em;
     padding-right: 0.781vw;
-
     border-radius: 20px;
   }
 
@@ -182,7 +181,9 @@
     font-size: max(18.75px, 2.5vw);
     line-height: max(16.8px, 2.24vw);
   }
-
+  .react-calendar__month-view {
+    margin-left: 0.2vw;
+  }
   .react-calendar__month-view__weekdays {
     font-size: max(1.467vw, 11px);
     line-height: max(1.733vw, 11px);
