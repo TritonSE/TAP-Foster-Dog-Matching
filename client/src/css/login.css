@@ -1,3 +1,30 @@
+#header {
+  display: grid;
+  grid-template-columns: 0.5fr 4fr 0.3fr;
+  grid-column-gap: 5%;
+  background-color: black;
+  height: 130px;
+}
+
+.header-welcome-text {
+  display: none;
+}
+
+.header-sign-out {
+  display: none;
+}
+
+.header-message {
+  padding-left: 0px;
+  margin-bottom: 0.6vw;
+}
+
+.header-welcome img {
+  width: 101px;
+  height: 84px;
+  padding: 23px calc(8px + 0.6vw) 0px 23px;
+}
+
 .form-container input::placeholder {
   position: absolute;
   left: 8%;
@@ -64,6 +91,32 @@
 }
 
 @media only screen and (max-width: 750px) {
+  #header {
+    display: grid;
+    grid-template-columns: 0.2fr 5fr 0.2fr;
+    grid-column-gap: 5%;
+    background-color: black;
+    height: 97px;
+  }
+
+  .header-message {
+    display:flex;
+    padding-left: 0px;
+    width: 100%;
+    font-size: calc(10px + 0.6vw);
+    font-weight:normal;
+    /* 
+    width: 80%;
+    margin-left: 0px;
+    margin-bottom: 5px; */
+  }
+
+  .header-welcome img {
+    padding: 42px 0px 0px 9px;
+    width: 55px;
+    height: 43px;
+  }
+  
   .form-container input::placeholder {
     position: absolute;
     left: 8%;

@@ -7,7 +7,7 @@
  */
 
 import React from "react";
-import StartHeader from "../components/StartHeader";
+import Header from "../components/Header";
 import IntroForm from "../components/IntroForm";
 import dog from "../images/dog.png";
 import "../css/landing.css";
@@ -15,7 +15,7 @@ import "../css/landing.css";
 function Landing() {
   return (
     <div>
-      <StartHeader />
+      <Header />
       <IntroForm formType="landing" header="Welcome" />
       <div className="right-panel">
         <img className="dog-image" src={dog} alt="Cute dog!" />
