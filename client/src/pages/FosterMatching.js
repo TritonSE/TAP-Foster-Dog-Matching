@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import DefaultBody from "../components/DefaultBody";
-import MainContentCard from "../components/MainContentCard";
+import SplitCardContainer from "../components/SplitCardContainer";
 import dogImage from "../images/dog.png";
+import ApplicationProgress from "../components/ApplicationProgress";
+import { Colors, Typography } from "../components/Theme";
 
 export const ExitButton = styled.a`
   color: black;
@@ -12,35 +14,164 @@ export const ExitButton = styled.a`
   margin-left: -9px;
   margin-top: -27px;
 `;
+export const FosterProfileContainer = styled.div`
+  text-align: center;
+  width: 35vw;
+  height: 100%;
+  background-color: black;
+  border-radius: 15px;
+  padding: 0 20px 20px 20px;
+`;
+export const AvailableDogsContainer = styled.div`
+  text-align: center;
+  width: 35vw;
+  height: 100%;
+  background-color: black;
+  border-radius: 15px;
+  padding: 0 20px 20px 20px;
+`;
+
+export const OuterContainer = styled.div`
+  max-width: 100vw;
+`;
+export const PaddingContainer = styled.div`
+  padding-top: 70px;
+`;
+export const TitleText = styled.span`
+  color: white;
+  width: inherit;
+  font-size: 33px;
+  font-weight: 700;
+  line-height: 40px;
+`;
 export const TextBox = styled.div`
-    width: 100%;
-    height: 100%;
-    background-color: white;
-    border-radius 20px;
-    font-size: 25px;
-    line-height: 30px;
+  background-color: white;
+  border-radius: 25px;
+  margin-top: 12px;
+`;
+export const TextBoxTitle = styled.span`
+  font-weight: 700;
+  line-height: 36px;
+  font-size: 30px;
+`;
+export const FosterProfileTable = styled.table`
+  width: 100%;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 400;
+  border-collapse: collapse;
+  tr:first-child {
+    border-top: none;
+  }
+  tr:last-child {
+    border-bottom: none;
+  }
+`;
+export const TableRow = styled.tr`
+  border: solid;
+  border-width: 1px 0;
+`;
+
+export const EmailDecoration = styled.span`
+  text-decoration-line: underline;
+`;
+
+export const FlexContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+`;
+export const UpdateContainer = styled.div`
+  font-size: 20px;
+  line-height: 24px;
+  padding: 4px;
+  background-color: #8dc442; //TODO make this come from theme
+`;
+
+export const GeneralNotes = styled.span`
+  font-weight: 700;
+  font-size: 25px;
+  line-height: 30px;
+`;
+
+export const InternalNotes = styled.span`
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 30px;
+`;
+export const TableCell = styled.td`
+  padding: 16px 0;
+`;
+export const ViewApplicationButton = styled.button`
+  background-color: #8dc442; //TODO make this come from theme
+  border-radius: 10px;
+  border: none;
+  font-size: 20px;
+  line-height: 24px;
+  padding: 5px 30px;
 `;
 // TODO give href to exit button
 function FosterMatching() {
   return (
     <DefaultBody>
-      <ExitButton href="#">Exit</ExitButton>
-      Progress bar to be added after Foster Application Page #33 is merged
-      <br />
-      Need to import nunito as well for card title
-      <MainContentCard>
-        <TextBox>
-          Hello Shelby <br />
-          <br />
-          The TAP team has matched you with Skippy as your next foster!
-          <br />
-          <br />
-          Click on step 5 to schedule your meet and greet with Skippy!
-          <br />
-          <br /> Best, The Animal Pad Team
-        </TextBox>
-        <img src={dogImage} alt="dog" />
-      </MainContentCard>
+      <OuterContainer>
+        <ExitButton href="#">Exit</ExitButton>
+        <ApplicationProgress completedUpToStep={2} unlockedUpToStep={3} selectedStep={3} />
+        <PaddingContainer>
+          <SplitCardContainer>
+            <FosterProfileContainer>
+              <TitleText>Foster Profile</TitleText>
+              <TextBox>
+                <TextBoxTitle>Shelby</TextBoxTitle>
+                <FosterProfileTable border="1" frame="void" rules="rows">
+                  <tbody>
+                    <TableRow>
+                      <TableCell>Contact Info: </TableCell>
+                      <TableCell>
+                        123-456-7890
+                        <br />
+                        <EmailDecoration>shelby@gmail.com</EmailDecoration>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>Currently Fostering?</TableCell>
+                      <TableCell>No</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>Matching Status</TableCell>
+                      <TableCell>
+                        <FlexContainer>
+                          <span>Step 4</span>
+                          <UpdateContainer>Status Updated</UpdateContainer>{" "}
+                        </FlexContainer>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>Last Active</TableCell>
+                      <TableCell>4/23/2021</TableCell>
+                    </TableRow>
+                  </tbody>
+                </FosterProfileTable>
+                <br />
+                <br />
+                <ViewApplicationButton>View Application</ViewApplicationButton>
+                <br />
+                <br />
+              </TextBox>
+              <TextBox>
+                <TitleText>Internal Foster Notes</TitleText>
+                <GeneralNotes>General Notes:</GeneralNotes>
+                <br />
+                <InternalNotes>
+                  Looking for a medium size to large size dog. Does have other dogs at home and
+                </InternalNotes>
+              </TextBox>
+            </FosterProfileContainer>
+            <AvailableDogsContainer>
+              <TitleText>Available Dogs</TitleText>
+            </AvailableDogsContainer>
+          </SplitCardContainer>
+        </PaddingContainer>
+      </OuterContainer>
     </DefaultBody>
   );
 }
