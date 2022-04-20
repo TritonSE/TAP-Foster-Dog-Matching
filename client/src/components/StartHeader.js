@@ -9,7 +9,7 @@
 
 import React from "react";
 import logo from "../images/logo.png";
-import "../styles/startheader.css";
+import "../css/startheader.css";
 
 function StartHeader() {
   return (

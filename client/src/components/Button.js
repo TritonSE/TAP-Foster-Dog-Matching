@@ -7,7 +7,7 @@
  */
 
 import React from "react";
-import "../styles/button.css";
+import "../css/button.css";
 
 function Button(props) {
   const border = "button-border button-border-" + props.className;
