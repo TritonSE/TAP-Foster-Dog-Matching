@@ -11,7 +11,7 @@ const validators = [
   body("email").notEmpty().isString().isEmail(),
   body("password").notEmpty().isString(),
   body("role").notEmpty().isString(),
-  body("lastActive").notEmpty().isDate().matches('/^\d{2}\/\d{2}\/\d{4}$/'),
+  body("lastActive").notEmpty().isDate().matches("/^d{2}/d{2}/d{4}$/"),
   body("currentlyFostering").notEmpty().isBoolean(),
   body("pastFosters").notEmpty().isNumeric(),
   body("ambassador").notEmpty().isMongoId(),
@@ -56,7 +56,7 @@ router.post(
 /**
  * GET /users/:userId - get a user profile based on its ID
  */
- router.get("/:userId", (req, res, next) => {
+router.get("/:userId", (req, res, next) => {
   getUser(req.params.userId)
     .then((user) => {
       if (user) {
