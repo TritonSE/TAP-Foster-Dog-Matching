@@ -36,13 +36,36 @@ function MeetingScheduler(props) {
   const meetTimes = props.times.map((meetTime) => (
     <div>
       {time === meetTime ? (
-        <button className="meeting-time-selected" type="button">
+        <button
+          className={
+            Math.ceil(
+              (new Date(date.getFullYear(), date.getMonth(), 1).getDay() +
+                new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()) /
+                7
+            ) <= 5
+              ? "meeting-time-selected"
+              : "meeting-time-selected-six-weeks"
+          }
+          type="button"
+        >
           <div className="meeting-time-selected-text-container">
             <div className="meeting-time-selected-text">Choose</div>
           </div>
         </button>
       ) : (
-        <button className="meeting-time" type="button" onClick={() => setTime(meetTime)}>
+        <button
+          className={
+            Math.ceil(
+              (new Date(date.getFullYear(), date.getMonth(), 1).getDay() +
+                new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()) /
+                7
+            ) <= 5
+              ? "meeting-time"
+              : "meeting-time-six-weeks"
+          }
+          type="button"
+          onClick={() => setTime(meetTime)}
+        >
           <div className="meeting-time-text">{meetTime}</div>
         </button>
       )}
@@ -50,9 +73,29 @@ function MeetingScheduler(props) {
   ));
 
   return (
-    <div className="container">
+    <div
+      className={
+        Math.ceil(
+          (new Date(date.getFullYear(), date.getMonth(), 1).getDay() +
+            new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()) /
+            7
+        ) <= 5
+          ? "container"
+          : "container-six-weeks"
+      }
+    >
       <div className="container-text">{props.title}</div>
-      <div className="calendar-box">
+      <div
+        className={
+          Math.ceil(
+            (new Date(date.getFullYear(), date.getMonth(), 1).getDay() +
+              new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()) /
+              7
+          ) <= 5
+            ? "calendar-box"
+            : "calendar-box-six-weeks"
+        }
+      >
         <Calendar
           onChange={onChange}
           value={date}
@@ -67,15 +110,43 @@ function MeetingScheduler(props) {
           showNeighboringMonth
           formatMonthYear={(locale, currDate) => month[currDate.getMonth()]}
           onClickDay={() => setTime("none")}
+          onActiveStartDateChange={({ activeStartDate }) => {
+            onChange(
+              new Date().getMonth() === activeStartDate.getMonth() ? new Date() : activeStartDate
+            );
+            setTime("none");
+          }}
         />
       </div>
-      <div className="times-box">
+      <div
+        className={
+          Math.ceil(
+            (new Date(date.getFullYear(), date.getMonth(), 1).getDay() +
+              new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()) /
+              7
+          ) <= 5
+            ? "times-box"
+            : "times-box-six-weeks"
+        }
+      >
         <div className="times-box-title">Times Avaliable</div>
         <div className="times-box-description">Slots will take about 30 minutes</div>
         <div className="date">
           {[weekday[date.getDay()], month[date.getMonth()], date.getDate()].join(" ")}
         </div>
-        <div className="meeting-times-container">{meetTimes}</div>
+        <div
+          className={
+            Math.ceil(
+              (new Date(date.getFullYear(), date.getMonth(), 1).getDay() +
+                new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()) /
+                7
+            ) <= 5
+              ? "meeting-times-container"
+              : "meeting-times-container-six-weeks"
+          }
+        >
+          {meetTimes}
+        </div>
       </div>
     </div>
   );
