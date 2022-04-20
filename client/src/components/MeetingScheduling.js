@@ -3,9 +3,9 @@ import Calendar from "react-calendar";
 import left from "../images/left.svg";
 import right from "../images/right.svg";
 import "../css/calendar.css";
-import "../css/calendarscheduling.css";
+import "../css/meetingscheduling.css";
 
-function MeetingScheduler(props) {
+function MeetingScheduling(props) {
   const [date, onChange] = useState(new Date());
   const [time, setTime] = useState("none");
 
@@ -152,4 +152,4 @@ function MeetingScheduler(props) {
   );
 }
 
-export default MeetingScheduler;
+export default MeetingScheduling;

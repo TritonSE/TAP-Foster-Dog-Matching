@@ -2,7 +2,7 @@
 // once testing is finished with this component.
 
 import React from "react";
-import MeetingScheduler from "../components/CalendarScheduling";
+import MeetingScheduling from "../components/MeetingScheduling";
 
 function Calendar() {
   const meetTimes = [
@@ -20,7 +20,7 @@ function Calendar() {
 
   return (
     <div>
-      <MeetingScheduler title="Interview Scheduling" times={meetTimes} />
+      <MeetingScheduling title="Interview Scheduling" times={meetTimes} />
     </div>
   );
 }
