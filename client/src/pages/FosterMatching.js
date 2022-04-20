@@ -271,8 +271,7 @@ function FosterMatching() {
               <DogGrid>
                 {Array.from(Array(12).keys()).map((index) => {
                   if (index % 3 === 0) return <DogCard dogName="Lolita" dogImage={GridImage1} />;
-                  if (index % 3 === 1)
-                    return <DogCard dogName="Flower" dogImage={GridImage2} />;
+                  if (index % 3 === 1) return <DogCard dogName="Flower" dogImage={GridImage2} />;
                   return <DogCard dogName="Shelly" dogImage={GridImage3} />;
                 })}
               </DogGrid>
