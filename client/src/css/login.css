@@ -100,11 +100,11 @@
   }
 
   .header-message {
-    display:flex;
+    display: flex;
     padding-left: 0px;
     width: 100%;
     font-size: calc(10px + 0.6vw);
-    font-weight:normal;
+    font-weight: normal;
     /* 
     width: 80%;
     margin-left: 0px;
@@ -120,7 +120,7 @@
   #form-container-login {
     bottom: 22%;
   }
-  
+
   .form-container input::placeholder {
     position: absolute;
     left: 8%;
