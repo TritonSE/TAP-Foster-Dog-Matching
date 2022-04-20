@@ -16,10 +16,10 @@ const validators = [
   body("lastName").notEmpty().isString(),
   body("email").notEmpty().isString().isEmail(),
   body("password").notEmpty().isString(),
-  body("phone").notEmpty().isString().isMobilePhone(),
+  body("phone").notEmpty().isString().isMobilePhone('en-US'),
   body("role").notEmpty().isString(),
   body("photoURL").notEmpty().isString().isURL(),
-  body("schedule").notEmpty().isObject(),
+  body("schedule").isObject().notEmpty(),
 ];
 
 /**
@@ -28,7 +28,15 @@ const validators = [
 router.post("/", [...validators, validateRequest], (req, res, next) => {
   createAdmin(req.body)
     .then((admin) => {
-      res.status(200).json({ admin });
+      if (admin) {
+        res.status(200).json({
+          admin,
+        });
+      } else {
+        res.status(500).json({
+          message: `Something went wrong, new Admin could not be created`,
+        });
+      }
     })
     .catch((err) => {
       next(err);
@@ -50,7 +58,7 @@ router.put(
           });
         } else {
           res.status(500).json({
-            message: `Something went wrong, new Admin could not be created`,
+            message: `Something went wrong, new Admin could not be updated`,
           });
         }
       })
