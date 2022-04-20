@@ -1,6 +1,6 @@
 import React from "react";
 import StartHeader from "../components/StartHeader";
-import Form from "../components/Form";
+import IntroForm from "../components/IntroForm";
 import dog from "../images/dog.png";
 import "../styles/register.css";
 
@@ -8,8 +8,8 @@ function Register() {
   return (
     <div>
       <StartHeader />
-      <Form formType="signup" header="Management Sign Up" />
-      {/* <Form accountType="Management" formType="signup-key" header="Management Sign Up" /> */}
+      <IntroForm formType="signup" header="Management Sign Up" />
+      {/* <IntroForm accountType="Management" formType="signup-key" header="Management Sign Up" /> */}
       <div className="right-panel">
         <img className="dog-image" src={dog} alt="Cute dog!" />
         <div className="copyright">

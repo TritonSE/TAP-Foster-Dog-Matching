@@ -9,7 +9,7 @@
 import React from "react";
 import Button from "./Button";
 
-function Form(props) {
+function IntroForm(props) {
   let content;
 
   switch (props.formType) {
@@ -105,4 +105,4 @@ function Form(props) {
   );
 }
 
-export default Form;
+export default IntroForm;
