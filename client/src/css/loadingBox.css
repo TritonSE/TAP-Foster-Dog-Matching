@@ -12,13 +12,24 @@
 
 .loading-text {
   text-align: left;
-  font-size: 2em;
+  font-size: 4vh;
+}
+
+.waiting-text{
+  margin-bottom: 1.5em;
+
+}
+
+.dog-image{
+  width: 100%;
+  height: auto;
 }
 
 .loading-image {
   -webkit-animation: spin 4s linear infinite;
   -moz-animation: spin 4s linear infinite;
   animation: spin 4s linear infinite;
+  height: auto !important;
 }
 
 @-moz-keyframes spin {

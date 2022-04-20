@@ -18,6 +18,7 @@
 import React from "react";
 import { EditorState, ContentState, convertFromHTML } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
+import x from "../images/X.png";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "../css/passFail.css";
 
@@ -27,6 +28,10 @@ function PassFail({ status, initialMessage }) {
       ContentState.createFromBlockArray(convertFromHTML(initialMessage))
     )
   );
+
+  // const [editorState, setEditorState] = React.useState(
+  //   EditorState.createEmpty()
+  // );
 
   const [title, setTitle] = React.useState(status);
 
@@ -39,8 +44,13 @@ function PassFail({ status, initialMessage }) {
     // console.log(editorState.getCurrentContent().getPlainText('\u0001'));
   };
 
+  const onClose = () => {
+
+  };
+
   return (
     <div className="pass-fail-wrapper">
+      <button className="x-button" onClick={onClose} ><img src={x} alt="loading circle"></img></button>
       <div className="title">
         <h3>{title}</h3>
       </div>

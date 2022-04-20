@@ -23,14 +23,15 @@ import "../css/loadingBox.css";
 function LoadingBox({ message, currentStage }) {
   return (
     <div className="loading-box-wrapper">
+
       <div className="loading-image">
         <img src={loadingCircle} alt="loading circle" />
       </div>
-      <div className="dog-image">
-        <img src={loadingDog} alt="loading dog" />
+      <div >
+        <img src={loadingDog} className="dog-image" alt="loading dog" />
       </div>
       <div className="loading-text">
-        <p>{message}</p>
+        <p className="waiting-text">{message}</p>
         <p>{"Current Stage: " + currentStage}</p>
       </div>
     </div>

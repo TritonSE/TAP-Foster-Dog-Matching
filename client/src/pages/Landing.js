@@ -1,5 +1,5 @@
 import React from "react";
-// import PassFail from "../components/PassFail";
+import PassFail from "../components/PassFail";
 import LoadingBox from "../components/LoadingBox";
 
 function Landing() {

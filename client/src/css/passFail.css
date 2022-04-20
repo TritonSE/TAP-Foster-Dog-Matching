@@ -19,7 +19,8 @@
 
 .editor-class {
   background-color: white;
-  height: 50vh;
+  height: 45vh;
+  min-height: 30%;
   border: 1px solid lightgray;
   padding: 1px;
 }
@@ -30,7 +31,7 @@
 }
 
 .button {
-  background: #8dc442;
+  /* background: #8dc442;
   border-radius: 15px;
   width: 20.5vh;
   height: 4.5vh;
@@ -38,7 +39,22 @@
   font-size: 2.7vh;
   border-color: #8dc442;
   box-shadow: 0;
-  flex: 1;
+  flex: 1; */
+  width: min(15vw, 191px);
+  height: 50px;
+  right: 20px;
+  bottom: 20px;
+  text-align: center;
+  cursor: pointer;
+
+  background: #8dc442;
+  padding: 3px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  color: white;
+  border: none;
+  /* font-family: Nunito; */
+  font-size: 20px;
 }
 
 .editor-message {
@@ -53,9 +69,17 @@
   margin-left: 2vw;
 }
 
+.x-button{
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  align-self: baseline;
+  margin-bottom: -5%;
+}
+
 .title {
   font-size: 2.813em;
-  margin-bottom: -7vh;
+  margin-bottom: -5%;
   padding-bottom: 0;
   flex: 1;
 }
