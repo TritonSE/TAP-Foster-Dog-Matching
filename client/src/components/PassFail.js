@@ -44,13 +44,13 @@ function PassFail({ status, initialMessage }) {
     // console.log(editorState.getCurrentContent().getPlainText('\u0001'));
   };
 
-  const onClose = () => {
-
-  };
+  const onClose = () => {};
 
   return (
     <div className="pass-fail-wrapper">
-      <button className="x-button" onClick={onClose} ><img src={x} alt="loading circle"></img></button>
+      <button className="x-button" onClick={onClose}>
+        <img src={x} alt="loading circle" />
+      </button>
       <div className="title">
         <h3>{title}</h3>
       </div>

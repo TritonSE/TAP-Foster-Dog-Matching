@@ -23,11 +23,10 @@ import "../css/loadingBox.css";
 function LoadingBox({ message, currentStage }) {
   return (
     <div className="loading-box-wrapper">
-
-      <div >
+      <div>
         <img src={loadingCircle} className="loading-image" alt="loading circle" />
       </div>
-      <div >
+      <div>
         <img src={loadingDog} className="dog-image" alt="loading dog" />
       </div>
       <div className="loading-text">
