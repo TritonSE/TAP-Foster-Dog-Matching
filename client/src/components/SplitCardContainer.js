@@ -7,7 +7,7 @@
  * should be added to give more space for the title.
  *
  *
- * @summary     Button with an icon image.
+ * @summary     Container to hold two cards.
  * @author      Andrew Masek
  *
  */
@@ -18,7 +18,6 @@ import styled from "styled-components";
 export const Background = styled.div`
   width: 100%;
   margin-left: 1%;
-  height: ${(props) => (props.titleText ? "696px" : "619px")};
   border-radius: 35px;
 `;
 

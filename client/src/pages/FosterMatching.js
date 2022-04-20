@@ -4,7 +4,9 @@ import DefaultBody from "../components/DefaultBody";
 import SplitCardContainer from "../components/SplitCardContainer";
 import PenIcon from "../images/penicon.png";
 import ApplicationProgress from "../components/ApplicationProgress";
-import { Colors, Typography } from "../components/Theme";
+import GridImage1 from "../images/griddog1.png";
+import GridImage2 from "../images/griddog2.png";
+import GridImage3 from "../images/griddog3.png";
 
 export const ExitButton = styled.a`
   color: black;
@@ -132,9 +134,6 @@ export const EditButtonParent = styled.div`
   position: relative;
 `;
 
-export const TextLeftAlign = styled.div`
-  text-align: left;
-`;
 function FloatingEditButton(props) {
   return (
     <EditButtonParent>
@@ -145,6 +144,65 @@ function FloatingEditButton(props) {
     </EditButtonParent>
   );
 }
+
+export const TextLeftAlign = styled.div`
+  text-align: left;
+`;
+
+export const CenterAlign = styled.div`
+  width: 100%;
+  text-align: center;
+`;
+
+export const SubtitleText = styled.div`
+  padding-top: 20px;
+  padding-bottom: 15px;
+  font-size: 20px;
+  color: white;
+`;
+
+export const DogGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 2.7%;
+  row-gap: 30px;
+`;
+
+export const DogCardBackground = styled.div`
+  height: 111px;
+  border-radius: 7.8px;
+  background-color: white;
+  text-align: center;
+  color: black;
+  font-size: 13px;
+  padding-top: 8px;
+  position: relative;
+`;
+
+export const DogCardCheckbox = styled.input`
+  position: absolute;
+  top: ${(props) => (props.topOffset ? props.topOffset : "0")};
+  left: ${(props) => (props.leftOffset ? props.leftOffset : "0")};
+`;
+function DogCard(props) {
+  return (
+    <DogCardBackground>
+      <img src={props.dogImage} alt={props.dogName} />
+      <br />
+      {props.dogName}
+      <DogCardCheckbox leftOffset="87%" topOffset="80%" type="checkbox" />
+    </DogCardBackground>
+  );
+}
+
+export const SubmitButton = styled.button`
+  background-color: #8dc442;
+  border: none;
+  font-size: 25px;
+  padding: 4px;
+  margin-top: 24px;
+`;
+
 // TODO give href to exit button
 function FosterMatching() {
   return (
@@ -209,8 +267,20 @@ function FosterMatching() {
             </FosterProfileContainer>
             <AvailableDogsContainer>
               <TitleText>Available Dogs</TitleText>
+              <SubtitleText>Scroll to view all available dogs</SubtitleText>
+              <DogGrid>
+                {Array.from(Array(12).keys()).map((index) => {
+                  if (index % 3 === 0) return <DogCard dogName="Lolita" dogImage={GridImage1} />;
+                  if (index % 3 === 1)
+                    return <DogCard dogName="Flower" dogImage={GridImage2} />;
+                  return <DogCard dogName="Shelly" dogImage={GridImage3} />;
+                })}
+              </DogGrid>
             </AvailableDogsContainer>
           </SplitCardContainer>
+          <CenterAlign>
+            <SubmitButton>Confirm</SubmitButton>
+          </CenterAlign>
         </PaddingContainer>
       </OuterContainer>
     </DefaultBody>
