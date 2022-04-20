@@ -7,13 +7,13 @@ import pfp from "../images/eren.png";
 const ConfirmContainer = styled.div`
   max-width: 100vw;
   width: 80vw;
-  height: 65vh;
+  min-height: 65vh;
   background: #000000;
   border-radius: 35px;
   overflow-y: scroll;
   ${device.mobile} {
+    margin-top: 5vh;
     flex-direction: column;
-    max-height: 100vh;
     overflow-y: visible;
   }
 `;
@@ -28,14 +28,20 @@ const ContentWrapper = styled.div`
 
 const InfoWrapper = styled.div`
   width: 45%;
-  min-height: 100%;
-  padding: 20px;
+  height: 100%;
+  margin: 2.5%;
+  ${device.mobile} {
+    width: 80%;
+  }
 `;
 
 const AfterWrapper = styled.div`
   width: 45%;
-  min-height: 100%;
-  padding: 20px;
+  height: 100%;
+  margin: 2.5%;
+  ${device.mobile} {
+    width: 80%;
+  }
 `;
 
 // Styling for after meet and greet component
@@ -48,17 +54,23 @@ const AfterContainer = styled.div`
 `;
 
 const AfterContent = styled.div`
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 2vw;
 `;
+
 const Title = styled.h3`
   margin: 0;
   margin: 2vh 0;
   text-align: center;
 `;
+
+const SuppliesTitle = styled.h3`
+  margin: 0;
+  text-align: center;
+`;
+
 const DogsWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -67,11 +79,17 @@ const DogsWrapper = styled.div`
 const InlineInfo = styled.div`
   display: flex;
   justify-content: space-between;
+  margin: 2vh 0vh;
 `;
 const Text = styled.p`
   margin: 0;
 `;
-const CircledText = styled.div``;
+const CircledText = styled.div`
+  border: 3px solid black;
+  box-sizing: border-box;
+  padding: 5px 10px;
+  border-radius: 5px;
+`;
 
 const SupplyWrappper = styled.div`
   height: 20vh;
@@ -102,7 +120,7 @@ function After(props) {
           </InlineInfo>
         </DogsWrapper>
         <SupplyWrappper>
-          <Title>Supplies Checklist</Title>
+          <SuppliesTitle>Supplies Checklist</SuppliesTitle>
           <Supplies>
             {props.supplies.map((supply) => (
               <Supply>{supply}</Supply>
@@ -133,7 +151,7 @@ function ConfirmMeetGreet() {
         <AfterWrapper>
           <After
             dogMet="Shelly"
-            dogHome="Shelly"
+            dogHome="Skippy"
             supplies={[
               "Lorem Ipsum dolor sit amet, consectetur adipiscing elit.",
               "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
