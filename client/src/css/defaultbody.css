@@ -15,6 +15,7 @@
   flex-direction: column;
   padding: 50px 40px;
   overflow: auto;
+  width: 100%;
 }
 
 @media only screen and (max-width: 750px) {

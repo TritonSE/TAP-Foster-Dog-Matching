@@ -12,6 +12,7 @@ import { ControlledRadios } from "../components/Radios";
 import { device } from "../utils/useResponsive";
 import { Colors } from "../components/Theme";
 import DefaultBody from "../components/DefaultBody";
+import ConfirmMeetGreet from "../components/ConfirmMeetGreet";
 
 const Button = styled.div`
   background: ${Colors.green};
@@ -505,18 +506,19 @@ const ExitButton = styled.div`
 
 function Application() {
   const navigate = useNavigate();
-  const [view, setView] = React.useState("application");
+  // const [view, setView] = React.useState("application");
 
   return (
     <DefaultBody>
       <ApplicationContainer>
         <ExitButton onClick={() => navigate("/dashboard")}>Exit</ExitButton>
-        <ApplicationProgress currentStep={0} />
-        {view === "application" ? (
+        <ApplicationProgress currentStep={4} />
+        {/* {view === "application" ? (
           <FosterApplication setView={setView} />
         ) : (
           <FosterAgreement setView={setView} />
-        )}
+        )} */}
+        <ConfirmMeetGreet />
       </ApplicationContainer>
     </DefaultBody>
   );
