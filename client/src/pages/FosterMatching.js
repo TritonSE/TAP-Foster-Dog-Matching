@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import DefaultBody from "../components/DefaultBody";
 import SplitCardContainer from "../components/SplitCardContainer";
-import dogImage from "../images/dog.png";
+import PenIcon from "../images/penicon.png";
 import ApplicationProgress from "../components/ApplicationProgress";
 import { Colors, Typography } from "../components/Theme";
 
@@ -48,6 +48,7 @@ export const TextBox = styled.div`
   background-color: white;
   border-radius: 25px;
   margin-top: 12px;
+  padding: 0 22px;
 `;
 export const TextBoxTitle = styled.span`
   font-weight: 700;
@@ -60,6 +61,7 @@ export const FosterProfileTable = styled.table`
   line-height: 24px;
   font-weight: 400;
   border-collapse: collapse;
+  text-align: left;
   tr:first-child {
     border-top: none;
   }
@@ -78,11 +80,12 @@ export const EmailDecoration = styled.span`
 
 export const FlexContainer = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
+  gap: 12px;
 `;
 export const UpdateContainer = styled.div`
   font-size: 20px;
-  line-height: 24px;
+  line-height: 15px;
   padding: 4px;
   background-color: #8dc442; //TODO make this come from theme
 `;
@@ -91,15 +94,18 @@ export const GeneralNotes = styled.span`
   font-weight: 700;
   font-size: 25px;
   line-height: 30px;
+  text-align: left;
 `;
 
-export const InternalNotes = styled.span`
+export const InternalNotes = styled.div`
   font-weight: 400;
   font-size: 25px;
   line-height: 30px;
+  text-align: left;
+  padding-top: 12px;
 `;
 export const TableCell = styled.td`
-  padding: 16px 0;
+  padding: 16px 0 16px 47px;
 `;
 export const ViewApplicationButton = styled.button`
   background-color: #8dc442; //TODO make this come from theme
@@ -109,6 +115,36 @@ export const ViewApplicationButton = styled.button`
   line-height: 24px;
   padding: 5px 30px;
 `;
+
+export const EditButton = styled.button`
+  position: absolute;
+  top: ${(props) => (props.topOffset ? props.topOffset : "0")};
+  left: ${(props) => (props.leftOffset ? props.leftOffset : "0")};
+  display: flex;
+  gap: 2px;
+  font-size: 22.2876px;
+  line-height: 19px;
+  background-color: transparent;
+  border: none;
+`;
+
+export const EditButtonParent = styled.div`
+  position: relative;
+`;
+
+export const TextLeftAlign = styled.div`
+  text-align: left;
+`;
+function FloatingEditButton(props) {
+  return (
+    <EditButtonParent>
+      <EditButton topOffset={props.topOffset} leftOffset={props.leftOffset}>
+        <img src={PenIcon} />
+        <span>Edit</span>
+      </EditButton>
+    </EditButtonParent>
+  );
+}
 // TODO give href to exit button
 function FosterMatching() {
   return (
@@ -151,6 +187,7 @@ function FosterMatching() {
                     </TableRow>
                   </tbody>
                 </FosterProfileTable>
+                <FloatingEditButton topOffset="-11px" leftOffset="535px" />
                 <br />
                 <br />
                 <ViewApplicationButton>View Application</ViewApplicationButton>
@@ -158,12 +195,16 @@ function FosterMatching() {
                 <br />
               </TextBox>
               <TextBox>
-                <TitleText>Internal Foster Notes</TitleText>
-                <GeneralNotes>General Notes:</GeneralNotes>
-                <br />
-                <InternalNotes>
-                  Looking for a medium size to large size dog. Does have other dogs at home and
-                </InternalNotes>
+                <TextBoxTitle>Internal Foster Notes</TextBoxTitle>
+                <TextLeftAlign>
+                  <br />
+                  <GeneralNotes>General Notes:</GeneralNotes>
+                  <br />
+                  <InternalNotes>
+                    Looking for a medium size to large size dog. Does have other dogs at home...
+                  </InternalNotes>
+                </TextLeftAlign>
+                <FloatingEditButton topOffset="-26px" leftOffset="535px" />
               </TextBox>
             </FosterProfileContainer>
             <AvailableDogsContainer>

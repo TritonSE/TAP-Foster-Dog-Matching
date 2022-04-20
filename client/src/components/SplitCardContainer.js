@@ -1,7 +1,10 @@
 /**
- * Button with an icon image that takes a target for its link and
- * optionally supports absolute offsets to position it if given a
- * relatively positioned parent. Used primarily in DashboardCards.
+ * This is a container for holding two cards as used
+ * by the fostermatching page. It sizes them equally
+ * using a CSS grid with a gap between them.
+ *
+ * Takes a titleText prop to determine if extra height
+ * should be added to give more space for the title.
  *
  *
  * @summary     Button with an icon image.
