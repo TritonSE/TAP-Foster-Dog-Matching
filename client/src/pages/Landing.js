@@ -1,6 +1,6 @@
 import React from "react";
 // import PassFail from "../components/PassFail";
-// import LoadingBox from "../components/LoadingBox";
+import LoadingBox from "../components/LoadingBox";
 
 function Landing() {
   return (
@@ -11,10 +11,10 @@ function Landing() {
         initialMessage = '<p>Test Message, I love food!</p>'
       /> */}
 
-      {/* <LoadingBox
+      <LoadingBox
         message= "Waiting for applicant to respond, click on the progress bar to see previous steps"
         currentStage="Applicant is scheduling their interview"
-      /> */}
+      />
     </div>
   );
 }
