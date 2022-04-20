@@ -24,8 +24,8 @@ function LoadingBox({ message, currentStage }) {
   return (
     <div className="loading-box-wrapper">
 
-      <div className="loading-image">
-        <img src={loadingCircle} alt="loading circle" />
+      <div >
+        <img src={loadingCircle} className="loading-image" alt="loading circle" />
       </div>
       <div >
         <img src={loadingDog} className="dog-image" alt="loading dog" />
