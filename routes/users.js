@@ -11,7 +11,7 @@ const validators = [
   body("email").notEmpty().isString().isEmail(),
   body("password").notEmpty().isString(),
   body("role").notEmpty().isString(),
-  body("lastActive").notEmpty().isDate({ format: "MM/DD/YYYY" }),
+  body("lastActive").notEmpty().isDate({ format: "MM/DD/YY" }),
   body("currentlyFostering").notEmpty().isBoolean(),
   body("pastFosters").notEmpty().isNumeric(),
   body("ambassador").notEmpty().isMongoId(),
@@ -22,19 +22,18 @@ const validators = [
 /**
  * POST /users - Create an user
  */
-router.post("/", [...validators, validateRequest], (req, res, next) => {
+router.post("/", [...validators, validateRequest], (req, res) => {
   createUser(req.body)
     .then((user) => {
       if (user) {
-        res.status(200).json({ user });
-      } else {
-        throw new Error(`Something went wrong, user could not be created.`);
+        return res.status(200).json({ user });
       }
-    })
-    .catch((err) => {
-      res.status(500).json({
-        message: err,
+      return res.status(400).json({
+        errors: [{ msg: "Unsuccessful user creation/ enter valid User data" }],
       });
+    })
+    .catch(() => {
+      res.status(500).send("Server err/ enter valid User data");
     });
 });
 
@@ -44,19 +43,18 @@ router.post("/", [...validators, validateRequest], (req, res, next) => {
 router.post(
   "/login",
   [...validators.map((validator) => validator.optional()), validateRequest],
-  (req, res, next) => {
+  (req, res) => {
     checkCredentials(req.body)
       .then((output) => {
         if (output) {
-          res.status(200).json({ output });
-        } else {
-          throw new Error("Email or Password is incorrect");
+          return res.status(200).json({ output });
         }
-      })
-      .catch((err) => {
-        res.status(500).json({
-          message: err,
+        return res.status(400).json({
+          errors: [{ msg: "Unsuccessful authentication/ Email or Password is incorrect" }],
         });
+      })
+      .catch(() => {
+        res.status(500).send("Server err/ Email or Password is incorrect");
       });
   }
 );
@@ -64,21 +62,20 @@ router.post(
 /**
  * GET /users/:userId - get a user profile based on its ID
  */
-router.get("/:userId", (req, res, next) => {
+router.get("/:userId", (req, res) => {
   getUser(req.params.userId)
     .then((user) => {
       if (user) {
-        res.status(200).json({
+        return res.status(200).json({
           user,
         });
-      } else {
-        throw new Error("Something went wrong, user could not be found.");
       }
-    })
-    .catch((err) => {
-      res.status(500).json({
-        message: err,
+      return res.status(400).json({
+        errors: [{ msg: "Unsuccessful user retrieval/ enter valid userId" }],
       });
+    })
+    .catch(() => {
+      res.status(500).send("Server err/ user could not be found");
     });
 });
 
