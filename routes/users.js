@@ -25,10 +25,16 @@ const validators = [
 router.post("/", [...validators, validateRequest], (req, res, next) => {
   createUser(req.body)
     .then((user) => {
-      res.status(200).json({ user });
+      if (user) {
+        res.status(200).json({ user });
+      } else {
+        throw new Error(`Something went wrong, user could not be created.`);
+      }
     })
     .catch((err) => {
-      res.status(500);
+      res.status(500).json({
+        message: err,
+      });
     });
 });
 
@@ -48,7 +54,9 @@ router.post(
         }
       })
       .catch((err) => {
-        res.status(500);
+        res.status(500).json({
+          message: err,
+        });
       });
   }
 );
@@ -64,13 +72,13 @@ router.get("/:userId", (req, res, next) => {
           user,
         });
       } else {
-        res.status(500).json({
-          message: `Something went wrong, User could not be found`,
-        });
+        throw new Error("Something went wrong, user could not be found.");
       }
     })
     .catch((err) => {
-      res.status(500);
+      res.status(500).json({
+        message: err,
+      });
     });
 });
 
