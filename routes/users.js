@@ -11,7 +11,7 @@ const validators = [
   body("email").notEmpty().isString().isEmail(),
   body("password").notEmpty().isString(),
   body("role").notEmpty().isString(),
-  body("lastActive").notEmpty().isDate().matches("/^d{2}/d{2}/d{4}$/"),
+  body("lastActive").notEmpty().isDate({ format: "MM/DD/YYYY" }),
   body("currentlyFostering").notEmpty().isBoolean(),
   body("pastFosters").notEmpty().isNumeric(),
   body("ambassador").notEmpty().isMongoId(),
