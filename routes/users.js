@@ -32,8 +32,8 @@ router.post("/", [...validators, validateRequest], (req, res) => {
         errors: [{ msg: "Unsuccessful user creation/ enter valid User data" }],
       });
     })
-    .catch(() => {
-      res.status(500).send("Server err/ enter valid User data");
+    .catch((err) => {
+      res.status(500).json({ message: err });
     });
 });
 
@@ -53,8 +53,8 @@ router.post(
           errors: [{ msg: "Unsuccessful authentication/ Email or Password is incorrect" }],
         });
       })
-      .catch(() => {
-        res.status(500).send("Server err/ Email or Password is incorrect");
+      .catch((err) => {
+        res.status(500).json({ message: err });
       });
   }
 );
@@ -74,8 +74,8 @@ router.get("/:userId", (req, res) => {
         errors: [{ msg: "Unsuccessful user retrieval/ enter valid userId" }],
       });
     })
-    .catch(() => {
-      res.status(500).send("Server err/ user could not be found");
+    .catch((err) => {
+      res.status(500).json({ message: err });
     });
 });
 
