@@ -46,13 +46,15 @@ const ApplicationContainer = styled.div`
   margin-bottom: -50px;
   ${device.mobile} {
     flex-direction: row;
-    max-height: 85vh;
+    height: calc(100% + 20px);
+    margin-bottom: -20px;
     gap: 10px;
   }
 `;
 
 const ApplicationContentContainer = styled.div`
-  flex: 1;
+  display: flex;
+  flex: 1 1 auto;
   ${device.mobile} {
     margin-top: 60px;
   }

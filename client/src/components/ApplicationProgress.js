@@ -36,7 +36,7 @@ const ProgressBarContainer = styled.div`
   ${device.mobile} {
     flex-direction: column;
     margin-top: 40px;
-    margin-bottom: 0;
+    margin-bottom: 20px;
   }
 `;
 
