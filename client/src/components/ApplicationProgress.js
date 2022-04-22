@@ -3,15 +3,11 @@
  *
  * Component that renders the Foster Application progress bar
  *
- * Used on: Applications
+ * Used in: Application Page
  *
- * Props:
- *  - currentStep [number] - int representing the current active step (0-indexed)
- *  - unlockedUpToStep [number] - int representing the farthest unlocked step (0-indexed)
- *  - completedUpToStep [number] - int representing the farthest completed step (0-indexed)
  */
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { Colors } from "./Theme";
 import check from "../images/check.png";
 import useResponsive, { device } from "../utils/useResponsive";
@@ -62,21 +58,12 @@ const ProgressMilestone = styled.div`
   box-sizing: border-box;
   border-radius: 50%;
   background: ${(props) => {
-    if (props.active) return Colors.green;
     if (props.unlocked) return "white";
+    if (props.active) return Colors.green;
     return "black";
   }};
-  ${(props) =>
-    props.unlocked &&
-    !props.active &&
-    css`
-      border: 5px solid ${Colors.green};
-    `}
-  color: ${(props) => {
-    if (props.active) return "white";
-    if (props.unlocked) return "black";
-    return "white";
-  }};
+  border: 5px solid ${(props) => (props.active ? Colors.green : "black")};
+  color: ${(props) => (props.unlocked ? "black" : "white")};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -95,6 +82,7 @@ const ProgressMilestoneText = styled.div`
   color: black;
   top: calc(100% + 6px);
   text-align: center;
+  min-width: 60px;
   ${device.mobile} {
     top: -30px;
     left: 75%;
@@ -103,9 +91,19 @@ const ProgressMilestoneText = styled.div`
   }
 `;
 
-function ApplicationProgress({ currentStep, unlockedUpToStep, completedUpToStep }) {
-  const { setCurrentStep } = React.useContext(ApplicationContext);
+function ApplicationProgress() {
+  const { currentStep, currentSubStep, goToStep, goToNextSubStep } =
+    React.useContext(ApplicationContext);
   const { isMobile } = useResponsive();
+
+  // TODO: Block onClick if step is not unlocked yet
+  const handleStepClicked = React.useCallback(
+    (index) => {
+      if (currentStep === index) goToNextSubStep();
+      else goToStep(index);
+    },
+    [currentStep, goToNextSubStep, goToStep]
+  );
 
   return (
     <ProgressBarContainer>
@@ -113,12 +111,12 @@ function ApplicationProgress({ currentStep, unlockedUpToStep, completedUpToStep 
       {MILESTONES.map((milestone, index) => (
         <React.Fragment key={milestone}>
           <ProgressMilestone
-            active={index === currentStep || index <= completedUpToStep}
-            unlocked={index === unlockedUpToStep}
-            clickable={index <= unlockedUpToStep}
-            onClick={() => setCurrentStep(index)} // TODO: Block onClick if step is not unlocked yet
+            active={index <= currentStep}
+            unlocked={currentStep === index && currentSubStep === "intro"}
+            clickable={index <= currentStep}
+            onClick={() => handleStepClicked(index)}
           >
-            {index <= completedUpToStep ? (
+            {index <= currentStep - 1 ? (
               <img src={check} alt="check mark" width={isMobile ? 40 : 50} />
             ) : (
               index + 1
@@ -127,7 +125,7 @@ function ApplicationProgress({ currentStep, unlockedUpToStep, completedUpToStep 
           </ProgressMilestone>
           {index < MILESTONES.length - 1 && (
             <ProgressMilestoneBarSection
-              completed={index < completedUpToStep || index < unlockedUpToStep}
+              completed={index < currentStep - 1 || index < currentStep}
             />
           )}
         </React.Fragment>

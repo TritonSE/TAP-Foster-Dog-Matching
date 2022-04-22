@@ -2,8 +2,10 @@
  *
  * Application Page
  *
- * Content for each step goes in the ApplicationContent array.
- * The indices represent each step of the application (0-indexed)
+ * Content for each step goes in the respective objects in the ApplicationContent array where the key represents the sub-step.
+ * Intro content for the step (white filled circle) goes in the 'intro' key.
+ * Actual content for the step (green filled circle) goes in the 'content' key.
+ * The indices represent each step of the application (0-indexed).
  *
  * ApplicationContext:
  *
@@ -11,8 +13,10 @@
  *
  * Value:
  *      - currentStep - number representing current step of the application (0-indexed)
- *      - setCurrentStep(step: number) - go to step in the application. pass in step of the application you want to go to (0-indexed)
- *      - goToNextStep - move to step directly after current step
+ *      - currentSubStep - string (either 'intro' or 'content') representing the current sub-step of the application
+ *      - goToStep(step: number, subStep: 'intro'|'content') - go to step in the application. pass in step of the application you want to go to (0-indexed)
+ *                                                             and the sub-step (either 'intro' or 'content'. default: 'intro').
+ *      - goToNextSubStep - move to 'content' sub-step.
  *
  * Usage:
  *
@@ -20,7 +24,7 @@
  *
  * In the component:
  *
- * const { setCurrentStep, setCurrentStep, goToNextStep } = React.useContext(ApplicationContext);
+ * const { currentStep, currentSubStep, goToStep, goToNextSubStep } = React.useContext(ApplicationContext);
  *
  * (See components/ApplicationProgress.js for complete usage example)
  */
@@ -74,43 +78,68 @@ const ExitButton = styled.div`
 function Application() {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = React.useState(0);
+  const [currentSubStep, setCurrentSubStep] = React.useState("content");
 
-  const goToNextStep = React.useCallback(
-    () => setCurrentStep((step) => Math.min(step + 1, 5)),
-    [currentStep]
-  );
+  const goToNextSubStep = React.useCallback(() => {
+    setCurrentSubStep("content");
+  }, []);
+
+  const goToStep = React.useCallback((step, subStep = "intro") => {
+    setCurrentStep(step);
+    setCurrentSubStep(step === 0 ? "content" : subStep);
+  }, []);
 
   const ApplicationContent = [
-    <FosterApplication />, //  Step 1
-    <h1>step 2 here</h1>, //  Step 2
-    <h1>step 3 here</h1>, //  Step 3
-    <h1>step 4 here</h1>, //  Step 4
-    <h1>step 5 here</h1>, //  Step 5
-    <Meetings
-      title="Adoption"
-      textCard={
-        <div>
-          <p>Hello, Shelby</p>
-          <p>
-            Thank you for your interest in making an adoption. We are so excited for you to become a
-            foster fail! A member from our adoption team will reach out to you shortly. Please feel
-            free to reach out to us if you have any questions for the time being.
-          </p>
-          <p>Best,</p>
-          <p>The Animal Pad Team</p>
-          <img src={logo} alt="logo" />
-        </div>
-      }
-    />, //  Step 6
+    {
+      content: <FosterApplication />,
+    }, //  Step 1
+    {
+      intro: <h1>step 2 intro here</h1>,
+      content: <h1>step 2 content here</h1>,
+    }, //  Step 2
+    {
+      intro: <h1>step 3 intro here</h1>,
+      content: <h1>step 3 content here</h1>,
+    }, //  Step 3
+    {
+      intro: <h1>step 4 intro here</h1>,
+      content: <h1>step 4 content here</h1>,
+    }, //  Step 4
+    {
+      intro: <h1>step 5 intro here</h1>,
+      content: <h1>step 5 content here</h1>,
+    }, //  Step 5
+    {
+      intro: <h1>step 6 intro here</h1>,
+      content: (
+        <Meetings
+          title="Adoption"
+          textCard={
+            <div>
+              <p>Hello, Shelby</p>
+              <p>
+                Thank you for your interest in making an adoption. We are so excited for you to
+                become a foster fail! A member from our adoption team will reach out to you shortly.
+                Please feel free to reach out to us if you have any questions for the time being.
+              </p>
+              <p>Best,</p>
+              <p>The Animal Pad Team</p>
+              <img src={logo} alt="logo" />
+            </div>
+          }
+        />
+      ),
+    }, //  Step 6
   ];
 
   const applicationData = React.useMemo(
     () => ({
       currentStep,
-      setCurrentStep,
-      goToNextStep,
+      currentSubStep,
+      goToStep,
+      goToNextSubStep,
     }),
-    [currentStep, setCurrentStep, goToNextStep]
+    [currentStep, currentSubStep, goToStep, goToNextSubStep]
   );
 
   return (
@@ -118,13 +147,11 @@ function Application() {
       <ApplicationContext.Provider value={applicationData}>
         <ApplicationContainer>
           <ExitButton onClick={() => navigate("/dashboard")}>Exit</ExitButton>
-          <ApplicationProgress
-            currentStep={currentStep}
-            unlockedUpToStep={currentStep}
-            completedUpToStep={currentStep - 1}
-          />
+          <ApplicationProgress />
           <ApplicationContentContainer>
-            {ApplicationContent[currentStep]}
+            {ApplicationContent[currentStep][currentSubStep] ||
+              ApplicationContent[currentStep]["intro"] ||
+              ApplicationContent[currentStep]["content"]}
           </ApplicationContentContainer>
         </ApplicationContainer>
       </ApplicationContext.Provider>
