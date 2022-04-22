@@ -22,13 +22,20 @@ const validators = [
  */
 router.get("/", (req, res, next) => {
   getDogs()
-    .then((dogs) =>
-      res.status(200).json({
-        dogs,
-      })
-    )
+    .then((dogs) => {
+      if (dogs) {
+        res.status(200).json({
+          dogs,
+        });
+      } else {
+        res.status(400).json({
+          message: `Something went wrong, new dogs could not be retrieved`,
+        });
+      }
+    })
     .catch((err) => {
-      next(err);
+      console.log(err.message);
+      res.status(500).send("server error, dogs could not be retrieved");
     });
 });
 
@@ -37,13 +44,19 @@ router.get("/", (req, res, next) => {
  */
 router.get("/:dogId", (req, res, next) => {
   getDog(req.params.dogId)
-    .then((dog) =>
-      res.status(200).json({
-        dog,
-      })
-    )
+    .then((dog) => {
+      if (dog) {
+        res.status(200).json({
+          dog,
+        });
+      }
+      res.status(400).json({
+        message: `Something went wrong, new dogs could not be retrieved`,
+      });
+    })
     .catch((err) => {
-      next(err);
+      console.log(err.message);
+      res.status(500).send("server error, dogs could not be retrieved");
     });
 });
 
@@ -53,12 +66,18 @@ router.get("/:dogId", (req, res, next) => {
 router.post("/", [...validators, validateRequest], (req, res, next) => {
   createDog(req.body)
     .then((dog) => {
-      res.status(200).json({
-        dog,
+      if (dog) {
+        res.status(200).json({
+          dog,
+        });
+      }
+      res.status(400).json({
+        message: `Something went wrong, new dogs could not be created`,
       });
     })
     .catch((err) => {
-      next(err);
+      console.log(err.message);
+      res.status(500).send("server error, dogs could not be retrieved");
     });
 });
 
@@ -76,11 +95,14 @@ router.put(
             dog,
           });
         } else {
-          throw new Error("Dog profile was not updated.");
+          res.status(400).json({
+            message: `Something went wrong, new dogs could not be updated`,
+          });
         }
       })
       .catch((err) => {
-        next(err);
+        console.log(err.message);
+        res.status(500).send("server error, dogs could not be retrieved");
       });
   }
 );

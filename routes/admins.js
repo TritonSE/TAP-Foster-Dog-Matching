@@ -16,7 +16,7 @@ const validators = [
   body("lastName").notEmpty().isString(),
   body("email").notEmpty().isString().isEmail(),
   body("password").notEmpty().isString(),
-  body("phone").notEmpty().isString().isMobilePhone('en-US'),
+  body("phone").notEmpty().isString().isMobilePhone("en-US"),
   body("role").notEmpty().isString(),
   body("photoURL").notEmpty().isString().isURL(),
   body("schedule").isObject().notEmpty(),
@@ -33,13 +33,14 @@ router.post("/", [...validators, validateRequest], (req, res, next) => {
           admin,
         });
       } else {
-        res.status(500).json({
+        res.status(400).json({
           message: `Something went wrong, new Admin could not be created`,
         });
       }
     })
     .catch((err) => {
-      next(err);
+      console.log(err.message);
+      res.status(500).send("server error, admin could not be created");
     });
 });
 
@@ -57,13 +58,14 @@ router.put(
             admin,
           });
         } else {
-          res.status(500).json({
+          res.status(400).json({
             message: `Something went wrong, new Admin could not be updated`,
           });
         }
       })
       .catch((err) => {
-        next(err);
+        console.log(err.message);
+        res.status(500).send("server error, admin could not be updated");
       });
   }
 );
@@ -79,13 +81,14 @@ router.get("/:adminId", (req, res, next) => {
           admin,
         });
       } else {
-        res.status(500).json({
+        res.status(400).json({
           message: `Something went wrong, Admin could not be found`,
         });
       }
     })
     .catch((err) => {
-      next(err);
+      console.log(err.message);
+      res.status(500).send("server error, admin could not be retrieved");
     });
 });
 
@@ -100,13 +103,14 @@ router.get("/", (req, res, next) => {
           admin,
         });
       } else {
-        res.status(500).json({
-          message: `Something went wrong, Admins could not be got`,
+        res.status(400).json({
+          message: `Something went wrong, Admins could not be retrieved`,
         });
       }
     })
     .catch((err) => {
-      next(err);
+      console.log(err.message);
+      res.status(500).send("server error, admins could not be retrieved");
     });
 });
 
@@ -122,13 +126,14 @@ router.post(
         if (admin) {
           res.status(200).json({ admin });
         } else {
-          res.status(500).json({
+          res.status(400).json({
             message: `Something went wrong, Email or password is incorrect`,
           });
         }
       })
       .catch((err) => {
-        next(err);
+        console.log(err.message);
+        res.status(500).send("server error, admin could not log in");
       });
   }
 );

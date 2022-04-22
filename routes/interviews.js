@@ -27,11 +27,16 @@ const validators = [
 router.get("/:interviewId", (req, res, next) => {
   getInterview(req.params.interviewId, req.query.stage)
     .then((interview) => {
-      if (!interview) res.status(500).send("Interview does not exist!");
-      res.status(200).json({ interview });
+      if (interview) {
+        res.status(200).json({ interview });
+      }
+      res.status(400).json({
+        message: `Something went wrong, interview could not be retrieved`,
+      });
     })
     .catch((err) => {
-      next(err);
+      console.log(err.message);
+      res.status(500).send("server error, dogs could not be retrieved");
     });
 });
 
@@ -41,10 +46,16 @@ router.get("/:interviewId", (req, res, next) => {
 router.post("/", [...validators, validateRequest], (req, res, next) => {
   createInterview(req.body)
     .then((interview) => {
-      res.status(200).json({ interview });
+      if (interview) {
+        res.status(200).json({ interview });
+      }
+      res.status(400).json({
+        message: `Something went wrong, interview could not be retrieved`,
+      });
     })
     .catch((err) => {
-      next(err);
+      console.log(err.message);
+      res.status(500).send("server error, dogs could not be retrieved");
     });
 });
 
