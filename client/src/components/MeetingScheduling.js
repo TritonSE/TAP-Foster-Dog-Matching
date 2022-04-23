@@ -1,3 +1,32 @@
+/**
+ * Meeting Scheduling Component
+ *
+ * Component for scheduling meetings on steps 2 and 4 of Foster View
+ *
+ * Used on: Applications
+ *
+ * Props:
+ * - title [string] - string to be displayed as title of this component
+ * - times [string[]] - array of strings of avaliable times to meet
+ *
+ * Example usage:
+ *   <MeetingScheduling
+ *     title="Interview Scheduling"
+ *     times={[
+ *       "11:00 AM",
+ *       "11:30 AM",
+ *  	 "12:00 PM",
+ *  	 "12:30 PM",
+ *  	 "1:00 PM",
+ *  	 "5:00 PM",
+ *  	 "5:30 PM",
+ *  	 "6:00 PM",
+ *  	 "6:30 PM",
+ *  	 "7:00 PM",
+ *     ]}
+ *   />
+ */
+
 import React, { useState } from "react";
 import Calendar from "react-calendar";
 import left from "../images/left.svg";
