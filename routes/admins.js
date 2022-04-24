@@ -29,18 +29,16 @@ router.post("/", [...validators, validateRequest], (req, res, next) => {
   createAdmin(req.body)
     .then((admin) => {
       if (admin) {
-        res.status(200).json({
+        return res.status(200).json({
           admin,
         });
-      } else {
-        res.status(400).json({
-          message: `Something went wrong, new Admin could not be created`,
-        });
       }
+      return res.status(400).json({
+        errors: [{ message: `Something went wrong, new Admin could not be created` }],
+      });
     })
     .catch((err) => {
-      console.log(err.message);
-      res.status(500).send("server error, admin could not be created");
+      res.status(500).json({ message: err });
     });
 });
 
@@ -54,18 +52,16 @@ router.put(
     updateAdmin(req.params.adminId, req.body)
       .then((admin) => {
         if (admin) {
-          res.status(200).json({
+          return res.status(200).json({
             admin,
           });
-        } else {
-          res.status(400).json({
-            message: `Something went wrong, new Admin could not be updated`,
-          });
         }
+        return res.status(400).json({
+          errors: [{ message: `Something went wrong, Admin could not be updated` }],
+        });
       })
       .catch((err) => {
-        console.log(err.message);
-        res.status(500).send("server error, admin could not be updated");
+        res.status(500).json({ message: err });
       });
   }
 );
@@ -77,18 +73,16 @@ router.get("/:adminId", (req, res, next) => {
   getAdmin(req.params.adminId)
     .then((admin) => {
       if (admin) {
-        res.status(200).json({
+        return res.status(200).json({
           admin,
         });
-      } else {
-        res.status(400).json({
-          message: `Something went wrong, Admin could not be found`,
-        });
       }
+      return res.status(400).json({
+        errors: [{ message: `Something went wrong, Admin could not be found` }],
+      });
     })
     .catch((err) => {
-      console.log(err.message);
-      res.status(500).send("server error, admin could not be retrieved");
+      res.status(500).json({ message: err });
     });
 });
 
@@ -99,18 +93,16 @@ router.get("/", (req, res, next) => {
   getAdmins()
     .then((admin) => {
       if (admin) {
-        res.status(200).json({
+        return res.status(200).json({
           admin,
         });
-      } else {
-        res.status(400).json({
-          message: `Something went wrong, Admins could not be retrieved`,
-        });
       }
+      return res.status(400).json({
+        errors: [{ message: `Something went wrong, Admins could not be retrieved` }],
+      });
     })
     .catch((err) => {
-      console.log(err.message);
-      res.status(500).send("server error, admins could not be retrieved");
+      res.status(500).json({ message: err });
     });
 });
 
@@ -124,16 +116,14 @@ router.post(
     validateCredenditals(req.body)
       .then((admin) => {
         if (admin) {
-          res.status(200).json({ admin });
-        } else {
-          res.status(400).json({
-            message: `Something went wrong, Email or password is incorrect`,
-          });
+          return res.status(200).json({ admin });
         }
+        return res.status(400).json({
+          errors: [{ message: `Something went wrong, Email or password is incorrect` }],
+        });
       })
       .catch((err) => {
-        console.log(err.message);
-        res.status(500).send("server error, admin could not log in");
+        res.status(500).json({ message: err });
       });
   }
 );

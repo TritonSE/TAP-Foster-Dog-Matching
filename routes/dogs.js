@@ -24,18 +24,16 @@ router.get("/", (req, res, next) => {
   getDogs()
     .then((dogs) => {
       if (dogs) {
-        res.status(200).json({
+        return res.status(200).json({
           dogs,
         });
-      } else {
-        res.status(400).json({
-          message: `Something went wrong, new dogs could not be retrieved`,
-        });
       }
+      return res.status(400).json({
+        errors: [{ message: `Something went wrong, dog profiles could not be retrieved` }],
+      });
     })
     .catch((err) => {
-      console.log(err.message);
-      res.status(500).send("server error, dogs could not be retrieved");
+      res.status(500).json({ message: err });
     });
 });
 
@@ -46,17 +44,16 @@ router.get("/:dogId", (req, res, next) => {
   getDog(req.params.dogId)
     .then((dog) => {
       if (dog) {
-        res.status(200).json({
+        return res.status(200).json({
           dog,
         });
       }
-      res.status(400).json({
-        message: `Something went wrong, new dogs could not be retrieved`,
+      return res.status(400).json({
+        errors: [{ message: `Something went wrong, dog profile could not be retrieved` }],
       });
     })
     .catch((err) => {
-      console.log(err.message);
-      res.status(500).send("server error, dogs could not be retrieved");
+      res.status(500).json({ message: err });
     });
 });
 
@@ -67,17 +64,16 @@ router.post("/", [...validators, validateRequest], (req, res, next) => {
   createDog(req.body)
     .then((dog) => {
       if (dog) {
-        res.status(200).json({
+        return res.status(200).json({
           dog,
         });
       }
-      res.status(400).json({
-        message: `Something went wrong, new dogs could not be created`,
+      return res.status(400).json({
+        errors: [{ message: `Something went wrong, new dog profile could not be created` }],
       });
     })
     .catch((err) => {
-      console.log(err.message);
-      res.status(500).send("server error, dogs could not be retrieved");
+      res.status(500).json({ message: err });
     });
 });
 
@@ -91,18 +87,16 @@ router.put(
     updateDog(req.params.dogId, req.body)
       .then((dog) => {
         if (dog) {
-          res.status(200).json({
+          return res.status(200).json({
             dog,
           });
-        } else {
-          res.status(400).json({
-            message: `Something went wrong, new dogs could not be updated`,
-          });
         }
+        return res.status(400).json({
+          errors: [{ message: `Something went wrong, dog profile could not be updated` }],
+        });
       })
       .catch((err) => {
-        console.log(err.message);
-        res.status(500).send("server error, dogs could not be retrieved");
+        res.status(500).json({ message: err });
       });
   }
 );
