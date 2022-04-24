@@ -25,7 +25,7 @@ const validators = [
 /**
  * POST /admin - Create an admin
  */
-router.post("/", [...validators, validateRequest], (req, res, next) => {
+router.post("/", [...validators, validateRequest], (req, res) => {
   createAdmin(req.body)
     .then((admin) => {
       if (admin) {
@@ -48,7 +48,7 @@ router.post("/", [...validators, validateRequest], (req, res, next) => {
 router.put(
   "/:adminId",
   [...validators.map((validator) => validator.optional()), validateRequest], // all fields for update are optional
-  (req, res, next) => {
+  (req, res) => {
     updateAdmin(req.params.adminId, req.body)
       .then((admin) => {
         if (admin) {
@@ -69,7 +69,7 @@ router.put(
 /**
  * GET /admin/:adminId - get a admin profile based on its ID
  */
-router.get("/:adminId", (req, res, next) => {
+router.get("/:adminId", (req, res) => {
   getAdmin(req.params.adminId)
     .then((admin) => {
       if (admin) {
@@ -89,7 +89,7 @@ router.get("/:adminId", (req, res, next) => {
 /**
  * GET /admin - get all admins
  */
-router.get("/", (req, res, next) => {
+router.get("/", (req, res) => {
   getAdmins()
     .then((admin) => {
       if (admin) {
@@ -112,7 +112,7 @@ router.get("/", (req, res, next) => {
 router.post(
   "/login",
   [...validators.map((validator) => validator.optional()), validateRequest],
-  (req, res, next) => {
+  (req, res) => {
     validateCredenditals(req.body)
       .then((admin) => {
         if (admin) {

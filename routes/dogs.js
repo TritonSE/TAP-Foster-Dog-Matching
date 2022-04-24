@@ -20,7 +20,7 @@ const validators = [
 /**
  * GET /dogs - Return all dog profiles
  */
-router.get("/", (req, res, next) => {
+router.get("/", (req, res) => {
   getDogs()
     .then((dogs) => {
       if (dogs) {
@@ -40,7 +40,7 @@ router.get("/", (req, res, next) => {
 /**
  * GET /dogs/:dogId - Return a dog profile by ID
  */
-router.get("/:dogId", (req, res, next) => {
+router.get("/:dogId", (req, res) => {
   getDog(req.params.dogId)
     .then((dog) => {
       if (dog) {
@@ -60,7 +60,7 @@ router.get("/:dogId", (req, res, next) => {
 /**
  * POST /dogs - Create a dog profile
  */
-router.post("/", [...validators, validateRequest], (req, res, next) => {
+router.post("/", [...validators, validateRequest], (req, res) => {
   createDog(req.body)
     .then((dog) => {
       if (dog) {
@@ -83,7 +83,7 @@ router.post("/", [...validators, validateRequest], (req, res, next) => {
 router.put(
   "/:dogId",
   [...validators.map((validator) => validator.optional()), validateRequest], // all fields for update are optional
-  (req, res, next) => {
+  (req, res) => {
     updateDog(req.params.dogId, req.body)
       .then((dog) => {
         if (dog) {

@@ -24,7 +24,7 @@ const validators = [
  *
  * @queryParam stage - Current stage of the interview
  */
-router.get("/:interviewId", (req, res, next) => {
+router.get("/:interviewId", (req, res) => {
   getInterview(req.params.interviewId, req.query.stage)
     .then((interview) => {
       if (interview) {
@@ -42,7 +42,7 @@ router.get("/:interviewId", (req, res, next) => {
 /**
  * POST /interviews - Create an interview
  */
-router.post("/", [...validators, validateRequest], (req, res, next) => {
+router.post("/", [...validators, validateRequest], (req, res) => {
   createInterview(req.body)
     .then((interview) => {
       if (interview) {
