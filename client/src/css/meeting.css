@@ -5,19 +5,18 @@
   display: flex;
   text-align: center;
   flex-direction: column;
-  overflow: auto;
   text-align: center;
   padding-left: 2%;
   padding-right: 2%;
   padding-top: 5px;
   padding-bottom: 2%;
-  box-sizing: border-box;
   height: calc(100% - 40px);
   width: 100%;
 }
 
-h2 {
+.meeting-card h2 {
   font-size: 2em;
+  margin: 10px;
 }
 
 .meeting-card-content {

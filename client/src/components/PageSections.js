@@ -25,7 +25,7 @@ const Container = styled.div`
   display: flex;
   flex: 1;
   max-height: 60vh;
-  ${device.mobile} {
+  ${device.tablet} {
     flex-direction: column;
     flex: 5;
     max-height: 100vh;
@@ -41,7 +41,7 @@ const Content = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-  ${device.mobile} {
+  ${device.tablet} {
     padding: 0 10px;
     max-height: 80vh;
   }
@@ -52,7 +52,7 @@ const SidebarContainer = styled.div`
   flex-direction: row;
   height: fit-content;
   margin-top: 80px;
-  ${device.mobile} {
+  ${device.tablet} {
     flex-direction: column;
     margin: 5px;
     width: 80%;
@@ -64,7 +64,7 @@ const SidebarBorder = styled.div`
   background: ${Colors.green};
   border-radius: 5px;
   width: 10px;
-  ${device.mobile} {
+  ${device.tablet} {
     height: 5px;
     width: 100%;
   }
@@ -75,7 +75,7 @@ const SectionButtonContainer = styled.div`
   flex-direction: column;
   gap: 10px;
   margin: 20px 0;
-  ${device.mobile} {
+  ${device.tablet} {
     flex: 1;
     flex-direction: row;
     margin: 0;
@@ -92,9 +92,12 @@ const SectionButton = styled.div`
   font-size: 18px;
   cursor: pointer;
   flex: 1;
-  ${device.mobile} {
+  ${device.tablet} {
     border-radius: 4px;
     padding: 10px 2px;
+    font-size: 22px;
+  }
+  ${device.mobile} {
     font-size: 3vw;
   }
 `;

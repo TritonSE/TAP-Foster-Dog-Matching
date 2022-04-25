@@ -27,13 +27,14 @@ import React, { useState, useEffect } from "react";
 import { NavLink as Link } from "react-router-dom";
 import styled from "styled-components";
 import burger from "../images/burger.png";
+import { device } from "../utils/useResponsive";
 
 export const Nav = styled.nav`
   width: max(250px, 16vw);
   height: 100%;
   background-color: #000000;
 
-  @media screen and (max-width: 750px) {
+  ${device.tablet} {
     position: fixed;
     right: -300px;
     width: min(300px, 45vw);
@@ -52,7 +53,7 @@ export const Nav = styled.nav`
 export const ToggleNavbar = styled.button`
   display: none;
 
-  @media screen and (max-width: 750px) {
+  ${device.tablet} {
     display: inline;
     position: fixed;
     right: 5%;
@@ -97,14 +98,14 @@ export const NavLink = styled(Link)`
   &.active {
     background-color: #8dc442;
   }
-  @media screen and (max-width: 750px) {
+  ${device.tablet} {
     font-size: min(18px, 4vw);
   }
 `;
 
 export const SignOut = styled.button`
   display: none;
-  @media screen and (max-width: 750px) {
+  ${device.tablet} {
     display: block;
     text-decoration: none;
 

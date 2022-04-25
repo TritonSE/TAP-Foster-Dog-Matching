@@ -48,7 +48,7 @@ const ApplicationContainer = styled.div`
   max-width: 100vw;
   height: calc(100% + 50px);
   margin-bottom: -50px;
-  ${device.mobile} {
+  ${device.tablet} {
     flex-direction: row;
     height: calc(100% + 20px);
     margin-bottom: -20px;
@@ -59,8 +59,11 @@ const ApplicationContainer = styled.div`
 const ApplicationContentContainer = styled.div`
   display: flex;
   flex: 1 1 auto;
+  ${device.tablet} {
+    margin-top: 100px;
+  }
   ${device.mobile} {
-    margin-top: 60px;
+    margin-top: 20%;
   }
 `;
 
@@ -70,7 +73,7 @@ const ExitButton = styled.div`
   left: -10px;
   font-size: 16px;
   cursor: pointer;
-  ${device.mobile} {
+  ${device.tablet} {
     top: -10px;
   }
 `;

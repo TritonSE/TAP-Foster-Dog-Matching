@@ -60,7 +60,7 @@
   padding-right: 0px;
 }
 
-@media only screen and (max-width: 750px) {
+@media only screen and (max-width: 1024px) {
   .header-message {
     display: none;
     grid-column: unset;
