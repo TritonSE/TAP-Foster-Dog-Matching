@@ -18,7 +18,7 @@ export const ExitButton = styled.a`
 `;
 export const FosterProfileContainer = styled.div`
   text-align: center;
-  width: 35vw;
+  width: calc(40vw - 125px);
   height: 100%;
   background-color: black;
   border-radius: 15px;
@@ -26,7 +26,7 @@ export const FosterProfileContainer = styled.div`
 `;
 export const AvailableDogsContainer = styled.div`
   text-align: center;
-  width: 35vw;
+  width: calc(40vw - 125px);
   height: 100%;
   background-color: black;
   border-radius: 15px;
@@ -199,8 +199,9 @@ export const SubmitButton = styled.button`
   background-color: #8dc442;
   border: none;
   font-size: 25px;
-  padding: 4px;
+  padding: 6px;
   margin-top: 24px;
+  border-radius: 10px;
 `;
 
 // TODO give href to exit button
@@ -245,7 +246,7 @@ function FosterMatching() {
                     </TableRow>
                   </tbody>
                 </FosterProfileTable>
-                <FloatingEditButton topOffset="-11px" leftOffset="535px" />
+                <FloatingEditButton topOffset="-11px" leftOffset="89%" />
                 <br />
                 <br />
                 <ViewApplicationButton>View Application</ViewApplicationButton>
@@ -262,7 +263,7 @@ function FosterMatching() {
                     Looking for a medium size to large size dog. Does have other dogs at home...
                   </InternalNotes>
                 </TextLeftAlign>
-                <FloatingEditButton topOffset="-26px" leftOffset="535px" />
+                <FloatingEditButton topOffset="-26px" leftOffset="89%" />
               </TextBox>
             </FosterProfileContainer>
             <AvailableDogsContainer>
