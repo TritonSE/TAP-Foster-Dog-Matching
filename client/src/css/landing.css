@@ -92,7 +92,7 @@
 
   color: black;
   font-weight: bold;
-  font-size: 15px;
+  font-size: calc(7px + 0.4vw);
   text-align: right;
   line-height: 2;
 }
@@ -182,17 +182,27 @@
     bottom: 15px;
     right: 10px;
 
-    font-size: 13px;
+    font-size: calc(10px + 0.4vw);
     line-height: 2;
   }
 }
 
 @media only screen and (max-height: 750px) {
+  .copyright {
+    font-size: calc(5px + 0.4vw);
+  }
+}
+
+@media (min-width: 750px) and (max-width: 1050px) {
   .left-panel {
-    top: 95px;
+    width: 70%;
   }
 
   .right-panel {
-    top: 95px;
+    width: 30%;
+  }
+
+  .form-container {
+    width: 75%;
   }
 }
