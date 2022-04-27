@@ -48,3 +48,9 @@
     transform: rotate(360deg);
   }
 }
+
+@media screen and (max-width: 750px) {
+  .loading-box-wrapper {
+    padding: 15px;
+  }
+}

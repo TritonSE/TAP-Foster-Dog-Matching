@@ -48,7 +48,7 @@ function PassFail({ status, initialMessage }) {
 
   return (
     <div className="pass-fail-wrapper">
-      <button className="x-button" onClick={onClose}>
+      <button type="button" className="x-button" onClick={onClose}>
         <img src={x} alt="loading circle" />
       </button>
       <div className="title">

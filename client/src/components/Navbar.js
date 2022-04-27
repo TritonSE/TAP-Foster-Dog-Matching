@@ -25,21 +25,19 @@
 
 import React, { useState, useEffect } from "react";
 import { NavLink as Link } from "react-router-dom";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import burger from "../images/burger.png";
 
 export const Nav = styled.nav`
-  position: fixed;
   width: max(250px, 16vw);
-  height: calc(100% - 130px);
-  top: 130px;
+  height: 100%;
   background-color: #000000;
 
   @media screen and (max-width: 750px) {
-    top: 97px;
+    position: fixed;
     right: -300px;
     width: min(300px, 45vw);
-    height: calc(100% - 97px);
+    height: 100%;
     z-index: 5;
     transform: translateX(0%);
     transition: right 0.5s;
@@ -157,18 +155,20 @@ function Navbar(props) {
 
       {/* Conditionally Rendered Navigation Panel */}
 
-      <Nav className={renderNav ? "active" : ""}>
-        <NavMenu>
-          {Object.entries(props.pages).map(([page, path]) => (
-            <NavLink to={path} activeStyle>
-              {page}
-            </NavLink>
-          ))}
-          {screenWidth < 750 || renderNav ? (
-            <SignOut onClick={() => logout()}>Sign Out</SignOut>
-          ) : undefined}
-        </NavMenu>
-      </Nav>
+      <div>
+        <Nav className={renderNav ? "active" : ""}>
+          <NavMenu>
+            {Object.entries(props.pages).map(([page, path]) => (
+              <NavLink to={path} activeStyle>
+                {page}
+              </NavLink>
+            ))}
+            {screenWidth < 750 || renderNav ? (
+              <SignOut onClick={() => logout()}>Sign Out</SignOut>
+            ) : undefined}
+          </NavMenu>
+        </Nav>
+      </div>
     </>
   );
 }

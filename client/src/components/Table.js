@@ -1,6 +1,7 @@
 /**
  * Table Component
- * Used on: PendingApplications
+ *
+ * Used on: PendingApplications, Fosters
  *
  * Props:
  *  - columns [{ header: string, accessor: string }[]]
@@ -19,17 +20,34 @@ import styled, { css } from "styled-components";
 import { Colors } from "./Theme";
 
 const tableBorder = css`
-  border: 1px solid ${Colors.gray};
-  border-collapse: collapse;
+  border: 0.5px solid ${Colors.gray};
+  border-collapse: separate;
+  border-spacing: 0;
 `;
 
 const TableContainer = styled.div`
-  margin-right: 65px;
-  display: inline-block;
+  margin-right: 40px;
+  display: inline-table;
 `;
 
 const StyledTable = styled.table`
   ${tableBorder}
+  border: 1px solid ${Colors.gray};
+  border-radius: 6px;
+  width: 100%;
+  tr:first-child,
+  th:first-child {
+    border-top-left-radius: 5px;
+  }
+  tr:first-child th:last-child {
+    border-top-right-radius: 5px;
+  }
+  tr:last-child td:first-child {
+    border-bottom-left-radius: 5px;
+  }
+  tr:last-child td:last-child {
+    border-bottom-right-radius: 5px;
+  }
 `;
 
 const TableHead = styled.thead``;
@@ -41,13 +59,18 @@ const TableRow = styled.tr`
   &:nth-child(odd) {
     background: white;
   }
+  td:first-child {
+    border-left: 0;
+  }
+  td:last-child {
+    border-right: 0;
+  }
 `;
 
 const TableHeader = styled.th`
-  ${tableBorder}
   color: white;
   background: ${Colors.green};
-  padding: 20px 40px;
+  padding: 20px 28px;
 `;
 
 const TableBody = styled.tbody``;
@@ -55,7 +78,7 @@ const TableBody = styled.tbody``;
 const TableCell = styled.td`
   ${tableBorder}
   color: black;
-  padding: 20px 40px;
+  padding: 20px 28px;
   text-align: center;
 `;
 
@@ -71,12 +94,19 @@ function Table({ columns, rows }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow>
-              {columns.map((column) => (
-                <TableCell key={row[column.accessor]}>{row[column.accessor]}</TableCell>
-              ))}
-            </TableRow>
+          {rows.map((row, index) => (
+            <>
+              {/* eslint-disable react/no-array-index-key */}
+              <TableRow
+                key={`${JSON.stringify(
+                  Object.values(row).filter((val) => typeof val !== "object")
+                )}-${index}`}
+              >
+                {columns.map((column) => (
+                  <TableCell key={row[column.accessor]}>{row[column.accessor]}</TableCell>
+                ))}
+              </TableRow>
+            </>
           ))}
         </TableBody>
       </StyledTable>
