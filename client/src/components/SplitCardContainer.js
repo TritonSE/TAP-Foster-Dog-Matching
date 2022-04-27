@@ -25,7 +25,12 @@ export const GridContainer = styled.div`
   place-items: center;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  column-gap: 4.5%;
+  column-gap: 2%;
+  @media (max-width: 1250px) {
+    grid-template-columns: none;
+    grid-template-rows: 1fr 1fr;
+    row-gap: 2%;
+  }
 `;
 function SplitCardContainer(props) {
   return (

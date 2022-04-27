@@ -18,19 +18,21 @@ export const ExitButton = styled.a`
 `;
 export const FosterProfileContainer = styled.div`
   text-align: center;
-  width: calc(40vw - 125px);
+  width: 100% !important;
   height: 100%;
   background-color: black;
   border-radius: 15px;
   padding: 0 20px 20px 20px;
+  box-sizing: border-box;
 `;
 export const AvailableDogsContainer = styled.div`
   text-align: center;
-  width: calc(40vw - 125px);
+  width: 100% !important;
   height: 100%;
   background-color: black;
   border-radius: 15px;
   padding: 0 20px 20px 20px;
+  box-sizing: border-box;
 `;
 
 export const OuterContainer = styled.div`
@@ -187,10 +189,14 @@ export const DogCardCheckbox = styled.input`
 function DogCard(props) {
   return (
     <DogCardBackground>
-      <img src={props.dogImage} alt={props.dogName} />
+      <img
+        src={props.dogImage}
+        alt={props.dogName}
+        style={{ maxWidth: "100%", objectFit: "contain" }}
+      />
       <br />
       {props.dogName}
-      <DogCardCheckbox leftOffset="87%" topOffset="80%" type="checkbox" />
+      <DogCardCheckbox leftOffset="calc(87% - 8px)" topOffset="80%" type="checkbox" />
     </DogCardBackground>
   );
 }
@@ -210,6 +216,8 @@ function FosterMatching() {
     <DefaultBody>
       <OuterContainer>
         <ExitButton href="#">Exit</ExitButton>
+        <br />
+        <br />
         <ApplicationProgress completedUpToStep={2} unlockedUpToStep={3} selectedStep={3} />
         <PaddingContainer>
           <SplitCardContainer>
@@ -246,7 +254,7 @@ function FosterMatching() {
                     </TableRow>
                   </tbody>
                 </FosterProfileTable>
-                <FloatingEditButton topOffset="-11px" leftOffset="89%" />
+                <FloatingEditButton topOffset="-11px" leftOffset="calc(89% - 30px)" />
                 <br />
                 <br />
                 <ViewApplicationButton>View Application</ViewApplicationButton>
@@ -263,7 +271,7 @@ function FosterMatching() {
                     Looking for a medium size to large size dog. Does have other dogs at home...
                   </InternalNotes>
                 </TextLeftAlign>
-                <FloatingEditButton topOffset="-26px" leftOffset="89%" />
+                <FloatingEditButton topOffset="-26px" leftOffset="calc(89% - 30px)" />
               </TextBox>
             </FosterProfileContainer>
             <AvailableDogsContainer>
