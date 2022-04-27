@@ -35,6 +35,10 @@ export const Nav = styled.nav`
   background-color: #000000;
 
   ${device.tablet} {
+    width: max(180px, 16vw);
+  }
+
+  ${device.mobile} {
     position: fixed;
     right: -300px;
     width: min(300px, 45vw);
@@ -53,7 +57,7 @@ export const Nav = styled.nav`
 export const ToggleNavbar = styled.button`
   display: none;
 
-  ${device.tablet} {
+  @media screen and (max-width: 750px) {
     display: inline;
     position: fixed;
     right: 5%;
@@ -98,14 +102,14 @@ export const NavLink = styled(Link)`
   &.active {
     background-color: #8dc442;
   }
-  ${device.tablet} {
+  @media screen and (max-width: 750px) {
     font-size: min(18px, 4vw);
   }
 `;
 
 export const SignOut = styled.button`
   display: none;
-  ${device.tablet} {
+  @media screen and (max-width: 750px) {
     display: block;
     text-decoration: none;
 

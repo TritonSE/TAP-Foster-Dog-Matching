@@ -95,7 +95,7 @@ const SectionButton = styled.div`
   ${device.tablet} {
     border-radius: 4px;
     padding: 10px 2px;
-    font-size: 22px;
+    font-size: 20px;
   }
   ${device.mobile} {
     font-size: 3vw;

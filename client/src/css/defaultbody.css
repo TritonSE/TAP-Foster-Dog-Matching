@@ -22,11 +22,14 @@
   box-sizing: border-box;
 }
 
+@media only screen and (max-width: 1024px) {
+  #default-body-content {
+    padding: 20px;
+  }
+}
+
 @media only screen and (max-width: 750px) {
   #default-body {
     display: block;
-  }
-  #default-body-content {
-    padding: 20px;
   }
 }
