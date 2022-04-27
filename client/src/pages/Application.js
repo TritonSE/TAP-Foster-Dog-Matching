@@ -513,12 +513,12 @@ function Application() {
       <ApplicationContainer>
         <ExitButton onClick={() => navigate("/dashboard")}>Exit</ExitButton>
         <ApplicationProgress currentStep={4} />
-        {view === "application" ? (
+        {/* {view === "application" ? (
           <FosterApplication setView={setView} />
         ) : (
           <FosterAgreement setView={setView} />
-        )}
-        {/* <ConfirmMeetGreet /> */}
+        )} */}
+        <ConfirmMeetGreet />
       </ApplicationContainer>
     </DefaultBody>
   );
