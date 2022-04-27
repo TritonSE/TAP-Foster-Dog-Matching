@@ -506,19 +506,19 @@ const ExitButton = styled.div`
 
 function Application() {
   const navigate = useNavigate();
-  // const [view, setView] = React.useState("application");
+  const [view, setView] = React.useState("application");
 
   return (
     <DefaultBody>
       <ApplicationContainer>
         <ExitButton onClick={() => navigate("/dashboard")}>Exit</ExitButton>
         <ApplicationProgress currentStep={4} />
-        {/* {view === "application" ? (
+        {view === "application" ? (
           <FosterApplication setView={setView} />
         ) : (
           <FosterAgreement setView={setView} />
-        )} */}
-        <ConfirmMeetGreet />
+        )}
+        {/* <ConfirmMeetGreet /> */}
       </ApplicationContainer>
     </DefaultBody>
   );

@@ -5,8 +5,7 @@ import { device } from "../utils/useResponsive";
 import pfp from "../images/eren.png";
 
 const ConfirmContainer = styled.div`
-  max-width: 100vw;
-  width: 80vw;
+  max-width: 95vw;
   min-height: 65vh;
   background: #000000;
   overflow-y: scroll;
