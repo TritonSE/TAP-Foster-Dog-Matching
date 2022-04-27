@@ -9,12 +9,32 @@ const ConfirmContainer = styled.div`
   width: 80vw;
   min-height: 65vh;
   background: #000000;
-  border-radius: 35px;
   overflow-y: scroll;
+  border-radius: 35px;
+
+  display: flex;
+  flex-direction: column;
   ${device.mobile} {
     margin-top: 5vh;
     flex-direction: column;
     overflow-y: visible;
+  }
+`;
+const ComponentHeader = styled.p`
+  margin: 0;
+  margin-top: 1.5vh;
+  color: white;
+
+  color: #ffffff;
+  text-align: center;
+  font-weight: 700;
+  font-size: 33px;
+  line-height: 40px;
+
+  color: #ffffff;
+  ${device.mobile} {
+    font-size: 20;
+    padding: 5px;
   }
 `;
 
@@ -23,24 +43,36 @@ const ContentWrapper = styled.div`
   flex-direction: row;
   ${device.mobile} {
     flex-direction: column;
+    align-items: center;
   }
+  height: 100%;
 `;
 
 const InfoWrapper = styled.div`
   width: 45%;
-  height: 100%;
+  height: 90%;
   margin: 2.5%;
+  overflow: hidden;
+  border-radius: 35px;
+
   ${device.mobile} {
     width: 80%;
+    overflow: visible;
+    margin-bottom: 4vh;
   }
 `;
 
 const AfterWrapper = styled.div`
   width: 45%;
-  height: 100%;
+  height: 90%;
   margin: 2.5%;
+  overflow: hidden;
+
+  border-radius: 35px;
+
   ${device.mobile} {
     width: 80%;
+    overflow: visible;
   }
 `;
 
@@ -87,7 +119,7 @@ const Text = styled.p`
 const CircledText = styled.div`
   border: 3px solid black;
   box-sizing: border-box;
-  padding: 5px 10px;
+  padding: 8px 30px;
   border-radius: 5px;
 `;
 
@@ -103,6 +135,21 @@ const SupplyWrappper = styled.div`
 
 const Supplies = styled.ul``;
 const Supply = styled.li``;
+
+const ConfirmButton = styled.button`
+  margin: 0 auto;
+  background: #8dc442;
+  border-radius: 10px;
+  width: 216px;
+  height: 52px;
+
+  font-weight: 400;
+  font-size: 22.2876px;
+  line-height: 27px;
+  color: #000000;
+  margin-bottom: 2vh;
+  cursor: pointer;
+`;
 
 function After(props) {
   return (
@@ -135,10 +182,11 @@ function After(props) {
 function ConfirmMeetGreet() {
   return (
     <ConfirmContainer>
+      <ComponentHeader>Home Screen Information</ComponentHeader>
       <ContentWrapper>
         <InfoWrapper>
           <Meetings
-            title="Interview Info"
+            title="Meet and Greet Info"
             ambassador="Dhanush"
             phone="123-456-7890"
             email="test@tap.com"
@@ -159,6 +207,7 @@ function ConfirmMeetGreet() {
           />
         </AfterWrapper>
       </ContentWrapper>
+      <ConfirmButton>Confirm</ConfirmButton>
     </ConfirmContainer>
   );
 }
