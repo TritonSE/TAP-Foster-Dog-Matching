@@ -21,7 +21,7 @@ import "../css/status.css";
  *
  */
 
-function Meetings(props) {
+function StatusUpdate(props) {
   return (
     <div className="status-card">
       <div className="card-title">
@@ -61,4 +61,4 @@ function Meetings(props) {
   );
 }
 
-export default Meetings;
+export default StatusUpdate;
