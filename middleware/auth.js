@@ -77,7 +77,9 @@ function requireAdminRoles(...allowedRoles) {
   return (req, res, next) =>
     requireAuthenticatedAdmin(req, res, async () => {
       if (!allowedRoles.includes(req.currentUser.role)) {
-        return res.status(401).send({ message: `You must be one of these roles: ${allowedRoles.join(", ")}` });
+        return res
+          .status(401)
+          .send({ message: `You must be one of these roles: ${allowedRoles.join(", ")}` });
       }
       return next();
     });

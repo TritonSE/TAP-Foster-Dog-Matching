@@ -32,7 +32,7 @@ async function createAdmin(newAdmin) {
   if (existingAdmin) {
     throw ServiceError(400, "An account with this email already exists");
   }
-  
+
   const admin = await new Admin(newAdmin).save();
   await createFirebaseUser(admin.id.toString(), newAdmin.email, newAdmin.password, "admin");
   return admin;
