@@ -5,6 +5,7 @@ app.use(express.json());
 
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const cors = require("cors");
 
 dotenv.config();
 
@@ -13,6 +14,7 @@ mongoose.connect(process.env.MONGO_URI);
 mongoose.connection.once("open", async () => {
   console.log("Established connection to MongoDB.");
 });
+app.use(cors({ methods: ["GET", "POST", "PUT", "DELETE"] }));
 
 // Routes
 app.use("/api/dogs", require("./routes/dogs"));
@@ -21,17 +23,17 @@ app.use("/api/admins", require("./routes/admins"));
 app.use("/api/users", require("./routes/users"));
 
 // Error handling
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
   if (err.status === 500 || err.status == null) {
     console.error(err);
-    res.status(500).json({
+    return res.status(500).json({
       message: `Something went wrong on the server: ${err.message}`,
     });
-  } else {
-    res.status(err.status).json({
-      message: err.message,
-    });
   }
+  // Catch ServiceError
+  return res.status(err.status).json({
+    message: err.message,
+  });
 });
 
 app.listen(PORT, () => {

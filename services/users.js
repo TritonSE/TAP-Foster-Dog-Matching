@@ -1,27 +1,20 @@
 const { User } = require("../models");
+const { createFirebaseUser } = require("./auth");
+const { ServiceError } = require("./errors");
 
 /**
  * Create an user
- * @param rawUser - details of interview to create
+ * @param rawUser - details of user to create
  */
 async function createUser(rawUser) {
+  const existingUser = await User.findOne({ email: rawUser.email }).exec();
+  if (existingUser) {
+    throw ServiceError(400, "An account with this email already exists");
+  }
+  
   const user = await new User(rawUser).save();
+  await createFirebaseUser(user.id.toString(), rawUser.email, rawUser.password, "user");
   return user;
-}
-
-/**
- * Check email and password
- * @param emailPass - email and pass to validate
- */
-async function checkCredentials(emailPass) {
-  const userObject = await User.findOne({ email: emailPass.email }).exec();
-  if (userObject === null) {
-    return false;
-  }
-  if (emailPass.password === userObject.password) {
-    return true;
-  }
-  return false;
 }
 
 /**
@@ -34,6 +27,5 @@ function getUser(userId) {
 
 module.exports = {
   createUser,
-  checkCredentials,
   getUser,
 };

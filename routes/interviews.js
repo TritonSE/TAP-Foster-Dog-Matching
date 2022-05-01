@@ -24,7 +24,7 @@ const validators = [
  *
  * @queryParam stage - Current stage of the interview
  */
-router.get("/:interviewId", (req, res) => {
+router.get("/:interviewId", (req, res, next) => {
   getInterview(req.params.interviewId, req.query.stage)
     .then((interview) => {
       if (interview) {
@@ -34,15 +34,13 @@ router.get("/:interviewId", (req, res) => {
         errors: [{ message: `Something went wrong, interview could not be retrieved` }],
       });
     })
-    .catch((err) => {
-      res.status(500).json({ message: err });
-    });
+    .catch((err) => next(err));
 });
 
 /**
  * POST /interviews - Create an interview
  */
-router.post("/", [...validators, validateRequest], (req, res) => {
+router.post("/", [...validators, validateRequest], (req, res, next) => {
   createInterview(req.body)
     .then((interview) => {
       if (interview) {
@@ -52,9 +50,7 @@ router.post("/", [...validators, validateRequest], (req, res) => {
         errors: [{ message: `Something went wrong, interview could not be created` }],
       });
     })
-    .catch((err) => {
-      res.status(500).json({ message: err });
-    });
+    .catch((err) => next(err));
 });
 
 module.exports = router;

@@ -20,7 +20,7 @@ const validators = [
 /**
  * GET /dogs - Return all dog profiles
  */
-router.get("/", (req, res) => {
+router.get("/", (req, res, next) => {
   getDogs()
     .then((dogs) => {
       if (dogs) {
@@ -32,15 +32,13 @@ router.get("/", (req, res) => {
         errors: [{ message: `Something went wrong, dog profiles could not be retrieved` }],
       });
     })
-    .catch((err) => {
-      res.status(500).json({ message: err });
-    });
+    .catch((err) => next(err));
 });
 
 /**
  * GET /dogs/:dogId - Return a dog profile by ID
  */
-router.get("/:dogId", (req, res) => {
+router.get("/:dogId", (req, res, next) => {
   getDog(req.params.dogId)
     .then((dog) => {
       if (dog) {
@@ -52,15 +50,13 @@ router.get("/:dogId", (req, res) => {
         errors: [{ message: `Something went wrong, dog profile could not be retrieved` }],
       });
     })
-    .catch((err) => {
-      res.status(500).json({ message: err });
-    });
+    .catch((err) => next(err));
 });
 
 /**
  * POST /dogs - Create a dog profile
  */
-router.post("/", [...validators, validateRequest], (req, res) => {
+router.post("/", [...validators, validateRequest], (req, res, next) => {
   createDog(req.body)
     .then((dog) => {
       if (dog) {
@@ -72,9 +68,7 @@ router.post("/", [...validators, validateRequest], (req, res) => {
         errors: [{ message: `Something went wrong, new dog profile could not be created` }],
       });
     })
-    .catch((err) => {
-      res.status(500).json({ message: err });
-    });
+    .catch((err) => next(err));
 });
 
 /**
@@ -83,7 +77,7 @@ router.post("/", [...validators, validateRequest], (req, res) => {
 router.put(
   "/:dogId",
   [...validators.map((validator) => validator.optional()), validateRequest], // all fields for update are optional
-  (req, res) => {
+  (req, res, next) => {
     updateDog(req.params.dogId, req.body)
       .then((dog) => {
         if (dog) {
@@ -95,9 +89,7 @@ router.put(
           errors: [{ message: `Something went wrong, dog profile could not be updated` }],
         });
       })
-      .catch((err) => {
-        res.status(500).json({ message: err });
-      });
+      .catch((err) => next(err));
   }
 );
 

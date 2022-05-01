@@ -22,14 +22,6 @@ module.exports = mongoose.model(
       required: true,
       unique: true,
     },
-    password: {
-      type: String,
-      required: true,
-    },
-    role: {
-      type: String,
-      required: true,
-    },
     lastActive: {
       type: Date,
       required: true,
