@@ -51,6 +51,7 @@
   padding-top: 20px;
   grid-column: 3;
   font-size: calc(14px + 0.6vw);
+  cursor: pointer;
 }
 
 .navbar-hamburger-button {

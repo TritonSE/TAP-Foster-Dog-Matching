@@ -1,6 +1,8 @@
 const { Admin, User } = require("../models");
 const { decodeAuthToken } = require("../services/auth");
 
+// TODO: Use these middleware for all protected routes
+
 /**
  * Protected Route Middleware
  *

@@ -3,7 +3,7 @@
  *
  * Component that renders the navbar
  *
- * @summary    resuable and responsive navbar component
+ * @summary    reusable and responsive navbar component
  * @author     Parth Patel
  *
  */
@@ -27,6 +27,7 @@ import React, { useState, useEffect } from "react";
 import { NavLink as Link } from "react-router-dom";
 import styled from "styled-components";
 import burger from "../images/burger.png";
+import { signOutUser } from "../services/auth";
 import { device } from "../utils/useResponsive";
 
 export const Nav = styled.nav`
@@ -147,11 +148,6 @@ function Navbar(props) {
     };
   }, []);
 
-  // logout function
-  const logout = () => {
-    // code to log user out of page
-  };
-
   return (
     <>
       <ToggleNavbar onClick={() => setRenderNav(!renderNav)}>
@@ -169,7 +165,7 @@ function Navbar(props) {
               </NavLink>
             ))}
             {screenWidth < 750 || renderNav ? (
-              <SignOut onClick={() => logout()}>Sign Out</SignOut>
+              <SignOut onClick={signOutUser}>Sign Out</SignOut>
             ) : undefined}
           </NavMenu>
         </Nav>
