@@ -1,0 +1,51 @@
+/**
+ *
+ * Auth Context
+ *
+ * Provides current user object to entire app
+ *
+ * Value:
+ *      - currentUser (object) - current user/admin object
+ *      - signedIn (boolean) - indicates whether user is signed in or not
+ *
+ * Used in App.js. See Header.js for example usage.
+ */
+
+import React from "react";
+import { getAdmin } from "../services/admins";
+import { getUser } from "../services/users";
+import { auth } from "../utils/firebase-config";
+
+export const AuthContext = React.createContext({});
+
+export function AuthProvider({ children }) {
+  const [currentUser, setCurrentUser] = React.useState();
+
+  React.useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(async (firebaseUser) => {
+      if (firebaseUser) {
+        const { claims } = await firebaseUser.getIdTokenResult();
+
+        // Fetch user/admin object
+        let userObject;
+        if (claims.type === "admin") {
+          userObject = (await getAdmin(firebaseUser.uid)).data.admin;
+        } else {
+          userObject = (await getUser(firebaseUser.uid)).data.user;
+        }
+
+        setCurrentUser({ type: claims.type, ...userObject });
+      } else {
+        setCurrentUser();
+      }
+    });
+    return unsubscribe;
+  }, []);
+
+  const value = React.useMemo(
+    () => ({ currentUser, signedIn: currentUser !== undefined }),
+    [currentUser]
+  );
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+}

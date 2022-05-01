@@ -12,24 +12,27 @@ import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import PendingApplications from "./pages/PendingApplications";
+import { AuthProvider } from "./contexts/AuthContext";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/application" element={<Application />} />
-        <Route path="/calendar" element={<Calendar />} />
-        <Route path="/contact" element={<ContactUs />} />
-        <Route path="/fosters" element={<Fosters />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        {/* Admin Routes TODO: set up conditional routing based on user role */}
-        <Route path="/pending-applications" element={<PendingApplications />} />
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/application" element={<Application />} />
+          <Route path="/calendar" element={<Calendar />} />
+          <Route path="/contact" element={<ContactUs />} />
+          <Route path="/fosters" element={<Fosters />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          {/* Admin Routes TODO: set up conditional routing based on user role */}
+          <Route path="/pending-applications" element={<PendingApplications />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 
