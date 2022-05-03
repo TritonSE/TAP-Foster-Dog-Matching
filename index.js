@@ -5,6 +5,7 @@ app.use(express.json());
 
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const cors = require("cors");
 
 dotenv.config();
 
@@ -13,6 +14,7 @@ mongoose.connect(process.env.MONGO_URI);
 mongoose.connection.once("open", async () => {
   console.log("Established connection to MongoDB.");
 });
+app.use(cors({ methods: ["GET", "POST", "PUT", "DELETE"] }));
 
 // Routes
 app.use("/api/dogs", require("./routes/dogs"));

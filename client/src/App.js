@@ -12,6 +12,7 @@ import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import PendingApplications from "./pages/PendingApplications";
+import DogProfile from "./pages/DogProfile";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         {/* Admin Routes TODO: set up conditional routing based on user role */}
         <Route path="/pending-applications" element={<PendingApplications />} />
+        <Route path="/manage-dog-profiles" element={<DogProfile />} />
       </Routes>
     </Router>
   );
