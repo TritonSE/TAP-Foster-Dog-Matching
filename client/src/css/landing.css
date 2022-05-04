@@ -54,12 +54,22 @@
   position: absolute;
   bottom: 45%;
   min-width: 175px;
+  height: 11%;
+}
+
+.button-name-foster {
+  font-size: calc(12.5px + 1vh);
+}
+
+.button-name-admin {
+  font-size: calc(12.5px + 1vh);
 }
 
 .button-border-admin {
   position: absolute;
   bottom: 25%;
   min-width: 175px;
+  height: 11%;
 }
 
 .right-panel {
@@ -101,7 +111,7 @@
   display: none;
 }
 
-@media only screen and (max-width: 750px) {
+@media only screen and (max-width: 1050px) {
   .right-panel,
   .dog-image,
   .copyright {
@@ -190,19 +200,5 @@
 @media only screen and (max-height: 750px) {
   .copyright {
     font-size: calc(5px + 0.4vw);
-  }
-}
-
-@media (min-width: 750px) and (max-width: 1050px) {
-  .left-panel {
-    width: 70%;
-  }
-
-  .right-panel {
-    width: 30%;
-  }
-
-  .form-container {
-    width: 75%;
   }
 }
