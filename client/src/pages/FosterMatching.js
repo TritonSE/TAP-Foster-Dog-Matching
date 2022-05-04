@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState } from "react";
 import styled from "styled-components";
 import DefaultBody from "../components/DefaultBody";
 import SplitCardContainer from "../components/SplitCardContainer";
@@ -89,7 +89,8 @@ export const FlexContainer = styled.div`
 `;
 export const UpdateContainer = styled.div`
   font-size: 20px;
-  line-height: 15px;
+  line-height: 20px;
+  text-align: center;
   padding: 4px;
   background-color: #8dc442; //TODO make this come from theme
 `;
@@ -103,7 +104,7 @@ export const GeneralNotes = styled.span`
 
 export const InternalNotes = styled.div`
   font-weight: 400;
-  font-size: 25px;
+  font-size: 18px;
   line-height: 30px;
   text-align: left;
   padding-top: 12px;
@@ -173,7 +174,8 @@ export const DogGrid = styled.div`
 export const DogCardBackground = styled.div`
   height: 111px;
   border-radius: 7.8px;
-  background-color: white;
+  top: ${(props) => (props.topOffset ? props.topOffset : "0")};
+  background-color: ${(props) => (props.checked === true ? "#E3F7C7" : "white")};
   text-align: center;
   color: black;
   font-size: 13px;
@@ -185,18 +187,29 @@ export const DogCardCheckbox = styled.input`
   position: absolute;
   top: ${(props) => (props.topOffset ? props.topOffset : "0")};
   left: ${(props) => (props.leftOffset ? props.leftOffset : "0")};
+  :checked {
+    accent-color: #8dc442;
+  }
+`;
+export const DogCardImage = styled.img`
+  max-width: calc(100% - 24px);
+  object-fit: contain;
+  padding: 0 14px;
 `;
 function DogCard(props) {
+  const [checked, setChecked] = useState(false);
+
   return (
-    <DogCardBackground>
-      <img
-        src={props.dogImage}
-        alt={props.dogName}
-        style={{ maxWidth: "100%", objectFit: "contain" }}
-      />
+    <DogCardBackground checked={checked}>
+      <DogCardImage src={props.dogImage} alt={props.dogName} />
       <br />
       {props.dogName}
-      <DogCardCheckbox leftOffset="calc(87% - 8px)" topOffset="80%" type="checkbox" />
+      <DogCardCheckbox
+        leftOffset="calc(87% - 8px)"
+        topOffset="80%"
+        type="checkbox"
+        onChange={(e) => setChecked(e.target.checked)}
+      />
     </DogCardBackground>
   );
 }
@@ -205,7 +218,7 @@ export const SubmitButton = styled.button`
   background-color: #8dc442;
   border: none;
   font-size: 25px;
-  padding: 6px;
+  padding: 9px 38px;
   margin-top: 24px;
   border-radius: 10px;
 `;
@@ -254,7 +267,7 @@ function FosterMatching() {
                     </TableRow>
                   </tbody>
                 </FosterProfileTable>
-                <FloatingEditButton topOffset="-11px" leftOffset="calc(89% - 30px)" />
+                <FloatingEditButton topOffset="-11px" leftOffset="calc(97% - 45px)" />
                 <br />
                 <br />
                 <ViewApplicationButton>View Application</ViewApplicationButton>
@@ -271,7 +284,7 @@ function FosterMatching() {
                     Looking for a medium size to large size dog. Does have other dogs at home...
                   </InternalNotes>
                 </TextLeftAlign>
-                <FloatingEditButton topOffset="-26px" leftOffset="calc(89% - 30px)" />
+                <FloatingEditButton topOffset="-26px" leftOffset="calc(97% - 45px)" />
               </TextBox>
             </FosterProfileContainer>
             <AvailableDogsContainer>
