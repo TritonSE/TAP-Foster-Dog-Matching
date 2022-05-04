@@ -1,12 +1,27 @@
 import { React, useState } from "react";
 import styled from "styled-components";
-import DefaultBody from "../components/DefaultBody";
-import SplitCardContainer from "../components/SplitCardContainer";
+import SplitCardContainer from "./SplitCardContainer";
 import PenIcon from "../images/penicon.png";
-import ApplicationProgress from "../components/ApplicationProgress";
 import GridImage1 from "../images/griddog1.png";
 import GridImage2 from "../images/griddog2.png";
 import GridImage3 from "../images/griddog3.png";
+
+/**
+ * This component is used as the fourth step of the
+ * applications process for admins to manage user
+ * profiles and select dogs to match with them.
+ *
+ *
+ * Doesn't take any props.
+ *
+ * Used primarily in step 4 of applications process
+ *
+ *
+ * @summary     Component to allow admins to manage user
+ *              profile and dog selection.
+ * @author      Andrew Masek
+ *
+ */
 
 export const ExitButton = styled.a`
   color: black;
@@ -224,88 +239,82 @@ export const SubmitButton = styled.button`
 `;
 
 // TODO give href to exit button
-function FosterMatching() {
+function FosterMatchingAdmin() {
   return (
-    <DefaultBody>
-      <OuterContainer>
-        <ExitButton href="#">Exit</ExitButton>
-        <br />
-        <br />
-        <ApplicationProgress completedUpToStep={2} unlockedUpToStep={3} selectedStep={3} />
-        <PaddingContainer>
-          <SplitCardContainer>
-            <FosterProfileContainer>
-              <TitleText>Foster Profile</TitleText>
-              <TextBox>
-                <TextBoxTitle>Shelby</TextBoxTitle>
-                <FosterProfileTable border="1" frame="void" rules="rows">
-                  <tbody>
-                    <TableRow>
-                      <TableCell>Contact Info: </TableCell>
-                      <TableCell>
-                        123-456-7890
-                        <br />
-                        <EmailDecoration>shelby@gmail.com</EmailDecoration>
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>Currently Fostering?</TableCell>
-                      <TableCell>No</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>Matching Status</TableCell>
-                      <TableCell>
-                        <FlexContainer>
-                          <span>Step 4</span>
-                          <UpdateContainer>Status Updated</UpdateContainer>{" "}
-                        </FlexContainer>
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>Last Active</TableCell>
-                      <TableCell>4/23/2021</TableCell>
-                    </TableRow>
-                  </tbody>
-                </FosterProfileTable>
-                <FloatingEditButton topOffset="-11px" leftOffset="calc(97% - 45px)" />
+    <OuterContainer>
+      <PaddingContainer>
+        <SplitCardContainer>
+          <FosterProfileContainer>
+            <TitleText>Foster Profile</TitleText>
+            <TextBox>
+              <TextBoxTitle>Shelby</TextBoxTitle>
+              <FosterProfileTable border="1" frame="void" rules="rows">
+                <tbody>
+                  <TableRow>
+                    <TableCell>Contact Info: </TableCell>
+                    <TableCell>
+                      123-456-7890
+                      <br />
+                      <EmailDecoration>shelby@gmail.com</EmailDecoration>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Currently Fostering?</TableCell>
+                    <TableCell>No</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Matching Status</TableCell>
+                    <TableCell>
+                      <FlexContainer>
+                        <span>Step 4</span>
+                        <UpdateContainer>Status Updated</UpdateContainer>{" "}
+                      </FlexContainer>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Last Active</TableCell>
+                    <TableCell>4/23/2021</TableCell>
+                  </TableRow>
+                </tbody>
+              </FosterProfileTable>
+              <FloatingEditButton topOffset="-11px" leftOffset="calc(97% - 45px)" />
+              <br />
+              <br />
+              <ViewApplicationButton>View Application</ViewApplicationButton>
+              <br />
+              <br />
+            </TextBox>
+            <TextBox>
+              <TextBoxTitle>Internal Foster Notes</TextBoxTitle>
+              <TextLeftAlign>
                 <br />
+                <GeneralNotes>General Notes:</GeneralNotes>
                 <br />
-                <ViewApplicationButton>View Application</ViewApplicationButton>
-                <br />
-                <br />
-              </TextBox>
-              <TextBox>
-                <TextBoxTitle>Internal Foster Notes</TextBoxTitle>
-                <TextLeftAlign>
-                  <br />
-                  <GeneralNotes>General Notes:</GeneralNotes>
-                  <br />
-                  <InternalNotes>
-                    Looking for a medium size to large size dog. Does have other dogs at home...
-                  </InternalNotes>
-                </TextLeftAlign>
-                <FloatingEditButton topOffset="-26px" leftOffset="calc(97% - 45px)" />
-              </TextBox>
-            </FosterProfileContainer>
-            <AvailableDogsContainer>
-              <TitleText>Available Dogs</TitleText>
-              <SubtitleText>Scroll to view all available dogs</SubtitleText>
-              <DogGrid>
-                {Array.from(Array(12).keys()).map((index) => {
-                  if (index % 3 === 0) return <DogCard dogName="Lolita" dogImage={GridImage1} />;
-                  if (index % 3 === 1) return <DogCard dogName="Flower" dogImage={GridImage2} />;
-                  return <DogCard dogName="Shelly" dogImage={GridImage3} />;
-                })}
-              </DogGrid>
-            </AvailableDogsContainer>
-          </SplitCardContainer>
-          <CenterAlign>
-            <SubmitButton>Confirm</SubmitButton>
-          </CenterAlign>
-        </PaddingContainer>
-      </OuterContainer>
-    </DefaultBody>
+                <InternalNotes>
+                  Looking for a medium size to large size dog. Does have other dogs at home...
+                </InternalNotes>
+              </TextLeftAlign>
+              <FloatingEditButton topOffset="-26px" leftOffset="calc(97% - 45px)" />
+            </TextBox>
+          </FosterProfileContainer>
+          <AvailableDogsContainer>
+            <TitleText>Available Dogs</TitleText>
+            <SubtitleText>Scroll to view all available dogs</SubtitleText>
+            <DogGrid>
+              {Array.from(Array(12).keys()).map((index) => {
+                if (index % 3 === 0) return <DogCard dogName="Lolita" dogImage={GridImage1} />;
+                if (index % 3 === 1) return <DogCard dogName="Flower" dogImage={GridImage2} />;
+                return <DogCard dogName="Shelly" dogImage={GridImage3} />;
+              })}
+            </DogGrid>
+          </AvailableDogsContainer>
+        </SplitCardContainer>
+        <CenterAlign>
+          <SubmitButton>Confirm</SubmitButton>
+        </CenterAlign>
+      </PaddingContainer>
+    </OuterContainer>
   );
 }
 
-export default FosterMatching;
+export default FosterMatchingAdmin;

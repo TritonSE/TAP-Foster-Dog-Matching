@@ -12,7 +12,6 @@ import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import PendingApplications from "./pages/PendingApplications";
-import FosterMatching from "./pages/FosterMatching";
 
 function App() {
   return (
@@ -27,7 +26,6 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/fostermatching" element={<FosterMatching />} />
         {/* Admin Routes TODO: set up conditional routing based on user role */}
         <Route path="/pending-applications" element={<PendingApplications />} />
       </Routes>
