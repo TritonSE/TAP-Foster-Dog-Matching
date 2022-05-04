@@ -36,11 +36,9 @@ module.exports = mongoose.model(
     },
     ambassador: {
       type: ObjectId,
-      required: true,
     },
     coordinator: {
       type: ObjectId,
-      required: true,
     },
     accountStatus: {
       type: String,

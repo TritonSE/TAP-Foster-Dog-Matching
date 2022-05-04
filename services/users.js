@@ -11,10 +11,18 @@ async function createUser(rawUser) {
   if (existingUser) {
     throw ServiceError(400, "An account with this email already exists");
   }
-
-  const user = await new User(rawUser).save();
-  await createFirebaseUser(user.id.toString(), rawUser.email, rawUser.password, "user");
-  return user;
+  const newUserObj = {
+    ...rawUser,
+    currentlyFostering: false,
+    lastActive: Date.now(),
+    pastFosters: 0,
+    ambassador: null,
+    coordinator: null,
+    accountStatus: "active",
+  };
+  const newUser = await new User(newUserObj).save();
+  await createFirebaseUser(newUser.id.toString(), rawUser.email, rawUser.password, "user");
+  return newUser;
 }
 
 /**

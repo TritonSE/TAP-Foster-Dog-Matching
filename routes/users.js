@@ -10,13 +10,13 @@ const validators = [
   body("lastName").notEmpty().isString(),
   body("email").notEmpty().isString().isEmail(),
   body("password").notEmpty().isString().isLength({ min: 6 }),
-  body("role").notEmpty().isString(),
-  body("lastActive").notEmpty().isDate({ format: "MM/DD/YY" }),
-  body("currentlyFostering").notEmpty().isBoolean(),
-  body("pastFosters").notEmpty().isNumeric(),
-  body("ambassador").notEmpty().isMongoId(),
-  body("coordinator").notEmpty().isMongoId(),
-  body("accountStatus").notEmpty().isString(),
+  // body("role").notEmpty().isString(),
+  // body("lastActive").notEmpty().isDate({ format: "MM/DD/YY" }),
+  // body("currentlyFostering").notEmpty().isBoolean(),
+  // body("pastFosters").notEmpty().isNumeric(),
+  // body("ambassador").notEmpty().isMongoId(),
+  // body("coordinator").notEmpty().isMongoId(),
+  // body("accountStatus").notEmpty().isString(),
 ];
 
 /**
