@@ -20,45 +20,60 @@ const validators = [
 /**
  * GET /dogs - Return all dog profiles
  */
-router.get("/", (req, res, next) => {
+router.get("/", (req, res) => {
   getDogs()
-    .then((dogs) =>
-      res.status(200).json({
-        dogs,
-      })
-    )
+    .then((dogs) => {
+      if (dogs) {
+        return res.status(200).json({
+          dogs,
+        });
+      }
+      return res.status(400).json({
+        errors: [{ message: `Something went wrong, dog profiles could not be retrieved` }],
+      });
+    })
     .catch((err) => {
-      next(err);
+      res.status(500).json({ message: err });
     });
 });
 
 /**
  * GET /dogs/:dogId - Return a dog profile by ID
  */
-router.get("/:dogId", (req, res, next) => {
+router.get("/:dogId", (req, res) => {
   getDog(req.params.dogId)
-    .then((dog) =>
-      res.status(200).json({
-        dog,
-      })
-    )
+    .then((dog) => {
+      if (dog) {
+        return res.status(200).json({
+          dog,
+        });
+      }
+      return res.status(400).json({
+        errors: [{ message: `Something went wrong, dog profile could not be retrieved` }],
+      });
+    })
     .catch((err) => {
-      next(err);
+      res.status(500).json({ message: err });
     });
 });
 
 /**
  * POST /dogs - Create a dog profile
  */
-router.post("/", [...validators, validateRequest], (req, res, next) => {
+router.post("/", [...validators, validateRequest], (req, res) => {
   createDog(req.body)
     .then((dog) => {
-      res.status(200).json({
-        dog,
+      if (dog) {
+        return res.status(200).json({
+          dog,
+        });
+      }
+      return res.status(400).json({
+        errors: [{ message: `Something went wrong, new dog profile could not be created` }],
       });
     })
     .catch((err) => {
-      next(err);
+      res.status(500).json({ message: err });
     });
 });
 
@@ -68,19 +83,20 @@ router.post("/", [...validators, validateRequest], (req, res, next) => {
 router.put(
   "/:dogId",
   [...validators.map((validator) => validator.optional()), validateRequest], // all fields for update are optional
-  (req, res, next) => {
+  (req, res) => {
     updateDog(req.params.dogId, req.body)
       .then((dog) => {
         if (dog) {
-          res.status(200).json({
+          return res.status(200).json({
             dog,
           });
-        } else {
-          throw new Error("Dog profile was not updated.");
         }
+        return res.status(400).json({
+          errors: [{ message: `Something went wrong, dog profile could not be updated` }],
+        });
       })
       .catch((err) => {
-        next(err);
+        res.status(500).json({ message: err });
       });
   }
 );

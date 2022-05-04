@@ -3,18 +3,15 @@
  *
  * Component that renders the Foster Application progress bar
  *
- * Used on: Applications
+ * Used in: Application Page
  *
- * Props:
- *  - currentStep [number] - int representing the current active step (0-indexed)
- *  - unlockedUpToStep [number] - int representing the farthest unlocked step (0-indexed)
- *  - completedUpToStep [number] - int representing the farthest completed step (0-indexed)
  */
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { Colors } from "./Theme";
 import check from "../images/check.png";
 import useResponsive, { device } from "../utils/useResponsive";
+import ApplicationContext from "../contexts/ApplicationContext";
 
 const MILESTONES = [
   "Application Submitted",
@@ -31,10 +28,11 @@ const ProgressBarContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   position: relative;
-  ${device.mobile} {
+  margin-bottom: 60px;
+  ${device.tablet} {
     flex-direction: column;
     margin-top: 40px;
-    margin-bottom: 0;
+    margin-bottom: 20px;
   }
 `;
 
@@ -44,7 +42,7 @@ const ProgressMilestoneBarSection = styled.div`
   margin: 0 -10px;
   background: ${(props) => (props.completed ? Colors.green : "black")};
   height: 16px;
-  ${device.mobile} {
+  ${device.tablet} {
     margin: -10px 0;
     width: 16px;
     height: calc(100% + 20px);
@@ -60,21 +58,12 @@ const ProgressMilestone = styled.div`
   box-sizing: border-box;
   border-radius: 50%;
   background: ${(props) => {
-    if (props.active) return Colors.green;
     if (props.unlocked) return "white";
+    if (props.active) return Colors.green;
     return "black";
   }};
-  ${(props) =>
-    props.unlocked &&
-    !props.active &&
-    css`
-      border: 5px solid ${Colors.green};
-    `}
-  color: ${(props) => {
-    if (props.active) return "white";
-    if (props.unlocked) return "black";
-    return "white";
-  }};
+  border: 5px solid ${(props) => (props.active ? Colors.green : "black")};
+  color: ${(props) => (props.unlocked ? "black" : "white")};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -93,32 +82,54 @@ const ProgressMilestoneText = styled.div`
   color: black;
   top: calc(100% + 6px);
   text-align: center;
-  ${device.mobile} {
+  min-width: 60px;
+  ${device.tablet} {
     top: -30px;
-    left: 70%;
+    left: 100%;
+    font-size: 20px;
+    min-width: 50px;
+  }
+  ${device.mobile} {
+    left: 75%;
     font-size: 3vw;
   }
 `;
 
-function ApplicationProgress({ currentStep, unlockedUpToStep, completedUpToStep }) {
-  const { isMobile } = useResponsive();
+function ApplicationProgress() {
+  const { currentStep, currentSubStep, goToStep, goToNextSubStep } =
+    React.useContext(ApplicationContext);
+  const { isTablet } = useResponsive();
+
+  // TODO: Block onClick if step is not unlocked yet
+  const handleStepClicked = React.useCallback(
+    (index) => {
+      if (currentStep === index) goToNextSubStep();
+      else goToStep(index);
+    },
+    [currentStep, goToNextSubStep, goToStep]
+  );
 
   return (
     <ProgressBarContainer>
-      {isMobile && <ProgressMilestoneText>{MILESTONES[currentStep]}</ProgressMilestoneText>}
+      {isTablet && <ProgressMilestoneText>{MILESTONES[currentStep]}</ProgressMilestoneText>}
       {MILESTONES.map((milestone, index) => (
         <React.Fragment key={milestone}>
           <ProgressMilestone
-            active={index === currentStep || index <= completedUpToStep}
-            unlocked={index === unlockedUpToStep}
-            clickable={index <= unlockedUpToStep}
+            active={index <= currentStep}
+            unlocked={currentStep === index && currentSubStep === "intro"}
+            clickable={index <= currentStep}
+            onClick={() => handleStepClicked(index)}
           >
-            {index <= completedUpToStep ? <img src={check} alt="check mark" /> : index + 1}
-            {!isMobile && <ProgressMilestoneText>{milestone}</ProgressMilestoneText>}
+            {index <= currentStep - 1 ? (
+              <img src={check} alt="check mark" width={isTablet ? 40 : 50} />
+            ) : (
+              index + 1
+            )}
+            {!isTablet && <ProgressMilestoneText>{milestone}</ProgressMilestoneText>}
           </ProgressMilestone>
           {index < MILESTONES.length - 1 && (
             <ProgressMilestoneBarSection
-              completed={index < completedUpToStep || index < unlockedUpToStep}
+              completed={index < currentStep - 1 || index < currentStep}
             />
           )}
         </React.Fragment>
