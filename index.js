@@ -6,6 +6,7 @@ app.use(express.json());
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 
+
 dotenv.config();
 
 const PORT = process.env.PORT || 8000;
@@ -32,6 +33,8 @@ app.use((err, req, res) => {
   }
 });
 
+const {sendEmail} = require("./routes/services/mailer");
 app.listen(PORT, () => {
   console.log(`Server listening at http://localhost:${PORT}`);
+  sendEmail('test', 'jacobau.inbox@gmail.com', {});
 });
