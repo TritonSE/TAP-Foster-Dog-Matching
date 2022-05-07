@@ -28,7 +28,6 @@ const mail = new Email({
  * @param {string} template - Template email
  * @param {string} to_email - Email address(es) being sent to
  * @param {string} locals - Information that will populate the email template
- * @param {object} res - Response
  * @returns {object} - Mail object / err
  */
  async function sendEmail(template, to_email, locals) {
@@ -47,13 +46,10 @@ const mail = new Email({
             console.error(`Error HERE: Email ${template} could not be sent to ${to_email}. \n${err}`);
             return false;
         }
-        // log emails successfully sent
-
         return true;
     }
     console.error(`Error: Email ${template} could not be sent to ${to_email}. Null mailer.`);
     return false;
-    // return res.status(500).send("Server err");
 }
 
 module.exports = {
