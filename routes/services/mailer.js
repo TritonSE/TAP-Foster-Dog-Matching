@@ -1,7 +1,6 @@
 const nodemailer = require("nodemailer");
 const Email = require("email-templates");
-const dotenv = require("dotenv");
-dotenv.config();
+const config = require("../../config");
 
 const transporter = nodemailer.createTransport({
     // service: "gmail",
@@ -10,8 +9,8 @@ const transporter = nodemailer.createTransport({
     secure: true,
     auth: {
         type: "OAuth2",
-        user: 'jacobau.spam@gmail.com',
-        pass: 'KitK@t123spam',
+        user: config.autoEmail.MAIL_USERNAME,
+        pass: config.autoEmail.MAIL_PASSWORD
     }
 });
 
@@ -37,7 +36,7 @@ const mail = new Email({
             await mail.send({
                 template,
                 message: {
-                    from: process.env.MAIL_USER,
+                    from: config.autoEmail.MAIL_USERNAME,
                     to: to_email,
                 },
                 locals,

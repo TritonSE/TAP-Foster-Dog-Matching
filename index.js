@@ -4,12 +4,9 @@ const app = express();
 app.use(express.json());
 
 const mongoose = require("mongoose");
-const dotenv = require("dotenv");
+const config = require("./config");
 
-dotenv.config();
-
-const PORT = process.env.PORT || 8000;
-mongoose.connect(process.env.MONGO_URI);
+mongoose.connect(config.db.uri);
 mongoose.connection.once("open", async () => {
   console.log("Established connection to MongoDB.");
 });
@@ -32,6 +29,6 @@ app.use((err, req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Server listening at http://localhost:${PORT}`);
+app.listen(config.app.port, () => {
+  console.log(`Server listening at http://localhost:${config.app.port}`);
 });
