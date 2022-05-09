@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import styled from "styled-components";
 import SplitCardContainer from "./SplitCardContainer";
 import PenIcon from "../images/penicon.png";
@@ -37,7 +37,7 @@ export const FosterProfileContainer = styled.div`
   height: 100%;
   background-color: black;
   border-radius: 15px;
-  padding: 0 20px 20px 20px;
+  padding: 5px 20px 20px 20px;
   box-sizing: border-box;
 `;
 export const AvailableDogsContainer = styled.div`
@@ -46,7 +46,7 @@ export const AvailableDogsContainer = styled.div`
   height: 100%;
   background-color: black;
   border-radius: 15px;
-  padding: 0 20px 20px 20px;
+  padding: 5px 20px 20px 20px;
   box-sizing: border-box;
 `;
 
@@ -54,7 +54,7 @@ export const OuterContainer = styled.div`
   max-width: 100vw;
 `;
 export const PaddingContainer = styled.div`
-  padding-top: 70px;
+  padding-bottom: 15px;
 `;
 export const TitleText = styled.span`
   color: white;
@@ -62,12 +62,13 @@ export const TitleText = styled.span`
   font-size: 33px;
   font-weight: 700;
   line-height: 40px;
+
 `;
 export const TextBox = styled.div`
   background-color: white;
   border-radius: 25px;
   margin-top: 12px;
-  padding: 0 22px;
+  padding: 5px 22px 0 22px;
 `;
 export const TextBoxTitle = styled.span`
   font-weight: 700;
@@ -156,7 +157,7 @@ function FloatingEditButton(props) {
   return (
     <EditButtonParent>
       <EditButton topOffset={props.topOffset} leftOffset={props.leftOffset}>
-        <img src={PenIcon} />
+        <img src={PenIcon} alt="edit icon"/>
         <span>Edit</span>
       </EditButton>
     </EditButtonParent>
@@ -213,18 +214,26 @@ export const DogCardImage = styled.img`
 `;
 function DogCard(props) {
   const [checked, setChecked] = useState(false);
+  let checkboxDOMElement;
 
-  return (
-    <DogCardBackground checked={checked}>
-      <DogCardImage src={props.dogImage} alt={props.dogName} />
-      <br />
-      {props.dogName}
+  const checkbox=
       <DogCardCheckbox
         leftOffset="calc(87% - 8px)"
         topOffset="80%"
         type="checkbox"
-        onChange={(e) => setChecked(e.target.checked)}
+        ref={c => (checkboxDOMElement = c)}
       />
+    useEffect(()=>{
+        console.log(checkboxDOMElement);
+        checkboxDOMElement.checked = checked;
+    }, [checked])
+    
+  return (
+    <DogCardBackground checked={checked} onClick={(_) => setChecked(!checked)}>
+      <DogCardImage src={props.dogImage} alt={props.dogName} />
+      <br />
+      {props.dogName}
+      {checkbox}
     </DogCardBackground>
   );
 }
