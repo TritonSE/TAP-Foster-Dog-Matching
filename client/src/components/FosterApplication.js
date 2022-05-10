@@ -9,6 +9,9 @@ import { ControlledCheckboxes } from "./Checkboxes";
 import { ControlledRadios } from "./Radios";
 import { device } from "../utils/useResponsive";
 import { Colors } from "./Theme";
+import Meetings from "./Meeting";
+import doggo from "../images/good-boi.png";
+import logo from "../images/logo-inverted.png";
 
 const Button = styled.div`
   background: ${Colors.green};
@@ -443,10 +446,12 @@ function FosterAgreementView({ setView }) {
 
   const onSubmit = (data) => {
     console.log(data);
+    setView("done");
   };
 
   const onError = (errors) => {
     console.log(errors);
+    setView("done");
   };
 
   return (
@@ -475,11 +480,34 @@ function FosterAgreementView({ setView }) {
   );
 }
 
+function ApplicationSubmittedView() {
+  return (
+    <Meetings
+      textCard={
+        <div>
+          <p>Hello, Shelby</p>
+          <br />
+          <p>Thank you so much for showing interest in volunteering to foster with us.</p>
+          <p>
+            Your application has been received and is under review! Hang tight, you will receive a
+            notification when we&apos;re ready!
+          </p>
+          <p>Best,</p>
+          <p>The Animal Pad Team</p>
+          <img src={logo} alt="logo" />
+        </div>
+      }
+      imagePath={doggo}
+    />
+  );
+}
+
 function FosterApplication() {
   const [view, setView] = React.useState("application");
 
   if (view === "application") return <FosterApplicationView setView={setView} />;
-  return <FosterAgreementView setView={setView} />;
+  else if (view === "agreement") return <FosterAgreementView setView={setView} />;
+  return <ApplicationSubmittedView />;
 }
 
 export default FosterApplication;

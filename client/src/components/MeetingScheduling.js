@@ -78,7 +78,10 @@ function MeetingScheduling(props) {
           type="button"
         >
           <div className="meeting-time-selected-text-container">
-            <div className="meeting-time-selected-text">Choose</div>
+            {/* TODO: change onClick to real handler. this is just for testing  */}
+            <div className="meeting-time-selected-text" onClick={props.interviewConfirmedCallback}>
+              Choose
+            </div>
           </div>
         </button>
       ) : (
