@@ -2,30 +2,6 @@ const nodemailer = require("nodemailer");
 const Email = require("email-templates");
 const config = require("../../config");
 
-// const transporter =
-//     config.autoEmail.MAIL_USERNAME === ""
-//         ? null
-//         : nodemailer.createTransport({
-//     service: "gmail",
-//     auth: {
-//         type: "OAuth2",
-//         user: config.autoEmail.MAIL_USERNAME,
-//         pass: config.autoEmail.MAIL_PASSWORD,
-//         clientId: config.autoEmail.CLIENT_ID, // Google Cloud Platform
-//         clientSecret: config.autoEmail.CLIENT_SECRET, // Google Cloud Platform
-//         refreshToken: config.autoEmail.REFRESH_TOKEN, // OAuth Playground
-//     }
-// });
-
-// const mail =
-//     config.autoEmail.MAIL_USERNAME === ""
-//         ? null
-//         : new Email({
-//               transport: transporter,
-//               send: true,
-//               preview: false,
-//           });
-
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
