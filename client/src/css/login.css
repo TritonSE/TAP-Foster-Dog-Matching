@@ -84,7 +84,7 @@
 .sign-up {
   position: absolute;
   height: 29px;
-  bottom: 16%;
+  bottom: 14%;
   right: 23%;
 
   color: #9b9a9a;
@@ -172,10 +172,9 @@
 
   .sign-up {
     position: absolute;
-    bottom: 3%;
-    right: 15%;
+    bottom: 1%;
+    right: 10%;
 
     font-size: 20px;
   }
 }
-
