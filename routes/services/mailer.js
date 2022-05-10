@@ -2,23 +2,28 @@ const nodemailer = require("nodemailer");
 const Email = require("email-templates");
 const config = require("../../config");
 
-const transporter = nodemailer.createTransport({
-    // service: "gmail",
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
+const transporter =
+    config.autoEmail.MAIL_USERNAME === ""
+        ? null
+        : nodemailer.createTransport({
+    service: "gmail",
     auth: {
         type: "OAuth2",
         user: config.autoEmail.MAIL_USERNAME,
-        pass: config.autoEmail.MAIL_PASSWORD
+        pass: config.autoEmail.MAIL_PASSWORD,
+        clientId: config.autoEmail.CLIENT_ID, // Google Cloud Platform
+        clientSecret: config.autoEmail.CLIENT_SECRET, // Google Cloud Platform
+        refreshToken: config.autoEmail.REFRESH_TOKEN, // OAuth Playground
     }
 });
 
-const mail = new Email({
-    transport: transporter,
-    send: true,
-    preview: false,
-})
+const mail =  config.autoEmail.MAIL_USERNAME === ""
+    ? null
+    : new Email({
+        transport: transporter,
+        send: true,
+        preview: false,
+    });
 
 /**
  * Populates given email template with locals and sends it to to_email.
