@@ -14,6 +14,8 @@ mongoose.connection.once("open", async () => {
 // Routes
 app.use("/api/dogs", require("./routes/dogs"));
 app.use("/api/interviews", require("./routes/interviews"));
+app.use("/api/admins", require("./routes/admins"));
+app.use("/api/users", require("./routes/users"));
 
 // Error handling
 app.use((err, req, res) => {
