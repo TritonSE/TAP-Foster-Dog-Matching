@@ -62,7 +62,6 @@ export const TitleText = styled.span`
   font-size: 33px;
   font-weight: 700;
   line-height: 40px;
-
 `;
 export const TextBox = styled.div`
   background-color: white;
@@ -157,7 +156,7 @@ function FloatingEditButton(props) {
   return (
     <EditButtonParent>
       <EditButton topOffset={props.topOffset} leftOffset={props.leftOffset}>
-        <img src={PenIcon} alt="edit icon"/>
+        <img src={PenIcon} alt="edit icon" />
         <span>Edit</span>
       </EditButton>
     </EditButtonParent>
@@ -216,18 +215,20 @@ function DogCard(props) {
   const [checked, setChecked] = useState(false);
   let checkboxDOMElement;
 
-  const checkbox=
-      <DogCardCheckbox
-        leftOffset="calc(87% - 8px)"
-        topOffset="80%"
-        type="checkbox"
-        ref={c => (checkboxDOMElement = c)}
-      />
-    useEffect(()=>{
-        console.log(checkboxDOMElement);
-        checkboxDOMElement.checked = checked;
-    }, [checked])
-    
+  const checkbox = (
+    <DogCardCheckbox
+      leftOffset="calc(87% - 8px)"
+      topOffset="80%"
+      type="checkbox"
+      ref={(c) => {
+        checkboxDOMElement = c;
+      }}
+    />
+  );
+  useEffect(() => {
+    checkboxDOMElement.checked = checked;
+  }, [checked]);
+
   return (
     <DogCardBackground checked={checked} onClick={(_) => setChecked(!checked)}>
       <DogCardImage src={props.dogImage} alt={props.dogName} />
@@ -303,7 +304,7 @@ function FosterMatchingAdmin() {
                   Looking for a medium size to large size dog. Does have other dogs at home...
                 </InternalNotes>
               </TextLeftAlign>
-              <FloatingEditButton topOffset="-26px" leftOffset="calc(97% - 45px)" />
+              <FloatingEditButton topOffset="-67px" leftOffset="calc(97% - 45px)" />
             </TextBox>
           </FosterProfileContainer>
           <AvailableDogsContainer>
