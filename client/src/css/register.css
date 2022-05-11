@@ -1,6 +1,6 @@
 #form-container-signup {
   min-height: 650px;
-  max-height: 90%;
+  max-height: 1000px;
   height: 87.5%;
 }
 
@@ -12,7 +12,7 @@ input {
   background: white;
   border: 3px solid #c4c4c4;
   box-sizing: border-box;
-  border-radius: 25px;
+  border-radius: 20px;
 
   font-size: 24px;
   padding-left: 4%;
@@ -165,7 +165,7 @@ input {
   text-decoration: none;
 }
 
-@media only screen and (max-width: 750px) {
+@media only screen and (max-width: 1050px) {
   .form-container input::placeholder {
     position: absolute;
     left: 8%;
@@ -177,8 +177,23 @@ input {
   }
 
   #form-container-signup {
-    bottom: 10%;
-    height: 60%;
+    min-height: 500px;
+    max-height: 50%;
+    height: 87.5%;
+  }
+
+  @media only screen and (max-height: 950px) {
+    #form-container-signup {
+      min-height: 450px;
+      bottom: 20vh;
+    }
+  }
+
+  @media only screen and (max-height: 700px) {
+    #form-container-signup {
+      min-height: 360px;
+      bottom: 15vh;
+    }
   }
 
   #form-header-signup {
@@ -220,8 +235,12 @@ input {
     font-size: 17.1429px;
   }
 
-  .sign-up {
-    display: none;
+  .log-in {
+    position: absolute;
+    bottom: 11%;
+    right: 14%;
+
+    font-size: 20px;
   }
 }
 
