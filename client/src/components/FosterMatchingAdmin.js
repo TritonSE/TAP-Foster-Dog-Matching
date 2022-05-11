@@ -299,12 +299,13 @@ function FosterMatchingAdmin() {
               <TextLeftAlign>
                 <br />
                 <GeneralNotes>General Notes:</GeneralNotes>
+                <FloatingEditButton topOffset="-28px" leftOffset="calc(97% - 45px)" />
                 <br />
                 <InternalNotes>
                   Looking for a medium size to large size dog. Does have other dogs at home...
                 </InternalNotes>
               </TextLeftAlign>
-              <FloatingEditButton topOffset="-67px" leftOffset="calc(97% - 45px)" />
+              
             </TextBox>
           </FosterProfileContainer>
           <AvailableDogsContainer>
