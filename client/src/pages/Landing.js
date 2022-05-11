@@ -1,7 +1,7 @@
 import React from "react";
 // import PassFail from "../components/PassFail";
-// import LoadingBox from "../components/LoadingBox";
-
+import LoadingBox from "../components/LoadingBox";
+import InterviewInfo from "../components/InterviewInfo"
 function Landing() {
   return (
     <div>
@@ -15,6 +15,10 @@ function Landing() {
         message= "Waiting for applicant to respond, click on the progress bar to see previous steps"
         currentStage="Applicant is scheduling their interview"
       /> */}
+
+      <InterviewInfo>
+
+      </InterviewInfo>
     </div>
   );
 }

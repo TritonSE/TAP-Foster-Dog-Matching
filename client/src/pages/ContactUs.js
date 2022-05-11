@@ -14,6 +14,7 @@ import cancel from "../images/cancel.png";
 import smallCancel from "../images/smallCancel.png";
 import Select from "../components/Select";
 import DefaultBody from "../components/DefaultBody";
+// const { sendEmail } = require("../../../routes/services/mailer");
 
 function ContactUs() {
   const [continued, setContinued] = useState(false);
