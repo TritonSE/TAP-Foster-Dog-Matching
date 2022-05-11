@@ -11,19 +11,42 @@ const validators = [
   body("lastName").notEmpty().isString(),
   body("address").notEmpty(),
   body("address.addressOne").notEmpty().isString(),
-  body("address.addressTwo").notEmpty().isString(),
+  body("address.addressTwo").notEmpty().isString().optional(),
   body("address.city").notEmpty().isString(),
   body("address.state").notEmpty().isString(),
   body("address.country").notEmpty().isString(),
-  body("address.zipcode").notEmpty().isString(),
+  body("address.zipcode").notEmpty().isNumeric(),
   body("email").notEmpty().isString().isEmail(),
-  body("dateOfBirth").notEmpty().isDate({ format: "MM/DD/YYYY" }),
+  body("dateOfBirth").notEmpty().isDate({ format: "MM-DD-YYYY" }),
   body("homeType").notEmpty().isString(),
   body("landlord").notEmpty(),
   body("landlord.firstName").notEmpty().isString(),
-  body("landlord.lastName").notEmpty().isString(),
-  body("landlord.phone").notEmpty().isString(),
-  body("landlord.email").notEmpty().isString().isEmail(),
+  body("landlord.lastName")
+    .if(
+      body("landlord.firstName")
+        .isString()
+        .custom((input) => input !== "n/a")
+    )
+    .notEmpty()
+    .isString(),
+  body("landlord.phone")
+    .if(
+      body("landlord.firstName")
+        .isString()
+        .custom((input) => input !== "n/a")
+    )
+    .notEmpty()
+    .isString()
+    .isMobilePhone(),
+  body("landlord.email")
+    .if(
+      body("landlord.firstName")
+        .isString()
+        .custom((input) => input !== "n/a")
+    )
+    .notEmpty()
+    .isString()
+    .isEmail(),
   body("fosterInfo").notEmpty(),
   body("fosterInfo.restrictions").notEmpty().isString(),
   body("fosterInfo.sleepLocation").notEmpty().isString(),
@@ -35,8 +58,14 @@ const validators = [
   body("fosterInfo.pastExperience").notEmpty().isString(),
   body("fosterInfo.whyFoster").notEmpty().isString(),
   body("fosterInfo.oneMonthCommitment").notEmpty().isString(),
-  body("fosterInfo.sizeOfDog").notEmpty().isString(),
-  body("fosterInfo.ageOfDog").notEmpty().isString(),
+  body("fosterInfo.sizeOfDog")
+    .notEmpty()
+    .isArray()
+    .custom((input) => input.every((value) => typeof value === "string")),
+  body("fosterInfo.ageOfDog")
+    .notEmpty()
+    .isArray()
+    .custom((input) => input.every((value) => typeof value === "string")),
   body("reference").notEmpty(),
   body("reference.firstName").notEmpty().isString(),
   body("reference.lastName").notEmpty().isString(),
@@ -53,7 +82,7 @@ const validators = [
   body("otherInfo.livingSituation").notEmpty().isString(),
   body("agreement").notEmpty(),
   body("agreement.name").notEmpty().isString(),
-  body("agreement.date").notEmpty().isDate({ format: "MM/DD/YYYY" }),
+  body("agreement.date").notEmpty().isDate({ format: "MM-DD-YYYY" }),
   body("agreement.signature").notEmpty().isString(),
   body("status").notEmpty().isString(),
   body("ambassador").notEmpty().isMongoId(),
@@ -70,7 +99,7 @@ const validators = [
 ];
 
 /**
- * GET /applications/:applicationId - Return an application profile by ID
+ * GET /applications/:applicationId - Return an application by ID
  */
 router.get("/:applicationId", (req, res, next) => {
   getApplication(req.params.applicationId)
@@ -80,12 +109,15 @@ router.get("/:applicationId", (req, res, next) => {
       })
     )
     .catch((err) => {
+      res.status(500).json({
+        err,
+      });
       next(err);
     });
 });
 
 /**
- * POST /applications - Create an application profile
+ * POST /applications - Create an application
  */
 router.post("/", [...validators, validateRequest], (req, res, next) => {
   createApplication(req.body)
@@ -95,12 +127,15 @@ router.post("/", [...validators, validateRequest], (req, res, next) => {
       });
     })
     .catch((err) => {
+      res.status(500).json({
+        err,
+      });
       next(err);
     });
 });
 
 /**
- * PUT /applications/:applicationId - Update an application profile
+ * PUT /applications/:applicationId - Update an application
  */
 router.put(
   "/:applicationId",
@@ -113,10 +148,14 @@ router.put(
             application,
           });
         } else {
-          throw new Error("Application profile was not updated.");
+          res.status(500).json(["There was an error updating the application", application]);
+          throw new Error("Application was not updated.");
         }
       })
       .catch((err) => {
+        res.status(500).json({
+          err,
+        });
         next(err);
       });
   }

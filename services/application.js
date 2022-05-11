@@ -1,7 +1,7 @@
 const { Application } = require("../models");
 
 /**
- * Returns a specific application profile according to provided application id
+ * Returns a specific application according to provided application id
  * @param applicationId - _id of application
  */
 function getApplication(applicationId) {
@@ -9,8 +9,8 @@ function getApplication(applicationId) {
 }
 
 /**
- * Create a application profile
- * @param rawApplicationProfile - profile of application to create
+ * Create a application
+ * @param rawApplicationProfile - application to create
  */
 async function createApplication(rawApplicationProfile) {
   const application = await new Application(rawApplicationProfile).save();
@@ -18,9 +18,9 @@ async function createApplication(rawApplicationProfile) {
 }
 
 /**
- * Update a application profile
+ * Update a application
  * @param applicationId - id of application to update
- * @param updatedApplicationProfile - profile of updated application
+ * @param updatedApplicationProfile - updated application
  */
 async function updateApplication(applicationId, updatedApplicationProfile) {
   const updatedApplication = await Application.findByIdAndUpdate(

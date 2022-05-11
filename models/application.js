@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 /**
- * Dog Profile Model
+ * Application Model
  */
 module.exports = mongoose.model(
   "Application",
@@ -28,7 +28,7 @@ module.exports = mongoose.model(
         },
         addressTwo: {
           type: String,
-          required: true, // TODO should this be required?
+          required: false,
         },
         city: {
           type: String,
@@ -77,6 +77,7 @@ module.exports = mongoose.model(
           type: String,
           required: true,
         },
+        required: false,
       },
       fosterInfo: {
         restrictions: {
@@ -120,11 +121,11 @@ module.exports = mongoose.model(
           required: true,
         },
         sizeOfDog: {
-          type: String,
+          type: [String],
           required: true,
         },
         ageOfDog: {
-          type: String,
+          type: [String],
           required: true,
         },
       },
