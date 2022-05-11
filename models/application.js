@@ -60,24 +60,22 @@ module.exports = mongoose.model(
         required: true,
       },
       landlord: {
-        // TODO should this also be required?
         firstName: {
           type: String,
           required: true,
         },
         lastName: {
           type: String,
-          required: true,
+          required: false,
         },
         phone: {
           type: String,
-          required: true,
+          required: false,
         },
         email: {
           type: String,
-          required: true,
+          required: false,
         },
-        required: false,
       },
       fosterInfo: {
         restrictions: {

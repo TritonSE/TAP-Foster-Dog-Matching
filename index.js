@@ -22,7 +22,7 @@ app.use("/api/admins", require("./routes/admins"));
 app.use("/api/users", require("./routes/users"));
 
 // Error handling
-app.use((err, req, res) => {
+app.use((err, req, res, _) => {
   if (err.status === 500 || err.status == null) {
     console.error(err);
     res.status(500).json({

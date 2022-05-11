@@ -30,6 +30,7 @@ async function updateApplication(applicationId, updatedApplicationProfile) {
       new: true,
     }
   ).exec();
+
   return updatedApplication;
 }
 

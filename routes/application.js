@@ -148,13 +148,12 @@ router.put(
             application,
           });
         } else {
-          res.status(500).json(["There was an error updating the application", application]);
-          throw new Error("Application was not updated.");
+          res.status(400).json(["Something went wrong updating the application", application]);
         }
       })
       .catch((err) => {
         res.status(500).json({
-          err,
+          message: err,
         });
         next(err);
       });
