@@ -24,7 +24,7 @@
  */
 
 import React, { useState, useEffect } from "react";
-import { NavLink as Link } from "react-router-dom";
+import { NavLink as Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import burger from "../images/burger.png";
 import { signOutUser } from "../services/auth";
@@ -134,6 +134,7 @@ export const SignOut = styled.button`
 `;
 
 function Navbar(props) {
+  const navigate = useNavigate();
   const [renderNav, setRenderNav] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
@@ -147,6 +148,11 @@ function Navbar(props) {
       window.removeEventListener("resize", changeWidth);
     };
   }, []);
+
+  const handleSignOut = () => {
+    signOutUser();
+    navigate("/");
+  };
 
   return (
     <>
@@ -165,7 +171,7 @@ function Navbar(props) {
               </NavLink>
             ))}
             {screenWidth < 750 || renderNav ? (
-              <SignOut onClick={signOutUser}>Sign Out</SignOut>
+              <SignOut onClick={handleSignOut}>Sign Out</SignOut>
             ) : undefined}
           </NavMenu>
         </Nav>

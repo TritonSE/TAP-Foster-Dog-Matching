@@ -7,18 +7,55 @@
  */
 
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "./Button";
+import { getAuthErrorMessage, signInUser } from "../services/auth";
 
 function IntroForm(props) {
   let content;
+  const navigate = useNavigate();
+  const [email, setEmail] = React.useState();
+  const [password, setPassword] = React.useState();
+  const [error, setError] = React.useState();
+
+  const handleSignIn = () => {
+    if (!email) {
+      setError("Please enter an email.");
+      return;
+    }
+    if (!password) {
+      setError("Please enter a password.");
+      return;
+    }
+    signInUser(email, password)
+      .then(() => {
+        setError();
+        navigate("/dashboard");
+      })
+      .catch((e) => setError(getAuthErrorMessage(e.code)));
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handleSignIn();
+    }
+  };
 
   switch (props.formType) {
     case "landing": {
       content = (
         <>
           <div className="form-landing-question">Are you a...</div>
-          <Button buttonLink="/login" className="foster" name="Foster" />
-          <Button buttonLink="/login" className="admin" name="Admin" />
+          <Button
+            className="foster"
+            name="Foster"
+            onClick={() => navigate("/login", { state: { type: "Foster" } })}
+          />
+          <Button
+            className="admin"
+            name="Admin"
+            onClick={() => navigate("/login", { state: { type: "Admin" } })}
+          />
         </>
       );
       break;
@@ -26,10 +63,24 @@ function IntroForm(props) {
     case "login": {
       content = (
         <>
-          <input type="email" className="login-email" placeholder="Email" />
-          <input type="password" className="login-password" placeholder="Password" />
-          {/* TODO: Make Login button work */}
-          <Button className="login" name="Log In" />
+          <input
+            type="email"
+            className="login-email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            onKeyDown={handleKeyDown}
+          />
+          <input
+            type="password"
+            className="login-password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={handleKeyDown}
+          />
+          {error && <p className="error-message">{error}</p>}
+          <Button className="login" name="Log In" onClick={handleSignIn} />
           <a href="/register" className="sign-up">
             Sign Up
           </a>

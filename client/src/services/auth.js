@@ -8,6 +8,7 @@
  */
 
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
+import FIREBASE_AUTH_ERROR_MESSAGES from "../constants/FIREBASE_AUTH_ERROR_MESSAGES";
 import { auth } from "../utils/firebase-config";
 
 /**
@@ -40,4 +41,8 @@ export async function signOutUser() {
  */
 export async function getJWTToken() {
   return auth.currentUser.getIdToken();
+}
+
+export function getAuthErrorMessage(errorCode) {
+  return FIREBASE_AUTH_ERROR_MESSAGES[errorCode] || "Something went wrong :(";
 }
