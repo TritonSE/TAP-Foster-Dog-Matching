@@ -2,7 +2,7 @@ const express = require("express");
 const { body } = require("express-validator");
 const { createUser, getUser } = require("../services/users");
 const { validateRequest } = require("../middleware/validation");
-const { requireAdminRoles } = require("../middleware/auth");
+const { requireAuthenticatedUserOrAdminRoles } = require("../middleware/auth");
 const { ADMIN_ROLES } = require("../services/admins");
 
 const router = express.Router();
@@ -35,7 +35,7 @@ router.post("/", [...validators, validateRequest], (req, res, next) => {
  */
 router.get(
   "/:userId",
-  [requireAdminRoles(ADMIN_ROLES.MANAGEMENT, ADMIN_ROLES.COORDINATOR)],
+  [requireAuthenticatedUserOrAdminRoles(ADMIN_ROLES.MANAGEMENT, ADMIN_ROLES.COORDINATOR)],
   (req, res, next) => {
     getUser(req.params.userId)
       .then((user) => {
