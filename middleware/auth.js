@@ -7,6 +7,7 @@ const { decodeAuthToken } = require("../services/auth");
  * Protected Route Middleware
  *
  * Require a valid JWT token from Firebase be passed into the Authorization header
+ * ie. allow either a User or Admin to access the route
  */
 async function requireAuthentication(req, res, next) {
   const authHeader = req.headers.authorization;
@@ -73,7 +74,7 @@ function requireAuthenticatedAdmin(req, res, next) {
 /**
  * Required Admin Role Middleware
  *
- * requireAuthenticatedAdmin and require caller to be an Admin with a certain role
+ * requireAuthenticatedAdmin and require caller to be an Admin with a certain role(s)
  */
 function requireAdminRoles(...allowedRoles) {
   return (req, res, next) =>
@@ -87,9 +88,32 @@ function requireAdminRoles(...allowedRoles) {
     });
 }
 
+/**
+ * Require User OR Admin Role Middleware
+ *
+ * requireAuthenticatedUser OR require caller to be an Admin with a certain role(s)
+ */
+function requireAuthenticatedUserOrAdminRoles(...allowedRoles) {
+  return (req, res, next) =>
+    requireAuthentication(req, res, async () => {
+      const { decodedToken } = req;
+      const user = await User.findById(decodedToken.uid).exec();
+
+      if (!user) {
+        // User must be Admin, so check role
+        return requireAdminRoles(allowedRoles)(req, res, next);
+      }
+
+      req.currentUser = user;
+
+      return next();
+    });
+}
+
 module.exports = {
   requireAuthentication,
   requireAuthenticatedAdmin,
   requireAuthenticatedUser,
   requireAdminRoles,
+  requireAuthenticatedUserOrAdminRoles,
 };

@@ -29,6 +29,7 @@ async function decodeAuthToken(token) {
     const userInfo = await firebaseAuth.verifyIdToken(token);
     return userInfo;
   } catch (e) {
+    console.error("Error decoding auth token:", e);
     return null;
   }
 }

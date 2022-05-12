@@ -2,6 +2,11 @@ const express = require("express");
 const { body } = require("express-validator");
 const { getInterview, createInterview } = require("../services/interviews");
 const { validateRequest } = require("../middleware/validation");
+const {
+  requireAuthenticatedUser,
+  requireAuthenticatedUserOrAdminRoles,
+} = require("../middleware/auth");
+const { ADMIN_ROLES } = require("../services/admins");
 
 const router = express.Router();
 
@@ -24,23 +29,27 @@ const validators = [
  *
  * @queryParam stage - Current stage of the interview
  */
-router.get("/:interviewId", (req, res, next) => {
-  getInterview(req.params.interviewId, req.query.stage)
-    .then((interview) => {
-      if (interview) {
-        return res.status(200).json({ interview });
-      }
-      return res.status(400).json({
-        errors: [{ message: `Something went wrong, interview could not be retrieved` }],
-      });
-    })
-    .catch((err) => next(err));
-});
+router.get(
+  "/:interviewId",
+  [requireAuthenticatedUserOrAdminRoles(ADMIN_ROLES.MANAGEMENT, ADMIN_ROLES.AMBASSADOR)],
+  (req, res, next) => {
+    getInterview(req.params.interviewId, req.query.stage)
+      .then((interview) => {
+        if (interview) {
+          return res.status(200).json({ interview });
+        }
+        return res.status(400).json({
+          errors: [{ message: `Something went wrong, interview could not be retrieved` }],
+        });
+      })
+      .catch((err) => next(err));
+  }
+);
 
 /**
  * POST /interviews - Create an interview
  */
-router.post("/", [...validators, validateRequest], (req, res, next) => {
+router.post("/", [...validators, validateRequest, requireAuthenticatedUser], (req, res, next) => {
   createInterview(req.body)
     .then((interview) => {
       if (interview) {

@@ -2,6 +2,7 @@ const express = require("express");
 const { body } = require("express-validator");
 const { getDogs, getDog, createDog, updateDog } = require("../services/dogs");
 const { validateRequest } = require("../middleware/validation");
+const { requireAuthentication, requireAuthenticatedAdmin } = require("../middleware/auth");
 
 const router = express.Router();
 
@@ -20,7 +21,7 @@ const validators = [
 /**
  * GET /dogs - Return all dog profiles
  */
-router.get("/", (req, res, next) => {
+router.get("/", [requireAuthenticatedAdmin], (req, res, next) => {
   getDogs()
     .then((dogs) => {
       if (dogs) {
@@ -38,7 +39,7 @@ router.get("/", (req, res, next) => {
 /**
  * GET /dogs/:dogId - Return a dog profile by ID
  */
-router.get("/:dogId", (req, res, next) => {
+router.get("/:dogId", [requireAuthentication], (req, res, next) => {
   getDog(req.params.dogId)
     .then((dog) => {
       if (dog) {
@@ -56,7 +57,7 @@ router.get("/:dogId", (req, res, next) => {
 /**
  * POST /dogs - Create a dog profile
  */
-router.post("/", [...validators, validateRequest], (req, res, next) => {
+router.post("/", [...validators, validateRequest, requireAuthenticatedAdmin], (req, res, next) => {
   createDog(req.body)
     .then((dog) => {
       if (dog) {
@@ -76,7 +77,11 @@ router.post("/", [...validators, validateRequest], (req, res, next) => {
  */
 router.put(
   "/:dogId",
-  [...validators.map((validator) => validator.optional()), validateRequest], // all fields for update are optional
+  [
+    ...validators.map((validator) => validator.optional()), // all fields for update are optional
+    validateRequest,
+    requireAuthenticatedAdmin,
+  ],
   (req, res, next) => {
     updateDog(req.params.dogId, req.body)
       .then((dog) => {

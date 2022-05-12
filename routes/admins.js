@@ -8,6 +8,7 @@ const {
   ADMIN_ROLES,
 } = require("../services/admins");
 const { validateRequest } = require("../middleware/validation");
+const { requireAuthentication, requireAuthenticatedAdmin } = require("../middleware/auth");
 
 const router = express.Router();
 
@@ -45,7 +46,11 @@ router.post("/", [...validators, validateRequest], (req, res, next) => {
  */
 router.put(
   "/:adminId",
-  [...validators.map((validator) => validator.optional()), validateRequest], // all fields for update are optional
+  [
+    ...validators.map((validator) => validator.optional()), // all fields for update are optional
+    validateRequest,
+    requireAuthenticatedAdmin,
+  ],
   (req, res, next) => {
     updateAdmin(req.params.adminId, req.body)
       .then((admin) => {
@@ -65,7 +70,7 @@ router.put(
 /**
  * GET /admins/:adminId - get a admin profile based on its ID
  */
-router.get("/:adminId", (req, res, next) => {
+router.get("/:adminId", [requireAuthentication], (req, res, next) => {
   getAdmin(req.params.adminId)
     .then((admin) => {
       if (admin) {
@@ -83,7 +88,7 @@ router.get("/:adminId", (req, res, next) => {
 /**
  * GET /admins - get all admins
  */
-router.get("/", (req, res, next) => {
+router.get("/", [requireAuthenticatedAdmin], (req, res, next) => {
   getAdmins()
     .then((admin) => {
       if (admin) {

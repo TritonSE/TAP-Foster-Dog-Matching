@@ -2,6 +2,8 @@ const express = require("express");
 const { body } = require("express-validator");
 const { createUser, getUser } = require("../services/users");
 const { validateRequest } = require("../middleware/validation");
+const { requireAdminRoles } = require("../middleware/auth");
+const { ADMIN_ROLES } = require("../services/admins");
 
 const router = express.Router();
 
@@ -10,13 +12,6 @@ const validators = [
   body("lastName").notEmpty().isString(),
   body("email").notEmpty().isString().isEmail(),
   body("password").notEmpty().isString().isLength({ min: 6 }),
-  // body("role").notEmpty().isString(),
-  // body("lastActive").notEmpty().isDate({ format: "MM/DD/YY" }),
-  // body("currentlyFostering").notEmpty().isBoolean(),
-  // body("pastFosters").notEmpty().isNumeric(),
-  // body("ambassador").notEmpty().isMongoId(),
-  // body("coordinator").notEmpty().isMongoId(),
-  // body("accountStatus").notEmpty().isString(),
 ];
 
 /**
@@ -38,19 +33,23 @@ router.post("/", [...validators, validateRequest], (req, res, next) => {
 /**
  * GET /users/:userId - get a user profile based on its ID
  */
-router.get("/:userId", (req, res, next) => {
-  getUser(req.params.userId)
-    .then((user) => {
-      if (user) {
-        return res.status(200).json({
-          user,
+router.get(
+  "/:userId",
+  [requireAdminRoles(ADMIN_ROLES.MANAGEMENT, ADMIN_ROLES.COORDINATOR)],
+  (req, res, next) => {
+    getUser(req.params.userId)
+      .then((user) => {
+        if (user) {
+          return res.status(200).json({
+            user,
+          });
+        }
+        return res.status(400).json({
+          errors: [{ msg: "Unsuccessful user retrieval/ enter valid userId" }],
         });
-      }
-      return res.status(400).json({
-        errors: [{ msg: "Unsuccessful user retrieval/ enter valid userId" }],
-      });
-    })
-    .catch((err) => next(err));
-});
+      })
+      .catch((err) => next(err));
+  }
+);
 
 module.exports = router;
