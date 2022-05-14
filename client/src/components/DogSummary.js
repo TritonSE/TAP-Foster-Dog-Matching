@@ -59,6 +59,9 @@ const NotesWrapper = styled.div`
   padding-left: 18px;
   padding-right: 18px;
   margin-bottom: 4vh;
+  @media screen and (max-height: 1000px) {
+    margin-bottom: 2vh;
+  }
 `;
 
 const Notes = styled.p`
@@ -74,6 +77,9 @@ const InterestedWrapper = styled.div`
   padding-left: 18px;
   padding-right: 18px;
   margin-bottom: 4vh;
+  @media screen and (max-height: 1000px) {
+    margin-bottom: 2vh;
+  }
 `;
 
 const Row = styled.div`
