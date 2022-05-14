@@ -72,7 +72,6 @@ function CoordinatorSelect({ initialValue }) {
   return (
     <Select
       value={value}
-      height="20px"
       options={[
         // TODO: Replace with data
         { label: "Kristin", value: "Kristin" },
@@ -96,7 +95,6 @@ function AmbassadorSelect({ initialValue }) {
   return (
     <Select
       value={value}
-      height="20px"
       options={[
         // TODO: Replace with data
         { label: "Shelby", value: "Shelby" },

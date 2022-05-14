@@ -1,0 +1,342 @@
+.container {
+  width: 70.677vw;
+  height: 36.25vw;
+  background: #000000;
+  border-radius: 35px;
+}
+
+.container-six-weeks {
+  width: 70.677vw;
+  height: 41.25vw;
+  background: #000000;
+  border-radius: 35px;
+}
+
+.container-text {
+  font-family: Myriad Pro;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.719vw;
+  line-height: 2.083vw;
+  color: #ffffff;
+  text-align: center;
+  padding-top: max(5px, 0.938vw);
+  padding-bottom: max(5px, 0.938vw);
+}
+
+.calendar-box {
+  float: left;
+  width: calc(37.115vw - 0.729vw - 0.729vw);
+  height: calc(30.365vw - 0.729vw - 0.729vw);
+  margin-left: 1.875vw;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 0.729vw 0.729vw 0.729vw 0.729vw;
+}
+
+.calendar-box-six-weeks {
+  float: left;
+  width: calc(37.115vw - 0.729vw - 0.729vw);
+  height: calc(35.365vw - 0.729vw - 0.729vw);
+  margin-left: 1.875vw;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 0.729vw 0.729vw 0.729vw 0.729vw;
+}
+
+.left-arrow {
+  width: 1.146vw;
+  height: 1.99vw;
+  float: left;
+  cursor: pointer;
+  outline: none;
+}
+
+.month {
+  text-align: center;
+  font-family: Myriad Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 2.5vw;
+  line-height: 2.24vw;
+  color: #000000;
+}
+
+.right-arrow {
+  width: 1.146vw;
+  height: 1.99vw;
+  float: right;
+  cursor: pointer;
+  outline: none;
+}
+
+.times-box {
+  float: right;
+  width: 27.552vw;
+  height: 30.365vw;
+  margin-right: 1.719vw;
+  background: #ffffff;
+  border-radius: 15px;
+}
+
+.times-box-six-weeks {
+  float: right;
+  width: 27.552vw;
+  height: 35.365vw;
+  margin-right: 1.719vw;
+  background: #ffffff;
+  border-radius: 15px;
+}
+
+.times-box-title {
+  margin-top: 1.823vw;
+  font-family: Myriad Pro;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.161vw;
+  line-height: 1.406vw;
+  color: #000000;
+  text-align: center;
+}
+
+.times-box-description {
+  margin-top: 0.45vw;
+  font-family: Myriad Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.042vw;
+  line-height: 1.25vw;
+  text-align: center;
+}
+
+.date {
+  font-family: Myriad Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.161vw;
+  line-height: 1.406vw;
+  color: #000000;
+  margin-left: 2vw;
+  margin-top: 1.3vw;
+}
+
+.meeting-times-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 1.146vw;
+  column-gap: 1.875vw;
+  margin-top: 1.25vw;
+  margin-left: 2vw;
+  width: max-content;
+}
+
+.meeting-times-container-six-weeks {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 1.246vw;
+  column-gap: 1.875vw;
+  margin-top: 1.25vw;
+  margin-left: 2vw;
+  width: max-content;
+}
+
+.meeting-time {
+  width: 10.885vw;
+  height: 3.021vw;
+  border: 2px solid #000000;
+  box-sizing: border-box;
+  border-radius: 10px;
+  display: inline;
+  cursor: pointer;
+  outline: none;
+  background-color: #ffffff;
+}
+
+.meeting-time-six-weeks {
+  width: 10.885vw;
+  height: 4.021vw;
+  border: 2px solid #000000;
+  box-sizing: border-box;
+  border-radius: 10px;
+  display: inline;
+  cursor: pointer;
+  outline: none;
+  background-color: #ffffff;
+}
+
+.meeting-time-text {
+  font-family: Myriad Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.161vw;
+  line-height: 1.161vw;
+  text-align: center;
+  vertical-align: middle;
+  color: #000000;
+}
+
+.meeting-time-selected {
+  width: 10.885vw;
+  height: 3.021vw;
+  border: 2px solid #000000;
+  box-sizing: border-box;
+  border-radius: 10px;
+  display: inline;
+  outline: none;
+  background: rgba(141, 196, 66, 0.6);
+}
+
+.meeting-time-selected-six-weeks {
+  width: 10.885vw;
+  height: 4.021vw;
+  border: 2px solid #000000;
+  box-sizing: border-box;
+  border-radius: 10px;
+  display: inline;
+  outline: none;
+  background: rgba(141, 196, 66, 0.6);
+}
+
+.meeting-time-selected-text-container {
+  width: 4.948vw;
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  border-radius: 5px;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.meeting-time-selected-text {
+  font-family: Myriad Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.161vw;
+  line-height: 2.021vw;
+  text-align: center;
+  vertical-align: middle;
+  color: #ffffff;
+}
+
+@media screen and (max-width: 750px) {
+  .container {
+    width: 288px;
+    height: 619px;
+  }
+
+  .container-six-weeks {
+    width: 288px;
+    height: 654px;
+  }
+
+  .container-text {
+    font-size: 19px;
+    line-height: 23px;
+  }
+
+  .calendar-box {
+    width: 254.345px;
+    height: 209.065px;
+    margin-left: 11px;
+    float: none;
+    margin-top: 20px;
+    margin-bottom: 12px;
+    padding: 5.4675px 5.4675px 5.4675px 5.4675px;
+  }
+
+  .calendar-box-six-weeks {
+    width: 254.345px;
+    height: 244.065px;
+    margin-left: 11px;
+    float: none;
+    margin-top: 20px;
+    margin-bottom: 12px;
+    padding: 5.4675px 5.4675px 5.4675px 5.4675px;
+  }
+
+  .left-arrow {
+    width: 8.595px;
+    height: 14.925px;
+  }
+
+  .month {
+    font-size: 18.1132px;
+    line-height: 22px;
+  }
+  .right-arrow {
+    width: 8.595px;
+    height: 14.925px;
+  }
+  .times-box {
+    float: left;
+    width: 267px;
+    height: 308px;
+    margin-left: 11px;
+  }
+  .times-box-six-weeks {
+    float: left;
+    width: 267px;
+    height: 308px;
+    margin-left: 11px;
+  }
+  .times-box-title {
+    margin-top: 21.1725px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .times-box-description {
+    margin-top: 3.375px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .date {
+    font-size: 14px;
+    line-height: 17px;
+    margin-left: 23px;
+    margin-top: 15.75px;
+  }
+
+  .meeting-times-container {
+    row-gap: 11.09px;
+    column-gap: 18.15px;
+    margin-top: 9.375px;
+    margin-left: 23px;
+  }
+  .meeting-times-container-six-weeks {
+    row-gap: 11.09px;
+    column-gap: 18.15px;
+    margin-top: 9.375px;
+    margin-left: 23px;
+  }
+  .meeting-time {
+    width: 100.8975px;
+    height: 29.25px;
+  }
+  .meeting-time-six-weeks {
+    width: 100.8975px;
+    height: 29.25px;
+  }
+  .meeting-time-text {
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .meeting-time-selected {
+    width: 100.8975px;
+    height: 29.25px;
+  }
+  .meeting-time-selected-six-weeks {
+    width: 100.8975px;
+    height: 29.25px;
+  }
+  .meeting-time-selected-text-container {
+    width: 46.22px;
+  }
+
+  .meeting-time-selected-text {
+    font-size: 11.1971px;
+    line-height: 15px;
+  }
+}

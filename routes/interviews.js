@@ -24,27 +24,36 @@ const validators = [
  *
  * @queryParam stage - Current stage of the interview
  */
-router.get("/:interviewId", (req, res, next) => {
+router.get("/:interviewId", (req, res) => {
   getInterview(req.params.interviewId, req.query.stage)
     .then((interview) => {
-      if (!interview) res.status(500).send("Interview does not exist!");
-      res.status(200).json({ interview });
+      if (interview) {
+        return res.status(200).json({ interview });
+      }
+      return res.status(400).json({
+        errors: [{ message: `Something went wrong, interview could not be retrieved` }],
+      });
     })
     .catch((err) => {
-      next(err);
+      res.status(500).json({ message: err });
     });
 });
 
 /**
  * POST /interviews - Create an interview
  */
-router.post("/", [...validators, validateRequest], (req, res, next) => {
+router.post("/", [...validators, validateRequest], (req, res) => {
   createInterview(req.body)
     .then((interview) => {
-      res.status(200).json({ interview });
+      if (interview) {
+        return res.status(200).json({ interview });
+      }
+      return res.status(400).json({
+        errors: [{ message: `Something went wrong, interview could not be created` }],
+      });
     })
     .catch((err) => {
-      next(err);
+      res.status(500).json({ message: err });
     });
 });
 

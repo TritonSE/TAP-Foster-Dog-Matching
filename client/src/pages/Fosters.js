@@ -4,6 +4,7 @@ import Table from "../components/Table";
 import TableCellButton from "../components/TableCellButton";
 import Select from "../components/Select";
 import { Colors, Typography } from "../components/Theme";
+import DefaultBody from "../components/DefaultBody";
 
 const DUMMY_REPEAT_FOSTERS_DATA = [
   {
@@ -37,7 +38,7 @@ const DUMMY_ALL_FOSTERS_DATA = [
     firstName: "Shelby",
     lastActive: "04/16/21",
     accountActive: true,
-    currentlyFostering: 2,
+    currentlyFostering: "Yes",
     pastFosters: 4,
     ambassador: "Shelby",
     coordinator: "Kristin",
@@ -46,7 +47,7 @@ const DUMMY_ALL_FOSTERS_DATA = [
     firstName: "Shelby",
     lastActive: "04/16/21",
     accountActive: false,
-    currentlyFostering: 1,
+    currentlyFostering: "No",
     pastFosters: 4,
     ambassador: "Shelby",
     coordinator: "Jim",
@@ -55,7 +56,7 @@ const DUMMY_ALL_FOSTERS_DATA = [
     firstName: "Shelby",
     lastActive: "04/16/21",
     accountActive: true,
-    currentlyFostering: 2,
+    currentlyFostering: "Yes",
     pastFosters: 3,
     ambassador: "Shelby",
     coordinator: "Kristin",
@@ -205,10 +206,10 @@ function RepeatFosters() {
   );
 
   return (
-    <>
+    <div>
       <Heading>My Repeat Fosters</Heading>
       <Table columns={columns} rows={rows} />
-    </>
+    </div>
   );
 }
 
@@ -277,7 +278,7 @@ function AllFosters() {
   );
 
   return (
-    <>
+    <div>
       <HeadingContainer>
         <Heading>{role === "management" ? "All Fosters" : "My Fosters Information"}</Heading>
         {role === "management" && (
@@ -293,17 +294,26 @@ function AllFosters() {
           />
         )}
       </HeadingContainer>
-      <Table columns={columns} rows={rows} />;
-    </>
+      <Table columns={columns} rows={rows} />
+    </div>
   );
 }
 
+const FostersContainer = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 40px;
+`;
+
 function Fosters() {
   return (
-    <>
-      {(role === "ambassador" || role === "management") && <RepeatFosters />}
-      {(role === "management" || role === "coordinator") && <AllFosters />}
-    </>
+    <DefaultBody>
+      <FostersContainer>
+        {(role === "ambassador" || role === "management") && <RepeatFosters />}
+        {(role === "management" || role === "coordinator") && <AllFosters />}
+      </FostersContainer>
+    </DefaultBody>
   );
 }
 
