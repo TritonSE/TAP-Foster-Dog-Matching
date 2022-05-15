@@ -16,7 +16,7 @@
   color: red;
   position: absolute;
   left: 42%;
-  top: 20vh;
+  top: 7vh;
   font-size: max(15px, 2.6vh);
 }
 
@@ -25,7 +25,7 @@
   width: max(400px, 36%);
   height: 55vh;
   left: 42%;
-  top: 27%;
+  top: 17%;
 
   background: #ffffff;
   border: 5px solid #8dc442;
@@ -74,8 +74,8 @@
   position: absolute;
   width: min(1090px, 60vw);
   height: 60vh;
-  left: 35vw;
-  top: 27vh;
+  left: 30vw;
+  top: 17%;
 
   background: #ffffff;
   border: 1px solid #000000;

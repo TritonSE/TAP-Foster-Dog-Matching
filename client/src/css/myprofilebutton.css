@@ -1,0 +1,44 @@
+.myprofile-button {
+  cursor: pointer;
+  outline: none;
+  width: 232px;
+  height: 74px;
+  background: #c6e2a1;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 50px;
+  float: right;
+  font-family: Myriad Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 25px;
+  margin-right: 62px;
+}
+
+.myprofile-button-text {
+  float: left;
+  color: #000000;
+  line-height: 74px;
+  padding-left: 27px;
+}
+
+.myprofile-button-image-container {
+  float: right;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  padding-right: 20px;
+  line-height: 110px;
+}
+
+.myprofile-button-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+
+@media only screen and (max-width: 1175px) {
+  .myprofile-button {
+    float: none;
+    margin: 0 0 0 -5px;
+  }
+}

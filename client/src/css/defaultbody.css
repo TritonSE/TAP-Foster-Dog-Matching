@@ -1,21 +1,35 @@
-#default-body {
-  display: grid;
-  grid-template-columns: max(250px, 16vw) auto;
+#default-body-container {
+  display: flex;
+  flex-direction: column;
   height: 100%;
 }
 
-#default-body-container {
-  grid-column: 2;
-  padding: 65px;
-  overflow: auto;
+#default-body {
+  position: relative;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: row;
   height: 100%;
+}
+
+#default-body-content {
+  display: flex;
+  flex-direction: column;
+  padding: 50px 40px;
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+@media only screen and (max-width: 1024px) {
+  #default-body-content {
+    padding: 20px;
+  }
 }
 
 @media only screen and (max-width: 750px) {
   #default-body {
     display: block;
-  }
-  #default-body-container {
-    padding: 30px;
   }
 }

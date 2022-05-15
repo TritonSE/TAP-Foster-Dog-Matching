@@ -5,6 +5,9 @@
  *
  * Used on: Select component
  *
+ * Props:
+ *  - onClickAway [function] - callback to run when the user clicks away from the children
+ *  - children [ReactElement] - element to listen to
  */
 
 import React from "react";
