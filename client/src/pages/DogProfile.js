@@ -9,6 +9,11 @@ import GreenButton from "../images/greenbutton.png";
 
 import { device } from "../utils/useResponsive";
 
+// styles for whole page
+const AllContentWrapper = styled.div`
+  position: relative;
+`;
+
 // styles for DogInfoBlock component
 const DogInfoWrapper = styled.div`
   display: flex;
@@ -77,18 +82,21 @@ const DogConainer = styled.div`
 
 // styles for CreateNewDogButton component
 const CreateNewDogWrapper = styled.div`
-  position: absolute;
-  top: 50px;
-  right: 50px;
+  position: relative;
+  left: 100%;
+  transform: translate(-100%);
   width: 330px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 25px;
   cursor: pointer;
+  margin-bottom: -50px;
 
   @media screen and (max-width: 1250px) {
     position: static;
+    transform: translate(0);
+    left: 0;
     margin-bottom: 20px;
   }
 `;
@@ -129,24 +137,28 @@ function DogInfoBlock({ blockTitle, dogs, validator, loaded }) {
   const [hidden, setHidden] = useState(true);
 
   return (
-    <DogInfoWrapper>
-      <HeaderWrapper>
-        <HeaderInline>
-          <Title>{blockTitle}</Title>
-          <ViewAll>
-            <ViewAllButton onClick={() => setHidden(!hidden)}>
-              {hidden ? "View All" : "View Less"}
-            </ViewAllButton>
-            <ViewAllButtonImg src={Arrow} />
-          </ViewAll>
-        </HeaderInline>
-        <BottomLine />
-      </HeaderWrapper>
+    <>
+      {loaded && (
+        <DogInfoWrapper>
+          <HeaderWrapper>
+            <HeaderInline>
+              <Title>{blockTitle}</Title>
+              <ViewAll>
+                <ViewAllButton onClick={() => setHidden(!hidden)}>
+                  {hidden ? "View All" : "View Less"}
+                </ViewAllButton>
+                <ViewAllButtonImg src={Arrow} />
+              </ViewAll>
+            </HeaderInline>
+            <BottomLine />
+          </HeaderWrapper>
 
-      <DogConainer hidden={hidden}>
-        {loaded && <Dogs dogs={dogs} validator={validator} />}
-      </DogConainer>
-    </DogInfoWrapper>
+          <DogConainer hidden={hidden}>
+            {loaded && <Dogs dogs={dogs} validator={validator} />}
+          </DogConainer>
+        </DogInfoWrapper>
+      )}
+    </>
   );
 }
 
@@ -168,6 +180,7 @@ function DogProfile() {
   const [createNewPopUp, setCreateNewPopUp] = useState(false);
 
   useEffect(() => {
+    // get dogs from backend
     fetch("http://localhost:8000/api/dogs/", {
       method: "GET",
     })
@@ -185,12 +198,14 @@ function DogProfile() {
 
   return (
     <DefaultBody>
+      <AllContentWrapper>
       <CreateNewDogButton onClick={() => setCreateNewPopUp(!createNewPopUp)} />
+      {/* dynamically render create a new dog component */}
       {createNewPopUp && <CreateDogPopUp />}
-
       <DogInfoBlock blockTitle="New Dogs" loaded={loaded} dogs={allDogs} validator="new" />
       <DogInfoBlock blockTitle="Dogs In Home" loaded={loaded} dogs={allDogs} validator="in home" />
       <DogInfoBlock blockTitle="Adopted Dogs" loaded={loaded} dogs={allDogs} validator="adopted" />
+      </AllContentWrapper>
     </DefaultBody>
   );
 }

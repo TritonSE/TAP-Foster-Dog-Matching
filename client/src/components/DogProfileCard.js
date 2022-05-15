@@ -21,7 +21,8 @@ const DogContainer = styled.div`
 
 const DogImg = styled.img`
   padding-top: 20px;
-  :height: 78px;
+  width: 194px;
+  height: 98px;
   border-radius: 5%;
 `;
 
