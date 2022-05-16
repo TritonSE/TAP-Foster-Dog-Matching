@@ -201,7 +201,7 @@ function DogProfile() {
       <AllContentWrapper>
       <CreateNewDogButton onClick={() => setCreateNewPopUp(!createNewPopUp)} />
       {/* dynamically render create a new dog component */}
-      {createNewPopUp && <CreateDogPopUp />}
+      {createNewPopUp && <CreateDogPopUp setCreateNewPopUp={setCreateNewPopUp} />}
       <DogInfoBlock blockTitle="New Dogs" loaded={loaded} dogs={allDogs} validator="new" />
       <DogInfoBlock blockTitle="Dogs In Home" loaded={loaded} dogs={allDogs} validator="in home" />
       <DogInfoBlock blockTitle="Adopted Dogs" loaded={loaded} dogs={allDogs} validator="adopted" />
