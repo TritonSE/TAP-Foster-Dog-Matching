@@ -1,5 +1,18 @@
-.title {
+.interview-info-wrapper{
+  background-color: white;
+  border-radius: 20px;
+  width: 90%;
+  display:flex;
+}
+
+.info-content{
+  width:90%;
+  border-color:none;
+}
+
+.interview-info-title {
   align-self: center;
+  margin-bottom: 1vh;
 }
 
 .reject-button {

@@ -17,15 +17,16 @@ function PassFail({ props }) {
 
   return (
     <div className="interview-info-wrapper">
-      <Form.Container>
-        <Form.Section className="title" title="After Interview" ref={notes}>
-          <ControlledInput
-            control={control}
-            label="Internal Notes"
-            numLines={8}
-            name="fosterInfo.restrictions"
-          />
-        </Form.Section>
+      <Form.Container className="info-content">
+          <h2 className="interview-info-title">After Interview</h2>
+          <div>
+            <ControlledInput
+              control={control}
+              label="Internal Notes"
+              numLines={8}
+              name="fosterInfo.restrictions"
+            />
+          </div>
         <Form.Row>
           <button type="button" className="reject-button" onClick={onReject}>
             Reject
