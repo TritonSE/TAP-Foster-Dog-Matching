@@ -67,8 +67,7 @@ function ContactUs() {
           setInputMessage("");
           setErrorMessage("");
           setSent(true);
-        }
-        else{
+        } else {
           setSent(false);
         }
       });
