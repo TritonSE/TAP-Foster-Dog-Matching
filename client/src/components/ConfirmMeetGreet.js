@@ -98,10 +98,9 @@ const ConfirmButton = styled.button`
 `;
 
 function ConfirmMeetGreet() {
-
   const handleConfirm = () => {
     // TODO: Handle confirmation with backend
-  }
+  };
 
   return (
     <ConfirmContainer>
