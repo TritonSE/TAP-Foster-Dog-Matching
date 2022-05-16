@@ -106,8 +106,8 @@ function Application() {
       content: <h1>step 3 content here</h1>,
     }, //  Step 3
     {
-      intro: <DogSelection />,
-      content: <h1>step 4 content here</h1>,
+      intro: <h1>step 4 intro here</h1>,
+      content: <DogSelection />,
     }, //  Step 4
     {
       intro: <h1>step 5 intro here</h1>,

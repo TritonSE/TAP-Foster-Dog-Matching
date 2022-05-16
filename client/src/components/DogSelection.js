@@ -82,13 +82,13 @@ const Content = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 3vh;
 `;
 
 const DogWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  overflow: scroll;
-  max-height: 660px;
+  overflow: visible;
   @media screen and (max-width: 750px) {
     width: 80%;
     display: flex;
@@ -99,15 +99,7 @@ const DogWrapper = styled.div`
   @media screen and (max-width: 350px) {
     width: 100%;
   }
-  @media screen and (max-height: 1000px) {
-    max-height: 585px;
-  }
-  @media screen and (max-height: 850px) {
-    max-height: 575px;
-  }
-  @media screen and (max-height: 750px) {
-    max-height: 565px;
-  }
+
 `;
 
 const ActiveWrapper = styled.div`
