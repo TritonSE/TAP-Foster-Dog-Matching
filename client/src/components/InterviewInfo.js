@@ -4,7 +4,7 @@ import React from "react";
 import Form from "./Form";
 import "../css/interviewInfo.css";
 
-function PassFail({}) {
+function PassFail({props}) {
 
     const { control, watch, handleSubmit } = useForm({
         reValidateMode: "onChange",
