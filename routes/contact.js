@@ -9,9 +9,9 @@ const router = express.Router();
 const validators = [
   body("name").notEmpty().isString(),
   body("team").notEmpty().isString(),
-  body("email").notEmpty().isString(),
+  body("email").notEmpty().isString().isEmail(),
   body("message").notEmpty().isString(),
-  body("toEmail").notEmpty().isString(),
+  body("toEmail").notEmpty().isString().isEmail(),
 ];
 
 /**
