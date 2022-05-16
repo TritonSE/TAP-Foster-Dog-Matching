@@ -68,7 +68,9 @@ function ContactUs() {
           setErrorMessage("");
           setSent(true);
         }
-        setSent(false);
+        else{
+          setSent(false);
+        }
       });
     }
   };
