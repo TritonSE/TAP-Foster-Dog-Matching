@@ -104,7 +104,7 @@ function ConfirmMeetGreet() {
 
   return (
     <ConfirmContainer>
-      <ComponentHeader>Home Screen Information</ComponentHeader>
+      <ComponentHeader>Meet & Greet Information</ComponentHeader>
       <ContentWrapper>
         <InfoWrapper>
           <MeetInfo
