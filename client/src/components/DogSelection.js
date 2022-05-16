@@ -99,7 +99,6 @@ const DogWrapper = styled.div`
   @media screen and (max-width: 350px) {
     width: 100%;
   }
-
 `;
 
 const ActiveWrapper = styled.div`
