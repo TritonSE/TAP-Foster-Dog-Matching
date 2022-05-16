@@ -12,6 +12,7 @@ const ConfirmContainer = styled.div`
   height: max-content;
   background: #000000;
   border-radius: 35px;
+  margin-bottom: 3vh;
   ${device.tablet} {
     min-height: 80vh;
     overflow-y: scroll;
@@ -37,6 +38,7 @@ const ComponentHeader = styled.p`
 const ContentWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   padding: 2vh 0vh;
 
   ${device.tablet} {
@@ -89,13 +91,18 @@ const ConfirmButton = styled.button`
   width: 216px;
   min-height: 52px;
   font-size: 22.2876px;
-  color: #000000;
   margin-bottom: 3vh;
   cursor: pointer;
   align-self: center;
+  border: none;
 `;
 
 function ConfirmMeetGreet() {
+
+  const handleConfirm = () => {
+    // TODO: Handle confirmation with backend
+  }
+
   return (
     <ConfirmContainer>
       <ComponentHeader>Home Screen Information</ComponentHeader>
@@ -123,7 +130,7 @@ function ConfirmMeetGreet() {
           />
         </AfterWrapper>
       </ContentWrapper>
-      <ConfirmButton>Confirm</ConfirmButton>
+      <ConfirmButton onClick={handleConfirm()}>Confirm</ConfirmButton>
     </ConfirmContainer>
   );
 }

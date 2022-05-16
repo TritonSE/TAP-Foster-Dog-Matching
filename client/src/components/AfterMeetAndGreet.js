@@ -47,15 +47,15 @@ const Lefttext = styled.p`
 `;
 
 const CircledText = styled.div`
-  ${(props) => (props.circle ? "border: 3px solid black;" : "")};
+  ${(props) => (props.circle ? "border: 2px solid #000000;" : "")};
   box-sizing: border-box;
-  padding: 8px 30px;
+  padding: 10px 50px;
   border-radius: 5px;
   margin-right: 1.5vw;
 `;
 
 const SupplyWrappper = styled.div`
-  height: 20vh;
+  height: 40%;
   min-height: 248px;
   padding: 10px;
 
