@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Trash from "../images/trash.png";
 import Add from "../images/add.png";
 import { device } from "../utils/useResponsive";
-import { Colors } from "./Theme";
 import validUrl from "../utils/validUrl";
 
 const ImageWrapper = styled.div`
@@ -91,7 +90,6 @@ function DogImagesInput(props) {
 
   useEffect(() => {
     // send image array to parent component
-    console.log(images);
     props.setImageArr(images);
     props.setImageCounter(imageCount);
   }, [images, imageCount]);

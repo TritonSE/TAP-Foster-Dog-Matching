@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import Form from "./Form";
 import { ControlledInput } from "./Input";
 import { Colors } from "./Theme";
 import { device } from "../utils/useResponsive";
-import Select from "../components/Select";
+import Select from "./Select";
 import DogImagesInput from "./DogImagesInput";
 import validUrl from "../utils/validUrl";
 import X from "../images/X.png";
@@ -118,9 +118,6 @@ function CreateDogPopUp(props) {
   const [category, setCategory] = useState(props.update ? props.dog.category : "New");
   // determine whether we are in update mode
   const update = props.update;
-  useEffect(() => {
-    console.log(update);
-  }, []);
 
   const toSelectGender = [
     { label: "Male", value: "Male" },
@@ -162,6 +159,17 @@ function CreateDogPopUp(props) {
     defaultValues: initialVals(),
   });
 
+  // array of urls validator
+  const checkUrl = (arr) => {
+    // returns true if all items are valid urls, returns false otherwise
+    for (const item of arr) {
+      if (!validUrl(item)) {
+        return false;
+      }
+    }
+    return true;
+  };
+
   // functions for creating a new dog
   const onSubmitCreate = (data) => {
     // validate images
@@ -195,31 +203,19 @@ function CreateDogPopUp(props) {
         },
         body: JSON.stringify(reqBody),
       })
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
     }
   };
 
-  const onErrorCreate = (errors) => {
+  const onErrorCreate = () => {
     // validate images
     const filtered = imageArr.filter((item) => item !== "");
     if (imageCounter !== filtered.length || !checkUrl(filtered)) {
       // no image(s) provided or invalid urls provided
       setError(true);
     }
-    console.log(errors);
   };
 
-  const checkUrl = (arr) => {
-    // returns true if all items are valid urls, returns false otherwise
-    for (const item of arr) {
-      console.log(item);
-      if (!validUrl(item)) {
-        return false;
-      }
-    }
-    return true;
-  };
+
 
   // functions for updating a dog
   const onSubmitUpdate = (data) => {
@@ -253,19 +249,16 @@ function CreateDogPopUp(props) {
         },
         body: JSON.stringify(reqBody),
       })
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
     }
   };
 
-  const onErrorUpdate = (errors) => {
+  const onErrorUpdate = () => {
     // validate images
     const filtered = imageArr.filter((item) => item !== "");
     if (imageCounter !== filtered.length || !checkUrl(filtered)) {
       // no image(s) provided or invalid urls provided
       setError(true);
     }
-    console.log(errors);
   };
 
   return (

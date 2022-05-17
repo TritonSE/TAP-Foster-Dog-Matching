@@ -136,7 +136,7 @@ function DogInfoBlock({ blockTitle, dogs, validator, loaded, setDogPopUp, setCur
   const [hidden, setHidden] = useState(true);
 
   return (
-    <>
+    <div>
       {loaded && (
         <DogInfoWrapper>
           <HeaderWrapper>
@@ -169,13 +169,14 @@ function DogInfoBlock({ blockTitle, dogs, validator, loaded, setDogPopUp, setCur
                       </ClickableDogCard>
                     );
                   }
+                  return undefined
                 })}
               </>
             )}
           </DogConainer>
         </DogInfoWrapper>
       )}
-    </>
+    </div>
   );
 }
 
@@ -206,14 +207,11 @@ function DogProfile() {
     })
       .then((res) => res.json())
       .then((json) => {
-        console.log(json.dogs);
+        // console.log(json.dogs);
         setAllDogs(json.dogs);
         setLoaded(true);
         return json.dogs;
       })
-      .catch((err) => {
-        console.log(err);
-      });
   }, [popUpPresent]);
 
   useEffect(() => {
@@ -223,10 +221,6 @@ function DogProfile() {
       setPopUpPresent(false);
     }
   }, [createNewPopUp, dogPopUp]);
-
-  useEffect(() => {
-    console.log(curDog);
-  }, [curDog]);
 
   return (
     <DefaultBody>
