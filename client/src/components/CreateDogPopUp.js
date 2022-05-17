@@ -14,8 +14,11 @@ const BlurBackground = styled.div`
   position: absolute;
   width: 100%;
   height: calc(100% + 50px);
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.6);
   z-index: 8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const CreateWrapper = styled.div`
@@ -23,7 +26,6 @@ const CreateWrapper = styled.div`
   height: fit-content;
   max-width: 1060px;
   width: calc(100% - 4px);
-  margin: auto;
 
   z-index: 3;
   background: #ffffff;
@@ -139,12 +141,29 @@ function CreateDogPopUp(props) {
     setCategory(val);
   }, []);
 
-  // handle form submission
+  // initialize form
+  const initialVals = () => {
+    if (update) {
+      return {
+        name: props.dog.name,
+        age: props.dog.age,
+        weight: props.dog.weight,
+        breed: props.dog.breed,
+        backgroundInfo: props.dog.backgroundInfo,
+        vettingInfo: props.dog.vettingInfo,
+        internalNotes: props.dog.internalNotes,
+      };
+    }
+    return {};
+  };
+
   const { control, handleSubmit } = useForm({
     reValidateMode: "onChange",
+    defaultValues: initialVals(),
   });
 
-  const onSubmit = (data) => {
+  // functions for creating a new dog
+  const onSubmitCreate = (data) => {
     // validate images
     const filtered = imageArr.filter((item) => item !== "");
     if (imageCounter !== filtered.length || !checkUrl(filtered)) {
@@ -165,7 +184,7 @@ function CreateDogPopUp(props) {
         category: category,
         backgroundInfo: data.backgroundInfo,
         vettingInfo: data.vettingInfo,
-        internalNotes: data.internalInfo,
+        internalNotes: data.internalNotes ? data.internalNotes : "",
       };
 
       fetch("http://localhost:8000/api/dogs", {
@@ -181,7 +200,7 @@ function CreateDogPopUp(props) {
     }
   };
 
-  const onError = (errors) => {
+  const onErrorCreate = (errors) => {
     // validate images
     const filtered = imageArr.filter((item) => item !== "");
     if (imageCounter !== filtered.length || !checkUrl(filtered)) {
@@ -202,6 +221,53 @@ function CreateDogPopUp(props) {
     return true;
   };
 
+  // functions for updating a dog
+  const onSubmitUpdate = (data) => {
+    // validate images
+    const filtered = imageArr.filter((item) => item !== "");
+    if (imageCounter !== filtered.length || !checkUrl(filtered)) {
+      // no image(s) provided or invalid urls provided
+      setError(true);
+    } else {
+      setError(false);
+      // image(s) are provided
+
+      // make post request to update an existing dog
+      const reqBody = {
+        name: data.name,
+        age: parseInt(data.age),
+        gender: gender,
+        weight: parseInt(data.weight),
+        breed: data.breed,
+        imageUrl: filtered,
+        category: category,
+        backgroundInfo: data.backgroundInfo,
+        vettingInfo: data.vettingInfo,
+        internalNotes: data.internalNotes ? data.internalNotes : "",
+      };
+
+      fetch(`http://localhost:8000/api/dogs/${props.dog._id}`, {
+        method: 'PUT', 
+        headers: {
+         'Content-type': 'application/json; charset=UTF-8'
+        },
+        body: JSON.stringify(reqBody),
+      })
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+    }
+  };
+
+  const onErrorUpdate = (errors) => {
+    // validate images
+    const filtered = imageArr.filter((item) => item !== "");
+    if (imageCounter !== filtered.length || !checkUrl(filtered)) {
+      // no image(s) provided or invalid urls provided
+      setError(true);
+    }
+    console.log(errors);
+  };
+
   return (
     <BlurBackground>
       <CreateWrapper>
@@ -217,18 +283,11 @@ function CreateDogPopUp(props) {
             <LeftWrapper>
               <LeftTop>
                 <Form.Column>
-                  <ControlledInput
-                    control={control}
-                    label="Name"
-                    name="name"
-                    value={update ? props.dog.name : void 0}
-                    required
-                  />
+                  <ControlledInput control={control} label="Name" name="name" required />
                   <ControlledInput
                     control={control}
                     label="Age"
                     name="age"
-                    value={update ? props.dog.age : void 0}
                     type="number"
                     required
                   />
@@ -244,16 +303,9 @@ function CreateDogPopUp(props) {
                     label="Weight"
                     name="weight"
                     type="number"
-                    value={update ? props.dog.weight : void 0}
                     required
                   />
-                  <ControlledInput
-                    control={control}
-                    label="Breed"
-                    name="breed"
-                    value={update ? props.dog.breed : void 0}
-                    required
-                  />
+                  <ControlledInput control={control} label="Breed" name="breed" required />
                   <Text>Category</Text>
                   <Select
                     value={category}
@@ -265,7 +317,7 @@ function CreateDogPopUp(props) {
               </LeftTop>
               <LeftBottom>
                 <DogImagesInput
-                  initialVals={update ? props.imageUrl : void 0}
+                  initialVals={update ? props.dog.imageUrl : undefined}
                   setImageArr={setImageArr}
                   error={error}
                   setError={setError}
@@ -282,7 +334,6 @@ function CreateDogPopUp(props) {
                   numLines={6}
                   name="backgroundInfo"
                   width="100%"
-                  value={update ? props.dog.backgroundInfo : void 0}
                   required
                 />
 
@@ -291,7 +342,6 @@ function CreateDogPopUp(props) {
                   label="Vetting Info"
                   numLines={6}
                   name="vettingInfo"
-                  value={update ? props.dog.vettingInfo : void 0}
                   required
                 />
 
@@ -299,16 +349,20 @@ function CreateDogPopUp(props) {
                   control={control}
                   label="Internal Info"
                   numLines={6}
-                  name="internalInfo"
-                  value={update ? props.dog.internalInfo : void 0}
-                  required
+                  name="internalNotes"
                 />
               </Form.Column>
             </RightWrapper>
           </FormWrapper>
 
           <Form.Actions>
-            <Button onClick={handleSubmit(onSubmit, onError)}>
+            <Button
+              onClick={
+                update
+                  ? handleSubmit(onSubmitUpdate, onErrorUpdate)
+                  : handleSubmit(onSubmitCreate, onErrorCreate)
+              }
+            >
               {update ? "Update" : "Continue"}
             </Button>
           </Form.Actions>

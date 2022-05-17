@@ -58,9 +58,9 @@ const Text = styled.p`
 `;
 
 function DogImagesInput(props) {
-  const [images, setImages] = useState(props.initalVals ? props.initialVals : ["", "", ""]);
+  const [images, setImages] = useState(props.initialVals ? props.initialVals : ["", "", ""]);
   const [imageCount, setImageCount] = useState(
-    props.initialVals ? Math.max(props.initalVals.length, 1) : 1
+    props.initialVals ? Math.max(props.initialVals.length, 1) : 1
   );
 
   const addImg = (val, index) => {
@@ -68,6 +68,7 @@ function DogImagesInput(props) {
     placeHolder[index] = val;
     setImages(placeHolder);
   };
+  
   const delImg = (index) => {
     if (imageCount > 1) {
       const placeHolder = [...images];
@@ -90,6 +91,7 @@ function DogImagesInput(props) {
 
   useEffect(() => {
     // send image array to parent component
+    console.log(images)
     props.setImageArr(images);
     props.setImageCounter(imageCount);
   }, [images, imageCount]);

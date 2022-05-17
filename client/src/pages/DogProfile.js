@@ -214,7 +214,7 @@ function DogProfile() {
       .catch((err) => {
         console.log(err);
       });
-  }, [createNewPopUp]);
+  }, [popUpPresent]);
 
   useEffect(() => {
     if (createNewPopUp || dogPopUp) {

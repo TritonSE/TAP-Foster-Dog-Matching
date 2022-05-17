@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import DogProfileSummary from "./DogProfileSummary";
 import CreateDogPopUp from "./CreateDogPopUp";
@@ -14,8 +14,11 @@ const BlurBackground = styled.div`
   position: absolute;
   width: 100%;
   height: calc(100% + 50px);
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.8);
   z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const ContentWrapper = styled.div`
@@ -24,7 +27,6 @@ const ContentWrapper = styled.div`
   max-height: 800px;
   max-width: 1357px;
   width: 100%;
-  margin: auto;
 
   z-index: 3;
   background: #000000;
@@ -120,17 +122,33 @@ const EditText = styled.p`
 
 function DogProfilePopUp({ setDogPopUp, dog }) {
   const [editDogPopUp, setEditDogPopUp] = useState(false);
+  const [curDog, setCurDog] = useState(dog);
+
+  useEffect(() => {
+    // get dog again every time pop up state changes
+    fetch(`http://localhost:8000/api/dogs/${dog._id}`, {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        setCurDog(json.dog);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+  }, [editDogPopUp]);
 
   return (
     <>
-      {editDogPopUp && <CreateDogPopUp setEditDogPopUp={setEditDogPopUp} dog={dog} update />}
+      {editDogPopUp && <CreateDogPopUp setEditDogPopUp={setEditDogPopUp} dog={curDog} update />}
       <BlurBackground>
         <ContentWrapper>
           <Close src={whiteX} onClick={() => setDogPopUp(false)} />
           <Title>Dog Profile</Title>
           <DogProfileWrapper>
             <LeftWrapper>
-              <DogProfileSummary dog={dog} />
+              <DogProfileSummary dog={curDog} />
             </LeftWrapper>
             <RightWrapper>
               <RightTopWrapper>
@@ -143,7 +161,7 @@ function DogProfilePopUp({ setDogPopUp, dog }) {
                 />
               </RightTopWrapper>
               <RightBottomWrapper>
-                <InternalFosterNotes internalNotes={dog.internalNotes} />
+                <InternalFosterNotes internalNotes={curDog.internalNotes} />
               </RightBottomWrapper>
               <EditWrapper onClick={() => setEditDogPopUp(true)}>
                 <EditImg src={Edit} />
