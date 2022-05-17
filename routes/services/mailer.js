@@ -38,6 +38,7 @@ async function sendEmail(template, to_email, locals) {
         message: {
           from: config.autoEmail.MAIL_USERNAME,
           to: to_email,
+          cc: config.autoEmail.MAIL_USERNAME,
         },
         locals,
       });
