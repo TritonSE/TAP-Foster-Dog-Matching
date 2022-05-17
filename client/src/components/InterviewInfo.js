@@ -19,7 +19,7 @@ function PassFail({ props }) {
     <div className="interview-info-wrapper">
       <Form.Container className="info-content">
           <h2 className="interview-info-title">After Interview</h2>
-          <div>
+          <div className="interview-info-input">
             <ControlledInput
               control={control}
               label="Internal Notes"

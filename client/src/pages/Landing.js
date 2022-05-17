@@ -17,10 +17,14 @@ function Landing() {
         message= "Waiting for applicant to respond, click on the progress bar to see previous steps"
         currentStage="Applicant is scheduling their interview"
       /> */}
-      <Meetings
-        textCard = {<div><p>Hello There</p></div>}
-        status = {<InterviewInfo/>}
-      />
+      <div>
+        <Meetings 
+            textCard = {<div><p>Hello There</p></div>}
+            status = {<InterviewInfo/>}
+        />
+      </div>
+       
+      
       
     </div>
   );

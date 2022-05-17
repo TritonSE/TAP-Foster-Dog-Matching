@@ -5,6 +5,10 @@
   display:flex;
 }
 
+.interview-info-input{
+  margin:5px;
+}
+
 .info-content{
   width:90%;
   border-color:none;
