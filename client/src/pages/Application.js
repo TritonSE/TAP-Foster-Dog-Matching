@@ -39,6 +39,7 @@ import FosterApplication from "../components/FosterApplication";
 import Meetings from "../components/Meeting";
 import logo from "../images/logo-inverted.png";
 import ApplicationContext from "../contexts/ApplicationContext";
+import DogSelection from "../components/DogSelection";
 
 const ApplicationContainer = styled.div`
   display: flex;
@@ -106,7 +107,7 @@ function Application() {
     }, //  Step 3
     {
       intro: <h1>step 4 intro here</h1>,
-      content: <h1>step 4 content here</h1>,
+      content: <DogSelection />,
     }, //  Step 4
     {
       intro: <h1>step 5 intro here</h1>,
