@@ -68,7 +68,7 @@ function DogImagesInput(props) {
     placeHolder[index] = val;
     setImages(placeHolder);
   };
-  
+
   const delImg = (index) => {
     if (imageCount > 1) {
       const placeHolder = [...images];
@@ -91,7 +91,7 @@ function DogImagesInput(props) {
 
   useEffect(() => {
     // send image array to parent component
-    console.log(images)
+    console.log(images);
     props.setImageArr(images);
     props.setImageCounter(imageCount);
   }, [images, imageCount]);

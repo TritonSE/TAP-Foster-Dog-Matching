@@ -136,7 +136,6 @@ function DogProfilePopUp({ setDogPopUp, dog }) {
       .catch((err) => {
         console.log(err);
       });
-
   }, [editDogPopUp]);
 
   return (

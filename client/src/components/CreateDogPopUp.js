@@ -247,9 +247,9 @@ function CreateDogPopUp(props) {
       };
 
       fetch(`http://localhost:8000/api/dogs/${props.dog._id}`, {
-        method: 'PUT', 
+        method: "PUT",
         headers: {
-         'Content-type': 'application/json; charset=UTF-8'
+          "Content-type": "application/json; charset=UTF-8",
         },
         body: JSON.stringify(reqBody),
       })
