@@ -169,7 +169,7 @@ function DogInfoBlock({ blockTitle, dogs, validator, loaded, setDogPopUp, setCur
                       </ClickableDogCard>
                     );
                   }
-                  return undefined
+                  return undefined;
                 })}
               </>
             )}
@@ -211,7 +211,7 @@ function DogProfile() {
         setAllDogs(json.dogs);
         setLoaded(true);
         return json.dogs;
-      })
+      });
   }, [popUpPresent]);
 
   useEffect(() => {

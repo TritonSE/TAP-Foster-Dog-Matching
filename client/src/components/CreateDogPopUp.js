@@ -202,7 +202,7 @@ function CreateDogPopUp(props) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(reqBody),
-      })
+      });
     }
   };
 
@@ -214,8 +214,6 @@ function CreateDogPopUp(props) {
       setError(true);
     }
   };
-
-
 
   // functions for updating a dog
   const onSubmitUpdate = (data) => {
@@ -248,7 +246,7 @@ function CreateDogPopUp(props) {
           "Content-type": "application/json; charset=UTF-8",
         },
         body: JSON.stringify(reqBody),
-      })
+      });
     }
   };
 
