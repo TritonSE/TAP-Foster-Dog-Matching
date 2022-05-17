@@ -98,7 +98,7 @@ const Input = React.forwardRef(
 
     return (
       <InputContainer width={width}>
-        <InputLabel>{label}</InputLabel>
+        {label && <InputLabel>{label}</InputLabel>}
         {numLines ? (
           <TextAreaField
             ref={ref}

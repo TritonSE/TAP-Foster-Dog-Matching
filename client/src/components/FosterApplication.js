@@ -270,6 +270,7 @@ function FosterApplicationView({ setView }) {
               options={["Yes", "No"]}
               name="fosterInfo.oneMonthCommitment"
               required
+              otherOption
             />
           </Form.SubSection>
           <Form.SubSection>
