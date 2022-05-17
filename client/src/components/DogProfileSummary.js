@@ -8,9 +8,8 @@ const SummaryWrapper = styled.div`
   height: 100%;
   position: relative;
   color: black;
-background: #FFFFFF;
-border-radius: 15px;
-
+  background: #ffffff;
+  border-radius: 15px;
 `;
 
 const InfoWrapper = styled.div`
@@ -21,10 +20,10 @@ const InfoWrapper = styled.div`
 `;
 
 const LeftInfoWrapper = styled.div`
-width: 40%;
-display: flex;
-flex-direction: column;
-justify-content: space-between;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 const RightInfoWrapper = styled.div`
@@ -41,15 +40,15 @@ const DogName = styled.h1`
 `;
 
 const DogPic = styled.img`
-max-width: 225px;
-max-height: 225px;
-margin-bottom: 2vh;
+  max-width: 225px;
+  max-height: 225px;
+  margin-bottom: 2vh;
 `;
 
 const InlineBlob = styled.div`
-    display: flex;
-    justify-content: space-between;
-    margin: 1vh 0;
+  display: flex;
+  justify-content: space-between;
+  margin: 1vh 0;
 `;
 
 const Field = styled.p`
@@ -58,8 +57,8 @@ const Field = styled.p`
   font-size: 22px;
   font-weight: 700;
 
-  ${device.tablet}{
-  font-size: max(15px, min(22px, 4vw));
+  ${device.tablet} {
+    font-size: max(15px, min(22px, 4vw));
   }
 `;
 
@@ -67,17 +66,15 @@ const Value = styled.p`
   margin: 0;
   font-size: 25px;
 
-  ${device.tablet}{
-  font-size: max(15px, min(22px, 4vw));
+  ${device.tablet} {
+    font-size: max(15px, min(22px, 4vw));
   }
 `;
-
 
 const TextBlob = styled.div`
   height: 40%;
   overflow: hidden;
 `;
-
 
 const InlineInfo = ({ field, value }) => {
   return (
@@ -104,7 +101,7 @@ function DogProfileSummary({ dog }) {
         <RightInfoWrapper>
           <TextBlob>
             <Field>Vetting Information</Field>
-  <Value>{dog.vettingInfo}</Value>
+            <Value>{dog.vettingInfo}</Value>
           </TextBlob>
           <TextBlob>
             <Field>Background Information</Field>

@@ -1,7 +1,6 @@
-import React from 'react'
+import React from "react";
 import styled from "styled-components";
 import { device } from "../utils/useResponsive";
-
 
 const ContentContainer = styled.div`
   width: 100%;
@@ -19,17 +18,17 @@ const AllWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  ${device.tablet}{
-      padding-bottom: 30px;
+  ${device.tablet} {
+    padding-bottom: 30px;
   }
 `;
 
 const Title = styled.p`
-margin:0;
-text-align: center;
-font-weight: 700;
-font-size: 22.2876px;
-padding: 2vh 0;
+  margin: 0;
+  text-align: center;
+  font-weight: 700;
+  font-size: 22.2876px;
+  padding: 2vh 0;
 `;
 
 const Value = styled.div`
@@ -37,16 +36,15 @@ const Value = styled.div`
   overflow: hidden;
 `;
 
-
 function InternalFosterNotes(props) {
-    return (
-        <ContentContainer>
-            <AllWrapper>
-                <Title>Internal Foster Notes</Title>
-                <Value>{props.internalNotes}</Value>
-            </AllWrapper>
-        </ContentContainer>
-    )
+  return (
+    <ContentContainer>
+      <AllWrapper>
+        <Title>Internal Foster Notes</Title>
+        <Value>{props.internalNotes}</Value>
+      </AllWrapper>
+    </ContentContainer>
+  );
 }
 
 export default InternalFosterNotes;

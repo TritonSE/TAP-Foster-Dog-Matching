@@ -1,10 +1,10 @@
 /**
  * Dog Card Component
- * 
+ *
  * A card that contains the image of a dog and it's name
- * 
+ *
  * props:
- * 
+ *
  * imageRef - reference to image
  * name - dog name that you want displayed on card
  */

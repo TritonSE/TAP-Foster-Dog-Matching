@@ -79,8 +79,8 @@ function DogImagesInput(props) {
 
   const checkError = (errorState, index) => {
     if (errorState) {
-        // make the color of the input box red 
-        // if the input is blank or is not a valid URL
+      // make the color of the input box red
+      // if the input is blank or is not a valid URL
       if (images[index] === "" || !validUrl(images[index])) {
         return true;
       }

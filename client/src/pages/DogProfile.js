@@ -132,8 +132,6 @@ const CreateDogButtonText = styled.p`
 
 const ClickableDogCard = styled.div``;
 
-
-
 function DogInfoBlock({ blockTitle, dogs, validator, loaded, setDogPopUp, setCurDog }) {
   const [hidden, setHidden] = useState(true);
 
@@ -156,18 +154,23 @@ function DogInfoBlock({ blockTitle, dogs, validator, loaded, setDogPopUp, setCur
 
           <DogConainer hidden={hidden}>
             {loaded && (
-                  <>
-                  {dogs.map((dog, i) => {
-                    if (validator === dog.category) {
-                      // TODO: change imageRef to dog.imageUrl[0] once image hosting is set up
-                      return (
-                        <ClickableDogCard onClick={() => {setDogPopUp(true); setCurDog(dog)}}>
-                          <DogCard key={i} name={dog.name} imageRef={Doggo} />
-                        </ClickableDogCard>
-                      );
-                    }
-                  })}
-                </>
+              <>
+                {dogs.map((dog, i) => {
+                  if (validator === dog.category) {
+                    // TODO: change imageRef to dog.imageUrl[0] once image hosting is set up
+                    return (
+                      <ClickableDogCard
+                        onClick={() => {
+                          setDogPopUp(true);
+                          setCurDog(dog);
+                        }}
+                      >
+                        <DogCard key={i} name={dog.name} imageRef={Doggo} />
+                      </ClickableDogCard>
+                    );
+                  }
+                })}
+              </>
             )}
           </DogConainer>
         </DogInfoWrapper>
@@ -223,7 +226,7 @@ function DogProfile() {
 
   useEffect(() => {
     console.log(curDog);
-  }, [curDog])
+  }, [curDog]);
 
   return (
     <DefaultBody>

@@ -265,7 +265,7 @@ function CreateDogPopUp(props) {
               </LeftTop>
               <LeftBottom>
                 <DogImagesInput
-                initialVals={update ? (props.imageUrl) : void(0)}
+                  initialVals={update ? props.imageUrl : void 0}
                   setImageArr={setImageArr}
                   error={error}
                   setError={setError}
