@@ -506,7 +506,7 @@ function FosterApplication() {
   const [view, setView] = React.useState("application");
 
   if (view === "application") return <FosterApplicationView setView={setView} />;
-  else if (view === "agreement") return <FosterAgreementView setView={setView} />;
+  if (view === "agreement") return <FosterAgreementView setView={setView} />;
   return <ApplicationSubmittedView />;
 }
 
