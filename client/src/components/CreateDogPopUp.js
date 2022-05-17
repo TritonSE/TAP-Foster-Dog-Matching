@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import Form from "./Form";
-import { ControlledInput, InputLabel } from "./Input";
+import { ControlledInput } from "./Input";
 import { Colors } from "./Theme";
 import { device } from "../utils/useResponsive";
 import Select from "../components/Select";
@@ -10,11 +10,21 @@ import DogImagesInput from "./DogImagesInput";
 import validUrl from "../utils/validUrl";
 import X from "../images/X.png";
 
-const CreateWrapper = styled.div`
+const BlurBackground = styled.div`
   position: absolute;
-  height: fit-content;
-
   width: 100%;
+  height: calc(100% + 50px);
+  background-color: rgba(255, 255, 255, 0.5);
+  z-index: 8;
+`;
+
+const CreateWrapper = styled.div`
+  position: relative;
+  height: fit-content;
+  max-width: 1060px;
+  width: calc(100% - 4px);
+  margin: auto;
+
   z-index: 3;
   background: #ffffff;
   border-radius: 20px;
@@ -45,14 +55,11 @@ const FormWrapper = styled.div`
 `;
 
 const LeftWrapper = styled.div`
-  width: 40%;
+  width: 50%;
   display: flex;
   flex-direction: column;
-  ${device.tablet} {
-    width: 45%;
-  }
 
-  ${device.mobile} {
+  ${device.tablet} {
     width: 55%;
   }
 `;
@@ -105,8 +112,13 @@ function CreateDogPopUp(props) {
   const [imageArr, setImageArr] = useState([]);
   const [imageCounter, setImageCounter] = useState(1);
   const [error, setError] = useState(false);
-  const [gender, setGender] = useState("Male");
-  const [category, setCategory] = useState("new");
+  const [gender, setGender] = useState(props.update ? props.dog.gender : "Male");
+  const [category, setCategory] = useState(props.update ? props.dog.category : "New");
+  // determine whether we are in update mode
+  const update = props.update;
+  useEffect(() => {
+    console.log(update);
+  }, []);
 
   const toSelectGender = [
     { label: "Male", value: "Male" },
@@ -191,85 +203,118 @@ function CreateDogPopUp(props) {
   };
 
   return (
-    <CreateWrapper>
-      <Close src={X} onClick={() => props.setCreateNewPopUp(false)} />
-      <Form.Container>
-        <Title>New Dog Profile</Title>
-        <FormWrapper>
-          <LeftWrapper>
-            <LeftTop>
-              <Form.Column>
-                <ControlledInput control={control} label="Name" name="name" required />
-                <ControlledInput control={control} label="Age" name="age" type="number" required />
-                <Text>Gender</Text>
-                <Select
-                  value={gender}
-                  options={toSelectGender}
-                  onChange={handleSelectGender}
-                  height="19px"
+    <BlurBackground>
+      <CreateWrapper>
+        <Close
+          src={X}
+          onClick={() => {
+            update ? props.setEditDogPopUp(false) : props.setCreateNewPopUp(false);
+          }}
+        />
+        <Form.Container>
+          <Title>{update ? "Update Dog Profile" : "New Dog Profile"}</Title>
+          <FormWrapper>
+            <LeftWrapper>
+              <LeftTop>
+                <Form.Column>
+                  <ControlledInput
+                    control={control}
+                    label="Name"
+                    name="name"
+                    value={update ? props.dog.name : void 0}
+                    required
+                  />
+                  <ControlledInput
+                    control={control}
+                    label="Age"
+                    name="age"
+                    value={update ? props.dog.age : void 0}
+                    type="number"
+                    required
+                  />
+                  <Text>Gender</Text>
+                  <Select
+                    value={gender}
+                    options={toSelectGender}
+                    onChange={handleSelectGender}
+                    height="19px"
+                  />
+                  <ControlledInput
+                    control={control}
+                    label="Weight"
+                    name="weight"
+                    type="number"
+                    value={update ? props.dog.weight : void 0}
+                    required
+                  />
+                  <ControlledInput
+                    control={control}
+                    label="Breed"
+                    name="breed"
+                    value={update ? props.dog.breed : void 0}
+                    required
+                  />
+                  <Text>Category</Text>
+                  <Select
+                    value={category}
+                    options={toSelectCategory}
+                    onChange={handleSelectCategory}
+                    height="19px"
+                  />
+                </Form.Column>
+              </LeftTop>
+              <LeftBottom>
+                <DogImagesInput
+                initialVals={update ? (props.imageUrl) : void(0)}
+                  setImageArr={setImageArr}
+                  error={error}
+                  setError={setError}
+                  setImageCounter={setImageCounter}
                 />
+              </LeftBottom>
+            </LeftWrapper>
+
+            <RightWrapper>
+              <Form.Column>
                 <ControlledInput
                   control={control}
-                  label="Weight"
-                  name="weight"
-                  type="number"
+                  label="Background Info"
+                  numLines={6}
+                  name="backgroundInfo"
+                  width="100%"
+                  value={update ? props.dog.backgroundInfo : void 0}
                   required
                 />
-                <ControlledInput control={control} label="Breed" name="breed" required />
-                <Text>Category</Text>
-                <Select
-                  value={category}
-                  options={toSelectCategory}
-                  onChange={handleSelectCategory}
-                  height="19px"
+
+                <ControlledInput
+                  control={control}
+                  label="Vetting Info"
+                  numLines={6}
+                  name="vettingInfo"
+                  value={update ? props.dog.vettingInfo : void 0}
+                  required
+                />
+
+                <ControlledInput
+                  control={control}
+                  label="Internal Info"
+                  numLines={6}
+                  name="internalInfo"
+                  value={update ? props.dog.internalInfo : void 0}
+                  required
                 />
               </Form.Column>
-            </LeftTop>
-            <LeftBottom>
-              <DogImagesInput
-                setImageArr={setImageArr}
-                error={error}
-                setError={setError}
-                setImageCounter={setImageCounter}
-              />
-            </LeftBottom>
-          </LeftWrapper>
+            </RightWrapper>
+          </FormWrapper>
 
-          <RightWrapper>
-            <Form.Column>
-              <ControlledInput
-                control={control}
-                label="Background Info"
-                numLines={6}
-                name="backgroundInfo"
-                width="100%"
-                required
-              />
-
-              <ControlledInput
-                control={control}
-                label="Vetting Info"
-                numLines={6}
-                name="vettingInfo"
-                required
-              />
-
-              <ControlledInput
-                control={control}
-                label="Internal Info"
-                numLines={6}
-                name="internalInfo"
-                required
-              />
-            </Form.Column>
-          </RightWrapper>
-        </FormWrapper>
-
-        <Form.Actions>
-          <Button onClick={handleSubmit(onSubmit, onError)}>Continue</Button>
-        </Form.Actions>
-      </Form.Container>
-    </CreateWrapper>
+          <Form.Actions>
+            <Button onClick={handleSubmit(onSubmit, onError)}>
+              {update ? "Update" : "Continue"}
+            </Button>
+          </Form.Actions>
+        </Form.Container>
+      </CreateWrapper>
+    </BlurBackground>
   );
 }
 

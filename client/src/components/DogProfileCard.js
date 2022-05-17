@@ -1,6 +1,16 @@
+/**
+ * Dog Card Component
+ * 
+ * A card that contains the image of a dog and it's name
+ * 
+ * props:
+ * 
+ * imageRef - reference to image
+ * name - dog name that you want displayed on card
+ */
+
 import React from "react";
 import styled from "styled-components";
-import Doggo from "../images/good-boi-2.png";
 
 const DogContainer = styled.div`
   width: 245px;
@@ -31,7 +41,7 @@ const DogName = styled.p``;
 function DogCard({ imageRef, name }) {
   return (
     <DogContainer>
-      <DogImg src={Doggo} />
+      <DogImg src={imageRef} />
       <DogName>{name}</DogName>
     </DogContainer>
   );

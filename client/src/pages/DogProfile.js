@@ -6,12 +6,21 @@ import CreateDogPopUp from "../components/CreateDogPopUp";
 import Arrow from "../images/arrow.png";
 import Plus from "../images/plus.png";
 import GreenButton from "../images/greenbutton.png";
+import Doggo from "../images/good-boi-2.png";
+import DogProfilePopUp from "../components/DogProfilePopUp";
 
 import { device } from "../utils/useResponsive";
 
 // styles for whole page
 const AllContentWrapper = styled.div`
   position: relative;
+  height: 100%;
+`;
+
+const AllDogsWrapper = styled.div`
+  position: absolute;
+  height: calc(100vh - 200px);
+  overflow: ${(props) => (props.popUp ? "hidden" : "visible")};
 `;
 
 // styles for DogInfoBlock component
@@ -121,19 +130,11 @@ const CreateDogButtonText = styled.p`
   margin: 0;
 `;
 
-function Dogs({ dogs, validator }) {
-  return (
-    <>
-      {dogs.map((dog, i) => {
-        if (validator === dog.category) {
-          return <DogCard key={i} name={dog.name} imageRef={dog.imageUrl[0]} />;
-        }
-      })}
-    </>
-  );
-}
+const ClickableDogCard = styled.div``;
 
-function DogInfoBlock({ blockTitle, dogs, validator, loaded }) {
+
+
+function DogInfoBlock({ blockTitle, dogs, validator, loaded, setDogPopUp, setCurDog }) {
   const [hidden, setHidden] = useState(true);
 
   return (
@@ -154,7 +155,20 @@ function DogInfoBlock({ blockTitle, dogs, validator, loaded }) {
           </HeaderWrapper>
 
           <DogConainer hidden={hidden}>
-            {loaded && <Dogs dogs={dogs} validator={validator} />}
+            {loaded && (
+                  <>
+                  {dogs.map((dog, i) => {
+                    if (validator === dog.category) {
+                      // TODO: change imageRef to dog.imageUrl[0] once image hosting is set up
+                      return (
+                        <ClickableDogCard onClick={() => {setDogPopUp(true); setCurDog(dog)}}>
+                          <DogCard key={i} name={dog.name} imageRef={Doggo} />
+                        </ClickableDogCard>
+                      );
+                    }
+                  })}
+                </>
+            )}
           </DogConainer>
         </DogInfoWrapper>
       )}
@@ -178,6 +192,9 @@ function DogProfile() {
   const [allDogs, setAllDogs] = useState();
   const [loaded, setLoaded] = useState(false);
   const [createNewPopUp, setCreateNewPopUp] = useState(false);
+  const [dogPopUp, setDogPopUp] = useState(false);
+  const [curDog, setCurDog] = useState();
+  const [popUpPresent, setPopUpPresent] = useState(false);
 
   useEffect(() => {
     // get dogs from backend
@@ -194,17 +211,56 @@ function DogProfile() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [createNewPopUp]);
+
+  useEffect(() => {
+    if (createNewPopUp || dogPopUp) {
+      setPopUpPresent(true);
+    } else {
+      setPopUpPresent(false);
+    }
+  }, [createNewPopUp, dogPopUp]);
+
+  useEffect(() => {
+    console.log(curDog);
+  }, [curDog])
 
   return (
     <DefaultBody>
       <AllContentWrapper>
-      <CreateNewDogButton onClick={() => setCreateNewPopUp(!createNewPopUp)} />
-      {/* dynamically render create a new dog component */}
-      {createNewPopUp && <CreateDogPopUp setCreateNewPopUp={setCreateNewPopUp} />}
-      <DogInfoBlock blockTitle="New Dogs" loaded={loaded} dogs={allDogs} validator="new" />
-      <DogInfoBlock blockTitle="Dogs In Home" loaded={loaded} dogs={allDogs} validator="in home" />
-      <DogInfoBlock blockTitle="Adopted Dogs" loaded={loaded} dogs={allDogs} validator="adopted" />
+        {/* toggle display for create a new dog component */}
+        {createNewPopUp && <CreateDogPopUp setCreateNewPopUp={setCreateNewPopUp} />}
+
+        {/* toggle display for create a new dog component */}
+        {dogPopUp && <DogProfilePopUp setDogPopUp={setDogPopUp} dog={curDog} />}
+
+        <AllDogsWrapper popUp={popUpPresent}>
+          <CreateNewDogButton onClick={() => setCreateNewPopUp(!createNewPopUp)} />
+          <DogInfoBlock
+            blockTitle="New Dogs"
+            loaded={loaded}
+            dogs={allDogs}
+            validator="new"
+            setDogPopUp={setDogPopUp}
+            setCurDog={setCurDog}
+          />
+          <DogInfoBlock
+            blockTitle="Dogs In Home"
+            loaded={loaded}
+            dogs={allDogs}
+            validator="in home"
+            setDogPopUp={setDogPopUp}
+            setCurDog={setCurDog}
+          />
+          <DogInfoBlock
+            blockTitle="Adopted Dogs"
+            loaded={loaded}
+            dogs={allDogs}
+            validator="adopted"
+            setDogPopUp={setDogPopUp}
+            setCurDog={setCurDog}
+          />
+        </AllDogsWrapper>
       </AllContentWrapper>
     </DefaultBody>
   );
