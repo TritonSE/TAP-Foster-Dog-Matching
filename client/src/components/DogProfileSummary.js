@@ -76,14 +76,14 @@ const TextBlob = styled.div`
   overflow: hidden;
 `;
 
-const InlineInfo = ({ field, value }) => {
+function InlineInfo({ field, value }) {
   return (
     <InlineBlob>
       <Field>{field + ":"}</Field>
       <Value>{value}</Value>
     </InlineBlob>
   );
-};
+}
 
 function DogProfileSummary({ dog }) {
   return (

@@ -160,15 +160,8 @@ function CreateDogPopUp(props) {
   });
 
   // array of urls validator
-  const checkUrl = (arr) => {
-    // returns true if all items are valid urls, returns false otherwise
-    for (const item of arr) {
-      if (!validUrl(item)) {
-        return false;
-      }
-    }
-    return true;
-  };
+  // returns true if all items are valid urls, returns false otherwise
+  const checkUrl = (arr) => arr.reduce((aggregate, item) => aggregate && validUrl(item), true);
 
   // functions for creating a new dog
   const onSubmitCreate = (data) => {
@@ -178,18 +171,18 @@ function CreateDogPopUp(props) {
       // no image(s) provided or invalid urls provided
       setError(true);
     } else {
-      setError(false);
       // image(s) are provided
+      setError(false);
 
       // make post request to create a new dog
       const reqBody = {
         name: data.name,
-        age: parseInt(data.age),
-        gender: gender,
-        weight: parseInt(data.weight),
+        age: parseInt(data.age, 10),
+        gender,
+        weight: parseInt(data.weight, 10),
         breed: data.breed,
         imageUrl: filtered,
-        category: category,
+        category,
         backgroundInfo: data.backgroundInfo,
         vettingInfo: data.vettingInfo,
         internalNotes: data.internalNotes ? data.internalNotes : "",
@@ -202,7 +195,10 @@ function CreateDogPopUp(props) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(reqBody),
-      });
+      }).then(() =>
+        // success - close the pop up
+        props.setCreateNewPopUp(false)
+      );
     }
   };
 
@@ -223,18 +219,18 @@ function CreateDogPopUp(props) {
       // no image(s) provided or invalid urls provided
       setError(true);
     } else {
-      setError(false);
       // image(s) are provided
+      setError(false);
 
       // make post request to update an existing dog
       const reqBody = {
         name: data.name,
-        age: parseInt(data.age),
-        gender: gender,
-        weight: parseInt(data.weight),
+        age: parseInt(data.age, 10),
+        gender,
+        weight: parseInt(data.weight, 10),
         breed: data.breed,
         imageUrl: filtered,
-        category: category,
+        category,
         backgroundInfo: data.backgroundInfo,
         vettingInfo: data.vettingInfo,
         internalNotes: data.internalNotes ? data.internalNotes : "",
@@ -246,7 +242,10 @@ function CreateDogPopUp(props) {
           "Content-type": "application/json; charset=UTF-8",
         },
         body: JSON.stringify(reqBody),
-      });
+      }).then(() =>
+        // success - close the pop up
+        props.setEditDogPopUp(false)
+      );
     }
   };
 
@@ -264,9 +263,9 @@ function CreateDogPopUp(props) {
       <CreateWrapper>
         <Close
           src={X}
-          onClick={() => {
-            update ? props.setEditDogPopUp(false) : props.setCreateNewPopUp(false);
-          }}
+          onClick={
+            update ? () => props.setEditDogPopUp(false) : () => props.setCreateNewPopUp(false)
+          }
         />
         <Form.Container>
           <Title>{update ? "Update Dog Profile" : "New Dog Profile"}</Title>

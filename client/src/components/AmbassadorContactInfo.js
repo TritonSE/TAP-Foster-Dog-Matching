@@ -16,7 +16,7 @@
 
 import React from "react";
 import styled from "styled-components";
-import device from "../utils/useResponsive";
+import { device } from "../utils/useResponsive";
 
 const ContentContainer = styled.div`
   width: 100%;

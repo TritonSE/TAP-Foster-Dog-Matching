@@ -155,7 +155,7 @@ function DogInfoBlock({ blockTitle, dogs, validator, loaded, setDogPopUp, setCur
           <DogConainer hidden={hidden}>
             {loaded && (
               <>
-                {dogs.map((dog, i) => {
+                {dogs.map((dog) => {
                   if (validator === dog.category) {
                     // TODO: change imageRef to dog.imageUrl[0] once image hosting is set up
                     return (
@@ -165,7 +165,7 @@ function DogInfoBlock({ blockTitle, dogs, validator, loaded, setDogPopUp, setCur
                           setCurDog(dog);
                         }}
                       >
-                        <DogCard key={i} name={dog.name} imageRef={Doggo} />
+                        <DogCard name={dog.name} imageRef={Doggo} />
                       </ClickableDogCard>
                     );
                   }

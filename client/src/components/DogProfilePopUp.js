@@ -132,9 +132,6 @@ function DogProfilePopUp({ setDogPopUp, dog }) {
       .then((res) => res.json())
       .then((json) => {
         setCurDog(json.dog);
-      })
-      .catch((err) => {
-        console.log(err);
       });
   }, [editDogPopUp]);
 
