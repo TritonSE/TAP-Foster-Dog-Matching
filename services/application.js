@@ -3,7 +3,9 @@ const { Application } = require("../models");
 /**
  * Convert object to dot notation
  * Modified from https://stackoverflow.com/a/66853185
- * @param object - object to convert
+ * @param inputObject - object to convert
+ * @param current - used to track object through recursive calls
+ * @param prefinalObject - used to track eventual result through recursive calls
  */
 function changeObjectToDotNotationFormat(inputObject, current, prefinalObject) {
   const result = prefinalObject || {};
