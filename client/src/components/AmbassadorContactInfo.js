@@ -1,6 +1,9 @@
 /**
  * Ambassador Contact Info Component
  *
+ *  @summary     Ambassador Contact Info Component
+ *  @author      Parth Patel
+ * 
  * Component that displays Ambassador info; similar to StatusUpdate, but with less information
  *
  * Used On: DogProfilePopUp.js

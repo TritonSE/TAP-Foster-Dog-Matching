@@ -1,7 +1,10 @@
 /**
  * Dog Card Component
  *
- * A card that contains the image of a dog and it's name
+ *  @summary     Dog Card Component
+ *  @author      Parth Patel
+ * 
+ * A card that contains the image of a dog and its name
  *
  * props:
  *

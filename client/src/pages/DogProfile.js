@@ -1,3 +1,11 @@
+/**
+ *  @summary     Manage Dog Profiles Page
+ *  @author      Parth Patel
+ * 
+ * Displays the dogs from the backend, allows you to create new dogs and edit existing dogs.
+ *
+ */
+
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import DefaultBody from "../components/DefaultBody";

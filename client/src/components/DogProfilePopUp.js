@@ -1,3 +1,19 @@
+/**
+ * Dog Profile Pop Up
+ * 
+ *  @summary     Dog Profile Pop Up
+ *  @author      Parth Patel
+ * 
+ * Creates a pop up with information about a dog, correlated ambassador info, and internal notes
+ * 
+ * Used on Manage Dog Profiles page
+ * 
+ * props:
+ *    setDogPopUp [function] - setState of whether or not the component should be open
+ *                             used to close the component
+ *    dog [object] - initial dog object pulled from backend
+ */
+
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import DogProfileSummary from "./DogProfileSummary";

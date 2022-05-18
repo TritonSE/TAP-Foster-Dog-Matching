@@ -1,3 +1,43 @@
+/**
+ * Dog Profile Summary Component
+ * 
+ *  @summary     Dog Profile Summary Component
+ *  @author      Parth Patel
+ * 
+ * Shows an overview of the dog's information
+ * Used in Dog Profile Pop Up Component
+ * 
+ * props:
+ *    dog [object] - object of the dog's information
+ * 
+ * sample dog object:
+ * {
+ * name: "tom",
+ * age: 34,
+ * gender: "Male",
+ * breed: "German Dog",
+ * weight: 40,
+ * vettingInfo: "sample text",
+ * backgroundInfo: "sample text"
+ * ...
+ * }
+ * 
+ * Note: you could just pull a dog object from the database given a dog ID and pass it straight into this component
+ * and it will work the same. Don't have to manually populate an object as shown above.
+ * 
+ * Sample API call:
+ * 
+ *     fetch(`http://localhost:8000/api/dogs/${dog._id}`, {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        setCurDog(json.dog);
+      });
+ * 
+ * 
+ */
+
 import React from "react";
 import styled from "styled-components";
 import Doggo from "../images/good-boi.png";

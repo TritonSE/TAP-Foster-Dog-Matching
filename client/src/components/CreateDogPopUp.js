@@ -1,3 +1,16 @@
+/**
+ * Create and Update Dog Pop Up component
+ * 
+ * This component is used in the manage dog profiles page to create a new dog and edit the details of existing dogs
+ * 
+ * props:
+ * 
+ *    update [boolean] [optional] - if true, component is set to update state
+ *    dog [object] - if update is true, a dog object with existing information must be provided 
+ * 
+ */
+
+
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
