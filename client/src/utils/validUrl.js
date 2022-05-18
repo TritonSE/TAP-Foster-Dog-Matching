@@ -1,13 +1,13 @@
 /**
  * validUrl function
- * 
+ *
  *  @summary     validUrl function
  *  @author      Parth Patel
- * 
+ *
  * Resource function to tell if a given string is a valid url using regex
- * 
+ *
  * @param str - string to check
- * 
+ *
  */
 
 function validUrl(str) {

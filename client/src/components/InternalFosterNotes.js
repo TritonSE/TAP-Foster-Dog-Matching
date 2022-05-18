@@ -1,15 +1,15 @@
 /**
  * Internal Foster Notes Component
- * 
+ *
  *  @summary     Internal Foster Notes Component
  *  @author      Parth Patel
- * 
+ *
  * Component to display the internal foster notes
  * Used on DogProfilePopUp component
- * 
- * props: 
+ *
+ * props:
  *    internalNotes [string] - internal notes to display
- * 
+ *
  */
 
 import React from "react";

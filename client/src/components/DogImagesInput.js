@@ -1,19 +1,19 @@
 /**
  * Dog Images Input Component
- * 
+ *
  *  @summary     Dog Images Input Component
  *  @author      Parth Patel
- * 
- * Component to add links of up to 3 dogs and delete links according to the figma model. 
+ *
+ * Component to add links of up to 3 dogs and delete links according to the figma model.
  * Used in the CreateDogPopUp component as a part of the form to create a new dog/ update an existing dog's information
- * 
+ *
  * props:
  *    initialVals [optional][ array] - array of links to prepopulate the component with
  *    error[ boolean] - whether or not there is an error within the user input links formatting
  *                     used to determine whether to show red around input boxes
  *    setImageArr [function] - callback used to send image array to parent component
  *    setImageCounter [function] - callback used to send image count to parent component
- * 
+ *
  */
 
 import React, { useState, useEffect } from "react";

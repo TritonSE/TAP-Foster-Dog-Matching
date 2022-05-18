@@ -1,7 +1,7 @@
 /**
  *  @summary     Manage Dog Profiles Page
  *  @author      Parth Patel
- * 
+ *
  * Displays the dogs from the backend, allows you to create new dogs and edit existing dogs.
  *
  */
