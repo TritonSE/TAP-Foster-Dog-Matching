@@ -1,3 +1,7 @@
+.form-header {
+  font-size: 30px;
+}
+
 #form-container-signup {
   min-height: 650px;
   max-height: 1000px;
@@ -29,7 +33,7 @@ input {
 
 .selector {
   position: absolute;
-  width: 40%;
+  width: calc(56% - 0.5vh);
   height: 38px;
   bottom: 81%;
   left: 22.5%;
@@ -110,40 +114,36 @@ input {
 .signup-first-name {
   position: absolute;
   width: 55%;
-  height: 8%;
-  min-height: 52.5px;
+  height: calc(6% + 0.5vh);
   bottom: 70.5%;
 }
 
 .signup-last-name {
   position: absolute;
   width: 55%;
-  height: 8%;
-  min-height: 52.5px;
+  height: calc(6% + 0.5vh);
+  /* min-height: 52.5px; */
   bottom: 60.5%;
 }
 
 .signup-email {
   position: absolute;
   width: 55%;
-  height: 8%;
-  min-height: 52.5px;
+  height: calc(6% + 0.5vh);
   bottom: 50.5%;
 }
 
 .signup-password {
   position: absolute;
   width: 55%;
-  height: 8%;
-  min-height: 52.5px;
+  height: calc(6% + 0.5vh);
   bottom: 40.5%;
 }
 
 .signup-re-password {
   position: absolute;
   width: 55%;
-  height: 8%;
-  min-height: 52.5px;
+  height: calc(6% + 0.5vh);
   bottom: 30.5%;
 }
 
@@ -166,20 +166,51 @@ input {
 }
 
 @media only screen and (max-width: 1050px) {
+  input {
+    border-radius: 10px;
+  }
+
+  .selector {
+    height: calc(16px + 0.5vh);
+    width: calc(48% - 1vh);
+    font-size: calc(8px + 0.5vh);
+    border-radius: 8px;
+  }
+  
   .form-container input::placeholder {
     position: absolute;
     left: 8%;
     bottom: 25%;
 
-    font-size: 16px;
+    font-size: calc(8px + 0.5vh);
     line-height: 19px;
     color: #9b9a9a;
+  }
+
+  .form-signup-question {
+    height: calc(32px + 0.5vh);
+    font-size: calc(12px + 0.5vh);
+  }
+
+  .form-header {
+    font-size: calc(16px + 0.5vh)
   }
 
   #form-container-signup {
     min-height: 500px;
     max-height: 50%;
     height: 87.5%;
+  }
+
+  .button-border-signup {
+    position: absolute;
+    width: 55%;
+    height: calc(20px + 0.5vh);
+    bottom: 20%;
+  }
+
+  .button-name-signup {
+    font-size: calc(10px + 0.5vh);
   }
 
   @media only screen and (max-height: 950px) {
@@ -240,7 +271,7 @@ input {
     bottom: 11%;
     right: 14%;
 
-    font-size: 20px;
+    font-size: calc(10px + 0.5vh);
   }
 }
 
