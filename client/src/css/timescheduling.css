@@ -23,9 +23,10 @@
 
 .container {
   width: 69.063vw;
-  height: 42.675vw;
+  min-height: 42.675vw;
   background: #000000;
   border-radius: 35px;
+  overflow: visible;
 }
 
 .container-text {
