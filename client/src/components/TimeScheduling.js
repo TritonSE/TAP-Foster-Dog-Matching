@@ -1,3 +1,35 @@
+/**
+ * Time Scheduling Component
+ *
+ * Component for adding and viewing weekly schedules on the Calendar page
+ *
+ * Used on: Calendar
+ *
+ * Props:
+ * - schedules - list of objects with an _id, name, role, date, and time
+ * - times [string[]] - array of strings of avaliable times to meet
+ *
+ * Example usage:
+      <TimeScheduling
+        schedules={[
+          {
+            _id: "1",
+            name: "Sam A.",
+            role: "Foster Ambassador",
+            date: "6/30/2022",
+            time: ["5-8 pm", "4-3 pm"],
+          },
+          {
+            _id: "2",
+            name: "Clara A.",
+            role: "Foster Ambassador",
+            date: "6/30/2022",
+            time: ["1-2 pm"],
+          }
+        ]}
+      />
+ */
+
 import React, { useState } from "react";
 import Calendar from "react-calendar";
 import DayScheduling from "./DayScheduling";
