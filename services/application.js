@@ -1,6 +1,25 @@
 const { Application } = require("../models");
 
 /**
+ * Convert object to dot notation
+ * Modified from https://stackoverflow.com/a/66853185
+ * @param object - object to convert
+ */
+function changeObjectToDotNotationFormat(inputObject, current, prefinalObject) {
+  const result = prefinalObject || {};
+  Object.keys(inputObject).forEach((key) => {
+    const value = inputObject[key];
+    const newKey = current ? `${current}.${key}` : key;
+    if (value && typeof value === "object") {
+      changeObjectToDotNotationFormat(value, newKey, result);
+    } else {
+      result[newKey] = value;
+    }
+  });
+  return result;
+}
+
+/**
  * Returns a specific application according to provided application id
  * @param applicationId - _id of application
  */
@@ -25,7 +44,7 @@ async function createApplication(rawApplicationProfile) {
 async function updateApplication(applicationId, updatedApplicationProfile) {
   const updatedApplication = await Application.findByIdAndUpdate(
     applicationId,
-    updatedApplicationProfile,
+    changeObjectToDotNotationFormat(updatedApplicationProfile),
     {
       new: true,
     }
