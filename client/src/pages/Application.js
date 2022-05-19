@@ -40,6 +40,7 @@ import Meetings from "../components/Meeting";
 import logo from "../images/logo-inverted.png";
 import ApplicationContext from "../contexts/ApplicationContext";
 import InterviewInfo from "../components/InterviewInfo";
+import StatusUpdate from "../components/StatusUpdate";
 
 const ApplicationContainer = styled.div`
   display: flex;
@@ -105,8 +106,16 @@ function Application() {
       intro: <h1>step 3 intro here</h1>,
       content: <div>
       <Meetings 
-          textCard = {<div><p>Hello There</p></div>}
-          status = {<InterviewInfo contingent={true} />}
+          status = {<StatusUpdate
+            title="Interview Info"
+            ambassador="Dhanush"
+            phone="123-456-7890"
+            email="test@tap.com"
+            date="1/1/2022"
+            time="6-7:00PM"
+            location="Zoom"
+          />}
+          interviewInfo = {<InterviewInfo contingent={true} />}
       />
     </div>,
     }, //  Step 3
