@@ -10,7 +10,7 @@
   padding-right: 2%;
   padding-top: 5px;
   padding-bottom: 2%;
-  height: calc(100% - 40px);
+  /* height: calc(100% - 40px); */
   width: 100%;
 }
 
