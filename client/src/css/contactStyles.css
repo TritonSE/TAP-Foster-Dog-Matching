@@ -87,7 +87,7 @@
 .noInputError {
   position: absolute;
   color: red;
-  left: 35vw;
+  left: 30vw;
   top: 7vh;
   font-size: max(15px, 2.6vh);
 }
