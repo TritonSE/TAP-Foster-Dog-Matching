@@ -39,6 +39,7 @@ import FosterApplication from "../components/FosterApplication";
 import Meetings from "../components/Meeting";
 import logo from "../images/logo-inverted.png";
 import ApplicationContext from "../contexts/ApplicationContext";
+import InterviewInfo from "../components/InterviewInfo";
 
 const ApplicationContainer = styled.div`
   display: flex;
@@ -102,7 +103,12 @@ function Application() {
     }, //  Step 2
     {
       intro: <h1>step 3 intro here</h1>,
-      content: <h1>step 3 content here</h1>,
+      content: <div>
+      <Meetings 
+          textCard = {<div><p>Hello There</p></div>}
+          status = {<InterviewInfo contingent={true} />}
+      />
+    </div>,
     }, //  Step 3
     {
       intro: <h1>step 4 intro here</h1>,

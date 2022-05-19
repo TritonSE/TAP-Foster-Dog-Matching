@@ -4,7 +4,7 @@ import React from "react";
 import Form from "./Form";
 import "../css/interviewInfo.css";
 
-function PassFail({ props }) {
+function PassFail( props ) {
   const { control, watch, handleSubmit } = useForm({
     reValidateMode: "onChange",
   });
@@ -14,6 +14,8 @@ function PassFail({ props }) {
   const onConfirm = () => {};
 
   const onReject = () => {};
+
+  const onContingent = () => {};
 
   return (
     <div className="interview-info-wrapper">
@@ -31,6 +33,13 @@ function PassFail({ props }) {
           <button type="button" className="reject-button" onClick={onReject}>
             Reject
           </button>
+          {props.contingent ? (
+            <button type="button" className="contingent-button" onClick={onContingent}>
+              Contingent
+            </button> )
+            :
+            (<></>)
+          }
           <button type="button" className="pass-button" onClick={onConfirm}>
             Pass
           </button>

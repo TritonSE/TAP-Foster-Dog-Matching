@@ -1,16 +1,17 @@
 .interview-info-wrapper{
   background-color: white;
   border-radius: 20px;
-  width: 90%;
+  width: 100%;
   display:flex;
 }
 
 .interview-info-input{
   margin:5px;
+  text-align: left;
 }
 
 .info-content{
-  width:90%;
+  width:100%;
   border-color:none;
 }
 
@@ -20,7 +21,7 @@
 }
 
 .reject-button {
-  width: min(15vw, 191px);
+  width: min(10vw, 191px);
   height: 50px;
   right: 20px;
   bottom: 20px;
@@ -37,8 +38,26 @@
   font-size: 20px;
 }
 
+.contingent-button{
+  width: min(10vw, 191px);
+  height: 50px;
+  right: 20px;
+  bottom: 20px;
+  text-align: center;
+  cursor: pointer;
+  background: #868686;
+  padding: 3px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  color: white;
+  border-color: black;
+  border-width: 1px;
+  /* font-family: Nunito; */
+  font-size: 20px;
+}
+
 .pass-button {
-  width: min(15vw, 191px);
+  width: min(10vw, 191px);
   height: 50px;
   right: 20px;
   bottom: 20px;
