@@ -15,7 +15,7 @@ const validators = [
   body("address.city").notEmpty().isString(),
   body("address.state").notEmpty().isString(),
   body("address.country").notEmpty().isString(),
-  body("address.zipcode").notEmpty().isNumeric(),
+  body("address.zipcode").notEmpty().isNumeric().isLength({ min: 5, max: 5 }),
   body("email").notEmpty().isString().isEmail(),
   body("dateOfBirth").notEmpty().isDate({ format: "MM-DD-YYYY" }),
   body("homeType").notEmpty().isString(),
@@ -37,7 +37,7 @@ const validators = [
     )
     .notEmpty()
     .isString()
-    .isMobilePhone(),
+    .isMobilePhone("en-US"),
   body("landlord.email")
     .if(
       body("landlord.firstName")
@@ -101,36 +101,41 @@ const validators = [
 /**
  * GET /applications/:applicationId - Return an application by ID
  */
-router.get("/:applicationId", (req, res, next) => {
+router.get("/:applicationId", (req, res) => {
   getApplication(req.params.applicationId)
-    .then((application) =>
-      res.status(200).json({
-        application,
-      })
-    )
-    .catch((err) => {
-      res.status(500).json({
-        err,
+    .then((application) => {
+      if (application) {
+        return res.status(200).json({
+          application,
+        });
+      }
+      return res.status(400).json({
+        errors: [{ message: `Something went wrong, application could not be found` }],
       });
-      next(err);
+    })
+    .catch((err) => {
+      res.status(500).json({ message: err });
     });
 });
 
 /**
  * POST /applications - Create an application
  */
-router.post("/", [...validators, validateRequest], (req, res, next) => {
+
+router.post("/", [...validators, validateRequest], (req, res) => {
   createApplication(req.body)
     .then((application) => {
-      res.status(200).json({
-        application,
+      if (application) {
+        return res.status(200).json({
+          application,
+        });
+      }
+      return res.status(400).json({
+        errors: [{ message: `Something went wrong, new application could not be created` }],
       });
     })
     .catch((err) => {
-      res.status(500).json({
-        err,
-      });
-      next(err);
+      res.status(500).json({ message: err });
     });
 });
 
@@ -156,6 +161,26 @@ router.put(
           message: err,
         });
         next(err);
+      });
+  }
+);
+router.put(
+  "/:applicationId",
+  [...validators.map((validator) => validator.optional()), validateRequest], // all fields for update are optional
+  (req, res) => {
+    updateApplication(req.params.applicationId, req.body)
+      .then((application) => {
+        if (application) {
+          return res.status(200).json({
+            application,
+          });
+        }
+        return res.status(400).json({
+          errors: [{ message: `Something went wrong, application could not be updated` }],
+        });
+      })
+      .catch((err) => {
+        res.status(500).json({ message: err });
       });
   }
 );
