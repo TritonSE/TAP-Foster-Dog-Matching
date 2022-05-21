@@ -46,7 +46,12 @@ const InputField = styled.input`
   padding: 4px;
   width: 100%;
   box-sizing: border-box;
-  outline: none;
+
+  &:focus {
+    outline: none;
+    border: 2px solid #719ece;
+  }
+
   ${(props) =>
     props.invalid &&
     css`
