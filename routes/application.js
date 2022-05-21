@@ -69,7 +69,7 @@ const validators = [
   body("reference").notEmpty(),
   body("reference.firstName").notEmpty().isString(),
   body("reference.lastName").notEmpty().isString(),
-  body("reference.phone").notEmpty().isString().isMobilePhone(),
+  body("reference.phone").notEmpty().isString().isMobilePhone("en-US"),
   body("reference.email").notEmpty().isString().isEmail(),
   body("reference.relation").notEmpty().isString(),
   body("reference.yearsKnown").notEmpty().isNumeric(),
