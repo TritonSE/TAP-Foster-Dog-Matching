@@ -36,24 +36,7 @@
   height: 26.91px;
   border: 1.07628px solid #9b9a9a;
   border-radius: 3.22885px;
-  overflow: hidden;
-}
-
-input[type="time"] {
-  -webkit-appearance: none;
-  border: none;
-  font-family: "Myriad Pro";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 17px;
-  color: #5f5b5b;
-  width: 100%;
-  height: 100%;
-}
-
-input[type="time"]::-webkit-calendar-picker-indicator {
-  display: none;
+  vertical-align: top;
 }
 
 .time-slot-divider {
@@ -61,7 +44,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   width: 7.53px;
   height: 0px;
   border: 1.07628px solid #9b9a9a;
-  vertical-align: 70%;
+  vertical-align: 50%;
   margin-left: 8.38px;
   margin-right: 8.38px;
 }
@@ -72,7 +55,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   height: 26.91px;
   border: 1.07628px solid #9b9a9a;
   border-radius: 3.22885px;
-  overflow: hidden;
+  vertical-align: top;
 }
 
 .trash-button {

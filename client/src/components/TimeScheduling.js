@@ -127,14 +127,13 @@ function TimeScheduling(props) {
             minDetail="month"
             prevLabel={<img className="left-arrow" src={left} alt="left arrow" />}
             nextLabel={<img className="right-arrow" src={right} alt="right arrow" />}
-            showNeighboringMonth={false}
             formatMonthYear={(locale, currentDate) => month[currentDate.getMonth()]}
             tileDisabled={({ date }) => !datesWithSchedules.has(dateToHumanFormat(date))}
           />
         </div>
         <div className="schedules-box">
           <div className="schedules-box-section1">
-            <div className="schedules-box-title">Times Avaliable</div>
+            <div className="schedules-box-title">Schedules</div>
             <div className="date">
               {[day[currDate.getDay()], month[currDate.getMonth()], currDate.getDate()].join(" ")}
             </div>
