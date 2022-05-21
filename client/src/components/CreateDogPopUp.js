@@ -31,6 +31,7 @@ const BlurBackground = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-y: scroll;
 
   @media screen and (max-height: 1000px) {
     align-items: start;
@@ -44,7 +45,7 @@ const CreateWrapper = styled.div`
   position: relative;
   max-width: 1060px;
   width: calc(100% - 4px);
-  max-height: calc(100% - 50px);
+  max-height: fit-content;
   overflow-y: scroll;
 
   z-index: 3;
@@ -378,7 +379,7 @@ function CreateDogPopUp(props) {
                   : handleSubmit(onSubmitCreate, onErrorCreate)
               }
             >
-              {update ? "Update" : "Continue"}
+              {update ? "Update" : "Submit"}
             </Button>
           </Form.Actions>
         </Form.Container>

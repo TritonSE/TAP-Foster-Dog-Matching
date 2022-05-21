@@ -30,13 +30,18 @@ const BlurBackground = styled.div`
   position: absolute;
   width: 100%;
   height: calc(100% + 50px);
-  background-color: rgba(255, 255, 255, 0.8);
   z-index: 5;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: rgba(255, 255, 255, 0.9);
 
   @media screen and (max-height: 1000px) {
+    align-items: start;
+    padding-bottom: 5vh;
+  }
+
+  ${device.tablet} {
     align-items: start;
     padding-bottom: 5vh;
   }

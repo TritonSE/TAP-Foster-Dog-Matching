@@ -49,7 +49,7 @@ const InputField = styled.input`
 
   &:focus {
     outline: none;
-    border: 2px solid #719ece;
+    border: 2px solid #8dc442;
   }
 
   ${(props) =>

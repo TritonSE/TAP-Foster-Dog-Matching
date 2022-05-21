@@ -46,6 +46,11 @@ const Input = styled.input`
   padding: 4px;
   box-sizing: border-box;
 
+  &:focus {
+    outline: none;
+    border: 2px solid #8dc442;
+  }
+
   ${device.mobile} {
     font-size: 3vw;
   }
