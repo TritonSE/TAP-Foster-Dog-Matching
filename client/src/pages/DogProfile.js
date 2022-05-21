@@ -12,10 +12,9 @@ import DefaultBody from "../components/DefaultBody";
 import DogCard from "../components/DogProfileCard";
 import CreateDogPopUp from "../components/CreateDogPopUp";
 import Arrow from "../images/arrow.png";
-import Plus from "../images/plus.png";
-import GreenButton from "../images/greenbutton.png";
 import Doggo from "../images/good-boi-2.png";
 import DogProfilePopUp from "../components/DogProfilePopUp";
+import CreateNew from "../images/createNewDog.png";
 
 import { device } from "../utils/useResponsive";
 
@@ -129,10 +128,6 @@ const GreenCircleImg = styled.img`
   width: 100%;
   position: absolute;
 `;
-const PlusImg = styled.img`
-  width: 100%;
-  position: absolute;
-`;
 
 const CreateDogButtonText = styled.p`
   margin: 0;
@@ -192,10 +187,9 @@ function CreateNewDogButton({ onClick }) {
   return (
     <CreateNewDogWrapper onClick={onClick}>
       <AddOverlap>
-        <GreenCircleImg src={GreenButton} />
-        <PlusImg src={Plus} />
+        <GreenCircleImg src={CreateNew} />
       </AddOverlap>
-      <CreateDogButtonText>Create a New Dog Profile</CreateDogButtonText>
+      <CreateDogButtonText>Create New Dog Profile</CreateDogButtonText>
     </CreateNewDogWrapper>
   );
 }

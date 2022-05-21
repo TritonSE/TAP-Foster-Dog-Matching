@@ -35,29 +35,42 @@ const BlurBackground = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media screen and (max-height: 1000px) {
+    align-items: start;
+    padding-bottom: 5vh;
+  }
 `;
 
 const ContentWrapper = styled.div`
   position: relative;
   min-height: fit-content;
-  max-height: 800px;
   max-width: 1357px;
+  max-height: calc(100% - 50px);
+  overflow-y: scroll;
+
   width: 100%;
 
   z-index: 3;
   background: #000000;
   border-radius: 35px;
   color: white;
+  display: flex;
+  flex-direction: column;
+
   ${device.tablet} {
     max-height: fit-content;
   }
 `;
+
+const Header = styled.div``;
 
 const Close = styled.img`
   position: absolute;
   left: 20px;
   top: 20px;
   z-index: 4;
+  cursor: pointer;
 `;
 
 const Title = styled.h1`
@@ -79,7 +92,7 @@ const DogProfileWrapper = styled.div`
   display: flex;
   justify-content: space-around;
   padding-top: 2vh;
-  padding-bottom: calc(33px + 3vh);
+  padding-bottom: 2vh;
 
   ${device.tablet} {
     flex-direction: column;
@@ -117,9 +130,8 @@ const RightBottomWrapper = styled.div`
 
 // edit portion styles
 const EditWrapper = styled.div`
-  position: absolute;
-  bottom: 1vh;
-  right: 0;
+  align-self: flex-end;
+  margin-bottom: 1vh;
 
   display: flex;
   align-items: center;
@@ -156,8 +168,10 @@ function DogProfilePopUp({ setDogPopUp, dog }) {
       {editDogPopUp && <CreateDogPopUp setEditDogPopUp={setEditDogPopUp} dog={curDog} update />}
       <BlurBackground>
         <ContentWrapper>
-          <Close src={whiteX} onClick={() => setDogPopUp(false)} />
-          <Title>Dog Profile</Title>
+          <Header>
+            <Close src={whiteX} onClick={() => setDogPopUp(false)} />
+            <Title>Dog Profile</Title>
+          </Header>
           <DogProfileWrapper>
             <LeftWrapper>
               <DogProfileSummary dog={curDog} />
@@ -175,12 +189,12 @@ function DogProfilePopUp({ setDogPopUp, dog }) {
               <RightBottomWrapper>
                 <InternalFosterNotes internalNotes={curDog.internalNotes} />
               </RightBottomWrapper>
-              <EditWrapper onClick={() => setEditDogPopUp(true)}>
-                <EditImg src={Edit} />
-                <EditText>Edit</EditText>
-              </EditWrapper>
             </RightWrapper>
           </DogProfileWrapper>
+          <EditWrapper onClick={() => setEditDogPopUp(true)}>
+            <EditImg src={Edit} />
+            <EditText>Edit</EditText>
+          </EditWrapper>
         </ContentWrapper>
       </BlurBackground>
     </>

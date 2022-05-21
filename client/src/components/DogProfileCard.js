@@ -30,6 +30,7 @@ const DogContainer = styled.div`
   box-sizing: border-box;
   box-shadow: 0px 2.61682px 2.61682px rgba(0, 0, 0, 0.5);
   border-radius: 9.81308px;
+  cursor: pointer;
 `;
 
 const DogImg = styled.img`

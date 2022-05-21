@@ -87,8 +87,8 @@ const DogPic = styled.img`
 
 const InlineBlob = styled.div`
   display: flex;
-  justify-content: space-between;
   margin: 1vh 0;
+  gap: 0.5vw;
 `;
 
 const Field = styled.p`
@@ -104,7 +104,7 @@ const Field = styled.p`
 
 const Value = styled.p`
   margin: 0;
-  font-size: 25px;
+  font-size: 22px;
 
   ${device.tablet} {
     font-size: max(15px, min(22px, 4vw));

@@ -26,18 +26,26 @@ const BlurBackground = styled.div`
   position: absolute;
   width: 100%;
   height: calc(100% + 50px);
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.8);
   z-index: 8;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media screen and (max-height: 1000px) {
+    align-items: start;
+  }
+  ${device.tablet} {
+    align-items: start;
+  }
 `;
 
 const CreateWrapper = styled.div`
   position: relative;
-  height: fit-content;
   max-width: 1060px;
   width: calc(100% - 4px);
+  max-height: calc(100% - 50px);
+  overflow-y: scroll;
 
   z-index: 3;
   background: #ffffff;
@@ -49,6 +57,7 @@ const Close = styled.img`
   position: absolute;
   left: 20px;
   top: 20px;
+  cursor: pointer;
 `;
 
 const Title = styled.h1`
@@ -194,7 +203,7 @@ function CreateDogPopUp(props) {
         weight: parseInt(data.weight, 10),
         breed: data.breed,
         imageUrl: filtered,
-        category,
+        category: "new",
         backgroundInfo: data.backgroundInfo,
         vettingInfo: data.vettingInfo,
         internalNotes: data.internalNotes ? data.internalNotes : "",
@@ -308,13 +317,17 @@ function CreateDogPopUp(props) {
                     required
                   />
                   <ControlledInput control={control} label="Breed" name="breed" required />
-                  <Text>Category</Text>
-                  <Select
-                    value={category}
-                    options={toSelectCategory}
-                    onChange={handleSelectCategory}
-                    height="19px"
-                  />
+                  {update ? (
+                    <>
+                      <Text>Category</Text>
+                      <Select
+                        value={category}
+                        options={toSelectCategory}
+                        onChange={handleSelectCategory}
+                        height="19px"
+                      />
+                    </>
+                  ) : undefined}
                 </Form.Column>
               </LeftTop>
               <LeftBottom>
