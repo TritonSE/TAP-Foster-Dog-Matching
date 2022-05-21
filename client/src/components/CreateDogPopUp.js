@@ -35,9 +35,7 @@ const BlurBackground = styled.div`
 
   @media screen and (max-height: 1000px) {
     align-items: start;
-  }
-  ${device.tablet} {
-    align-items: start;
+    height: 100%;
   }
 `;
 

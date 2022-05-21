@@ -35,15 +35,15 @@ const BlurBackground = styled.div`
   justify-content: center;
   align-items: center;
   background-color: rgba(255, 255, 255, 0.9);
+  overflow-y: scroll;
 
   @media screen and (max-height: 1000px) {
     align-items: start;
-    padding-bottom: 5vh;
   }
 
   ${device.tablet} {
     align-items: start;
-    padding-bottom: 5vh;
+    height: 100%;
   }
 `;
 
@@ -52,8 +52,7 @@ const ContentWrapper = styled.div`
   min-height: fit-content;
   max-width: 1357px;
   max-height: calc(100% - 50px);
-  overflow-y: scroll;
-
+  margin-bottom: 5vh;
   width: 100%;
 
   z-index: 3;
