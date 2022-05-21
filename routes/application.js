@@ -145,28 +145,6 @@ router.post("/", [...validators, validateRequest], (req, res) => {
 router.put(
   "/:applicationId",
   [...validators.map((validator) => validator.optional()), validateRequest], // all fields for update are optional
-  (req, res, next) => {
-    updateApplication(req.params.applicationId, req.body)
-      .then((application) => {
-        if (application) {
-          res.status(200).json({
-            application,
-          });
-        } else {
-          res.status(400).json(["Something went wrong updating the application", application]);
-        }
-      })
-      .catch((err) => {
-        res.status(500).json({
-          message: err,
-        });
-        next(err);
-      });
-  }
-);
-router.put(
-  "/:applicationId",
-  [...validators.map((validator) => validator.optional()), validateRequest], // all fields for update are optional
   (req, res) => {
     updateApplication(req.params.applicationId, req.body)
       .then((application) => {
@@ -184,5 +162,6 @@ router.put(
       });
   }
 );
+
 
 module.exports = router;
