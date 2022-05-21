@@ -5,7 +5,6 @@
  * @summary     Contact page implementation
  * @author      Parth Patel
  *
- * #TODO Send message needs to be functional
  */
 
 import React, { useState } from "react";
@@ -47,14 +46,30 @@ function ContactUs() {
     setValue(val);
   }, []);
 
-  const sendMessage = () => {
+  const sendMessage = async () => {
     if (inputMessage === "") {
       setErrorMessage(emptyText);
     } else {
-      setErrorMessage("");
-      setInputMessage("");
-      setSent(true);
-      // Send message to backend
+      await fetch(`http://localhost:8000/api/contact/`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: "place holder name",
+          email: "temp@temp.com",
+          team: value,
+          message: inputMessage,
+          toEmail: "tapmatching@gmail.com",
+        }),
+      }).then((res) => {
+        // message sent
+        if (res.ok) {
+          setInputMessage("");
+          setErrorMessage("");
+          setSent(true);
+        } else {
+          setSent(false);
+        }
+      });
     }
   };
 
