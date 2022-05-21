@@ -5,7 +5,6 @@
  * @summary     Contact page implementation
  * @author      Parth Patel
  *
- * #TODO Send message needs to be functional
  */
 
 import React, { useState } from "react";
