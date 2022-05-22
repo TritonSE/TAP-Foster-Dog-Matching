@@ -35,14 +35,14 @@ const BlurBackground = styled.div`
   justify-content: center;
   align-items: center;
   background-color: rgba(255, 255, 255, 0.9);
-  overflow-y: scroll;
-
   @media screen and (max-height: 1000px) {
     align-items: start;
+    padding-bottom: 5vh;
+    height: 100%;
   }
-
   ${device.tablet} {
     align-items: start;
+    padding-bottom: 5vh;
     height: 100%;
   }
 `;
@@ -52,20 +52,19 @@ const ContentWrapper = styled.div`
   min-height: fit-content;
   max-width: 1357px;
   max-height: calc(100% - 50px);
-  margin-bottom: 5vh;
+  overflow-y: scroll;
   width: 100%;
-
   z-index: 3;
   background: #000000;
   border-radius: 35px;
   color: white;
   display: flex;
   flex-direction: column;
-
   ${device.tablet} {
     max-height: fit-content;
   }
 `;
+
 
 const Header = styled.div``;
 

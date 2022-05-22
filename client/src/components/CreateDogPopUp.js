@@ -31,12 +31,12 @@ const BlurBackground = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow-y: scroll;
 
   @media screen and (max-height: 1000px) {
     align-items: start;
-    height: 100%;
+    
   }
+
 `;
 
 const CreateWrapper = styled.div`
@@ -51,6 +51,8 @@ const CreateWrapper = styled.div`
   border-radius: 20px;
   border: 1px solid black;
 `;
+
+
 
 const Close = styled.img`
   position: absolute;
