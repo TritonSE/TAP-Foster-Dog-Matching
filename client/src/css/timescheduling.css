@@ -231,7 +231,7 @@
   position: relative;
   width: 776px;
   margin: 0 auto;
-  height: 607.02px;
+  height: 620px;
   top: 50%;
   transform: translateY(-50%);
   background: #fff;
@@ -334,7 +334,7 @@ input:checked + .repeat-slider:before {
 }
 
 .weekly-schedule-container {
-  height: 388px;
+  height: 400px;
   width: 620px;
   margin-left: 75px;
   clear: right;
