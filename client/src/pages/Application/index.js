@@ -85,20 +85,20 @@ function Application() {
   // TODO: Use firebase user data
   const role = "admin";
 
+  // Switch application content based on current user role
+  const applicationContent = React.useMemo(
+    () => (role === "admin" ? AdminView : FosterView),
+    [role]
+  );
+
   const goToNextSubStep = React.useCallback(() => {
     setCurrentSubStep("content");
   }, []);
 
   const goToStep = React.useCallback((step, subStep = "intro") => {
     setCurrentStep(step);
-    setCurrentSubStep(step === 0 ? "content" : subStep);
+    setCurrentSubStep(step === 0 || !applicationContent[currentStep].intro ? "content" : subStep);
   }, []);
-
-  // Switch application content based on current user role
-  const applicationContent = React.useMemo(
-    () => (role === "admin" ? AdminView : FosterView),
-    [role]
-  );
 
   const applicationData = React.useMemo(
     () => ({
