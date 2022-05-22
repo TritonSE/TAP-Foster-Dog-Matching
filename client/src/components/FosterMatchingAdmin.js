@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import SplitCardContainer from "./SplitCardContainer";
 import PenIcon from "../images/penicon.png";
@@ -179,7 +179,7 @@ export const SubtitleText = styled.div`
   color: white;
 `;
 
-export const DogGrid = styled.div`
+export const DogGridStyled = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   column-gap: 2.7%;
@@ -230,12 +230,40 @@ function DogCard(props) {
   }, [checked]);
 
   return (
-    <DogCardBackground checked={checked} onClick={(_) => setChecked(!checked)}>
+    <DogCardBackground checked={checked} onClick={(_) => props.updateCard(setChecked, !checked)}>
       <DogCardImage src={props.dogImage} alt={props.dogName} />
       <br />
       {props.dogName}
       {checkbox}
     </DogCardBackground>
+  );
+}
+function DogGrid() {
+  const [numChecked, setNumChecked] = useState(0);
+  const MAX_CHECKED_CARDS = 5;
+
+  const tryCheckDogCard = useCallback((cardSetChecked, newValue) => {
+    if (newValue) {
+      if (numChecked + 1 <= MAX_CHECKED_CARDS) {
+        setNumChecked(numChecked + 1);
+        cardSetChecked(true);
+      }
+    } else {
+      setNumChecked(numChecked - 1);
+      cardSetChecked(false);
+    }
+  });
+
+  return (
+    <DogGridStyled>
+      {Array.from(Array(12).keys()).map((index) => {
+        if (index % 3 === 0)
+          return <DogCard dogName="Lolita" dogImage={GridImage1} updateCard={tryCheckDogCard} />;
+        if (index % 3 === 1)
+          return <DogCard dogName="Flower" dogImage={GridImage2} updateCard={tryCheckDogCard} />;
+        return <DogCard dogName="Shelly" dogImage={GridImage3} updateCard={tryCheckDogCard} />;
+      })}
+    </DogGridStyled>
   );
 }
 
@@ -305,19 +333,12 @@ function FosterMatchingAdmin() {
                   Looking for a medium size to large size dog. Does have other dogs at home...
                 </InternalNotes>
               </TextLeftAlign>
-              
             </TextBox>
           </FosterProfileContainer>
           <AvailableDogsContainer>
             <TitleText>Available Dogs</TitleText>
             <SubtitleText>Scroll to view all available dogs</SubtitleText>
-            <DogGrid>
-              {Array.from(Array(12).keys()).map((index) => {
-                if (index % 3 === 0) return <DogCard dogName="Lolita" dogImage={GridImage1} />;
-                if (index % 3 === 1) return <DogCard dogName="Flower" dogImage={GridImage2} />;
-                return <DogCard dogName="Shelly" dogImage={GridImage3} />;
-              })}
-            </DogGrid>
+            <DogGrid />
           </AvailableDogsContainer>
         </SplitCardContainer>
         <CenterAlign>
