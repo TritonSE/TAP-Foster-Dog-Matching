@@ -34,9 +34,7 @@ const BlurBackground = styled.div`
 
   @media screen and (max-height: 1000px) {
     align-items: start;
-    
   }
-
 `;
 
 const CreateWrapper = styled.div`
@@ -51,8 +49,6 @@ const CreateWrapper = styled.div`
   border-radius: 20px;
   border: 1px solid black;
 `;
-
-
 
 const Close = styled.img`
   position: absolute;

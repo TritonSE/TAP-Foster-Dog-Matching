@@ -65,7 +65,6 @@ const ContentWrapper = styled.div`
   }
 `;
 
-
 const Header = styled.div``;
 
 const Close = styled.img`
