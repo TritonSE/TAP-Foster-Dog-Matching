@@ -31,6 +31,7 @@ const BlurBackground = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-y: scroll;
 
   @media screen and (max-height: 1000px) {
     align-items: start;
@@ -40,8 +41,9 @@ const BlurBackground = styled.div`
 const CreateWrapper = styled.div`
   position: relative;
   max-width: 1060px;
+  min-height: fit-content;
   width: calc(100% - 4px);
-  max-height: fit-content;
+  max-height: calc(100% - 50px);
   overflow-y: scroll;
 
   z-index: 3;

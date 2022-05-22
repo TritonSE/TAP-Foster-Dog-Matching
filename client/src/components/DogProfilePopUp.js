@@ -35,6 +35,8 @@ const BlurBackground = styled.div`
   justify-content: center;
   align-items: center;
   background-color: rgba(255, 255, 255, 0.9);
+  overflow: ${(props) => (props.popUp ? "hidden" : "visible")};
+
   @media screen and (max-height: 1000px) {
     align-items: start;
     padding-bottom: 5vh;
@@ -168,7 +170,7 @@ function DogProfilePopUp({ setDogPopUp, dog }) {
   return (
     <>
       {editDogPopUp && <CreateDogPopUp setEditDogPopUp={setEditDogPopUp} dog={curDog} update />}
-      <BlurBackground>
+      <BlurBackground popUp={editDogPopUp}>
         <ContentWrapper>
           <Header>
             <Close src={whiteX} onClick={() => setDogPopUp(false)} />
