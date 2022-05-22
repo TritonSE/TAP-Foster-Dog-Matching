@@ -8,8 +8,10 @@ function Register() {
   return (
     <div>
       <Header />
-      <IntroForm formType="signup" header="Management Sign Up" />
-      {/* <IntroForm accountType="Management" formType="signup-key" header="Management Sign Up" /> */}
+      {/* <IntroForm formType="signup" accountType="Foster" header="Foster Sign Up" /> */}
+      <IntroForm formType="signup" accountType="Admin" header="Admin Sign Up" />
+      {/* <IntroForm formType="signup-key" accountType="Foster" header="Foster Sign Up" /> */}
+      {/* <IntroForm formType="signup-key" accountType="Admin" header="Admin Sign Up" /> */}
       <div className="right-panel">
         <img className="dog-image" src={dog} alt="Cute dog!" />
         <div className="copyright">

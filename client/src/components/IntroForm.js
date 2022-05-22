@@ -38,29 +38,47 @@ function IntroForm(props) {
       break;
     }
     case "signup": {
-      content = (
-        <>
-          <div className="form-signup-question"> I am a... </div>
-          <select className="selector">
-            <option value="" disabled selected>
-              Select an option
-            </option>
-            <option value="manager">Manager</option>
-            <option value="ambassador">Ambassador</option>
-            <option value="coordinator">Coordinator</option>
-          </select>
-          <input className="signup-first-name" placeholder="First Name" />
-          <input className="signup-last-name" placeholder="Last Name" />
-          <input type="email" className="signup-email" placeholder="Email" />
-          <input type="password" className="signup-password" placeholder="Password" />
-          <input type="password" className="signup-re-password" placeholder="Re-enter Password" />
-          {/* TODO: Make Signup button work */}
-          <Button className="signup" name="Sign Up" />
-          <a href="/login" className="log-in">
-            Log In
-          </a>
-        </>
-      );
+      if (props.accountType === "Admin") {
+        content = (
+          <>
+            <div className="form-signup-question"> I am a... </div>
+            <select className="selector">
+              <option value="" disabled selected>
+                Select an option
+              </option>
+              <option value="management">Management</option>
+              <option value="ambassador">Ambassador</option>
+              <option value="coordinator">Coordinator</option>
+            </select>
+            <input className="signup-first-name" placeholder="First Name" />
+            <input className="signup-last-name" placeholder="Last Name" />
+            <input type="email" className="signup-email" placeholder="Email" />
+            <input type="password" className="signup-password" placeholder="Password" />
+            <input type="password" className="signup-re-password" placeholder="Re-enter Password" />
+            {/* TODO: Make Signup button work */}
+            <Button className="signup" name="Continue" />
+            <a href="/login" className="log-in">
+              Log In
+            </a>
+          </>
+        );
+      } else if (props.accountType === "Foster") {
+        content = (
+          <>
+            <input className="signup-first-name" placeholder="First Name" />
+            <input className="signup-last-name" placeholder="Last Name" />
+            <input type="email" className="signup-email" placeholder="Email" />
+            <input type="password" className="signup-password" placeholder="Password" />
+            <input type="password" className="signup-re-password" placeholder="Re-enter Password" />
+            {/* TODO: Make Signup button work */}
+            <Button className="signup" name="Continue" />
+            <a href="/login" className="log-in">
+              Log In
+            </a>
+          </>
+        );
+      }
+      
       break;
     }
     case "signup-key": {
