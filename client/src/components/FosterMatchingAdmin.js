@@ -230,7 +230,10 @@ function DogCard(props) {
   }, [checked]);
 
   return (
-    <DogCardBackground checked={checked} onClick={(_) => props.updateCard(setChecked, !checked)}>
+    <DogCardBackground
+      checked={checked}
+      onClick={(_) => props.updateCard(setChecked, !checked, checkboxDOMElement)}
+    >
       <DogCardImage src={props.dogImage} alt={props.dogName} />
       <br />
       {props.dogName}
@@ -242,11 +245,13 @@ function DogGrid() {
   const [numChecked, setNumChecked] = useState(0);
   const MAX_CHECKED_CARDS = 5;
 
-  const tryCheckDogCard = useCallback((cardSetChecked, newValue) => {
+  const tryCheckDogCard = useCallback((cardSetChecked, newValue, checkboxDOMElement) => {
     if (newValue) {
       if (numChecked + 1 <= MAX_CHECKED_CARDS) {
         setNumChecked(numChecked + 1);
         cardSetChecked(true);
+      } else {
+        checkboxDOMElement.checked = false;
       }
     } else {
       setNumChecked(numChecked - 1);
