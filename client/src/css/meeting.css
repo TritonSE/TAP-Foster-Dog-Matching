@@ -6,10 +6,10 @@
   text-align: center;
   flex-direction: column;
   text-align: center;
-  padding-left: 2%;
-  padding-right: 2%;
-  padding-top: 5px;
-  padding-bottom: 2%;
+  padding-left: 4%;
+  padding-right: 4%;
+  padding-top: 3%;
+  padding-bottom: 4%;
   height: calc(100% - 40px);
   width: 100%;
 }
@@ -21,7 +21,7 @@
 
 .meeting-card-content {
   display: flex;
-  flex: 1;
+  flex: 2;
   flex-direction: row;
   justify-content: center;
 }
@@ -49,7 +49,7 @@
   height: 100%;
 }
 
-.info-card{
+.info-card {
   margin-left: 2vw;
   flex: 2;
   border-radius: 15px;
@@ -78,15 +78,15 @@
     display: flex;
     flex-direction: column;
     padding-left: 4%;
-    padding-right: 5%;
+    padding-right: 7%;
     padding-top: 5px;
     padding-bottom: 3%;
     font-size: 1.2em;
+    height: fit-content;
   }
 
   .meeting-card-content {
     flex-direction: column;
-    background-color: blue;
   }
 
   h2 {
@@ -97,18 +97,18 @@
     flex: 2;
     min-height: 50vw;
     width: auto;
-    margin: 1% 1% 4% 1%;
+    margin: 1.5;
     max-width: unset;
   }
 
   .image-card {
     flex: 2;
-    margin: 1%;
+    margin: 1.5%;
   }
 
-  .info-card{
+  .info-card {
     flex: 2;
-    margin: 1%;
+    margin: 1.5%;
   }
 
   .image {

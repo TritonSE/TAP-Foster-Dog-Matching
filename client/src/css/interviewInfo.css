@@ -1,19 +1,19 @@
-.interview-info-wrapper{
+.interview-info-wrapper {
   background-color: white;
   border-radius: 20px;
   width: 100%;
   height: 100%;
-  display:flex;
+  display: flex;
 }
 
-.interview-info-input{
-  margin:6% 12%;
+.interview-info-input {
+  margin: 6% 12%;
   text-align: left;
 }
 
-.info-content{
-  width:100%;
-  border-color:none;
+.info-content {
+  width: 100%;
+  border-color: none;
 }
 
 .interview-info-title {
@@ -39,7 +39,7 @@
   font-size: 20px;
 }
 
-.contingent-button{
+.contingent-button {
   width: min(10vw, 191px);
   height: 50px;
   right: 20px;
@@ -76,7 +76,7 @@
   font-size: 20px;
 }
 
-.button-row{
+.button-row {
   margin-left: 4%;
   margin-right: 4%;
 }
@@ -99,5 +99,4 @@
     height: 45px;
     font-size: min(17px, 5vw);
   }
-
 }
