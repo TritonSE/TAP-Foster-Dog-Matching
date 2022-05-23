@@ -115,7 +115,7 @@ function Application() {
             time="6-7:00PM"
             location="Zoom"
           />}
-          interviewInfo = {<InterviewInfo contingent={true} />}
+          interviewInfo = {<InterviewInfo contingent={true} title="After Interviews"/>}
       />
     </div>,
     }, //  Step 3

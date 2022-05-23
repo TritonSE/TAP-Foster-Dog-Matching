@@ -20,30 +20,33 @@ function PassFail( props ) {
   return (
     <div className="interview-info-wrapper">
       <Form.Container className="info-content">
-          <h2 className="interview-info-title">After Interview</h2>
+          <h2 className="interview-info-title">{props.title}</h2>
           <div className="interview-info-input">
             <ControlledInput
               control={control}
               label="Internal Notes"
-              numLines={8}
+              numLines={15}
               name="fosterInfo.restrictions"
             />
           </div>
-        <Form.Row>
-          <button type="button" className="reject-button" onClick={onReject}>
-            Reject
-          </button>
-          {props.contingent ? (
-            <button type="button" className="contingent-button" onClick={onContingent}>
-              Contingent
-            </button> )
-            :
-            (<></>)
-          }
-          <button type="button" className="pass-button" onClick={onConfirm}>
-            Pass
-          </button>
-        </Form.Row>
+          <div className="button-row">
+            <Form.Row>
+            <button type="button" className="reject-button" onClick={onReject}>
+              Reject
+            </button>
+            {props.contingent ? (
+              <button type="button" className="contingent-button" onClick={onContingent}>
+                Contingent
+              </button> )
+              :
+              (<></>)
+            }
+            <button type="button" className="pass-button" onClick={onConfirm}>
+              Pass
+            </button>
+          </Form.Row>
+          </div>
+        
       </Form.Container>
     </div>
   );

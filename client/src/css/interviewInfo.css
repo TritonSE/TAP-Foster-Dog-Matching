@@ -2,11 +2,12 @@
   background-color: white;
   border-radius: 20px;
   width: 100%;
+  height: 100%;
   display:flex;
 }
 
 .interview-info-input{
-  margin:5px;
+  margin:6% 12%;
   text-align: left;
 }
 
@@ -73,4 +74,30 @@
   border-width: 1px;
   /* font-family: Nunito; */
   font-size: 20px;
+}
+
+.button-row{
+  margin-left: 4%;
+  margin-right: 4%;
+}
+
+@media screen and (max-width: 750px) {
+  .pass-button {
+    width: min(100px, 50vw);
+    height: 45px;
+    font-size: min(17px, 5vw);
+  }
+
+  .contingent-button {
+    width: min(100px, 50vw);
+    height: 45px;
+    font-size: min(17px, 5vw);
+  }
+
+  .reject-button {
+    width: min(100px, 50vw);
+    height: 45px;
+    font-size: min(17px, 5vw);
+  }
+
 }

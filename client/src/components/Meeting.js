@@ -48,7 +48,7 @@ function Meetings(props) {
           </div>
         )}
          {props.interviewInfo && (
-          <div className="image-card">
+          <div className="info-card">
             <div className="status">{props.interviewInfo}</div>
           </div>
         )}
