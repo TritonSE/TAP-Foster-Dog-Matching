@@ -41,6 +41,8 @@ import logo from "../images/logo-inverted.png";
 import ApplicationContext from "../contexts/ApplicationContext";
 import InterviewInfo from "../components/InterviewInfo";
 import StatusUpdate from "../components/StatusUpdate";
+import ConfirmMeetGreet from "../components/ConfirmMeetGreet";
+import DogSelection from "../components/DogSelection";
 
 const ApplicationContainer = styled.div`
   display: flex;
@@ -121,11 +123,11 @@ function Application() {
     }, //  Step 3
     {
       intro: <h1>step 4 intro here</h1>,
-      content: <h1>step 4 content here</h1>,
+      content: <DogSelection />,
     }, //  Step 4
     {
       intro: <h1>step 5 intro here</h1>,
-      content: <h1>step 5 content here</h1>,
+      content: <ConfirmMeetGreet />,
     }, //  Step 5
     {
       intro: <h1>step 6 intro here</h1>,
