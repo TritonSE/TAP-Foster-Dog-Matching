@@ -1,9 +1,11 @@
 .interview-info-wrapper {
   background-color: white;
   border-radius: 20px;
-  width: 100%;
-  height: 100%;
+  width: min(100%,500px);
+  height: min(100%,550px);
   display: flex;
+  padding-top: 1vw;
+  min-width: 32vw;
 }
 
 .interview-info-input {
@@ -14,6 +16,10 @@
 .info-content {
   width: 100%;
   border-color: none;
+}
+
+.info-input:focus {
+  outline-color:#8dc442;
 }
 
 .interview-info-title {
@@ -76,7 +82,12 @@
   font-size: 20px;
 }
 
-.button-row {
+.button-rowfalse {
+  margin-left: 16%;
+  margin-right: 16%;
+}
+
+.button-rowtrue {
   margin-left: 4%;
   margin-right: 4%;
 }

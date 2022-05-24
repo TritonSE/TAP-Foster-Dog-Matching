@@ -1,7 +1,7 @@
 .status-card {
   text-align: center;
-  width: 100%;
-  height: 100%;
+  width: min(100%,500px);
+  height: min(100%,550px);
   background-color: white;
   border-radius: 15px;
   padding-top: 2vw;

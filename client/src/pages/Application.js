@@ -121,7 +121,7 @@ function Application() {
               />
             }
             // textCard={<div>HELLO THERE</div>}
-            interviewInfo={<InterviewInfo contingent title="After Interviews" />}
+            interviewInfo={<InterviewInfo contingent={false} title="After Interviews" />}
           />
         </div>
       ),
