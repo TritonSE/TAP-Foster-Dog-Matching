@@ -8,6 +8,9 @@
   padding-bottom: 1vw;
   box-sizing: border-box;
   padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .pfp {

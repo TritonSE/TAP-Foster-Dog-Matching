@@ -9,12 +9,13 @@ import StatusUpdate from "../../../components/StatusUpdate";
 import Meetings from "../../../components/Meeting";
 import logo from "../../../images/logo-inverted.png";
 import doggo from "../../../images/good-boi.png";
+import DogProfileSummary from "../../../components/DogProfileSummary";
 
 const FosterResourcesActions = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 24px;
+  padding: 50px 24px;
   gap: 20px;
 `;
 
@@ -27,6 +28,13 @@ const Button = styled.div`
   font-size: 20px;
 `;
 
+const RightColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+`;
+
 function FosterInHomeContent() {
   const navigate = useNavigate();
   const [view, setView] = React.useState("resources");
@@ -35,9 +43,22 @@ function FosterInHomeContent() {
     return (
       <Meetings
         title="Foster Resources"
-        textCard={<div>barnacle component here</div>}
+        textCard={
+          <DogProfileSummary
+            // TODO: api call to get actual dog
+            dog={{
+              name: "tom",
+              age: 34,
+              gender: "Male",
+              breed: "German Dog",
+              weight: 40,
+              vettingInfo: "sample text",
+              backgroundInfo: "sample text",
+            }}
+          />
+        }
         status={
-          <div>
+          <RightColumn>
             <StatusUpdate
               title="Ambassador Contact Info"
               ambassador="Dhanush"
@@ -49,7 +70,7 @@ function FosterInHomeContent() {
               <Button onClick={() => setView("adoption")}>Adopt</Button>
               <Button onClick={() => navigate("/contact")}>Contact</Button>
             </FosterResourcesActions>
-          </div>
+          </RightColumn>
         }
       />
     );

@@ -83,7 +83,7 @@ function Application() {
   const [currentStep, setCurrentStep] = React.useState(0);
   const [currentSubStep, setCurrentSubStep] = React.useState("content");
   // TODO: Use firebase user data
-  const role = "admin";
+  const role = "foster";
 
   // Switch application content based on current user role
   const applicationContent = React.useMemo(
