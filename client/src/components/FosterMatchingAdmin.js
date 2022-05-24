@@ -23,7 +23,7 @@ import GridImage3 from "../images/griddog3.png";
  *
  */
 
-export const ExitButton = styled.a`
+const ExitButton = styled.a`
   color: black;
   font-size: 25px;
   text-decoration: none;
@@ -31,7 +31,7 @@ export const ExitButton = styled.a`
   margin-left: -9px;
   margin-top: -27px;
 `;
-export const FosterProfileContainer = styled.div`
+const FosterProfileContainer = styled.div`
   text-align: center;
   width: 100% !important;
   height: 100%;
@@ -40,7 +40,7 @@ export const FosterProfileContainer = styled.div`
   padding: 5px 20px 20px 20px;
   box-sizing: border-box;
 `;
-export const AvailableDogsContainer = styled.div`
+const AvailableDogsContainer = styled.div`
   text-align: center;
   width: 100% !important;
   height: 100%;
@@ -50,31 +50,31 @@ export const AvailableDogsContainer = styled.div`
   box-sizing: border-box;
 `;
 
-export const OuterContainer = styled.div`
+const OuterContainer = styled.div`
   max-width: 100vw;
 `;
-export const PaddingContainer = styled.div`
+const PaddingContainer = styled.div`
   padding-bottom: 15px;
 `;
-export const TitleText = styled.span`
+const TitleText = styled.span`
   color: white;
   width: inherit;
   font-size: 33px;
   font-weight: 700;
   line-height: 40px;
 `;
-export const TextBox = styled.div`
+const TextBox = styled.div`
   background-color: white;
   border-radius: 25px;
   margin-top: 12px;
   padding: 5px 22px 0 22px;
 `;
-export const TextBoxTitle = styled.span`
+const TextBoxTitle = styled.span`
   font-weight: 700;
   line-height: 36px;
   font-size: 30px;
 `;
-export const FosterProfileTable = styled.table`
+const FosterProfileTable = styled.table`
   width: 100%;
   font-size: 20px;
   line-height: 24px;
@@ -88,21 +88,21 @@ export const FosterProfileTable = styled.table`
     border-bottom: none;
   }
 `;
-export const TableRow = styled.tr`
+const TableRow = styled.tr`
   border: solid;
   border-width: 1px 0;
 `;
 
-export const EmailDecoration = styled.span`
+const EmailDecoration = styled.span`
   text-decoration-line: underline;
 `;
 
-export const FlexContainer = styled.div`
+const FlexContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   gap: 12px;
 `;
-export const UpdateContainer = styled.div`
+const UpdateContainer = styled.div`
   font-size: 20px;
   line-height: 20px;
   text-align: center;
@@ -110,33 +110,34 @@ export const UpdateContainer = styled.div`
   background-color: #8dc442; //TODO make this come from theme
 `;
 
-export const GeneralNotes = styled.span`
+const GeneralNotes = styled.span`
   font-weight: 700;
   font-size: 25px;
   line-height: 30px;
   text-align: left;
 `;
 
-export const InternalNotes = styled.div`
+const InternalNotes = styled.div`
   font-weight: 400;
   font-size: 18px;
   line-height: 30px;
   text-align: left;
   padding-top: 12px;
 `;
-export const TableCell = styled.td`
+const TableCell = styled.td`
   padding: 16px 0 16px 47px;
 `;
-export const ViewApplicationButton = styled.button`
+const ViewApplicationButton = styled.button`
   background-color: #8dc442; //TODO make this come from theme
   border-radius: 10px;
   border: none;
   font-size: 20px;
   line-height: 24px;
   padding: 5px 30px;
+  cursor: pointer;
 `;
 
-export const EditButton = styled.button`
+const EditButton = styled.button`
   position: absolute;
   top: ${(props) => (props.topOffset ? props.topOffset : "0")};
   left: ${(props) => (props.leftOffset ? props.leftOffset : "0")};
@@ -146,9 +147,10 @@ export const EditButton = styled.button`
   line-height: 19px;
   background-color: transparent;
   border: none;
+  cursor: pointer;
 `;
 
-export const EditButtonParent = styled.div`
+const EditButtonParent = styled.div`
   position: relative;
 `;
 
@@ -163,30 +165,30 @@ function FloatingEditButton(props) {
   );
 }
 
-export const TextLeftAlign = styled.div`
+const TextLeftAlign = styled.div`
   text-align: left;
 `;
 
-export const CenterAlign = styled.div`
+const CenterAlign = styled.div`
   width: 100%;
   text-align: center;
 `;
 
-export const SubtitleText = styled.div`
+const SubtitleText = styled.div`
   padding-top: 20px;
   padding-bottom: 15px;
   font-size: 20px;
   color: white;
 `;
 
-export const DogGridStyled = styled.div`
+const DogGridStyled = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   column-gap: 2.7%;
   row-gap: 30px;
 `;
 
-export const DogCardBackground = styled.div`
+const DogCardBackground = styled.div`
   height: 111px;
   border-radius: 7.8px;
   top: ${(props) => (props.topOffset ? props.topOffset : "0")};
@@ -196,17 +198,19 @@ export const DogCardBackground = styled.div`
   font-size: 13px;
   padding-top: 8px;
   position: relative;
+  cursor: pointer;
 `;
 
-export const DogCardCheckbox = styled.input`
+const DogCardCheckbox = styled.input`
   position: absolute;
   top: ${(props) => (props.topOffset ? props.topOffset : "0")};
   left: ${(props) => (props.leftOffset ? props.leftOffset : "0")};
+  cursor: pointer;
   :checked {
     accent-color: #8dc442;
   }
 `;
-export const DogCardImage = styled.img`
+const DogCardImage = styled.img`
   max-width: calc(100% - 24px);
   object-fit: contain;
   padding: 0 14px;
@@ -272,13 +276,14 @@ function DogGrid() {
   );
 }
 
-export const SubmitButton = styled.button`
+const SubmitButton = styled.button`
   background-color: #8dc442;
   border: none;
   font-size: 25px;
   padding: 9px 38px;
   margin-top: 24px;
   border-radius: 10px;
+  cursor: pointer;
 `;
 
 // TODO give href to exit button
