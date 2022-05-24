@@ -24,15 +24,21 @@ const ContentContainer = styled.div`
   background: #ffffff;
   border-radius: 15px;
   overflow: hidden;
+
+  ${device.tablet}{
+    overflow: auto;
+    max-height: 300px;
+  }
+
 `;
 
 const AllWrapper = styled.div`
+  height: 100%;
   margin: 0px 20px;
   margin-bottom: 30px;
   font-size: 18px;
   display: flex;
   flex-direction: column;
-  height: 100%;
 
   ${device.tablet} {
     padding-bottom: 30px;
@@ -48,8 +54,8 @@ const Title = styled.p`
 `;
 
 const Value = styled.div`
-  height: 100%;
-  overflow-y: scroll;
+  height: 80%;
+  overflow-y: auto;
 `;
 
 function InternalFosterNotes(props) {

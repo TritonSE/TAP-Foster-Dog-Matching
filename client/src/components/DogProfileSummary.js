@@ -111,7 +111,7 @@ const Field = styled.p`
 const Value = styled.div`
   margin: 0;
   font-size: 22px;
-  overflow: scroll;
+  overflow: auto;
   height: 100%;
   max-height: 250px;
 
