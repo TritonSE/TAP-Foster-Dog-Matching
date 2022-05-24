@@ -21,6 +21,7 @@ import Select from "./Select";
 import DogImagesInput from "./DogImagesInput";
 import validUrl from "../utils/validUrl";
 import X from "../images/X.png";
+import { createDog, updateDog } from "../services/dogs";
 
 const BlurBackground = styled.div`
   position: absolute;
@@ -207,18 +208,11 @@ function CreateDogPopUp(props) {
         vettingInfo: data.vettingInfo,
         internalNotes: data.internalNotes ? data.internalNotes : "",
       };
-
-      fetch("http://localhost:8000/api/dogs", {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(reqBody),
-      }).then(() =>
+      createDog(reqBody).then((response) => {
         // success - close the pop up
-        props.setCreateNewPopUp(false)
-      );
+        if (response.ok) props.setCreateNewPopUp(false);
+        else console.error(response.body);
+      });
     }
   };
 
@@ -255,17 +249,12 @@ function CreateDogPopUp(props) {
         vettingInfo: data.vettingInfo,
         internalNotes: data.internalNotes ? data.internalNotes : "",
       };
-
-      fetch(`http://localhost:8000/api/dogs/${props.dog._id}`, {
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-        body: JSON.stringify(reqBody),
-      }).then(() =>
-        // success - close the pop up
-        props.setEditDogPopUp(false)
-      );
+      updateDog(props.dog._id, reqBody).then((response) => {
+        if (response.ok) {
+          // success - close the pop up
+          props.setEditDogPopUp(false);
+        } else console.error(response.body);
+      });
     }
   };
 

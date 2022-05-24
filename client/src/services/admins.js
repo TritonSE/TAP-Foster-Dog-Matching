@@ -24,7 +24,7 @@ export async function createAdmin(newAdmin) {
  *
  * @export
  * @param {string} adminId - admin id to update
- * @param {*} updatedAdmin - updated admin data
+ * @param {object} updatedAdmin - updated admin data
  * @return {object} - updated admin (as a makeRequest response. see data.js)
  */
 export async function updateAdmin(adminId, updatedAdmin) {

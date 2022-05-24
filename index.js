@@ -11,7 +11,7 @@ mongoose.connect(config.db.uri);
 mongoose.connection.once("open", async () => {
   console.log("Established connection to MongoDB.");
 });
-app.use(cors({ methods: ["GET", "POST", "PUT", "DELETE"] }));
+app.use(cors());
 
 // Routes
 app.use("/api/dogs", require("./routes/dogs"));
