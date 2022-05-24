@@ -28,7 +28,12 @@ const ImageWrapper = styled.div`
   flex-direction: column;
   justify-content: space-around;
 `;
-const Title = styled.h3``;
+const Title = styled.h3`
+  font-size: 22px;
+  ${device.mobile} {
+    font-size: 4vw;
+  }
+`;
 
 const InputLineWrapper = styled.div`
   display: ${(props) => (props.show ? "flex" : "none")};
@@ -67,6 +72,7 @@ const AddWrapper = styled.div`
   justify-content: space-around;
   width: 70%;
   align-items: center;
+  gap: 10px;
 `;
 
 const Plus = styled.img`
@@ -76,7 +82,11 @@ const Plus = styled.img`
 `;
 
 const Text = styled.p`
+  font-size: 18px;
   margin: 0;
+  ${device.mobile} {
+    font-size: 3vw;
+  }
 `;
 
 function DogImagesInput(props) {

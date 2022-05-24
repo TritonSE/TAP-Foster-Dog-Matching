@@ -46,6 +46,7 @@ import { device } from "../utils/useResponsive";
 const SummaryWrapper = styled.div`
   width: 100%;
   height: 100%;
+
   position: relative;
   color: black;
   background: #ffffff;
@@ -67,8 +68,13 @@ const LeftInfoWrapper = styled.div`
 `;
 
 const RightInfoWrapper = styled.div`
-  ${LeftInfoWrapper};
-  width: 55%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  ${device.mobile} {
+    width: 40%;
+  }
 `;
 
 const DogName = styled.h1`
@@ -102,9 +108,12 @@ const Field = styled.p`
   }
 `;
 
-const Value = styled.p`
+const Value = styled.div`
   margin: 0;
   font-size: 22px;
+  overflow: scroll;
+  height: 100%;
+  max-height: 250px;
 
   ${device.tablet} {
     font-size: max(15px, min(22px, 4vw));

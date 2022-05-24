@@ -23,6 +23,7 @@ const ContentContainer = styled.div`
   color: black;
   background: #ffffff;
   border-radius: 15px;
+  overflow: hidden;
 `;
 
 const AllWrapper = styled.div`
@@ -31,6 +32,7 @@ const AllWrapper = styled.div`
   font-size: 18px;
   display: flex;
   flex-direction: column;
+  height: 100%;
 
   ${device.tablet} {
     padding-bottom: 30px;
@@ -46,8 +48,8 @@ const Title = styled.p`
 `;
 
 const Value = styled.div`
-  height: 40%;
-  overflow: hidden;
+  height: 100%;
+  overflow-y: scroll;
 `;
 
 function InternalFosterNotes(props) {

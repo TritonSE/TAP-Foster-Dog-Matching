@@ -93,6 +93,7 @@ const Title = styled.h1`
 
 const DogProfileWrapper = styled.div`
   width: 100%;
+  height: 100%;
   display: flex;
   justify-content: space-around;
   padding-top: 2vh;
@@ -105,7 +106,6 @@ const DogProfileWrapper = styled.div`
 
 const LeftWrapper = styled.div`
   width: 52.5%;
-
   ${device.tablet} {
     width: 80%;
     margin: auto;
@@ -130,6 +130,7 @@ const RightTopWrapper = styled.div`
 
 const RightBottomWrapper = styled.div`
   height: 35%;
+  max-height: 300px;
 `;
 
 // edit portion styles
