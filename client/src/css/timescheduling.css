@@ -383,6 +383,7 @@ input:checked + .repeat-slider:before {
   .container {
     width: 288px;
     height: 619px;
+    min-height: 619px;
     margin: 0 auto;
   }
 
