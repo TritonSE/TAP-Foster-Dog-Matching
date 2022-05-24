@@ -1,7 +1,7 @@
 import "./App.css";
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import { AuthProvider } from "./contexts/AuthContext";
 import Dashboard from "./pages/Dashboard";
 import Application from "./pages/Application";
 import Calendar from "./pages/Calendar";
@@ -12,7 +12,7 @@ import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import PendingApplications from "./pages/PendingApplications";
-import { AuthProvider } from "./contexts/AuthContext";
+import DogProfile from "./pages/DogProfile";
 
 function App() {
   return (
@@ -30,6 +30,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           {/* Admin Routes TODO: set up conditional routing based on user role */}
           <Route path="/pending-applications" element={<PendingApplications />} />
+          <Route path="/manage-dog-profiles" element={<DogProfile />} />
         </Routes>
       </Router>
     </AuthProvider>

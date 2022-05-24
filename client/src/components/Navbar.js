@@ -128,7 +128,6 @@ export const SignOut = styled.button`
 
     position: absolute;
     bottom: 100px;
-
     padding: 25px 0px;
   }
 `;

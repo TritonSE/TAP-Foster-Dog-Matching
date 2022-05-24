@@ -36,6 +36,7 @@ function DefaultBody(props) {
             "Current Fosters": "/fosters",
             Calendar: "/calendar",
             Profile: "/profile",
+            "Manage Dog Profiles": "/manage-dog-profiles",
             // NOTE: showing all links for now for dev purposes
             // TODO: only show links depending on current role/status once roles have been implemented
           }}

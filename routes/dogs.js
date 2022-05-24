@@ -13,6 +13,7 @@ const validators = [
   body("weight").notEmpty().isNumeric(),
   body("breed").notEmpty().isString(),
   body("imageUrl").notEmpty().isArray().isURL(),
+  body("category").notEmpty().isIn(["new", "in home", "adopted"]),
   body("backgroundInfo").notEmpty().isString(),
   body("vettingInfo").notEmpty().isString(),
   body("internalNotes").optional().isString(),
