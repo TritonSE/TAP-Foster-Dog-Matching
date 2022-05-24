@@ -1,17 +1,22 @@
 .status-card {
   text-align: center;
-  width: min(100%,500px);
-  height: min(100%,550px);
+  width: 100%;
+  height: min(63vh, 540px);
+  min-height: 520px;
+  min-width: 400px;
   background-color: white;
-  border-radius: 15px;
+  border-radius: 20px;
   padding-top: 2vw;
   padding-bottom: 1vw;
+  box-sizing: border-box;
+  padding: 15px;
 }
 
 .pfp {
+  border: 1px solid #c4c4c4;
   border-radius: 50%;
-  width: 5vw;
-  height: 5vw;
+  width: 50px;
+  height: 50px;
   margin-right: 5px;
   margin-top: 5px;
   margin-bottom: 0px;
@@ -29,81 +34,44 @@
   color: black;
 }
 
-.information-grid {
-  display: grid;
-  grid-gap: 1vw;
-  grid-template-columns: 50% 50%;
+.information-box {
+  display: flex;
+  flex-direction: column;
+  gap: 1vw;
   text-align: left;
   margin: 20px;
-  padding: 15px;
 }
 
-.ambassador-left {
-  padding-top: 2em;
+.information-box-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 2vw;
 }
 
-.ambassador-right {
-  padding-top: 2em;
-  float: left;
+.information-box-item-label {
+  display: flex;
+  flex: 1;
+  align-items: center;
+}
+
+.information-box-item-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+  flex: 1;
 }
 
 .box-ambassador {
-  padding-left: 2vw;
-  grid-row: 1;
-}
-
-.box-contact {
-  padding-left: 2vw;
-  grid-row: 3;
-}
-
-.box-email {
-  grid-row: 4;
-  grid-column-start: 2;
-  padding-left: 2vw;
-}
-
-.box-date {
-  padding-left: 2vw;
-  grid-row: 6;
-}
-
-.box-time {
-  padding-left: 2vw;
-  grid-row: 8;
-}
-
-.box-location {
-  padding-left: 2vw;
-  grid-row: 10;
-}
-
-.line1 {
-  grid-row: 2;
-  grid-column-start: 1;
-  grid-column-end: 3;
-}
-
-.line2 {
-  grid-row: 5;
-  grid-column-start: 1;
-  grid-column-end: 3;
-}
-
-.line3 {
-  grid-row: 7;
-  grid-column-start: 1;
-  grid-column-end: 3;
-}
-
-.line4 {
-  grid-row: 9;
-  grid-column-start: 1;
-  grid-column-end: 3;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .line {
   height: 2px;
+  width: 100%;
   color: #8dc442;
   background-color: #8dc442;
 }
@@ -116,37 +84,24 @@
 }
 
 @media only screen and (max-width: 750px) {
+  .status-card {
+    height: 100%;
+  }
   .pfp {
-    /* float: right; */
     width: 10vw;
     height: 10vw;
     vertical-align: bottom;
   }
 
-  .ambassador-left {
-    padding-top: 2em;
-  }
-
-  .ambassador-right {
-    padding-top: 2em;
-    float: left;
+  .information-box-item {
+    flex-direction: column;
   }
 }
 
 @media only screen and (max-width: 300px) {
   .pfp {
-    /* float: right; */
     width: 10vw;
     height: 10vw;
     vertical-align: bottom;
-  }
-
-  .ambassador-left {
-    padding-top: 1em;
-  }
-
-  .ambassador-right {
-    padding-top: 0em;
-    float: left;
   }
 }
