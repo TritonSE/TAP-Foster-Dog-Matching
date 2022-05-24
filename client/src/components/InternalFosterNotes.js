@@ -25,11 +25,10 @@ const ContentContainer = styled.div`
   border-radius: 15px;
   overflow: hidden;
 
-  ${device.tablet}{
+  ${device.tablet} {
     overflow: auto;
     max-height: 300px;
   }
-
 `;
 
 const AllWrapper = styled.div`
