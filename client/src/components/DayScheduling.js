@@ -71,6 +71,10 @@ function DayScheduling(props) {
       paddingLeft: 1,
       paddingTop: 4,
     }),
+    input: () => ({
+      paddingBottom: 5,
+      paddingLeft: 3,
+    }),
   };
 
   return (
