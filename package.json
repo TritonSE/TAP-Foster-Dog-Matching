@@ -14,12 +14,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^11.0.0",
+    "email-templates": "^9.0.0",
     "express": "^4.17.2",
     "express-validator": "^6.14.0",
     "mongoose": "^6.1.6",
-    "react-calendar": "^3.7.0",
-    "react-draft-wysiwyg": "^1.14.7"
+    "nodemailer": "^6.7.5"
   },
   "devDependencies": {
     "eslint": "^8.6.0",
