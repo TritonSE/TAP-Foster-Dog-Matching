@@ -56,7 +56,7 @@ function MeetingSchedulingMeetTimesContainer(props) {
           : "meeting-scheduling-meeting-times-container-six-weeks"
       }
     >
-      {meetTimes}
+      {meetTimes.length === 0 ? "No more times avaliable on this day" : meetTimes}
     </div>
   );
 }

@@ -128,6 +128,7 @@
   margin-top: 1.25vw;
   margin-left: 2vw;
   width: max-content;
+  font-size: 1.161vw;
 }
 
 .meeting-scheduling-meeting-times-container-six-weeks {
@@ -138,6 +139,7 @@
   margin-top: 1.25vw;
   margin-left: 2vw;
   width: max-content;
+  font-size: 1.161vw;
 }
 
 .meeting-scheduling-meeting-time {
@@ -303,12 +305,14 @@
     column-gap: 18.15px;
     margin-top: 9.375px;
     margin-left: 23px;
+    font-size: 14px;
   }
   .meeting-scheduling-meeting-times-container-six-weeks {
     row-gap: 11.09px;
     column-gap: 18.15px;
     margin-top: 9.375px;
     margin-left: 23px;
+    font-size: 14px;
   }
   .meeting-scheduling-meeting-time {
     width: 100.8975px;
