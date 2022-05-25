@@ -32,6 +32,10 @@ module.exports = mongoose.model(
       type: [String],
       required: true,
     },
+    category: {
+      type: String,
+      required: true,
+    },
     backgroundInfo: {
       type: String,
       required: true,
