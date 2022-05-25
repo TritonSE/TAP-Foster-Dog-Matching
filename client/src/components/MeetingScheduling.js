@@ -18,6 +18,7 @@
 
 import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
+import MeetingSchedulingMeetTimesContainer from "./MeetingSchedulingMeetTimesContainer";
 import left from "../images/left.svg";
 import right from "../images/right.svg";
 import "../css/calendar.css";
@@ -64,20 +65,37 @@ function timeToHumanFormat(time) {
 // Assuming timeRanges were derived from adding 30 minutes to the
 // times specified in this.times in the format HH:MM - HH:MM [AaPp][Mm]
 function timeInTimeRange(meetTime, timeRange) {
+  // Account for AM/PM wrap-around
+  if (
+    parseInt(meetTime.split(" ")[0].split(":")[0], 10) === 11 &&
+    parseInt(meetTime.split(" ")[0].split(":")[1], 10) >= 30
+  )
+    return (
+      meetTime.split(" ")[0].localeCompare(timeRange.split(" ")[0]) === 0 &&
+      meetTime
+        .split(" ")[1]
+        .toLowerCase()
+        .localeCompare(
+          timeRange.substring(timeRange.length - 2, timeRange.length).toLowerCase()
+        ) !== 0
+    );
+
   return (
     meetTime
       .split(" ")
       .join("")
+      .toLowerCase()
       .localeCompare(
-        timeRange.split(" ")[0] + timeRange.substring(timeRange.length - 2, timeRange.length)
+        (
+          timeRange.split(" ")[0] + timeRange.substring(timeRange.length - 2, timeRange.length)
+        ).toLowerCase()
       ) === 0
   );
 }
 
 function MeetingScheduling(props) {
   const [date, onChange] = useState(new Date());
-  const [time, setTime] = useState("none");
-  const [meetTimes, setMeetTimes] = useState([]);
+  const [meetTimesContainer, setMeetTimesContainer] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const weekday = [
@@ -117,7 +135,7 @@ function MeetingScheduling(props) {
     "7:00 PM",
   ];
 
-  const createInterview = () => {
+  const createInterview = (time) => {
     const reqBody = {
       user: "000000000000000000000000", // TODO: Use real user ID once Firebase is merged in
       ambassador: "000000000000000000000001", // TODO: User real ambassador ID once Firebase is merged in
@@ -137,9 +155,11 @@ function MeetingScheduling(props) {
       },
       body: JSON.stringify(reqBody),
     }); /* .then(() =>
-      // TODO: Use stage callback
-    ); */
+    // TODO: Use stage callback
+  ); */
   };
+
+  const setInterviewSlotSelected = React.useCallback((time) => createInterview(time));
 
   const updateMeetTimes = (interviews) => {
     const meetTimesTemp = [...times];
@@ -153,46 +173,12 @@ function MeetingScheduling(props) {
       return interview;
     });
 
-    setMeetTimes(
-      meetTimesTemp.map((meetTime) => (
-        <div key={meetTime}>
-          {time === meetTime ? (
-            <button
-              className={
-                Math.ceil(
-                  (new Date(date.getFullYear(), date.getMonth(), 1).getDay() +
-                    new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()) /
-                    7
-                ) <= 5
-                  ? "meeting-scheduling-meeting-time-selected"
-                  : "meeting-scheduling-meeting-time-selected-six-weeks"
-              }
-              type="button"
-              onClick={createInterview}
-            >
-              <div className="meeting-scheduling-meeting-time-selected-text-container">
-                <div className="meeting-scheduling-meeting-time-selected-text">Choose</div>
-              </div>
-            </button>
-          ) : (
-            <button
-              className={
-                Math.ceil(
-                  (new Date(date.getFullYear(), date.getMonth(), 1).getDay() +
-                    new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()) /
-                    7
-                ) <= 5
-                  ? "meeting-scheduling-meeting-time"
-                  : "meeting-scheduling-meeting-time-six-weeks"
-              }
-              type="button"
-              onClick={() => setTime(meetTime)}
-            >
-              <div className="meeting-scheduling-meeting-time-text">{meetTime}</div>
-            </button>
-          )}
-        </div>
-      ))
+    setMeetTimesContainer(
+      <MeetingSchedulingMeetTimesContainer
+        date={date}
+        meetTimes={meetTimesTemp}
+        interviewSlotSelectedCallback={setInterviewSlotSelected}
+      />
     );
   };
 
@@ -252,12 +238,10 @@ function MeetingScheduling(props) {
           }
           showNeighboringMonth
           formatMonthYear={(locale, currDate) => month[currDate.getMonth()]}
-          onClickDay={() => setTime("none")}
           onActiveStartDateChange={({ activeStartDate }) => {
             onChange(
               new Date().getMonth() === activeStartDate.getMonth() ? new Date() : activeStartDate
             );
-            setTime("none");
           }}
         />
       </div>
@@ -279,19 +263,8 @@ function MeetingScheduling(props) {
         <div className="meeting-scheduling-date">
           {[weekday[date.getDay()], month[date.getMonth()], date.getDate()].join(" ")}
         </div>
-        <div
-          className={
-            Math.ceil(
-              (new Date(date.getFullYear(), date.getMonth(), 1).getDay() +
-                new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()) /
-                7
-            ) <= 5
-              ? "meeting-scheduling-meeting-times-container"
-              : "meeting-scheduling-meeting-times-container-six-weeks"
-          }
-        >
-          {!isLoading && meetTimes}
-        </div>
+
+        {!isLoading && meetTimesContainer}
       </div>
     </div>
   );
