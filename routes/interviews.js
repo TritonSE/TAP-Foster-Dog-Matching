@@ -25,7 +25,7 @@ const validators = [
 ];
 
 /**
- * GET /interview/:interviewId - Return an interview by ID
+ * GET /interviews/:interviewId - Return an interview by ID
  *
  * @queryParam stage - Current stage of the interview
  */
