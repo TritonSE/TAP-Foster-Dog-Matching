@@ -24,7 +24,7 @@ const Button = styled.div`
   align-self: ${(props) => props.alignSelf || "unset"};
 `;
 
-function FosterApplicationView({ setView }) {
+function FosterApplicationView({ setView, setApplicationData }) {
   const personalInfoRef = React.useRef();
   const fosterInfoRef = React.useRef();
   const outsideInfoRef = React.useRef();
@@ -44,11 +44,12 @@ function FosterApplicationView({ setView }) {
   const onSubmit = (data) => {
     console.log(data);
     setView("agreement");
+    setApplicationData(data);
   };
 
   const onError = (errors) => {
     console.log(errors);
-    setView("agreement"); // uncomment this to see the foster agreement w/o filling out the form
+    // setView("agreement"); // uncomment this to see the foster agreement w/o filling out the form
   };
 
   return (
@@ -438,11 +439,24 @@ const SignatureContainer = styled.div`
   margin: auto;
 `;
 
-function FosterAgreementView({ setView }) {
+function FosterAgreementView({ setView, applicationData }) {
   const { control, handleSubmit } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
+    console.log(applicationData);
+
+    
+    const reqBody = {...applicationData, ...{"agreement": data}}
+    console.log(reqBody);
+    fetch("http://localhost:8000/api/applications/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(reqBody)
+    }).then(res => {
+      console.log(res)
+    }).catch(err=>console.log(err))
+
   };
 
   const onError = (errors) => {
@@ -477,9 +491,10 @@ function FosterAgreementView({ setView }) {
 
 function FosterApplication() {
   const [view, setView] = React.useState("application");
+  const [applicationData, setApplicationData] = React.useState();
 
-  if (view === "application") return <FosterApplicationView setView={setView} />;
-  return <FosterAgreementView setView={setView} />;
+  if (view === "application") return <FosterApplicationView setView={setView} setApplicationData={setApplicationData}/>;
+  return <FosterAgreementView setView={setView} applicationData={applicationData}/>;
 }
 
 export default FosterApplication;
