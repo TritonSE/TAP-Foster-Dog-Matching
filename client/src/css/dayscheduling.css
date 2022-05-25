@@ -1,9 +1,9 @@
-.day {
+.day-scheduling-day {
   width: 100%;
   margin-bottom: 20.45px;
 }
 
-.day-text {
+.day-scheduling-day-text {
   float: left;
   font-family: "Myriad Pro";
   font-style: normal;
@@ -14,7 +14,7 @@
   width: 57.66px;
 }
 
-.day-times-container {
+.day-scheduling-day-times-container {
   float: left;
   margin-left: 45.83px;
   width: 450px;
@@ -25,12 +25,12 @@
   column-gap: 9.88px;
 }
 
-.time-slot {
+.day-scheduling-time-slot {
   width: auto;
   height: 26.91px;
 }
 
-.time-slot-begin {
+.day-scheduling-time-slot-begin {
   display: inline-block;
   width: 68.42px;
   height: 26.91px;
@@ -39,7 +39,7 @@
   vertical-align: top;
 }
 
-.time-slot-divider {
+.day-scheduling-time-slot-divider {
   display: inline-block;
   width: 7.53px;
   height: 0px;
@@ -49,7 +49,7 @@
   margin-right: 8.38px;
 }
 
-.time-slot-end {
+.day-scheduling-time-slot-end {
   display: inline-block;
   width: 68.42px;
   height: 26.91px;
@@ -58,19 +58,19 @@
   vertical-align: top;
 }
 
-.trash-button {
+.day-scheduling-trash-button {
   display: inline-block;
   margin-left: 18.78px;
   cursor: pointer;
   outline: none;
 }
 
-.trash-button-image {
+.day-scheduling-trash-button-image {
   width: 25px;
   height: 24.21px;
 }
 
-.day-add-button {
+.day-scheduling-day-add-button {
   display: block;
   float: right;
   cursor: pointer;
@@ -79,34 +79,34 @@
   margin-top: 2px;
 }
 
-.day-add-button-image {
+.day-scheduling-day-add-button-image {
   width: 27px;
   height: 27px;
 }
 
 @media screen and (max-width: 780px) {
-  .day-times-container {
+  .day-scheduling-day-times-container {
     width: 57.692vw;
     margin-left: 5.876vw;
   }
 }
 
 @media screen and (max-width: 750px) {
-  .day-times-container {
+  .day-scheduling-day-times-container {
     width: 215px;
     grid-template-columns: repeat(1, 1fr);
   }
 }
 
 @media screen and (max-width: 440px) {
-  .day-text {
+  .day-scheduling-day-text {
     margin-bottom: 10px;
     float: none;
   }
 }
 
 @media screen and (max-width: 367px) {
-  .day-times-container {
+  .day-scheduling-day-times-container {
     margin-left: 0;
   }
 }

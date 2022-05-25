@@ -1,18 +1,18 @@
-.container {
+.meeting-scheduling-container {
   width: 70.677vw;
   height: 36.25vw;
   background: #000000;
   border-radius: 35px;
 }
 
-.container-six-weeks {
+.meeting-scheduling-container-six-weeks {
   width: 70.677vw;
   height: 41.25vw;
   background: #000000;
   border-radius: 35px;
 }
 
-.container-text {
+.meeting-scheduling-container-text {
   font-family: Myriad Pro;
   font-style: normal;
   font-weight: bold;
@@ -24,7 +24,7 @@
   padding-bottom: max(5px, 0.938vw);
 }
 
-.calendar-box {
+.meeting-scheduling-calendar-box {
   float: left;
   width: calc(37.115vw - 0.729vw - 0.729vw);
   height: calc(30.365vw - 0.729vw - 0.729vw);
@@ -34,7 +34,7 @@
   padding: 0.729vw 0.729vw 0.729vw 0.729vw;
 }
 
-.calendar-box-six-weeks {
+.meeting-scheduling-calendar-box-six-weeks {
   float: left;
   width: calc(37.115vw - 0.729vw - 0.729vw);
   height: calc(35.365vw - 0.729vw - 0.729vw);
@@ -44,7 +44,7 @@
   padding: 0.729vw 0.729vw 0.729vw 0.729vw;
 }
 
-.left-arrow {
+.meeting-scheduling-left-arrow {
   width: 1.146vw;
   height: 1.99vw;
   float: left;
@@ -52,7 +52,7 @@
   outline: none;
 }
 
-.month {
+.meeting-scheduling-month {
   text-align: center;
   font-family: Myriad Pro;
   font-style: normal;
@@ -62,7 +62,7 @@
   color: #000000;
 }
 
-.right-arrow {
+.meeting-scheduling-right-arrow {
   width: 1.146vw;
   height: 1.99vw;
   float: right;
@@ -70,7 +70,7 @@
   outline: none;
 }
 
-.times-box {
+.meeting-scheduling-times-box {
   float: right;
   width: 27.552vw;
   height: 30.365vw;
@@ -79,7 +79,7 @@
   border-radius: 15px;
 }
 
-.times-box-six-weeks {
+.meeting-scheduling-times-box-six-weeks {
   float: right;
   width: 27.552vw;
   height: 35.365vw;
@@ -88,7 +88,7 @@
   border-radius: 15px;
 }
 
-.times-box-title {
+.meeting-scheduling-times-box-title {
   margin-top: 1.823vw;
   font-family: Myriad Pro;
   font-style: normal;
@@ -99,7 +99,7 @@
   text-align: center;
 }
 
-.times-box-description {
+.meeting-scheduling-times-box-description {
   margin-top: 0.45vw;
   font-family: Myriad Pro;
   font-style: normal;
@@ -109,7 +109,7 @@
   text-align: center;
 }
 
-.date {
+.meeting-scheduling-date {
   font-family: Myriad Pro;
   font-style: normal;
   font-weight: normal;
@@ -120,7 +120,7 @@
   margin-top: 1.3vw;
 }
 
-.meeting-times-container {
+.meeting-scheduling-meeting-times-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   row-gap: 1.146vw;
@@ -130,7 +130,7 @@
   width: max-content;
 }
 
-.meeting-times-container-six-weeks {
+.meeting-scheduling-meeting-times-container-six-weeks {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   row-gap: 1.246vw;
@@ -140,7 +140,7 @@
   width: max-content;
 }
 
-.meeting-time {
+.meeting-scheduling-meeting-time {
   width: 10.885vw;
   height: 3.021vw;
   border: 2px solid #000000;
@@ -152,7 +152,7 @@
   background-color: #ffffff;
 }
 
-.meeting-time-six-weeks {
+.meeting-scheduling-meeting-time-six-weeks {
   width: 10.885vw;
   height: 4.021vw;
   border: 2px solid #000000;
@@ -164,7 +164,7 @@
   background-color: #ffffff;
 }
 
-.meeting-time-text {
+.meeting-scheduling-meeting-time-text {
   font-family: Myriad Pro;
   font-style: normal;
   font-weight: normal;
@@ -175,7 +175,7 @@
   color: #000000;
 }
 
-.meeting-time-selected {
+.meeting-scheduling-meeting-time-selected {
   width: 10.885vw;
   height: 3.021vw;
   border: 2px solid #000000;
@@ -186,7 +186,7 @@
   background: rgba(141, 196, 66, 0.6);
 }
 
-.meeting-time-selected-six-weeks {
+.meeting-scheduling-meeting-time-selected-six-weeks {
   width: 10.885vw;
   height: 4.021vw;
   border: 2px solid #000000;
@@ -197,7 +197,7 @@
   background: rgba(141, 196, 66, 0.6);
 }
 
-.meeting-time-selected-text-container {
+.meeting-scheduling-meeting-time-selected-text-container {
   width: 4.948vw;
   border: 1px solid #ffffff;
   box-sizing: border-box;
@@ -207,7 +207,7 @@
   cursor: pointer;
 }
 
-.meeting-time-selected-text {
+.meeting-scheduling-meeting-time-selected-text {
   font-family: Myriad Pro;
   font-style: normal;
   font-weight: normal;
@@ -219,22 +219,22 @@
 }
 
 @media screen and (max-width: 750px) {
-  .container {
+  .meeting-scheduling-container {
     width: 288px;
     height: 619px;
   }
 
-  .container-six-weeks {
+  .meeting-scheduling-container-six-weeks {
     width: 288px;
     height: 654px;
   }
 
-  .container-text {
+  .meeting-scheduling-container-text {
     font-size: 19px;
     line-height: 23px;
   }
 
-  .calendar-box {
+  .meeting-scheduling-calendar-box {
     width: 254.345px;
     height: 209.065px;
     margin-left: 11px;
@@ -244,7 +244,7 @@
     padding: 5.4675px 5.4675px 5.4675px 5.4675px;
   }
 
-  .calendar-box-six-weeks {
+  .meeting-scheduling-calendar-box-six-weeks {
     width: 254.345px;
     height: 244.065px;
     margin-left: 11px;
@@ -254,88 +254,88 @@
     padding: 5.4675px 5.4675px 5.4675px 5.4675px;
   }
 
-  .left-arrow {
+  .meeting-scheduling-left-arrow {
     width: 8.595px;
     height: 14.925px;
   }
 
-  .month {
+  .meeting-scheduling-month {
     font-size: 18.1132px;
     line-height: 22px;
   }
-  .right-arrow {
+  .meeting-scheduling-right-arrow {
     width: 8.595px;
     height: 14.925px;
   }
-  .times-box {
+  .meeting-scheduling-times-box {
     float: left;
     width: 267px;
     height: 308px;
     margin-left: 11px;
   }
-  .times-box-six-weeks {
+  .meeting-scheduling-times-box-six-weeks {
     float: left;
     width: 267px;
     height: 308px;
     margin-left: 11px;
   }
-  .times-box-title {
+  .meeting-scheduling-times-box-title {
     margin-top: 21.1725px;
     font-size: 18px;
     line-height: 22px;
   }
 
-  .times-box-description {
+  .meeting-scheduling-times-box-description {
     margin-top: 3.375px;
     font-size: 14px;
     line-height: 17px;
   }
 
-  .date {
+  .meeting-scheduling-date {
     font-size: 14px;
     line-height: 17px;
     margin-left: 23px;
     margin-top: 15.75px;
   }
 
-  .meeting-times-container {
+  .meeting-scheduling-meeting-times-container {
     row-gap: 11.09px;
     column-gap: 18.15px;
     margin-top: 9.375px;
     margin-left: 23px;
   }
-  .meeting-times-container-six-weeks {
+  .meeting-scheduling-meeting-times-container-six-weeks {
     row-gap: 11.09px;
     column-gap: 18.15px;
     margin-top: 9.375px;
     margin-left: 23px;
   }
-  .meeting-time {
+  .meeting-scheduling-meeting-time {
     width: 100.8975px;
     height: 29.25px;
   }
-  .meeting-time-six-weeks {
+  .meeting-scheduling-meeting-time-six-weeks {
     width: 100.8975px;
     height: 29.25px;
   }
-  .meeting-time-text {
+  .meeting-scheduling-meeting-time-text {
     font-size: 14px;
     line-height: 17px;
   }
 
-  .meeting-time-selected {
+  .meeting-scheduling-meeting-time-selected {
     width: 100.8975px;
     height: 29.25px;
   }
-  .meeting-time-selected-six-weeks {
+  .meeting-scheduling-meeting-time-selected-six-weeks {
     width: 100.8975px;
     height: 29.25px;
   }
-  .meeting-time-selected-text-container {
+  .meeting-scheduling-meeting-time-selected-text-container {
     width: 46.22px;
   }
 
-  .meeting-time-selected-text {
+  .meeting-scheduling-meeting-time-selected-text {
     font-size: 11.1971px;
     line-height: 15px;
   }
