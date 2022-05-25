@@ -109,6 +109,7 @@ function Application() {
       content: (
         <div>
           <Meetings
+            title="Interview Information"
             status={
               <StatusUpdate
                 title="Interview Info"
@@ -121,7 +122,7 @@ function Application() {
               />
             }
             // textCard={<div>HELLO THERE</div>}
-            interviewInfo={<InterviewInfo contingent={false} title="After Interviews" />}
+            interviewInfo={<InterviewInfo contingent title="After Interviews" />}
           />
         </div>
       ),
