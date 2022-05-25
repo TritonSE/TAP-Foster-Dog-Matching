@@ -1,6 +1,6 @@
 const express = require("express");
 const { body } = require("express-validator");
-const { getInterview, createInterview } = require("../services/interviews");
+const { getInterview, getInterviews, createInterview } = require("../services/interviews");
 const { validateRequest } = require("../middleware/validation");
 const {
   requireAuthenticatedUser,
@@ -45,6 +45,24 @@ router.get(
       .catch((err) => next(err));
   }
 );
+
+/**
+ * GET /interviews - Return interviews by date query
+ */
+router.get("/", (req, res) => {
+  getInterviews(req.query.date)
+    .then((interviews) => {
+      if (interviews) {
+        return res.status(200).json({ interviews });
+      }
+      return res.status(400).json({
+        errors: [{ message: `Something went wrong, interviews could not be retrieved` }],
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({ message: err });
+    });
+});
 
 /**
  * POST /interviews - Create an interview

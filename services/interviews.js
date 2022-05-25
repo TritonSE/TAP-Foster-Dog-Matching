@@ -9,6 +9,10 @@ function getInterview(interviewId, interviewStage) {
   return Interview.findOne({ _id: interviewId, stage: interviewStage }).exec();
 }
 
+function getInterviews(interviewDate) {
+  return Interview.find({ date: interviewDate }).exec();
+}
+
 /**
  * Create an interview
  * @param rawInterview - details of interview to create
@@ -20,5 +24,6 @@ async function createInterview(rawInterview) {
 
 module.exports = {
   getInterview,
+  getInterviews,
   createInterview,
 };

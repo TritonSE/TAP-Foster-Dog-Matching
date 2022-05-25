@@ -16,7 +16,7 @@
  *   />
  */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import left from "../images/left.svg";
 import right from "../images/right.svg";
@@ -61,9 +61,24 @@ function timeToHumanFormat(time) {
   return time1 + " - " + time2;
 }
 
+// Assuming timeRanges were derived from adding 30 minutes to the
+// times specified in this.times in the format HH:MM - HH:MM [AaPp][Mm]
+function timeInTimeRange(meetTime, timeRange) {
+  return (
+    meetTime
+      .split(" ")
+      .join("")
+      .localeCompare(
+        timeRange.split(" ")[0] + timeRange.substring(timeRange.length - 2, timeRange.length)
+      ) === 0
+  );
+}
+
 function MeetingScheduling(props) {
   const [date, onChange] = useState(new Date());
   const [time, setTime] = useState("none");
+  const [meetTimes, setMeetTimes] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const weekday = [
     "Sunday,",
@@ -126,45 +141,77 @@ function MeetingScheduling(props) {
     ); */
   };
 
-  const meetTimes = times.map((meetTime) => (
-    <div key={meetTime}>
-      {time === meetTime ? (
-        <button
-          className={
-            Math.ceil(
-              (new Date(date.getFullYear(), date.getMonth(), 1).getDay() +
-                new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()) /
-                7
-            ) <= 5
-              ? "meeting-scheduling-meeting-time-selected"
-              : "meeting-scheduling-meeting-time-selected-six-weeks"
-          }
-          type="button"
-          onClick={createInterview}
-        >
-          <div className="meeting-scheduling-meeting-time-selected-text-container">
-            <div className="meeting-scheduling-meeting-time-selected-text">Choose</div>
-          </div>
-        </button>
-      ) : (
-        <button
-          className={
-            Math.ceil(
-              (new Date(date.getFullYear(), date.getMonth(), 1).getDay() +
-                new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()) /
-                7
-            ) <= 5
-              ? "meeting-scheduling-meeting-time"
-              : "meeting-scheduling-meeting-time-six-weeks"
-          }
-          type="button"
-          onClick={() => setTime(meetTime)}
-        >
-          <div className="meeting-scheduling-meeting-time-text">{meetTime}</div>
-        </button>
-      )}
-    </div>
-  ));
+  const updateMeetTimes = (interviews) => {
+    const meetTimesTemp = [...times];
+    interviews.map((interview) => {
+      times.map((meetTime) => {
+        if (timeInTimeRange(meetTime, interview.time) && meetTimesTemp.includes(meetTime)) {
+          meetTimesTemp.splice(meetTimesTemp.indexOf(meetTime), 1);
+        }
+        return meetTime;
+      });
+      return interview;
+    });
+
+    setMeetTimes(
+      meetTimesTemp.map((meetTime) => (
+        <div key={meetTime}>
+          {time === meetTime ? (
+            <button
+              className={
+                Math.ceil(
+                  (new Date(date.getFullYear(), date.getMonth(), 1).getDay() +
+                    new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()) /
+                    7
+                ) <= 5
+                  ? "meeting-scheduling-meeting-time-selected"
+                  : "meeting-scheduling-meeting-time-selected-six-weeks"
+              }
+              type="button"
+              onClick={createInterview}
+            >
+              <div className="meeting-scheduling-meeting-time-selected-text-container">
+                <div className="meeting-scheduling-meeting-time-selected-text">Choose</div>
+              </div>
+            </button>
+          ) : (
+            <button
+              className={
+                Math.ceil(
+                  (new Date(date.getFullYear(), date.getMonth(), 1).getDay() +
+                    new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()) /
+                    7
+                ) <= 5
+                  ? "meeting-scheduling-meeting-time"
+                  : "meeting-scheduling-meeting-time-six-weeks"
+              }
+              type="button"
+              onClick={() => setTime(meetTime)}
+            >
+              <div className="meeting-scheduling-meeting-time-text">{meetTime}</div>
+            </button>
+          )}
+        </div>
+      ))
+    );
+  };
+
+  useEffect(() => {
+    setIsLoading(true);
+    // get interviews from backend
+    fetch(
+      `http://localhost:8000/api/interviews/?` +
+        new URLSearchParams({ date: dateToHumanFormat(date) }),
+      {
+        method: "GET",
+      }
+    )
+      .then((res) => res.json())
+      .then((json) => {
+        updateMeetTimes(json.interviews);
+        setIsLoading(false);
+      });
+  }, [date]);
 
   return (
     <div
@@ -243,7 +290,7 @@ function MeetingScheduling(props) {
               : "meeting-scheduling-meeting-times-container-six-weeks"
           }
         >
-          {meetTimes}
+          {!isLoading && meetTimes}
         </div>
       </div>
     </div>
