@@ -95,7 +95,7 @@
 .error-message {
   color: red;
   position: absolute;
-  bottom: 32%;
+  bottom: 5%;
 }
 
 @media only screen and (max-width: 1050px) {
