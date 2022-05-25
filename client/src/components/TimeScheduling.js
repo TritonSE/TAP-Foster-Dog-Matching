@@ -80,12 +80,14 @@ function TimeScheduling(props) {
     <div key={schedule._id}>
       {dateToHumanFormat(currDate) === schedule.date && (
         <>
-          <div className="schedule-entry">
-            <div className="schedule-name-text">{schedule.name}</div>
-            <div className="schedule-role-text">{schedule.role}</div>
-            <div className="schedule-time-text">Times available: {schedule.time.join(", ")}</div>
+          <div className="time-scheduling-schedule-entry">
+            <div className="time-scheduling-schedule-name-text">{schedule.name}</div>
+            <div className="time-scheduling-schedule-role-text">{schedule.role}</div>
+            <div className="time-scheduling-schedule-time-text">
+              Times available: {schedule.time.join(", ")}
+            </div>
           </div>
-          <div className="schedule-divider" />
+          <div className="time-scheduling-schedule-divider" />
         </>
       )}
     </div>
@@ -99,21 +101,21 @@ function TimeScheduling(props) {
 
   return (
     <>
-      <div className="container">
-        <div className="container-text">Calendar</div>
+      <div className="time-scheduling-container">
+        <div className="time-scheduling-container-text">Calendar</div>
         <div
-          className="add-button"
+          className="time-scheduling-add-button"
           role="button"
           tabIndex={0}
           onClick={togglePopup}
           onKeyDown={togglePopup}
         >
-          <div className="add-button-icon-background">
-            <img className="add-button-icon" src={plus} alt="Add Button Icon" />
+          <div className="time-scheduling-add-button-icon-background">
+            <img className="time-scheduling-add-button-icon" src={plus} alt="Add Button Icon" />
           </div>
-          <div className="add-button-text">Add your Calendar</div>
+          <div className="time-scheduling-add-button-text">Add your Calendar</div>
         </div>
-        <div className="calendar-box">
+        <div className="time-scheduling-calendar-box">
           <Calendar
             onChange={onChange}
             value={currDate}
@@ -131,21 +133,21 @@ function TimeScheduling(props) {
             tileDisabled={({ date }) => !datesWithSchedules.has(dateToHumanFormat(date))}
           />
         </div>
-        <div className="schedules-box">
-          <div className="schedules-box-section1">
-            <div className="schedules-box-title">Schedules</div>
-            <div className="date">
+        <div className="time-scheduling-schedules-box">
+          <div className="time-scheduling-schedules-box-section1">
+            <div className="time-scheduling-schedules-box-title">Schedules</div>
+            <div className="time-scheduling-date">
               {[day[currDate.getDay()], month[currDate.getMonth()], currDate.getDate()].join(" ")}
             </div>
           </div>
-          <div className="schedules-box-section2">{schedules}</div>
+          <div className="time-scheduling-schedules-box-section2">{schedules}</div>
         </div>
       </div>
       {isOpen && (
-        <div className="schedule-adder-transparent">
-          <div className="schedule-adder">
+        <div className="time-scheduling-schedule-adder-transparent">
+          <div className="time-scheduling-schedule-adder">
             <span
-              className="close-icon"
+              className="time-scheduling-close-icon"
               role="button"
               tabIndex={0}
               onClick={togglePopup}
@@ -153,16 +155,16 @@ function TimeScheduling(props) {
             >
               ✕
             </span>
-            <div className="popup-text">Please set your weekly schedule below:</div>
-            <label className="repeat-switch" htmlFor="temp-id">
+            <div className="time-scheduling-popup-text">Please set your weekly schedule below:</div>
+            <label className="time-scheduling-repeat-switch" htmlFor="temp-id">
               <input type="checkbox" id="temp-id" />
-              <span className="repeat-slider" />
+              <span className="time-scheduling-repeat-slider" />
             </label>
-            <div className="repeat-text">Repeat?</div>
-            <div className="weekly-schedule-container">{schedulerByDay}</div>
-            <div className="save-button">
+            <div className="time-scheduling-repeat-text">Repeat?</div>
+            <div className="time-scheduling-weekly-schedule-container">{schedulerByDay}</div>
+            <div className="time-scheduling-save-button">
               <div
-                className="save-button-text"
+                className="time-scheduling-save-button-text"
                 role="button"
                 tabIndex={0}
                 onClick={togglePopup}

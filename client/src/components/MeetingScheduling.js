@@ -62,7 +62,20 @@ function MeetingScheduling(props) {
     "December",
   ];
 
-  const meetTimes = props.times.map((meetTime) => (
+  const times = [
+    "11:00 AM",
+    "11:30 AM",
+    "12:00 PM",
+    "12:30 PM",
+    "1:00 PM",
+    "5:00 PM",
+    "5:30 PM",
+    "6:00 PM",
+    "6:30 PM",
+    "7:00 PM",
+  ];
+
+  const meetTimes = times.map((meetTime) => (
     <div>
       {time === meetTime ? (
         <button
@@ -72,14 +85,17 @@ function MeetingScheduling(props) {
                 new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()) /
                 7
             ) <= 5
-              ? "meeting-time-selected"
-              : "meeting-time-selected-six-weeks"
+              ? "meeting-scheduling-meeting-time-selected"
+              : "meeting-scheduling-meeting-time-selected-six-weeks"
           }
           type="button"
         >
-          <div className="meeting-time-selected-text-container">
+          <div className="meeting-scheduling-meeting-time-selected-text-container">
             {/* TODO: change onClick to real handler. this is just for testing  */}
-            <div className="meeting-time-selected-text" onClick={props.interviewConfirmedCallback}>
+            <div
+              className="meeting-scheduling-meeting-time-selected-text"
+              onClick={props.interviewConfirmedCallback}
+            >
               Choose
             </div>
           </div>
@@ -92,13 +108,13 @@ function MeetingScheduling(props) {
                 new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()) /
                 7
             ) <= 5
-              ? "meeting-time"
-              : "meeting-time-six-weeks"
+              ? "meeting-scheduling-meeting-time"
+              : "meeting-scheduling-meeting-time-six-weeks"
           }
           type="button"
           onClick={() => setTime(meetTime)}
         >
-          <div className="meeting-time-text">{meetTime}</div>
+          <div className="meeting-scheduling-meeting-time-text">{meetTime}</div>
         </button>
       )}
     </div>
@@ -112,11 +128,11 @@ function MeetingScheduling(props) {
             new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()) /
             7
         ) <= 5
-          ? "container"
-          : "container-six-weeks"
+          ? "meeting-scheduling-container"
+          : "meeting-scheduling-container-six-weeks"
       }
     >
-      <div className="container-text">{props.title}</div>
+      <div className="meeting-scheduling-container-text">{props.title}</div>
       <div
         className={
           Math.ceil(
@@ -124,8 +140,8 @@ function MeetingScheduling(props) {
               new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()) /
               7
           ) <= 5
-            ? "calendar-box"
-            : "calendar-box-six-weeks"
+            ? "meeting-scheduling-calendar-box"
+            : "meeting-scheduling-calendar-box-six-weeks"
         }
       >
         <Calendar
@@ -137,8 +153,10 @@ function MeetingScheduling(props) {
           }
           calendarType="US"
           minDetail="month"
-          prevLabel={<img className="left-arrow" src={left} alt="left arrow" />}
-          nextLabel={<img className="right-arrow" src={right} alt="right arrow" />}
+          prevLabel={<img className="meeting-scheduling-left-arrow" src={left} alt="left arrow" />}
+          nextLabel={
+            <img className="meeting-scheduling-right-arrow" src={right} alt="right arrow" />
+          }
           showNeighboringMonth
           formatMonthYear={(locale, currDate) => month[currDate.getMonth()]}
           onClickDay={() => setTime("none")}
@@ -157,13 +175,15 @@ function MeetingScheduling(props) {
               new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()) /
               7
           ) <= 5
-            ? "times-box"
-            : "times-box-six-weeks"
+            ? "meeting-scheduling-times-box"
+            : "meeting-scheduling-times-box-six-weeks"
         }
       >
-        <div className="times-box-title">Times Avaliable</div>
-        <div className="times-box-description">Slots will take about 30 minutes</div>
-        <div className="date">
+        <div className="meeting-scheduling-times-box-title">Times Avaliable</div>
+        <div className="meeting-scheduling-times-box-description">
+          Slots will take about 30 minutes
+        </div>
+        <div className="meeting-scheduling-date">
           {[weekday[date.getDay()], month[date.getMonth()], date.getDate()].join(" ")}
         </div>
         <div
@@ -173,8 +193,8 @@ function MeetingScheduling(props) {
                 new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()) /
                 7
             ) <= 5
-              ? "meeting-times-container"
-              : "meeting-times-container-six-weeks"
+              ? "meeting-scheduling-meeting-times-container"
+              : "meeting-scheduling-meeting-times-container-six-weeks"
           }
         >
           {meetTimes}
