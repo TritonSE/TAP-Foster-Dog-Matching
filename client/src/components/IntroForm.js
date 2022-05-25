@@ -92,16 +92,65 @@ function IntroForm(props) {
             Please enter the correct {props.accountType} sign up key to complete account creation.{" "}
           </div>
           <div className="key-input">
-            <input type="text" maxLength="1" className="key-1" />
-            <input type="text" maxLength="1" className="key-2" />
-            <input type="text" maxLength="1" className="key-3" />
-            <input type="text" maxLength="1" className="key-4" />
-            <input type="text" maxLength="1" className="key-5" />
+            <input type="text" maxLength="1" id="key-1" />
+            <input type="text" maxLength="1" id="key-2" />
+            <input type="text" maxLength="1" id="key-3" />
+            <input type="text" maxLength="1" id="key-4" />
+            <input type="text" maxLength="1" id="key-5" />
           </div>
           {/* TODO: Make Confirm button work */}
           <Button className="confirm" name="Confirm" />
         </>
       );
+      const key1 = document.getElementById('key-1');
+      const key2 = document.getElementById('key-2');
+      const key3 = document.getElementById('key-3');
+      const key4 = document.getElementById('key-4');
+      const key5 = document.getElementById('key-5');
+
+      // BUG: adding moving logic makes page dissapear???
+      // key1.addEventListener('keyup', (e) => {
+      //   if(e.key === "Backspace"){
+      //     key1.value = '';
+      //   }else {
+      //     key2.focus();
+      //   }
+      // });
+
+      // key2.addEventListener('keyup', (e) => {
+      //   if(e.key === "Backspace"){
+      //     key2.value = '';
+      //     key1.focus();
+      //   }else {
+      //     key3.focus();
+      //   }
+      // });
+
+      // key3.addEventListener('keyup', (e) => {
+      //   if(e.key === "Backspace"){
+      //     key3.value = '';
+      //     key2.focus();
+      //   }else {
+      //     key4.focus();
+      //   }
+      // });
+
+      // key4.addEventListener('keyup', (e) => {
+      //   if(e.key === "Backspace"){
+      //     key4.value = '';
+      //     key3.focus();
+      //   }else {
+      //     key5.focus();
+      //   }
+      // });
+
+      // key5.addEventListener('keyup', (e) => {
+      //   if(e.key === "Backspace"){
+      //     key5.value = '';
+      //     key4.focus();
+      //   }
+      // });
+
       break;
     }
   }
