@@ -211,7 +211,6 @@ function CreateDogPopUp(props) {
       createDog(reqBody).then((response) => {
         // success - close the pop up
         if (response.ok) props.setCreateNewPopUp(false);
-        else console.error(response.body);
       });
     }
   };
@@ -250,10 +249,9 @@ function CreateDogPopUp(props) {
         internalNotes: data.internalNotes ? data.internalNotes : "",
       };
       updateDog(props.dog._id, reqBody).then((response) => {
-        if (response.ok) {
+        if (response.ok)
           // success - close the pop up
           props.setEditDogPopUp(false);
-        } else console.error(response.body);
       });
     }
   };

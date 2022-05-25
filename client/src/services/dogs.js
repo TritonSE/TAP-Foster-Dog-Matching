@@ -37,7 +37,7 @@ export async function updateDog(dogId, updatedDog) {
  * @export
  * @return {object} - dog objects (as a makeRequest response. see data.js)
  */
-export async function getDogs(dogId) {
+export async function getDogs() {
   return getData(`dogs`);
 }
 
