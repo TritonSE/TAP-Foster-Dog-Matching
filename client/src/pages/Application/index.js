@@ -4,7 +4,7 @@
  *
  * Content for each step goes in their respective files in the AdminView/FosterView folders.
  * Each file exports an object with an 'intro' and 'content' key:
- * - Intro content for the step (white filled circle) goes in the 'intro' key.
+ * - Intro content for the step (white filled circle) goes in the 'intro' key (if there is no intro content, this key can be excluded).
  * - Actual content for the step (green filled circle) goes in the 'content' key.
  *
  * ApplicationContext:
@@ -97,7 +97,9 @@ function Application() {
 
   const goToStep = React.useCallback((step, subStep = "intro") => {
     setCurrentStep(step);
-    setCurrentSubStep(step === 0 || !applicationContent[currentStep].intro ? "content" : subStep);
+    setCurrentSubStep(
+      step === 0 || applicationContent[step].intro === undefined ? "content" : subStep
+    );
   }, []);
 
   const applicationData = React.useMemo(
