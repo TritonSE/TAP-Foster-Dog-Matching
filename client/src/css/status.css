@@ -81,6 +81,7 @@
   height: 2px;
   background: #f4f4f4;
   border-radius: 10px;
+  width: 100%;
   transform: matrix(1, 0, 0, -1, 0, 0);
 }
 

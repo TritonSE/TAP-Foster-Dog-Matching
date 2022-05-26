@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { device } from "../utils/useResponsive";
 import pfp from "../images/pfp.png";
 import After from "./AfterMeetAndGreet";
-import MeetInfo from "./MeetAndGreetInfo";
+import StatusUpdate from "./StatusUpdate";
 
 const ConfirmContainer = styled.div`
   display: flex;
@@ -107,15 +107,16 @@ function ConfirmMeetGreet() {
       <ComponentHeader>Meet & Greet Information</ComponentHeader>
       <ContentWrapper>
         <InfoWrapper>
-          <MeetInfo
+          <StatusUpdate
             title="Meet and Greet Info"
             ambassador="Dhanush"
             phone="123-456-7890"
             email="test@tap.com"
             date="1/1/2022"
             time="6-7:00PM"
-            location="Zoom"
+            tapFacilityLocation="Zoom"
             image={pfp}
+            meetAndGreetView
           />
         </InfoWrapper>
         <AfterWrapper>

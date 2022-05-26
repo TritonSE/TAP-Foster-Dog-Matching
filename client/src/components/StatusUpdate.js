@@ -21,14 +21,14 @@ import "../css/status.css";
  *
  */
 
-function StatusItem({ label, content, noLine }) {
+function StatusItem({ label, content, noLine, meetAndGreetView }) {
   return (
     <>
       <div className="information-box-item">
         <div className="information-box-item-label">{label}</div>
         <div className="information-box-item-content">{content}</div>
       </div>
-      {!noLine && <hr className="line" />}
+      {!noLine && <hr className={meetAndGreetView ? "linegray" : "line"} />}
     </>
   );
 }
@@ -41,13 +41,14 @@ function StatusUpdate(props) {
       </div>
       <div className="information-box">
         <StatusItem
-          label="Ambassador:"
+          label={props.meetAndGreetView ? "Foster Name:" : "Ambassador:"}
           content={
             <div className="box-ambassador">
               <img className="pfp" src={props.image} alt="" />
               <div className="ambassador-right">{props.ambassador}</div>
             </div>
           }
+          meetAndGreetView={props.meetAndGreetView}
         />
         <StatusItem
           label="Contact Info:"
@@ -57,12 +58,29 @@ function StatusUpdate(props) {
               <span>{props.email}</span>
             </>
           }
+          meetAndGreetView={props.meetAndGreetView}
         />
-        {props.date && <StatusItem label="Date:" content={props.date} />}
-        {props.time && <StatusItem label="Time:" content={props.time} />}
-        {props.location && <StatusItem label="Location:" content={props.location} noLine />}
+        {props.date && (
+          <StatusItem
+            label="Date:"
+            content={props.date}
+            meetAndGreetView={props.meetAndGreetView}
+          />
+        )}
+        {props.time && (
+          <StatusItem
+            label="Time:"
+            content={props.time}
+            meetAndGreetView={props.meetAndGreetView}
+          />
+        )}
         {props.tapFacilityLocation && (
-          <StatusItem label="TAP Facility Location:" content={props.tapFacilityLocation} noLine />
+          <StatusItem
+            label={props.meetAndGreetView ? "TAP Address" : "TAP Facility Location:"}
+            content={props.tapFacilityLocation}
+            meetAndGreetView={props.meetAndGreetView}
+            noLine
+          />
         )}
       </div>
     </div>
