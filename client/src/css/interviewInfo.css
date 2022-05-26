@@ -9,6 +9,7 @@
   /* max-width: 460px; */
   align-items: center;
   /* max-height: 32vw; */
+  padding-bottom: 10px;
 }
 
 .interview-info-input {
@@ -21,9 +22,9 @@
   border-color: none;
 }
 
-.info-input:focus {
+/* .info-input:focus {
   outline-color: #8dc442;
-}
+} */
 
 .interview-info-title {
   align-self: center;

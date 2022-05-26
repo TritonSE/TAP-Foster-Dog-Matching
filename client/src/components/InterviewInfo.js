@@ -1,13 +1,28 @@
 import { useForm } from "react-hook-form";
 import React from "react";
+import styled from "styled-components";
 import { ControlledInput } from "./Input";
 import Form from "./Form";
 import "../css/interviewInfo.css";
+
+const InputField = styled.input`
+  &:focus { 
+    outline: none;
+    border: 2px solid #8dc442;
+  }
+`;
 
 function PassFail(props) {
   const { control, watch, handleSubmit } = useForm({
     reValidateMode: "onChange",
   });
+
+  const TextAreaField = styled(InputField).attrs({
+    as: "textarea",
+  })`
+    resize: none;
+    font-family: inherit;
+  `;
 
   // const notes = React.useRef();
 
