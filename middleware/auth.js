@@ -18,7 +18,6 @@ async function requireAuthentication(req, res, next) {
   }
 
   const decodedToken = await decodeAuthToken(token);
-  console.log("decoded token:", decodedToken);
 
   if (decodedToken) {
     req.decodedToken = decodedToken;

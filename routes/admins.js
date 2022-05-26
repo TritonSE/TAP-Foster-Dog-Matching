@@ -16,7 +16,7 @@ const validators = [
   body("firstName").notEmpty().isString(),
   body("lastName").notEmpty().isString(),
   body("email").notEmpty().isString().isEmail(),
-  body("password").notEmpty().isString().isLength({ min: 6 }),
+  body("password").notEmpty().isString().isLength({ min: 8 }),
   body("phone").notEmpty().isString().isMobilePhone("en-US"),
   body("role").notEmpty().isString().isIn(Object.values(ADMIN_ROLES)),
   body("photoURL").notEmpty().isString().isURL(),
