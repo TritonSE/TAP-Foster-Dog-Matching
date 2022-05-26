@@ -126,8 +126,7 @@ export const SignOut = styled.button`
     cursor: pointer;
 
     position: absolute;
-    bottom: 0;
-
+    bottom: 100px;
     padding: 25px 0px;
   }
 `;

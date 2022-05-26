@@ -1,0 +1,521 @@
+.weekly-schedule-container::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.weekly-schedule-container::-webkit-scrollbar:vertical {
+  width: 12px;
+}
+
+.weekly-schedule-container::-webkit-scrollbar:horizontal {
+  height: 12px;
+}
+
+.weekly-schedule-container::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 5px solid transparent;
+  border-radius: 9px;
+  background-clip: content-box;
+}
+
+.weekly-schedule-container::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+.container {
+  width: 69.063vw;
+  height: 42.675vw;
+  min-height: 42.675vw;
+  background: #000000;
+  border-radius: 35px;
+  overflow: visible;
+}
+
+.container-text {
+  float: left;
+  font-family: Myriad Pro;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.719vw;
+  line-height: 2.083vw;
+  color: #ffffff;
+  padding-left: 1.875vw;
+  padding-top: 1.51vw;
+  margin-bottom: 2.396vw;
+}
+
+.add-button {
+  float: right;
+  margin-top: 1.25vw;
+  margin-right: 1.9vw;
+  cursor: pointer;
+  outline: none;
+}
+
+.add-button-icon-background {
+  display: inline-block;
+  background: #8dc442;
+  width: 2.604vw;
+  height: 2.604vw;
+  border-radius: 50%;
+  text-align: center;
+}
+
+.add-button-icon {
+  display: block;
+  width: 1.7vw;
+  height: 1.7vw;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0.417vw;
+}
+
+.add-button-text {
+  margin-top: 0.5vw;
+  height: 2.604vw;
+  margin-left: 0.417vw;
+  display: inline-block;
+  font-family: "Myriad Pro";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.302vw;
+  vertical-align: top;
+  color: #ffffff;
+}
+
+.calendar-box {
+  clear: left;
+  display: unset;
+  float: left;
+  width: calc(37.115vw - 0.729vw - 0.729vw);
+  height: auto;
+  margin-left: 1.875vw;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 0.729vw 0.729vw 0.729vw 0.729vw;
+}
+
+.left-arrow {
+  width: 1.146vw;
+  height: 1.99vw;
+  float: left;
+  cursor: pointer;
+  outline: none;
+}
+
+.month {
+  text-align: center;
+  font-family: Myriad Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 2.5vw;
+  line-height: 2.24vw;
+  color: #000000;
+}
+
+.right-arrow {
+  width: 1.146vw;
+  height: 1.99vw;
+  float: right;
+  cursor: pointer;
+  outline: none;
+}
+
+.schedules-box {
+  float: right;
+  width: 24.063vw;
+  height: 34.863vw;
+  margin-right: 1.719vw;
+  background: #ffffff;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.schedules-box-section1 {
+  width: 24.063vw;
+  height: 7.24vw;
+  background: #8dc442;
+  border-radius: 15px 15px 0px 0px;
+  overflow: hidden;
+}
+
+.schedules-box-title {
+  margin-top: 1.927vw;
+  font-family: Myriad Pro;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.302vw;
+  line-height: 1.563vw;
+  color: #000000;
+  text-align: center;
+}
+
+.date {
+  font-family: Myriad Pro;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.161vw;
+  line-height: 1.406vw;
+  color: #000000;
+  margin-left: 2vw;
+  margin-top: 1.55vw;
+}
+
+.schedules-box-section2 {
+  width: 100%;
+  height: 27.623vw;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.schedule-entry {
+  width: 24.063vw;
+  min-height: 5.065vw;
+  height: max-content;
+  background-color: #ffffff;
+  font-family: "Myriad Pro";
+  font-style: normal;
+  color: #000000;
+  overflow: hidden;
+  padding-bottom: 0.3vw;
+}
+
+.schedule-divider {
+  width: 24.063vw;
+  height: 0vw;
+  border: 2px solid #8dc442;
+}
+
+.schedule-name-text {
+  margin-left: 1.458vw;
+  margin-top: 1.354vw;
+  font-weight: 700;
+  font-size: 1.161vw;
+  line-height: 1.406vw;
+}
+
+.schedule-role-text {
+  float: left;
+  font-weight: 400;
+  font-size: 0.781vw;
+  line-height: 0.938vw;
+  margin-top: 0.315vw;
+  margin-left: 3.021vw;
+}
+
+.schedule-time-text {
+  width: 8.49vw;
+  float: right;
+  font-weight: 400;
+  font-size: 0.781vw;
+  line-height: 0.938vw;
+  margin-top: 0.315vw;
+  margin-right: 1.198vw;
+}
+
+.schedule-adder-transparent {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+@supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+  .schedule-adder-transparent {
+    background: rgba(112, 112, 112, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+}
+.schedule-adder {
+  position: relative;
+  width: 776px;
+  margin: 0 auto;
+  height: 620px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #fff;
+  border-radius: 16.1442px;
+  overflow-x: auto;
+}
+
+.close-icon {
+  content: "✕";
+  font-weight: bold;
+  cursor: pointer;
+  position: fixed;
+  margin-left: 50px;
+  margin-top: 18px;
+  line-height: 40px;
+  font-size: 40px;
+  outline: none;
+}
+
+.popup-text {
+  font-family: "Myriad Pro";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 23.9877px;
+  line-height: 29px;
+  color: #000000;
+  text-align: center;
+  padding-top: 60.28px;
+}
+
+.repeat-switch {
+  float: right;
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 12px;
+  margin-right: 83.55px;
+  margin-top: 10px;
+}
+
+.repeat-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.repeat-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(136, 136, 136, 0.5);
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.repeat-slider:before {
+  position: absolute;
+  content: "";
+  height: 24.75px;
+  width: 24.75px;
+  left: -3px;
+  bottom: -7px;
+  background-color: white;
+  border: 1.07628px solid #8dc442;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .repeat-slider {
+  background-color: #8dc442;
+}
+
+input:focus + .repeat-slider {
+  box-shadow: 0 0 1px #8dc442;
+}
+
+input:checked + .repeat-slider:before {
+  -webkit-transform: translateX(24.75px);
+  -ms-transform: translateX(24.75px);
+  transform: translateX(24.75px);
+}
+
+.repeat-text {
+  font-family: "Myriad Pro";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16.1442px;
+  line-height: 19px;
+  color: #000000;
+  margin-right: 72px;
+  float: right;
+  clear: right;
+  margin-top: 8px;
+  margin-bottom: 10px;
+}
+
+.weekly-schedule-container {
+  height: 400px;
+  width: 620px;
+  margin-left: 75px;
+  clear: right;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  row-gap: 5px;
+}
+
+.save-button {
+  width: 164.67px;
+  height: 37.67px;
+  background: #8dc442;
+  border-radius: 5.38141px;
+  cursor: pointer;
+  outline: none;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 17px;
+}
+
+.save-button-text {
+  font-family: "Myriad Pro";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 17.2205px;
+  line-height: 37.67px;
+  color: #ffffff;
+  text-align: center;
+}
+
+@media screen and (max-width: 780px) {
+  .schedule-adder {
+    width: 99%;
+  }
+
+  .weekly-schedule-container {
+    margin-left: 9.615vw;
+    width: 79.487vw;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .container {
+    width: 288px;
+    height: 619px;
+    min-height: 619px;
+    margin: 0 auto;
+  }
+
+  .container-text {
+    font-size: 19px;
+    line-height: 23px;
+    padding-left: 14.06px;
+    padding-top: 11.325px;
+    margin-bottom: 17.97px;
+  }
+
+  .add-button {
+    margin-top: 12px;
+    margin-right: 15px;
+  }
+
+  .add-button-icon-background {
+    width: 19.5px;
+    height: 19.5px;
+  }
+
+  .add-button-icon {
+    width: 12.75px;
+    height: 12.75px;
+    margin-top: 3.1275px;
+  }
+
+  .add-button-text {
+    margin-top: 3.75px;
+    height: 19.5px;
+    margin-left: 3.1275px;
+    font-size: 9.765px;
+  }
+
+  .calendar-box {
+    width: 254.345px;
+    margin-left: 11px;
+    float: left;
+    margin-top: 10px;
+    margin-bottom: 12px;
+    padding: 5.4675px 5.4675px 5.4675px 5.4675px;
+    border-radius: 7.54717px;
+  }
+
+  .left-arrow {
+    width: 8.595px;
+    height: 14.925px;
+  }
+
+  .month {
+    font-size: 18.1132px;
+    line-height: 22px;
+  }
+  .right-arrow {
+    width: 8.595px;
+    height: 14.925px;
+  }
+  .schedules-box {
+    width: 267px;
+    height: 273px;
+    margin-right: 10.27px;
+  }
+
+  .schedules-box-section1 {
+    width: 267px;
+    height: 54.3px;
+  }
+
+  .date {
+    line-height: 17px;
+    margin-left: 23px;
+    margin-top: 7.75px;
+  }
+
+  .schedules-box-title {
+    margin-top: 14.4525px;
+    font-size: 9.765px;
+    line-height: 11.7225px;
+  }
+
+  .schedules-box-section2 {
+    height: 207.17px;
+  }
+
+  .schedule-entry {
+    width: 267px;
+    min-height: 38px;
+    padding-bottom: 2.25px;
+  }
+
+  .schedule-divider {
+    width: 267px;
+    height: 0px;
+  }
+
+  .schedule-name-text {
+    margin-left: 10.935px;
+    margin-top: 10.155px;
+    font-size: 8.71px;
+    line-height: 10.545px;
+  }
+
+  .schedule-role-text {
+    font-size: 8px;
+    line-height: 7.035px;
+    margin-top: 2.3625px;
+    margin-left: 22.6575px;
+  }
+
+  .schedule-time-text {
+    width: 63.67px;
+    font-size: 8px;
+    line-height: 7.035px;
+    margin-top: 2.3625px;
+    margin-right: 8.895px;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .schedule-adder {
+    height: 637.02px;
+  }
+}
+
+@media screen and (max-width: 367px) {
+  .weekly-schedule-container {
+    width: 270px;
+  }
+}
+
+@media screen and (max-width: 315px) {
+  .weekly-schedule-container {
+    margin-left: 7px;
+  }
+}
