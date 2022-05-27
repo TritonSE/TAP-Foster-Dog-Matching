@@ -9,22 +9,14 @@
  */
 
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import "../css/header.css";
 import logoImage from "../images/logo1.png";
 import { signOutUser } from "../services/auth";
 
 function Header({ firstName, role }) {
-  const navigate = useNavigate();
-
-  const handleSignOut = () => {
-    signOutUser();
-    navigate("/");
-  };
-
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
-      handleSignOut();
+      signOutUser();
     }
   };
 
@@ -47,7 +39,7 @@ function Header({ firstName, role }) {
       </div>
       <div
         className="header-sign-out"
-        onClick={handleSignOut}
+        onClick={signOutUser}
         onKeyDown={handleKeyDown}
         role="button"
         tabIndex={0}

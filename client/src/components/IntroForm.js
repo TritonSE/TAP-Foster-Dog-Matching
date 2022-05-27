@@ -38,7 +38,7 @@ function IntroForm(props) {
 
   React.useEffect(() => {
     // Send user to correct page after login based on role
-    if (props.formType === "login" && currentUser)
+    if (currentUser)
       navigate(currentUser.type === "admin" ? "/pending-applications" : "/dashboard");
   }, [currentUser]);
 
