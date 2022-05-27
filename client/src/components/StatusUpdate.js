@@ -74,6 +74,13 @@ function StatusUpdate(props) {
             meetAndGreetView={props.meetAndGreetView}
           />
         )}
+        {props.location && (
+          <StatusItem
+            label="Location:"
+            content={props.location}
+            meetAndGreetView={props.meetAndGreetView}
+          />
+        )}
         {props.tapFacilityLocation && (
           <StatusItem
             label={props.meetAndGreetView ? "TAP Address" : "TAP Facility Location:"}
