@@ -35,9 +35,7 @@ import "../css/meeting.css";
 function Meetings(props) {
   return (
     <div className="meeting-card">
-      <div className="title">
-        <h2>{props.title}</h2>
-      </div>
+      <div className="title">{props.title && <h2>{props.title}</h2>}</div>
       <div className="meeting-card-content">
         <div className="text-card">{props.textCard}</div>
         {props.status && (
