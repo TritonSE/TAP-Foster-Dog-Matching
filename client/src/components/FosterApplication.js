@@ -12,9 +12,11 @@ import { Colors } from "./Theme";
 import Meetings from "./Meeting";
 import doggo from "../images/good-boi.png";
 import logo from "../images/logo-inverted.png";
+import ApplicationContext from "../contexts/ApplicationContext";
+import PassFail from "./PassFail";
 
 const Button = styled.div`
-  background: ${Colors.green};
+  background: ${(props) => (props.gray ? Colors.gray : Colors.green)};
   font-size: 20px;
   padding: 10px 30px;
   display: flex;
@@ -444,6 +446,9 @@ const SignatureContainer = styled.div`
 
 function FosterAgreementView({ setView }) {
   const { control, handleSubmit } = useForm();
+  const [showPassDialog, setShowPassDialog] = React.useState(false);
+  const [showRejectDialog, setShowRejectDialog] = React.useState(false);
+  const { applicationView } = React.useContext(ApplicationContext);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -473,10 +478,31 @@ function FosterAgreementView({ setView }) {
         </SignatureContainer>
         <Form.Actions>
           <Button onClick={() => setView("application")}>Back</Button>
-          <Button onClick={handleSubmit(onSubmit, onError)}>Submit Application</Button>
+          {applicationView === "foster" ? (
+            <Button onClick={handleSubmit(onSubmit, onError)}>Submit Application</Button>
+          ) : (
+            <>
+              <Button onClick={() => setShowRejectDialog(true)} gray>
+                Reject
+              </Button>
+              <Button onClick={() => setShowPassDialog(true)}>Pass</Button>
+            </>
+          )}
           <div /> {/* Spacer */}
         </Form.Actions>
       </Form.Container>
+      <PassFail
+        visible={showPassDialog}
+        setVisible={setShowPassDialog}
+        status="Pass"
+        initialMessage=""
+      />
+      <PassFail
+        visible={showRejectDialog}
+        setVisible={setShowRejectDialog}
+        status="Reject"
+        initialMessage=""
+      />
     </FosterAgreementContainer>
   );
 }

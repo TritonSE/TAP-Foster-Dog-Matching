@@ -89,6 +89,14 @@ function StatusUpdate(props) {
             noLine
           />
         )}
+        {props.status && (
+          <StatusItem
+            label="Status:"
+            content={props.status}
+            meetAndGreetView={props.meetAndGreetView}
+            noLine
+          />
+        )}
       </div>
     </div>
   );

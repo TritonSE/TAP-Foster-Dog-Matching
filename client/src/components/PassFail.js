@@ -22,7 +22,7 @@ import x from "../images/X.png";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "../css/passFail.css";
 
-function PassFail({ status, initialMessage }) {
+function PassFail({ visible, setVisible, status, initialMessage }) {
   const [editorState, setEditorState] = React.useState(
     EditorState.createWithContent(
       ContentState.createFromBlockArray(convertFromHTML(initialMessage))
@@ -41,38 +41,44 @@ function PassFail({ status, initialMessage }) {
 
   const onConfirm = () => {
     // TODO
+    setVisible(false);
+
     // console.log(editorState.getCurrentContent().getPlainText('\u0001'));
   };
 
-  const onClose = () => {};
+  const onClose = () => {
+    setVisible(false);
+  };
 
-  return (
-    <div className="pass-fail-wrapper">
-      <button type="button" className="x-button" onClick={onClose}>
-        <img src={x} alt="loading circle" />
-      </button>
-      <div className="title">
-        <h3>{title}</h3>
-      </div>
-      <div className="editor-message">
-        <h3>Message to the foster</h3>
-      </div>
+  if (visible)
+    return (
+      <div className="pass-fail-wrapper">
+        <button type="button" className="x-button" onClick={onClose}>
+          <img src={x} alt="loading circle" />
+        </button>
+        <div className="title">
+          <h3>{title}</h3>
+        </div>
+        <div className="editor-message">
+          <h3>Message to the foster</h3>
+        </div>
 
-      <div className="editor-container">
-        <Editor
-          editorState={editorState}
-          onEditorStateChange={onChange}
-          toolbarClassName="toolbar-class"
-          wrapperClassName="wrapper-class"
-          editorClassName="editor-class"
-        />
-      </div>
+        <div className="editor-container">
+          <Editor
+            editorState={editorState}
+            onEditorStateChange={onChange}
+            toolbarClassName="toolbar-class"
+            wrapperClassName="wrapper-class"
+            editorClassName="editor-class"
+          />
+        </div>
 
-      <button type="button" className="button" onClick={onConfirm}>
-        Confirm
-      </button>
-    </div>
-  );
+        <button type="button" className="button" onClick={onConfirm}>
+          Confirm
+        </button>
+      </div>
+    );
+  return null;
 }
 
 export default PassFail;

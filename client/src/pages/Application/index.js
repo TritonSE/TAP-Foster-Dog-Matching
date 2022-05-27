@@ -12,6 +12,7 @@
  * Use this context to get the current step and to move to different steps of the application.
  *
  * Value:
+ *      - view - what view is the application currently in ("foster" or "admin")
  *      - currentStep - number representing current step of the application (0-indexed)
  *      - currentSubStep - string (either 'intro' or 'content') representing the current sub-step of the application
  *      - goToStep(step: number, subStep: 'intro'|'content') - go to step in the application. pass in step of the application you want to go to (0-indexed)
@@ -35,6 +36,7 @@ import { useNavigate } from "react-router-dom";
 import ApplicationProgress from "../../components/ApplicationProgress";
 import { device } from "../../utils/useResponsive";
 import DefaultBody from "../../components/DefaultBody";
+import ApplicationRejected from "../../components/ApplicationRejected";
 import ApplicationContext from "../../contexts/ApplicationContext";
 import AdminView from "./AdminView";
 import FosterView from "./FosterView";
@@ -83,12 +85,14 @@ function Application() {
   const [currentStep, setCurrentStep] = React.useState(0);
   const [currentSubStep, setCurrentSubStep] = React.useState("content");
   // TODO: Use firebase user data
-  const role = "foster";
+  const [applicationView, setApplicationView] = React.useState("admin");
+  // TODO: Grab real application data from db
+  const [applicationState, setApplicationState] = React.useState({ status: "" });
 
   // Switch application content based on current user role
   const applicationContent = React.useMemo(
-    () => (role === "admin" ? AdminView : FosterView),
-    [role]
+    () => (applicationView === "admin" ? AdminView : FosterView),
+    [applicationView]
   );
 
   const goToNextSubStep = React.useCallback(() => {
@@ -104,12 +108,13 @@ function Application() {
 
   const applicationData = React.useMemo(
     () => ({
+      applicationView,
       currentStep,
       currentSubStep,
       goToStep,
       goToNextSubStep,
     }),
-    [currentStep, currentSubStep, goToStep, goToNextSubStep]
+    [applicationView, currentStep, currentSubStep, goToStep, goToNextSubStep]
   );
 
   return (
@@ -119,9 +124,13 @@ function Application() {
           <ExitButton onClick={() => navigate("/dashboard")}>Exit</ExitButton>
           <ApplicationProgress />
           <ApplicationContentContainer>
-            {applicationContent[currentStep][currentSubStep] ||
+            {applicationState.status === "rejected" ? (
+              <ApplicationRejected />
+            ) : (
+              applicationContent[currentStep][currentSubStep] ||
               applicationContent[currentStep]["intro"] ||
-              applicationContent[currentStep]["content"]}
+              applicationContent[currentStep]["content"]
+            )}
           </ApplicationContentContainer>
         </ApplicationContainer>
       </ApplicationContext.Provider>

@@ -4,6 +4,11 @@
   align-items: center;
   margin: 0 auto;
   max-width: 1475px;
+  position: absolute;
+  top: 0;
+  z-index: 100;
+  background: white;
+  padding: 20px;
 }
 
 .editor-container {
@@ -80,11 +85,13 @@
   margin-bottom: -5%;
 }
 
-.title {
+.pass-fail-wrapper .title {
   font-size: 2.813em;
   margin-bottom: -5%;
   padding-bottom: 0;
   flex: 1;
+  color: black;
+  width: fit-content;
 }
 
 @media screen and (max-width: 750px) {
