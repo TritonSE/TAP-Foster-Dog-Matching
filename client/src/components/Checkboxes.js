@@ -92,11 +92,13 @@ const Checkboxes = React.forwardRef(({ options, value, onChange, invalid }, ref)
   const half = Math.ceil(options.length / 2);
 
   function handleSelect(newValue) {
+    let updatedValue;
     if (value && !value.some((selection) => selection === newValue))
-      onChange((oldValue) => [...oldValue, newValue]);
+      updatedValue = [...value, newValue];
     else if (value && value.some((selection) => selection === newValue))
-      onChange((oldValue) => oldValue.filter((val) => val !== newValue));
-    else onChange([newValue]);
+      updatedValue = value.filter((val) => val !== newValue);
+    else updatedValue = [newValue];
+    onChange(updatedValue);
   }
 
   function isSelected(optionValue) {
