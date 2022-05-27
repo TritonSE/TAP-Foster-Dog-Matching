@@ -49,7 +49,7 @@ function FosterApplicationView({ setView, setApplicationData }) {
 
   const onError = (errors) => {
     console.log(errors);
-    // setView("agreement"); // uncomment this to see the foster agreement w/o filling out the form
+    setView("agreement"); // uncomment this to see the foster agreement w/o filling out the form
   };
 
   return (
@@ -387,7 +387,7 @@ function FosterApplicationView({ setView, setApplicationData }) {
             <ControlledRadios
               control={control}
               options={["Yes", "No"]}
-              name="fosterInfo.dogsNeutered"
+              name="otherInfo.dogsNeutered"
               required
             />
           </Form.SubSection>
@@ -449,8 +449,12 @@ function FosterAgreementView({ setView, applicationData }) {
     
     const reqBody = {...applicationData, ...{"agreement": data}}
     console.log(reqBody);
+    console.log("hello")
+    console.log(reqBody.fosterInfo.sizeOfDog.Scopes[1])
+
     fetch("http://localhost:8000/api/applications/", {
       method: "POST",
+      mode: "cors",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(reqBody)
     }).then(res => {
