@@ -61,6 +61,12 @@
   padding-right: 0px;
 }
 
+@media only screen and (max-width: 1000px) {
+  #header {
+    grid-template-columns: 3fr 4fr minmax(104px, auto);
+  }
+}
+
 @media only screen and (max-width: 750px) {
   .header-message {
     display: none;
