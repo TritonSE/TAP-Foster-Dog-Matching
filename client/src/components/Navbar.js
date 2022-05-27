@@ -137,7 +137,7 @@ function Navbar(props) {
   const navigate = useNavigate();
   const [renderNav, setRenderNav] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, loadingUser } = useContext(AuthContext);
 
   // Update screenHeight to viewport size
   useEffect(() => {
@@ -152,8 +152,8 @@ function Navbar(props) {
 
   // Redirect to home page when user clicks sign out
   useEffect(() => {
-    if (!currentUser) navigate("/");
-  }, [currentUser]);
+    if (!loadingUser && !currentUser) navigate("/");
+  }, [loadingUser, currentUser]);
 
   return (
     <>

@@ -5,6 +5,7 @@
  * Provides current user object to entire app
  *
  * Value:
+ *      - loadingUser (boolean) - true if user is loading
  *      - currentUser (object) - current user/admin object
  *      - signedIn (boolean) - indicates whether user is signed in or not
  *
@@ -19,10 +20,12 @@ import { auth } from "../utils/firebase-config";
 export const AuthContext = React.createContext({});
 
 export function AuthProvider({ children }) {
+  const [loadingUser, setLoadingUser] = React.useState(true);
   const [currentUser, setCurrentUser] = React.useState();
 
   React.useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (firebaseUser) => {
+      setLoadingUser(true);
       if (firebaseUser) {
         const { claims } = await firebaseUser.getIdTokenResult();
 
@@ -38,13 +41,14 @@ export function AuthProvider({ children }) {
       } else {
         setCurrentUser();
       }
+      setLoadingUser(false);
     });
     return unsubscribe;
   }, []);
 
   const value = React.useMemo(
-    () => ({ currentUser, signedIn: currentUser !== undefined }),
-    [currentUser]
+    () => ({ loadingUser, currentUser, signedIn: currentUser !== undefined }),
+    [currentUser, loadingUser]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
