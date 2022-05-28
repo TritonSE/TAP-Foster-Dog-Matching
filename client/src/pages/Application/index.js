@@ -85,7 +85,7 @@ function Application() {
   const [currentStep, setCurrentStep] = React.useState(0);
   const [currentSubStep, setCurrentSubStep] = React.useState("content");
   // TODO: Use firebase user data
-  const [applicationView, setApplicationView] = React.useState("admin");
+  const [applicationView, setApplicationView] = React.useState("foster");
   // TODO: Grab real application data from db
   const [applicationState, setApplicationState] = React.useState({ status: "" });
 

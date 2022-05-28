@@ -7,9 +7,10 @@
   flex-direction: column;
   text-align: center;
   padding: 1.875vw;
-  height: 100%;
+  height: calc(100% - 3vh);
   width: 100%;
   box-sizing: border-box;
+  margin-bottom: 3vh;
 }
 
 .meeting-card h2 {
@@ -45,8 +46,6 @@
   margin-left: 2vw;
   flex: 2;
   border-radius: 15px;
-  width: 100%;
-  height: 100%;
 }
 
 .image {

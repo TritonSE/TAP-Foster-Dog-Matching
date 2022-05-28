@@ -79,6 +79,7 @@ function StatusUpdate(props) {
             label="Location:"
             content={props.location}
             meetAndGreetView={props.meetAndGreetView}
+            noLine
           />
         )}
         {props.tapFacilityLocation && (
