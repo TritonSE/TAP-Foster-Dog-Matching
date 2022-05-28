@@ -6,7 +6,7 @@ import Form from "./Form";
 import "../css/interviewInfo.css";
 
 const InputField = styled.input`
-  &:focus { 
+  &:focus {
     outline: none;
     border: 2px solid #8dc442;
   }
