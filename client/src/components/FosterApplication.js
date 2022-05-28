@@ -443,24 +443,37 @@ function FosterAgreementView({ setView, applicationData }) {
   const { control, handleSubmit } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
-    console.log(applicationData);
+    // temporary user id
+    const userId = "6216d4d491e35e349858ae1f";
+    // Cleaning up data for request
+    const reqBody = {
+      ...applicationData,
+      ...{ agreement: data },
+      ...{ status: "Step 1: Application", completedActionItems: false },
+      ...{ user: userId },
+    };
+    reqBody.otherInfo.dogsNeutered = reqBody.otherInfo.dogsNeutered === "No" ? false : true;
+    reqBody.fosterInfo.permissionToVisit =
+      reqBody.fosterInfo.permissionToVisit === "No" ? false : true;
+    reqBody.address.zipcode = parseInt(reqBody.address.zipcode, 10);
+    reqBody.reference.yearsKnown = parseInt(reqBody.reference.yearsKnown, 10);
+    const format = (inputDate) => {
+      return [inputDate.slice(5, 7), inputDate.slice(8, 10), inputDate.slice(0, 4)].join("/");
+    };
+    reqBody.agreement.date = format(reqBody.agreement.date);
 
-    
-    const reqBody = {...applicationData, ...{"agreement": data}}
-    console.log(reqBody);
-    console.log("hello")
-    console.log(reqBody.fosterInfo.sizeOfDog.Scopes[1])
-
-    fetch("http://localhost:8000/api/applications/", {
+    // make a new application
+    fetch("http://localhost:8000/api/application", {
       method: "POST",
       mode: "cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(reqBody)
-    }).then(res => {
-      console.log(res)
-    }).catch(err=>console.log(err))
-
+      headers: {
+        "Content-Type": "application/json",
+        "Content-Length": JSON.stringify(reqBody).length,
+      },
+      body: JSON.stringify(reqBody),
+    }).then((res) => {
+      console.log(res);
+    });
   };
 
   const onError = (errors) => {
@@ -497,8 +510,9 @@ function FosterApplication() {
   const [view, setView] = React.useState("application");
   const [applicationData, setApplicationData] = React.useState();
 
-  if (view === "application") return <FosterApplicationView setView={setView} setApplicationData={setApplicationData}/>;
-  return <FosterAgreementView setView={setView} applicationData={applicationData}/>;
+  if (view === "application")
+    return <FosterApplicationView setView={setView} setApplicationData={setApplicationData} />;
+  return <FosterAgreementView setView={setView} applicationData={applicationData} />;
 }
 
 export default FosterApplication;
