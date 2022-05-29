@@ -24,6 +24,8 @@ import right from "../images/right.svg";
 import "../css/calendar.css";
 import "../css/meetingscheduling.css";
 
+import { getInterviews, createInterview } from "../services/interviews";
+
 // Returns a date string in the format MM/DD/YYYY
 function dateToHumanFormat(date) {
   const DD = date.getDate() >= 10 ? "" + date.getDate() : "0" + date.getDate();
@@ -135,7 +137,7 @@ function MeetingScheduling(props) {
     "7:00 PM",
   ];
 
-  const createInterview = (time) => {
+  const createNewInterview = (time) => {
     const reqBody = {
       user: "000000000000000000000000", // TODO: Use real user ID once Firebase is merged in
       ambassador: "000000000000000000000001", // TODO: User real ambassador ID once Firebase is merged in
@@ -146,20 +148,14 @@ function MeetingScheduling(props) {
       stage: props.stage,
     };
 
-    // TODO: use functions with AUTH token once Firebase is merged  in
-    fetch("http://localhost:8000/api/interviews", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(reqBody),
-    }); /* .then(() =>
-    // TODO: Use stage callback
-  ); */
+    createInterview(reqBody).then((response) => {
+      console.log(response.data.interview);
+      if (response.ok) props.interviewConfirmedCallback(response.data.interview._id);
+      else console.error(response.body);
+    });
   };
 
-  const setInterviewSlotSelected = React.useCallback((time) => createInterview(time));
+  const setInterviewSlotSelected = React.useCallback((time) => createNewInterview(time));
 
   const updateMeetTimes = (interviews) => {
     const meetTimesTemp = [...times];
@@ -185,18 +181,10 @@ function MeetingScheduling(props) {
   useEffect(() => {
     setIsLoading(true);
     // get interviews from backend
-    fetch(
-      `http://localhost:8000/api/interviews/?` +
-        new URLSearchParams({ date: dateToHumanFormat(date) }),
-      {
-        method: "GET",
-      }
-    )
-      .then((res) => res.json())
-      .then((json) => {
-        updateMeetTimes(json.interviews);
-        setIsLoading(false);
-      });
+    getInterviews(dateToHumanFormat(date)).then((response) => {
+      updateMeetTimes(response.data.interviews);
+      setIsLoading(false);
+    });
   }, [date]);
 
   return (

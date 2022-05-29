@@ -18,7 +18,10 @@ function MeetingSchedulingMeetTimesContainer(props) {
               : "meeting-scheduling-meeting-time-selected-six-weeks"
           }
           type="button"
-          onClick={props.interviewSlotSelectedCallback(time)}
+          onClick={(e) => {
+            e.stopPropagation();
+            props.interviewSlotSelectedCallback(time);
+          }}
         >
           <div className="meeting-scheduling-meeting-time-selected-text-container">
             <div className="meeting-scheduling-meeting-time-selected-text">Choose</div>
