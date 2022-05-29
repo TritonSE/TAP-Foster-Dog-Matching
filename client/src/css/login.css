@@ -1,4 +1,4 @@
-#header {
+.intro-page #header {
   display: grid;
   grid-template-columns: 0.5fr 4fr 0.3fr;
   grid-column-gap: 5%;
@@ -6,20 +6,20 @@
   height: 130px;
 }
 
-.header-welcome-text {
+.intro-page .header-welcome-text {
   display: none;
 }
 
-.header-sign-out {
+.intro-page .header-sign-out {
   display: none;
 }
 
-.header-message {
+.intro-page .header-message {
   padding-left: 0px;
   margin-bottom: 0.6vw;
 }
 
-.header-welcome img {
+.intro-page .header-welcome img {
   width: 101px;
   height: 84px;
   padding: 23px calc(8px + 0.6vw) 0px 23px;
@@ -94,8 +94,14 @@
   text-decoration: none;
 }
 
+.error-message {
+  color: red;
+  position: absolute;
+  bottom: 5%;
+}
+
 @media only screen and (max-width: 1050px) {
-  #header {
+  .intro-page #header {
     display: grid;
     grid-template-columns: 0.2fr 5fr 0.2fr;
     grid-column-gap: 5%;
@@ -103,19 +109,15 @@
     height: 97px;
   }
 
-  .header-message {
+  .intro-page .header-message {
     display: flex;
     padding-left: 0px;
     width: 100%;
     font-size: calc(10px + 0.6vw);
     font-weight: normal;
-    /* 
-    width: 80%;
-    margin-left: 0px;
-    margin-bottom: 5px; */
   }
 
-  .header-welcome img {
+  .intro-page .header-welcome img {
     padding: 42px 0px 0px 9px;
     width: 55px;
     height: 43px;
@@ -155,6 +157,12 @@
 
     border-radius: 10px;
     font-size: calc(14px + 0.4vh);
+  }
+
+  .error-message {
+    color: red;
+    position: absolute;
+    bottom: 20%;
   }
 
   .button-border-login {

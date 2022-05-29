@@ -33,8 +33,6 @@ function PassFail({ status, initialMessage }) {
   //   EditorState.createEmpty()
   // );
 
-  const [title, setTitle] = React.useState(status);
-
   const onChange = (change) => {
     setEditorState(change);
   };
@@ -52,7 +50,7 @@ function PassFail({ status, initialMessage }) {
         <img src={x} alt="loading circle" />
       </button>
       <div className="title">
-        <h3>{title}</h3>
+        <h3>{status}</h3>
       </div>
       <div className="editor-message">
         <h3>Message to the foster</h3>

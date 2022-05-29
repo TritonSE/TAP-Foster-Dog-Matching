@@ -8,16 +8,19 @@
  */
 
 import React from "react";
+import { useLocation } from "react-router-dom";
 import Header from "../components/Header";
 import IntroForm from "../components/IntroForm";
 import dog from "../images/dog.png";
 import "../css/login.css";
 
 function Login() {
+  const { state } = useLocation();
+
   return (
-    <div>
+    <div className="intro-page">
       <Header />
-      <IntroForm formType="login" header="Foster Log In" />
+      <IntroForm formType="login" header={`${state ? state.type : "Foster"} Log In`} />
       <div className="right-panel">
         <img className="dog-image" src={dog} alt="Cute dog!" />
         <div className="copyright">
