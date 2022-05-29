@@ -1,0 +1,112 @@
+.day {
+  width: 100%;
+  margin-bottom: 20.45px;
+}
+
+.day-text {
+  float: left;
+  font-family: "Myriad Pro";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 23.9877px;
+  line-height: 29px;
+  color: #8dc442;
+  width: 57.66px;
+}
+
+.day-times-container {
+  float: left;
+  margin-left: 45.83px;
+  width: 450px;
+  height: max-content;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 15px;
+  column-gap: 9.88px;
+}
+
+.time-slot {
+  width: auto;
+  height: 26.91px;
+}
+
+.time-slot-begin {
+  display: inline-block;
+  width: 68.42px;
+  height: 26.91px;
+  border: 1.07628px solid #9b9a9a;
+  border-radius: 3.22885px;
+  vertical-align: top;
+}
+
+.time-slot-divider {
+  display: inline-block;
+  width: 7.53px;
+  height: 0px;
+  border: 1.07628px solid #9b9a9a;
+  vertical-align: 50%;
+  margin-left: 8.38px;
+  margin-right: 8.38px;
+}
+
+.time-slot-end {
+  display: inline-block;
+  width: 68.42px;
+  height: 26.91px;
+  border: 1.07628px solid #9b9a9a;
+  border-radius: 3.22885px;
+  vertical-align: top;
+}
+
+.trash-button {
+  display: inline-block;
+  margin-left: 18.78px;
+  cursor: pointer;
+  outline: none;
+}
+
+.trash-button-image {
+  width: 25px;
+  height: 24.21px;
+}
+
+.day-add-button {
+  display: block;
+  float: right;
+  cursor: pointer;
+  outline: none;
+  margin-right: 10px;
+  margin-top: 2px;
+}
+
+.day-add-button-image {
+  width: 27px;
+  height: 27px;
+}
+
+@media screen and (max-width: 780px) {
+  .day-times-container {
+    width: 57.692vw;
+    margin-left: 5.876vw;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .day-times-container {
+    width: 215px;
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .day-text {
+    margin-bottom: 10px;
+    float: none;
+  }
+}
+
+@media screen and (max-width: 367px) {
+  .day-times-container {
+    margin-left: 0;
+  }
+}

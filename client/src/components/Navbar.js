@@ -27,13 +27,18 @@ import React, { useState, useEffect } from "react";
 import { NavLink as Link } from "react-router-dom";
 import styled from "styled-components";
 import burger from "../images/burger.png";
+import { device } from "../utils/useResponsive";
 
 export const Nav = styled.nav`
   width: max(250px, 16vw);
   height: 100%;
   background-color: #000000;
 
-  @media screen and (max-width: 750px) {
+  ${device.tablet} {
+    width: max(180px, 16vw);
+  }
+
+  ${device.mobile} {
     position: fixed;
     right: -300px;
     width: min(300px, 45vw);
@@ -121,8 +126,7 @@ export const SignOut = styled.button`
     cursor: pointer;
 
     position: absolute;
-    bottom: 0;
-
+    bottom: 100px;
     padding: 25px 0px;
   }
 `;

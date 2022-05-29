@@ -78,7 +78,7 @@ function IntroForm(props) {
           </>
         );
       }
-      
+
       break;
     }
     case "signup-key": {
@@ -104,51 +104,51 @@ function IntroForm(props) {
       );
 
       window.onload = function moveFocus() {
-        const key1 = document.getElementById('key-1');
-        const key2 = document.getElementById('key-2');
-        const key3 = document.getElementById('key-3');
-        const key4 = document.getElementById('key-4');
-        const key5 = document.getElementById('key-5');
-        
-        key1.addEventListener('keyup', (e) => {
-          if(e.key === "Backspace"){
-            key1.value = '';
-          }else {
+        const key1 = document.getElementById("key-1");
+        const key2 = document.getElementById("key-2");
+        const key3 = document.getElementById("key-3");
+        const key4 = document.getElementById("key-4");
+        const key5 = document.getElementById("key-5");
+
+        key1.addEventListener("keyup", (e) => {
+          if (e.key === "Backspace") {
+            key1.value = "";
+          } else {
             key2.focus();
           }
         });
-        key2.addEventListener('keyup', (e) => {
-          if(e.key === "Backspace"){
-            key2.value = '';
+        key2.addEventListener("keyup", (e) => {
+          if (e.key === "Backspace") {
+            key2.value = "";
             key1.focus();
-          }else {
+          } else {
             key3.focus();
           }
         });
-        key3.addEventListener('keyup', (e) => {
-          if(e.key === "Backspace"){
-            key3.value = '';
+        key3.addEventListener("keyup", (e) => {
+          if (e.key === "Backspace") {
+            key3.value = "";
             key2.focus();
-          }else {
+          } else {
             key4.focus();
           }
         });
-        key4.addEventListener('keyup', (e) => {
-          if(e.key === "Backspace"){
-            key4.value = '';
+        key4.addEventListener("keyup", (e) => {
+          if (e.key === "Backspace") {
+            key4.value = "";
             key3.focus();
-          }else {
+          } else {
             key5.focus();
           }
         });
-        key5.addEventListener('keyup', (e) => {
-          if(e.key === "Backspace"){
-            key5.value = '';
+        key5.addEventListener("keyup", (e) => {
+          if (e.key === "Backspace") {
+            key5.value = "";
             key4.focus();
           }
         });
-      }
-      
+      };
+
       break;
     }
   }

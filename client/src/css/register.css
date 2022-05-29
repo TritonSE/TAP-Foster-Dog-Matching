@@ -212,7 +212,7 @@ input {
     font-size: calc(8px + 0.5vh);
     border-radius: 8px;
   }
-  
+
   .form-container input::placeholder {
     position: absolute;
     left: 7%;
@@ -229,7 +229,7 @@ input {
   }
 
   .form-header {
-    font-size: calc(16px + 0.5vh)
+    font-size: calc(16px + 0.5vh);
   }
 
   #form-container-signup {
@@ -270,12 +270,12 @@ input {
   .back-to-register {
     font-size: calc(8px + 1vh);
   }
-  
+
   .form-signup-key-text {
     font-size: calc(7px + 1vh);
     bottom: 60%;
   }
-  
+
   .key-input {
     position: absolute;
     max-height: 100px;
@@ -284,7 +284,7 @@ input {
     width: 85%;
     bottom: 40%;
   }
-  
+
   .key-input > input {
     font-size: calc(18px + 0.5vh);
   }
@@ -310,7 +310,7 @@ input {
       position: absolute;
       left: 7%;
       bottom: calc(10% + 0.5vh);
-  
+
       font-size: calc(8px + 0.5vh);
       line-height: calc(8px + 0.5vh);
       color: #9b9a9a;
