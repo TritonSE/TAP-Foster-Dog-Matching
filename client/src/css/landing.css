@@ -43,7 +43,6 @@
 .form-landing-question {
   position: absolute;
   bottom: 65%;
-  width: 100px;
   height: 24px;
 
   color: black;
@@ -155,7 +154,6 @@
     position: absolute;
     top: 28%;
 
-    width: 100px;
     height: 24px;
   }
 
