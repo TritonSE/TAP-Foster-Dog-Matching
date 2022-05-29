@@ -14,7 +14,7 @@ import "../css/landing.css";
 
 function Landing() {
   return (
-    <div>
+    <div className="intro-page">
       <Header />
       <IntroForm formType="landing" header="Welcome" />
       <div className="right-panel">

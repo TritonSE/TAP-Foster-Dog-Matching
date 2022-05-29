@@ -25,6 +25,7 @@ import { device } from "../utils/useResponsive";
 import whiteX from "../images/whiteX.png";
 import Edit from "../images/pencil.png";
 import pfp from "../images/pfp.png";
+import { getDog } from "../services/dogs";
 
 const BlurBackground = styled.div`
   position: absolute;
@@ -159,13 +160,9 @@ function DogProfilePopUp({ setDogPopUp, dog }) {
 
   useEffect(() => {
     // get dog again every time pop up state changes
-    fetch(`http://localhost:8000/api/dogs/${dog._id}`, {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        setCurDog(json.dog);
-      });
+    getDog(dog._id).then((response) => {
+      setCurDog(response.data.dog);
+    });
   }, [editDogPopUp]);
 
   return (

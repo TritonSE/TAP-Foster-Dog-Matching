@@ -51,6 +51,7 @@
   padding-top: 20px;
   grid-column: 3;
   font-size: calc(14px + 0.6vw);
+  cursor: pointer;
 }
 
 .navbar-hamburger-button {
@@ -58,6 +59,12 @@
   display: none;
   padding-top: 63px;
   padding-right: 0px;
+}
+
+@media only screen and (max-width: 1000px) {
+  #header {
+    grid-template-columns: 3fr 4fr minmax(104px, auto);
+  }
 }
 
 @media only screen and (max-width: 750px) {
