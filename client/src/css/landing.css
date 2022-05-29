@@ -166,8 +166,8 @@
 
   .button-border-foster,
   .button-border-admin {
-    box-shadow: 0px 2.85714px 2.85714px rgba(0, 0, 0, 0.25);
-    border-radius: 14.2857px;
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.25);
+    border-radius: 14.25px;
 
     max-width: 142.5px;
     width: 52.5%;

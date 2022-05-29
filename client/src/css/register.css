@@ -1,5 +1,6 @@
 .form-header {
-  font-size: 30px;
+  height: auto;
+  font-size: calc(24px + 0.5vh);
 }
 
 #form-container-signup {
@@ -9,7 +10,7 @@
 }
 
 #form-header-signup {
-  bottom: calc(90% + 0.5vh)
+  bottom: 90%;
 }
 
 input {
@@ -18,35 +19,33 @@ input {
   box-sizing: border-box;
   border-radius: 20px;
 
-  font-size: calc(8px + 0.5vh);
+  font-size: calc(8px + 1vh);
   padding-left: 4%;
 }
 
 .form-container input::placeholder {
   position: absolute;
-  left: 8%;
-  bottom: 23%;
+  left: 7%;
+  bottom: calc(10% + 0.5vh);
 
-  font-size: calc(8px + 0.5vh);
-  line-height: 19px;
+  font-size: calc(8px + 0.75vh);
+  line-height: calc(8px + 0.75vh);
   color: #9b9a9a;
 }
 
 .form-signup-question {
   position: absolute;
-  width: 55%;
-  height: 68px;
-  bottom: calc(76% + 0.5vh);
+  width: 65%;
+  bottom: calc(88% - 1vh);
 
-  font-size: calc(10px + 0.5vh);
+  font-size: calc(12px + 0.5vh);
 }
 
 .selector {
   position: absolute;
-  width: calc(56% - 0.5vh);
-  height: calc(24px + 0.5vh);
+  width: 65%;
+  height: calc(20px + 0.5vh);
   bottom: 81%;
-  left: 22.5%;
 
   background: #c6c6c6;
   border-radius: 10px;
@@ -55,78 +54,14 @@ input {
 
 .selector * {
   background: white;
-  font-size: 24px;
+  width: 20%;
+  font-size: calc(10px + 0.5vh);
 }
-
-
-
-/* .form-signup-question,
-.selector {
-    display: none;
-}
-
-.signup-first-name {
-  position: absolute;
-  width: 55%;
-  height: 8%;
-  min-height: 52.5px;
-  bottom: 75.5%;
-}
-
-.signup-last-name {
-  position: absolute;
-  width: 55%;
-  height: 8%;
-  min-height: 52.5px;
-  bottom: 65.5%;
-}
-
-.signup-email {
-  position: absolute;
-  width: 55%;
-  height: 8%;
-  min-height: 52.5px;
-  bottom: 55.5%;
-}
-
-.signup-password {
-  position: absolute;
-  width: 55%;
-  height: 8%;
-  min-height: 52.5px;
-  bottom: 45.5%;
-}
-
-.signup-re-password {
-  position: absolute;
-  width: 55%;
-  height: 8%;
-  min-height: 52.5px;
-  bottom: 35.5%;
-}
-
-.button-border-signup {
-  position: absolute;
-  width: 55%;
-  height: 46px;
-  bottom: 25%;
-}
-
-.log-in {
-  position: absolute;
-  height: 29px;
-  bottom: 20%;
-  right: 23%;
-
-  color: #9b9a9a;
-  font-size: 24px;
-  text-decoration: none;
-} */
 
 .signup-first-name {
   outline: 0;
   position: absolute;
-  width: 55%;
+  width: 65%;
   height: calc(6% + 0.5vh);
   bottom: 70.5%;
 }
@@ -134,7 +69,7 @@ input {
 .signup-last-name {
   outline: 0;
   position: absolute;
-  width: 55%;
+  width: 65%;
   height: calc(6% + 0.5vh);
   /* min-height: 52.5px; */
   bottom: 60.5%;
@@ -143,7 +78,7 @@ input {
 .signup-email {
   outline: 0;
   position: absolute;
-  width: 55%;
+  width: 65%;
   height: calc(6% + 0.5vh);
   bottom: 50.5%;
 }
@@ -151,14 +86,15 @@ input {
 .signup-password {
   outline: 0;
   position: absolute;
-  width: 55%;
+  width: 65%;
   height: calc(6% + 0.5vh);
   bottom: 40.5%;
 }
 
 .signup-re-password {
+  outline: 0;
   position: absolute;
-  width: 55%;
+  width: 65%;
   height: calc(6% + 0.5vh);
   bottom: 30.5%;
 }
@@ -171,7 +107,7 @@ input {
 }
 
 .button-name-signup {
-  font-size: calc(12px + 0.5vh);
+  font-size: calc(16px + 0.5vh);
 }
 
 .log-in {
@@ -212,7 +148,7 @@ input {
 .form-signup-key-text {
   position: absolute;
   width: 70%;
-  height: 68px;
+  height: 22.5%;
   bottom: 60%;
 
   font-size: calc(16px + 0.5vh);
@@ -272,7 +208,7 @@ input {
 
   .selector {
     height: calc(16px + 0.5vh);
-    width: calc(48% - 1vh);
+    width: 65%;
     font-size: calc(8px + 0.5vh);
     border-radius: 8px;
   }
@@ -280,16 +216,16 @@ input {
   .form-container input::placeholder {
     position: absolute;
     left: 7%;
-    bottom: 20%;
+    bottom: calc(10% + 0.5vh);
 
     font-size: calc(8px + 0.5vh);
-    line-height: 19px;
+    line-height: calc(8px + 0.5vh);
     color: #9b9a9a;
   }
 
   .form-signup-question {
-    height: calc(32px + 0.5vh);
     font-size: calc(12px + 0.5vh);
+    bottom: calc(88% - 1vh);
   }
 
   .form-header {
@@ -337,7 +273,7 @@ input {
   
   .form-signup-key-text {
     font-size: calc(7px + 1vh);
-    bottom: 65%;
+    bottom: 60%;
   }
   
   .key-input {
@@ -373,10 +309,10 @@ input {
     .form-container input::placeholder {
       position: absolute;
       left: 7%;
-      bottom: 0%;
+      bottom: calc(10% + 0.5vh);
   
       font-size: calc(8px + 0.5vh);
-      line-height: 19px;
+      line-height: calc(8px + 0.5vh);
       color: #9b9a9a;
     }
 

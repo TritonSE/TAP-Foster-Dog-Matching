@@ -28,10 +28,10 @@
 .form-container input::placeholder {
   position: absolute;
   left: 8%;
-  bottom: 23%;
+  bottom: calc(10% + 0.5vh);
 
-  /* font-size: 100%; */
-  line-height: 29px;
+  font-size: calc(8px + 0.75vh);
+  line-height: calc(8px + 0.75vh);
   color: #9b9a9a;
 }
 
@@ -42,9 +42,8 @@
 .login-email {
   outline: none;
   position: absolute;
-  width: 59%;
-  height: calc(6% + 0.5vh);
-  min-height: 52.5px;
+  width: 65%;
+  height: calc(9% + 0.5vh);
   bottom: 60%;
 
   background: white;
@@ -52,25 +51,28 @@
   box-sizing: border-box;
   border-radius: 20px;
 
-  font-size: 24px;
+  font-size: calc(8px + 1vh);
   padding-left: 4%;
 }
 
 .login-password {
   outline: none;
   position: absolute;
-  width: 59%;
-  height: calc(6% + 0.5vh);
-  min-height: 52.5px;
-  bottom: 41%;
+  width: 65%;
+  height: calc(9% + 0.5vh);
+  bottom: 45%;
 
   background: white;
   border: 3px solid #c4c4c4;
   box-sizing: border-box;
   border-radius: 20px;
 
-  font-size: 24px;
+  font-size: calc(8px + 1vh);
   padding-left: 4%;
+}
+
+.button-name-login {
+  font-size: calc(16px + 0.5vh);
 }
 
 .button-border-login {
@@ -78,7 +80,7 @@
   bottom: 25%;
 
   width: 55%;
-  height: 46px;
+  height: calc(9% + 0.5vh);
 }
 
 .sign-up {
@@ -88,7 +90,7 @@
   right: 23%;
 
   color: #9b9a9a;
-  font-size: 24px;
+  font-size: calc(14px + 0.5vh);
   text-decoration: none;
 }
 
@@ -130,51 +132,51 @@
     left: 7%;
     bottom: 20%;
 
-    font-size: calc(14px + 0.4vh);
-    line-height: 29px;
+    font-size: calc(8px + 0.5vh);
+    line-height: 19px;
     color: #9b9a9a;
   }
 
   .login-email {
     position: absolute;
-    width: 82.5%;
-    height: calc(6% + 0.5vh);
-    bottom: 53%;
+    width: 65%;
+    height: calc(8% + 0.5vh);
+    bottom: 60%;
 
-    font-size: 16px;
-    padding-left: 6%;
+    border-radius: 10px;
+    font-size: calc(14px + 0.4vh);
   }
 
   .login-password {
     position: absolute;
-    width: 82.5%;
-    height: calc(6% + 0.5vh);
-    bottom: 32%;
+    width: 65%;
+    height: calc(8% + 0.5vh);
+    bottom: 40%;
 
-    font-size: 16px;
-    padding-left: 6%;
+    border-radius: 10px;
+    font-size: calc(14px + 0.4vh);
   }
 
   .button-border-login {
-    box-shadow: 0px 2.85714px 2.85714px rgba(0, 0, 0, 0.25);
-    border-radius: 14.2857px;
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.25);
+    border-radius: 14.25px;
 
     position: absolute;
-    bottom: 13%;
+    bottom: 20%;
 
     width: 104px;
-    height: 36px;
+    height: calc(26px + 0.5vh);
   }
 
   .button-name-login {
-    font-size: 20px;
+    font-size: calc(10px + 0.5vh);
   }
 
   .sign-up {
     position: absolute;
-    bottom: 3%;
+    bottom: 7.5%;
     right: 15%;
 
-    font-size: 20px;
+    font-size: calc(10px + 0.5vh);
   }
 }
