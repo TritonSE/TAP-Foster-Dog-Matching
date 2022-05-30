@@ -10,7 +10,6 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "./Button";
 import { getAuthErrorMessage, signInUser } from "../services/auth";
-import { AuthContext } from "../contexts/AuthContext";
 
 function IntroForm(props) {
   let content;
@@ -18,7 +17,6 @@ function IntroForm(props) {
   const [email, setEmail] = React.useState();
   const [password, setPassword] = React.useState();
   const [error, setError] = React.useState();
-  const { currentUser } = React.useContext(AuthContext);
 
   const handleSignIn = () => {
     if (!email) {
@@ -32,15 +30,11 @@ function IntroForm(props) {
     signInUser(email, password)
       .then(() => {
         setError();
+        // Send user back to the home page. Router handles the default page the user sees.
+        navigate("/");
       })
       .catch((e) => setError(getAuthErrorMessage(e.code)));
   };
-
-  React.useEffect(() => {
-    // Send user to correct page after login based on role
-    if (currentUser)
-      navigate(currentUser.type === "admin" ? "/pending-applications" : "/dashboard");
-  }, [currentUser]);
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {

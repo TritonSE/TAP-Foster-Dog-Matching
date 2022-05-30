@@ -11,8 +11,47 @@ import "../css/defaultbody.css";
 import Header from "./Header";
 import Navbar from "./Navbar";
 
+const FOSTER_PAGES = {
+  Dashboard: "/dashboard",
+  "Contact Us": "/contact",
+};
+
+const MANAGEMENT_PAGES = {
+  "Pending Applications": "/pending-applications",
+  Fosters: "/fosters",
+  "Manage Dog Profiles": "/manage-dog-profiles",
+  Calendar: "/calendar",
+  Profile: "/profile",
+};
+
+const AMBASSADOR_PAGES = {
+  "Pending Applications": "/pending-applications",
+  "Current Fosters": "/fosters",
+  "Manage Dog Profiles": "/manage-dog-profiles",
+  Calendar: "/calendar",
+};
+
+const COORDINATOR_PAGES = {
+  "My Fosters": "/fosters",
+  "Manage Dog Profiles": "/manage-dog-profiles",
+  "My Profile": "/profile",
+};
+
 function DefaultBody(props) {
   const { currentUser, signedIn } = React.useContext(AuthContext);
+
+  const visiblePages = React.useMemo(() => {
+    if (currentUser.type === "admin")
+      switch (currentUser.role) {
+        case "ambassador":
+          return AMBASSADOR_PAGES;
+        case "coordinator":
+          return COORDINATOR_PAGES;
+        case "management":
+          return MANAGEMENT_PAGES;
+      }
+    return FOSTER_PAGES;
+  }, [currentUser]);
 
   return (
     <div id="default-body-container">
@@ -27,20 +66,7 @@ function DefaultBody(props) {
         }
       />
       <div id="default-body">
-        <Navbar
-          pages={{
-            Dashboard: "/dashboard",
-            Application: "/application",
-            "Contact Us": "/contact",
-            "Pending Applications": "/pending-applications",
-            "Current Fosters": "/fosters",
-            Calendar: "/calendar",
-            Profile: "/profile",
-            "Manage Dog Profiles": "/manage-dog-profiles",
-            // NOTE: showing all links for now for dev purposes
-            // TODO: only show links depending on current role/status once roles have been implemented
-          }}
-        />
+        <Navbar pages={visiblePages} />
         <div id="default-body-content">{props.children}</div>
       </div>
     </div>
