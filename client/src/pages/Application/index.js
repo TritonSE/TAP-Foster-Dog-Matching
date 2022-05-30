@@ -38,6 +38,7 @@ import { device } from "../../utils/useResponsive";
 import DefaultBody from "../../components/DefaultBody";
 import ApplicationRejected from "../../components/ApplicationRejected";
 import ApplicationContext from "../../contexts/ApplicationContext";
+import { AuthContext } from "../../contexts/AuthContext";
 import AdminView from "./AdminView";
 import FosterView from "./FosterView";
 
@@ -82,12 +83,16 @@ const ExitButton = styled.div`
 
 function Application() {
   const navigate = useNavigate();
+  const { currentUser } = React.useContext(AuthContext);
   const [currentStep, setCurrentStep] = React.useState(0);
   const [currentSubStep, setCurrentSubStep] = React.useState("content");
-  // TODO: Use firebase user data
-  const [applicationView, setApplicationView] = React.useState("foster");
+  const [applicationView, setApplicationView] = React.useState(); // Note: change this to 'foster' or 'admin' to test different views
   // TODO: Grab real application data from db
   const [applicationState, setApplicationState] = React.useState({ status: "" });
+
+  React.useEffect(() => {
+    if (currentUser) setApplicationView(currentUser.type);
+  }, [currentUser]);
 
   // Switch application content based on current user role
   const applicationContent = React.useMemo(
@@ -99,12 +104,15 @@ function Application() {
     setCurrentSubStep("content");
   }, []);
 
-  const goToStep = React.useCallback((step, subStep = "intro") => {
-    setCurrentStep(step);
-    setCurrentSubStep(
-      step === 0 || applicationContent[step].intro === undefined ? "content" : subStep
-    );
-  }, []);
+  const goToStep = React.useCallback(
+    (step, subStep = "intro") => {
+      setCurrentStep(step);
+      setCurrentSubStep(
+        step === 0 || applicationContent[step].intro === undefined ? "content" : subStep
+      );
+    },
+    [applicationContent]
+  );
 
   const applicationData = React.useMemo(
     () => ({
