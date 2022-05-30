@@ -41,14 +41,14 @@ function FosterApplicationView({ setView, setApplicationData }) {
     []
   );
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = (_) => {
+    // TODO: implement onSubmit
     setView("agreement");
     setApplicationData(data);
   };
 
-  const onError = (errors) => {
-    console.log(errors);
+  const onError = (_) => {
+    // TODO: implement onError
     setView("agreement"); // uncomment this to see the foster agreement w/o filling out the form
   };
 
@@ -476,8 +476,8 @@ function FosterAgreementView({ setView, applicationData }) {
     });
   };
 
-  const onError = (errors) => {
-    console.log(errors);
+  const onError = (_) => {
+    // TODO: implement onError
   };
 
   return (
