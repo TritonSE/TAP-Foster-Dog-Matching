@@ -4,12 +4,12 @@
   width: 100%;
   height: min(63vh, 540px);
   display: flex;
-  min-height: 520px;
-  min-width: 400px;
+  /* min-height: 520px; */
+  /* min-width: 400px; */
   /* max-width: 460px; */
   align-items: center;
   /* max-height: 32vw; */
-  padding-bottom: 10px;
+  /* padding-bottom: 10px; */
 }
 
 .interview-info-input {

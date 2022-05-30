@@ -2,8 +2,8 @@
   text-align: center;
   width: 100%;
   height: min(63vh, 540px);
-  min-height: 520px;
-  min-width: 400px;
+  /* min-height: 520px; */
+  /* min-width: 400px; */
   background-color: white;
   border-radius: 20px;
   padding-top: 2vw;

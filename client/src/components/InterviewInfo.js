@@ -40,7 +40,7 @@ function PassFail(props) {
           <ControlledInput
             control={control}
             label="Internal Notes"
-            numLines={14}
+            numLines={12}
             name="fosterInfo.restrictions"
             className="info-input"
           />

@@ -107,23 +107,22 @@ function Application() {
     {
       intro: <h1>step 3 intro here</h1>,
       content: (
-        <div>
-          <Meetings
-            title="Interview Information"
-            status={
-              <StatusUpdate
-                title="Interview Info"
-                ambassador="Dhanush"
-                phone="123-456-7890"
-                email="test@tap.com"
-                date="1/1/2022"
-                time="6-7:00PM"
-                location="Zoom"
-              />
-            }
-            // textCard={<div>HELLO THERE</div>}
-            interviewInfo={<InterviewInfo contingent title="After Interviews" />}
-          /></div>
+        <Meetings
+          title="Interview Information"
+          status={
+            <StatusUpdate
+              title="Interview Info"
+              ambassador="Dhanush"
+              phone="123-456-7890"
+              email="test@tap.com"
+              date="1/1/2022"
+              time="6-7:00PM"
+              location="Zoom"
+            />
+          }
+          // textCard={<div>HELLO THERE</div>}
+          interviewInfo={<InterviewInfo contingent title="After Interviews" />}
+        />
       ),
     }, //  Step 3
     {
