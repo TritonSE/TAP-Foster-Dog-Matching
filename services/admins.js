@@ -1,4 +1,12 @@
 const { Admin } = require("../models");
+const { createFirebaseUser } = require("./auth");
+const { ServiceError } = require("./errors");
+
+const ADMIN_ROLES = {
+  MANAGEMENT: "management",
+  AMBASSADOR: "ambassador",
+  COORDINATOR: "coordinator",
+};
 
 /**
  * Returns an array of all admins
@@ -20,7 +28,13 @@ function getAdmin(adminId) {
  * @param newAdmin - new Admin information
  */
 async function createAdmin(newAdmin) {
+  const existingAdmin = await Admin.findOne({ email: newAdmin.email }).exec();
+  if (existingAdmin) {
+    throw ServiceError(400, "An account with this email already exists");
+  }
+
   const admin = await new Admin(newAdmin).save();
+  await createFirebaseUser(admin.id.toString(), newAdmin.email, newAdmin.password, "admin");
   return admin;
 }
 
@@ -36,24 +50,10 @@ async function updateAdmin(adminId, updatedAdmin) {
   return newAdmin;
 }
 
-/**
- * Validates email and password
- * @param credentials - email and pass to validate
- */
-async function validateCredenditals(credentials) {
-  const admin = await Admin.findOne({ email: credentials.email }).exec();
-
-  if (admin.password === credentials.password) {
-    return true;
-  }
-
-  return false;
-}
-
 module.exports = {
   getAdmins,
   getAdmin,
   createAdmin,
   updateAdmin,
-  validateCredenditals,
+  ADMIN_ROLES,
 };

@@ -13,7 +13,7 @@ import cancel from "../images/cancel.png";
 import smallCancel from "../images/smallCancel.png";
 import Select from "../components/Select";
 import DefaultBody from "../components/DefaultBody";
-// const { sendEmail } = require("../../../routes/services/mailer");
+import { sendContact } from "../services/contact";
 
 function ContactUs() {
   const [continued, setContinued] = useState(false);
@@ -51,19 +51,9 @@ function ContactUs() {
     if (inputMessage === "") {
       setErrorMessage(emptyText);
     } else {
-      await fetch(`http://localhost:8000/api/contact/`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: "place holder name",
-          email: "temp@temp.com",
-          team: value,
-          message: inputMessage,
-          toEmail: "tapmatching@gmail.com",
-        }),
-      }).then((res) => {
-        // message sent
+      await sendContact("place holder name", "temp@temp.com", value, inputMessage).then((res) => {
         if (res.ok) {
+          // message sent
           setInputMessage("");
           setErrorMessage("");
           setSent(true);

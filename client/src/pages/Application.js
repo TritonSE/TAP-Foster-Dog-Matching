@@ -123,8 +123,7 @@ function Application() {
             }
             // textCard={<div>HELLO THERE</div>}
             interviewInfo={<InterviewInfo contingent title="After Interviews" />}
-          />
-        </div>
+          /></div>
       ),
     }, //  Step 3
     {

@@ -17,6 +17,7 @@ import DogProfilePopUp from "../components/DogProfilePopUp";
 import CreateNew from "../images/createNewDog.png";
 
 import { device } from "../utils/useResponsive";
+import { getDogs } from "../services/dogs";
 
 // styles for whole page
 const AllContentWrapper = styled.div`
@@ -204,16 +205,10 @@ function DogProfile() {
 
   useEffect(() => {
     // get dogs from backend
-    fetch("http://localhost:8000/api/dogs/", {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        // console.log(json.dogs);
-        setAllDogs(json.dogs);
-        setLoaded(true);
-        return json.dogs;
-      });
+    getDogs().then((response) => {
+      setAllDogs(response.data.dogs);
+      setLoaded(true);
+    });
   }, [popUpPresent]);
 
   useEffect(() => {
