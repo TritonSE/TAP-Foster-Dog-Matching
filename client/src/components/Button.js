@@ -13,7 +13,7 @@ function Button(props) {
   const border = "button-border button-border-" + props.className;
   const name = "button-name button-name-" + props.className;
   return (
-    <a href={props.buttonLink} className={border} style={props.styleBorder}>
+    <a href={props.buttonLink} className={border} style={props.styleBorder} onClick={props.onClick}>
       <div className={name}>{props.name}</div>
     </a>
   );
