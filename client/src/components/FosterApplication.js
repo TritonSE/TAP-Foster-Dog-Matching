@@ -478,7 +478,7 @@ function FosterAgreementView({ setView }) {
         </SignatureContainer>
         <Form.Actions>
           <Button onClick={() => setView("application")}>Back</Button>
-          {applicationView === "foster" ? (
+          {applicationView === "user" ? (
             <Button onClick={handleSubmit(onSubmit, onError)}>Submit Application</Button>
           ) : (
             <>

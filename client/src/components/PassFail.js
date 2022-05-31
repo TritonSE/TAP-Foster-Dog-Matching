@@ -50,30 +50,32 @@ function PassFail({ visible, setVisible, status, initialMessage }) {
 
   if (visible)
     return (
-      <div className="pass-fail-wrapper">
-        <button type="button" className="x-button" onClick={onClose}>
-          <img src={x} alt="loading circle" />
-        </button>
-        <div className="title">
-          <h3>{status}</h3>
-        </div>
-        <div className="editor-message">
-          <h3>Message to the foster</h3>
-        </div>
+      <div className="pass-fail-transparent-container">
+        <div className="pass-fail-wrapper">
+          <button type="button" className="x-button" onClick={onClose}>
+            <img src={x} alt="loading circle" />
+          </button>
+          <div className="title">
+            <h3>{status}</h3>
+          </div>
+          <div className="editor-message">
+            <h3>Message to the foster</h3>
+          </div>
 
-        <div className="editor-container">
-          <Editor
-            editorState={editorState}
-            onEditorStateChange={onChange}
-            toolbarClassName="toolbar-class"
-            wrapperClassName="wrapper-class"
-            editorClassName="editor-class"
-          />
-        </div>
+          <div className="editor-container">
+            <Editor
+              editorState={editorState}
+              onEditorStateChange={onChange}
+              toolbarClassName="toolbar-class"
+              wrapperClassName="wrapper-class"
+              editorClassName="editor-class"
+            />
+          </div>
 
-        <button type="button" className="button" onClick={onConfirm}>
-          Confirm
-        </button>
+          <button type="button" className="button" onClick={onConfirm}>
+            Confirm
+          </button>
+        </div>
       </div>
     );
   return null;

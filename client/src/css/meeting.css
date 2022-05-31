@@ -7,8 +7,8 @@
   flex-direction: column;
   text-align: center;
   padding: 1.875vw;
-  height: calc(100% - 3vh);
-  width: 100%;
+  height: fit-content;
+  width: fit-content;
   box-sizing: border-box;
   margin-bottom: 3vh;
 }
@@ -24,7 +24,8 @@
   display: flex;
   flex: 1;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
+  gap: 2vw;
 }
 
 .meeting-card .title {
@@ -35,17 +36,15 @@
 
 .text-card {
   background: #fff;
-  flex: 2;
+  flex: 1;
   border-radius: 15px;
   padding: 2%;
   text-align: left;
   max-width: 50%;
 }
 
-.image-card {
-  margin-left: 2vw;
-  flex: 2;
-  border-radius: 15px;
+.text-card:only-child {
+  margin: auto;
 }
 
 .image {
@@ -54,8 +53,7 @@
 }
 
 .status {
-  width: 100%;
-  height: 100%;
+  flex: 1;
   border-radius: 15px;
 }
 
@@ -64,7 +62,7 @@
   height: 0;
 }
 
-@media only screen and (max-width: 750px) {
+@media only screen and (max-width: 1024px) {
   .meeting-card {
     display: flex;
     flex-direction: column;

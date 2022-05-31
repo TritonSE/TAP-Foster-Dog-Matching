@@ -12,7 +12,7 @@
  * Use this context to get the current step and to move to different steps of the application.
  *
  * Value:
- *      - view - what view is the application currently in ("foster" or "admin")
+ *      - view - what view is the application currently in ("user" or "admin")
  *      - currentStep - number representing current step of the application (0-indexed)
  *      - currentSubStep - string (either 'intro' or 'content') representing the current sub-step of the application
  *      - goToStep(step: number, subStep: 'intro'|'content') - go to step in the application. pass in step of the application you want to go to (0-indexed)

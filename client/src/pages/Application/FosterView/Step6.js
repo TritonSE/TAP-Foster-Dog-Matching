@@ -10,6 +10,7 @@ import Meetings from "../../../components/Meeting";
 import logo from "../../../images/logo-inverted.png";
 import doggo from "../../../images/good-boi.png";
 import DogProfileSummary from "../../../components/DogProfileSummary";
+import { device } from "../../../utils/useResponsive";
 
 const FosterResourcesActions = styled.div`
   display: flex;
@@ -17,6 +18,9 @@ const FosterResourcesActions = styled.div`
   justify-content: space-between;
   padding: 50px 24px;
   gap: 20px;
+  ${device.tablet} {
+    flex-direction: column;
+  }
 `;
 
 const Button = styled.div`
@@ -82,8 +86,8 @@ function FosterInHomeContent() {
           <p>Hello, Shelby</p>
           <p>
             Thank you for your interest in making an adoption. We are so excited for you to become a
-            foster fail! A member from our adoption team will reach out to you shortly. Please feel
-            free to reach out to us if you have any questions for the time being.
+            foster! A member from our adoption team will reach out to you shortly. Please feel free
+            to reach out to us if you have any questions for the time being.
           </p>
           <p>Best,</p>
           <p>The Animal Pad Team</p>
