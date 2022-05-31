@@ -55,7 +55,7 @@ function AppRouter() {
         {/* Ambassador Routes */}
         {signedIn && currentUser.type === "admin" && currentUser.role === "ambassador" && (
           <>
-            <Route path="/" element={<Navigate replace to="/fosters" />} />
+            <Route path="/" element={<Navigate replace to="/pending-applications" />} />
             <Route path="/calendar" element={<Calendar />} />
             <Route path="/fosters" element={<Fosters />} />
             <Route path="/pending-applications" element={<PendingApplications />} />
