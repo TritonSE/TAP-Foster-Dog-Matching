@@ -13,7 +13,17 @@
 }
 
 .info-content {
+  text-align: center;
   width: 100%;
+  height: min(63vh, 540px);
+  background-color: white;
+  border-radius: 20px;
+  box-sizing: border-box;
+  padding: 15px;
+  padding-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   border-color: none;
 }
 

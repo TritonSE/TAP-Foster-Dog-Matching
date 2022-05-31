@@ -27,7 +27,7 @@ function InterviewInfo(props) {
 
   return (
     <div className="interview-info-wrapper">
-      <Form.Container className="info-content">
+      <div className="info-content">
         <h3 className="interview-info-title">{props.title}</h3>
         <div className="interview-info-input">
           <ControlledInput
@@ -51,7 +51,7 @@ function InterviewInfo(props) {
             Pass
           </button>
         </div>
-      </Form.Container>
+      </div>
       <PassFail
         visible={showPassDialog}
         setVisible={setShowPassDialog}

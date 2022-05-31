@@ -10,7 +10,6 @@ import Meetings from "../../../components/Meeting";
 import logo from "../../../images/logo-inverted.png";
 import doggo from "../../../images/good-boi.png";
 import DogProfileSummary from "../../../components/DogProfileSummary";
-import { device } from "../../../utils/useResponsive";
 
 const FosterResourcesActions = styled.div`
   display: flex;
@@ -18,13 +17,11 @@ const FosterResourcesActions = styled.div`
   justify-content: space-between;
   padding: 50px 24px;
   gap: 20px;
-  ${device.tablet} {
-    flex-direction: column;
-  }
 `;
 
 const Button = styled.div`
-  padding: 15px 60px;
+  width: 100%;
+  padding: 1vw 0;
   cursor: pointer;
   background: #ffffff;
   border: 2px solid #ffffff;
