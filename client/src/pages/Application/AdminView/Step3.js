@@ -8,13 +8,23 @@ import Meeting from "../../../components/Meeting";
 import StatusUpdate from "../../../components/StatusUpdate";
 import InterviewInfo from "../../../components/InterviewInfo";
 
-export default {
-  content: (
+function HomeScreenInformation() {
+  const waiting = false; // TODO: use actual application status
+
+  if (waiting)
+    return (
+      <LoadingBox
+        message="Waiting for applicant to respond, click on the progress bar to see previous steps"
+        currentStage="Applicant is scheduling their interview"
+      />
+    );
+
+  return (
     <Meeting
-      title="Interview Information"
+      title="Home Screen Information"
       status={
         <StatusUpdate
-          title="Interview Info"
+          title="Home Screen Info"
           ambassador="Dhanush"
           phone="123-456-7890"
           email="test@tap.com"
@@ -23,13 +33,11 @@ export default {
           location="Zoom"
         />
       }
-      interviewInfo={<InterviewInfo contingent title="After Interviews" />}
+      interviewInfo={<InterviewInfo title="After Home Screen" contingent />}
     />
-  ),
-  // content: (
-  //   <LoadingBox
-  //     message="Waiting for applicant to respond, click on the progress bar to see previous steps"
-  //     currentStage="Applicant is scheduling their interview"
-  //   />
-  // ),
+  );
+}
+
+export default {
+  content: <HomeScreenInformation />,
 };

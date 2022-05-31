@@ -4,12 +4,7 @@
   width: 100%;
   height: min(63vh, 540px);
   display: flex;
-  /* min-height: 520px; */
-  /* min-width: 400px; */
-  /* max-width: 460px; */
   align-items: center;
-  /* max-height: 32vw; */
-  /* padding-bottom: 10px; */
 }
 
 .interview-info-input {
@@ -21,10 +16,6 @@
   width: 100%;
   border-color: none;
 }
-
-/* .info-input:focus {
-  outline-color: #8dc442;
-} */
 
 .interview-info-title {
   align-self: center;
@@ -89,15 +80,11 @@
   font-size: 18px;
 }
 
-.button-rowfalse {
-  margin-left: 16%;
-  margin-right: 16%;
-}
-
-.button-rowtrue {
-  margin-left: 4%;
-  margin-right: 4%;
-  font-size: 18px;
+.button-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: center;
 }
 
 @media screen and (max-width: 750px) {

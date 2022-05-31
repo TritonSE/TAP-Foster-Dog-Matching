@@ -1,36 +1,29 @@
 import { useForm } from "react-hook-form";
 import React from "react";
-import styled from "styled-components";
 import { ControlledInput } from "./Input";
 import Form from "./Form";
+import PassFail from "./PassFail";
 import "../css/interviewInfo.css";
 
-const InputField = styled.input`
-  &:focus {
-    outline: none;
-    border: 2px solid #8dc442;
-  }
-`;
-
-function PassFail(props) {
-  const { control, watch, handleSubmit } = useForm({
+function InterviewInfo(props) {
+  const [showPassDialog, setShowPassDialog] = React.useState(false);
+  const [showContingentDialog, setShowContingentDialog] = React.useState(false);
+  const [showRejectDialog, setShowRejectDialog] = React.useState(false);
+  const { control } = useForm({
     reValidateMode: "onChange",
   });
 
-  const TextAreaField = styled(InputField).attrs({
-    as: "textarea",
-  })`
-    resize: none;
-    font-family: inherit;
-  `;
+  const onPass = () => {
+    setShowPassDialog(true);
+  };
 
-  // const notes = React.useRef();
+  const onReject = () => {
+    setShowRejectDialog(true);
+  };
 
-  const onConfirm = () => {};
-
-  const onReject = () => {};
-
-  const onContingent = () => {};
+  const onContingent = () => {
+    setShowContingentDialog(true);
+  };
 
   return (
     <div className="interview-info-wrapper">
@@ -45,26 +38,40 @@ function PassFail(props) {
             className="info-input"
           />
         </div>
-        <div className={"button-row" + props.contingent}>
-          <Form.Row>
-            <button type="button" className="reject-button" onClick={onReject}>
-              Reject
+        <div className="button-row">
+          <button type="button" className="reject-button" onClick={onReject}>
+            Reject
+          </button>
+          {props.contingent && (
+            <button type="button" className="contingent-button" onClick={onContingent}>
+              Contingent
             </button>
-            {props.contingent ? (
-              <button type="button" className="contingent-button" onClick={onContingent}>
-                Contingent
-              </button>
-            ) : (
-              <div />
-            )}
-            <button type="button" className="pass-button" onClick={onConfirm}>
-              Pass
-            </button>
-          </Form.Row>
+          )}
+          <button type="button" className="pass-button" onClick={onPass}>
+            Pass
+          </button>
         </div>
       </Form.Container>
+      <PassFail
+        visible={showPassDialog}
+        setVisible={setShowPassDialog}
+        status="Pass"
+        initialMessage=""
+      />
+      <PassFail
+        visible={showContingentDialog}
+        setVisible={setShowContingentDialog}
+        status="Contingent"
+        initialMessage=""
+      />
+      <PassFail
+        visible={showRejectDialog}
+        setVisible={setShowRejectDialog}
+        status="Reject"
+        initialMessage=""
+      />
     </div>
   );
 }
 
-export default PassFail;
+export default InterviewInfo;
