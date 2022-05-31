@@ -52,7 +52,7 @@ const ApplicationContainer = styled.div`
   margin-bottom: -50px;
   ${device.tablet} {
     flex-direction: row;
-    height: calc(100% + 20px);
+    height: fit-content;
     margin-bottom: -20px;
     gap: 10px;
   }
@@ -62,12 +62,6 @@ const ApplicationContentContainer = styled.div`
   display: flex;
   justify-content: center;
   flex: 1 1 auto;
-  ${device.tablet} {
-    margin-top: 100px;
-  }
-  ${device.mobile} {
-    margin-top: 20%;
-  }
 `;
 
 const ExitButton = styled.div`
@@ -77,7 +71,13 @@ const ExitButton = styled.div`
   font-size: 16px;
   cursor: pointer;
   ${device.tablet} {
-    top: -10px;
+    position: fixed;
+    top: 130px;
+    left: 190px;
+  }
+  ${device.mobile} {
+    top: 100px;
+    left: 10px;
   }
 `;
 
