@@ -21,41 +21,49 @@ import "../css/status.css";
  *
  */
 
+function StatusItem({ label, content, noLine }) {
+  return (
+    <>
+      <div className="information-box-item">
+        <div className="information-box-item-label">{label}</div>
+        <div className="information-box-item-content">{content}</div>
+      </div>
+      {!noLine && <hr className="line" />}
+    </>
+  );
+}
+
 function StatusUpdate(props) {
   return (
     <div className="status-card">
       <div className="card-title">
         <h3>{props.title}</h3>
       </div>
-      <div className="information-grid">
-        <div className="box-ambassador">
-          <div className="ambassador-left">Ambassador:</div>
-        </div>
-        <div className="box-ambassador">
-          <img className="pfp" src={props.image} alt="" />
-          <div className="ambassador-right">{props.ambassador}</div>
-        </div>
-        <div className="line1">
-          <hr className="line" />
-        </div>
-        <div className="box-contact">Contact Info:</div>
-        <div className="box-contact">{props.phone}</div>
-        <div className="box-email">{props.email}</div>
-        <div className="line2">
-          <hr className="line" />
-        </div>
-        <div className="box-date">Interview Date:</div>
-        <div className="box-date">{props.date}</div>
-        <div className="line3">
-          <hr className="line" />
-        </div>
-        <div className="box-time">Interview Time:</div>
-        <div className="box-time">{props.time}</div>
-        <div className="line4">
-          <hr className="line" />
-        </div>
-        <div className="box-location">Interview Location:</div>
-        <div className="box-location">{props.location}</div>
+      <div className="information-box">
+        <StatusItem
+          label="Ambassador:"
+          content={
+            <div className="box-ambassador">
+              <img className="pfp" src={props.image} alt="" />
+              <div className="ambassador-right">{props.ambassador}</div>
+            </div>
+          }
+        />
+        <StatusItem
+          label="Contact Info:"
+          content={
+            <>
+              <span>{props.phone}</span>
+              <span>{props.email}</span>
+            </>
+          }
+        />
+        {props.date && <StatusItem label="Date:" content={props.date} />}
+        {props.time && <StatusItem label="Time:" content={props.time} />}
+        {props.location && <StatusItem label="Location:" content={props.location} noLine />}
+        {props.tapFacilityLocation && (
+          <StatusItem label="TAP Facility Location:" content={props.tapFacilityLocation} noLine />
+        )}
       </div>
     </div>
   );
