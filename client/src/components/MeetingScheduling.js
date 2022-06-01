@@ -13,6 +13,18 @@
  *   <MeetingScheduling
  *     title="Interview Scheduling"
  *     stage="Initial Interview"
+ *     times={[
+ *       "11:00 AM",
+ *       "11:30 AM",
+ *  	   "12:00 PM",
+ *  	   "12:30 PM",
+ *  	   "1:00 PM",
+ *  	   "5:00 PM",
+ *  	   "5:30 PM",
+ *  	   "6:00 PM",
+ *  	   "6:30 PM",
+ *  	   "7:00 PM",
+ *     ]}
  *   />
  */
 
@@ -21,6 +33,7 @@ import Calendar from "react-calendar";
 import MeetingSchedulingMeetTimesContainer from "./MeetingSchedulingMeetTimesContainer";
 import left from "../images/left.svg";
 import right from "../images/right.svg";
+import { AuthContext } from "../contexts/AuthContext";
 import "../css/calendar.css";
 import "../css/meetingscheduling.css";
 
@@ -95,10 +108,32 @@ function timeInTimeRange(meetTime, timeRange) {
   );
 }
 
+function timeEarlierThanNow(meetTime, selectedDate) {
+  const index = meetTime.indexOf(":");
+  const index2 = meetTime.indexOf(" ");
+
+  const d1 = new Date(selectedDate);
+  d1.setHours(meetTime.substring(0, index));
+  d1.setMinutes(meetTime.substring(index + 1, index2));
+  if (
+    (meetTime.substring(index2 + 1, meetTime.length).localeCompare("PM") === 0 ||
+      meetTime.substring(index2 + 1, meetTime.length).localeCompare("pm") === 0) &&
+    d1.getHours() < 12
+  )
+    d1.setHours(d1.getHours() + 12);
+  d1.setSeconds("00");
+
+  const d2 = new Date();
+  console.log(d1.getTime() + " " + d2.getTime());
+  console.log(d1.toTimeString() + " vs " + d2.toTimeString());
+  return d1.getTime() <= d2.getTime();
+}
+
 function MeetingScheduling(props) {
   const [date, onChange] = useState(new Date());
   const [meetTimesContainer, setMeetTimesContainer] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const { currentUser } = React.useContext(AuthContext);
 
   const weekday = [
     "Sunday,",
@@ -124,26 +159,13 @@ function MeetingScheduling(props) {
     "December",
   ];
 
-  const times = [
-    "11:00 AM",
-    "11:30 AM",
-    "12:00 PM",
-    "12:30 PM",
-    "1:00 PM",
-    "5:00 PM",
-    "5:30 PM",
-    "6:00 PM",
-    "6:30 PM",
-    "7:00 PM",
-  ];
-
   const createNewInterview = (time) => {
     const reqBody = {
-      user: "000000000000000000000000", // TODO: Use real user ID once Firebase is merged in
-      ambassador: "000000000000000000000001", // TODO: User real ambassador ID once Firebase is merged in
+      user: currentUser._id, // TODO: Use real user ID once Firebase is merged in
+      ambassador: currentUser.ambassador, // TODO: User real ambassador ID once Firebase is merged in
       date: dateToHumanFormat(date),
       time: timeToHumanFormat(time),
-      location: "Zoom Link?", // TODO: generate a Zoom link here
+      location: "[TBD]", // TODO: figure out later
       internalNotes: "",
       stage: props.stage,
     };
@@ -158,15 +180,17 @@ function MeetingScheduling(props) {
   const setInterviewSlotSelected = React.useCallback((time) => createNewInterview(time));
 
   const updateMeetTimes = (interviews) => {
-    const meetTimesTemp = [...times];
-    interviews.map((interview) => {
-      times.map((meetTime) => {
-        if (timeInTimeRange(meetTime, interview.time) && meetTimesTemp.includes(meetTime)) {
+    const meetTimesTemp = [...props.times];
+    props.times.map((meetTime) => {
+      interviews.map((interview) => {
+        if (meetTimesTemp.includes(meetTime) && timeInTimeRange(meetTime, interview.time)) {
           meetTimesTemp.splice(meetTimesTemp.indexOf(meetTime), 1);
         }
-        return meetTime;
+        return interview;
       });
-      return interview;
+      if (meetTimesTemp.includes(meetTime) && timeEarlierThanNow(meetTime, date))
+        meetTimesTemp.splice(meetTimesTemp.indexOf(meetTime), 1);
+      return meetTime;
     });
 
     setMeetTimesContainer(
