@@ -39,10 +39,15 @@ function Meetings(props) {
         <h2>{props.title}</h2>
       </div>
       <div className="meeting-card-content">
-        <div className="text-card">{props.textCard}</div>
+        {props.textCard && <div className="text-card">{props.textCard}</div>}
         {props.status && (
           <div className="image-card">
             <div className="status">{props.status}</div>
+          </div>
+        )}
+        {props.interviewInfo && (
+          <div className="info-card">
+            <div className="status">{props.interviewInfo}</div>
           </div>
         )}
         {props.imagePath && (
