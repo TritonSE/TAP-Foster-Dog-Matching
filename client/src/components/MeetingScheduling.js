@@ -39,7 +39,12 @@ import "../css/meetingscheduling.css";
 
 import { getInterviews, createInterview } from "../services/interviews";
 
-// Returns a date string in the format MM/DD/YYYY
+/**
+ * Takes a Date Object and returns a human-readable date string
+ *
+ * @param {Date} date - the date object to convert
+ * @return {string} - the date in the format MM/DD/YYYY
+ */
 function dateToHumanFormat(date) {
   const DD = date.getDate() >= 10 ? "" + date.getDate() : "0" + date.getDate();
   const monthInt = date.getMonth() + 1;
@@ -47,9 +52,12 @@ function dateToHumanFormat(date) {
   return MM + "/" + DD + "/" + date.getFullYear();
 }
 
-// Given time is in the format HH:MM [AaPp][Mm], returns
-// a time string in the format HH:MM - HH:MM [AaPp][Mm]
-// with a total alloted time of 30 minutes.
+/**
+ * Takes a starting time of a meeting and creates a corresponding time slot.
+ *
+ * @param {string} time - The time in the format HH:MM [AaPp][Mm]
+ * @return {string} - The time slot, assuming 30 minutes long, in the format HH:MM - HH:MM [AaPp][Mm]
+ */
 function timeToHumanFormat(time) {
   const index = time.indexOf(":");
   const index2 = time.indexOf(" ");
@@ -77,8 +85,13 @@ function timeToHumanFormat(time) {
   return time1 + " - " + time2;
 }
 
-// Assuming timeRanges were derived from adding 30 minutes to the
-// times specified in this.times in the format HH:MM - HH:MM [AaPp][Mm]
+/**
+ * Checks if a meeting time is within a time range.
+ *
+ * @param {string} meetTime - The meeting time in the format HH:MM [AaPp][Mm]
+ * @param {string} timeRange - The time range the format HH:MM - HH:MM [AaPp][Mm]
+ * @return {boolean} - True if the meetTime is within the timeRange, false if not
+ */
 function timeInTimeRange(meetTime, timeRange) {
   // Account for AM/PM wrap-around
   if (
@@ -108,6 +121,13 @@ function timeInTimeRange(meetTime, timeRange) {
   );
 }
 
+/**
+ * Checks if the meeting time has not happened yet (i.e. the time is sometime in the future)
+ *
+ * @param {string} meetTime - The meeting time in the format HH:MM [AaPp][Mm]
+ * @param {Date} selectedDate - The date of the meeting time
+ * @return {boolean} - True if the meeting time has already occurred, false if not
+ */
 function timeEarlierThanNow(meetTime, selectedDate) {
   const index = meetTime.indexOf(":");
   const index2 = meetTime.indexOf(" ");
@@ -161,8 +181,8 @@ function MeetingScheduling(props) {
 
   const createNewInterview = (time) => {
     const reqBody = {
-      user: currentUser._id, // TODO: Use real user ID once Firebase is merged in
-      ambassador: currentUser.ambassador, // TODO: User real ambassador ID once Firebase is merged in
+      user: currentUser._id,
+      ambassador: currentUser.ambassador,
       date: dateToHumanFormat(date),
       time: timeToHumanFormat(time),
       location: "[TBD]", // TODO: figure out later
@@ -183,11 +203,13 @@ function MeetingScheduling(props) {
     const meetTimesTemp = [...props.times];
     props.times.map((meetTime) => {
       interviews.map((interview) => {
+        // Remove timeslots that already have an interview scheduled during them
         if (meetTimesTemp.includes(meetTime) && timeInTimeRange(meetTime, interview.time)) {
           meetTimesTemp.splice(meetTimesTemp.indexOf(meetTime), 1);
         }
         return interview;
       });
+      // Remove timeslots that have already passed (i.e. the user has selected the current day)
       if (meetTimesTemp.includes(meetTime) && timeEarlierThanNow(meetTime, date))
         meetTimesTemp.splice(meetTimesTemp.indexOf(meetTime), 1);
       return meetTime;
