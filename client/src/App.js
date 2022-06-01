@@ -37,6 +37,7 @@ function AppRouter() {
             <Route path="/" element={<Navigate replace to="/dashboard" />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/contact" element={<ContactUs />} />
+            <Route path="/application" element={<Application />} />
           </>
         )}
 
@@ -49,6 +50,7 @@ function AppRouter() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/pending-applications" element={<PendingApplications />} />
             <Route path="/manage-dog-profiles" element={<DogProfile />} />
+            <Route path="/application" element={<Application />} />
           </>
         )}
 
@@ -60,6 +62,7 @@ function AppRouter() {
             <Route path="/fosters" element={<Fosters />} />
             <Route path="/pending-applications" element={<PendingApplications />} />
             <Route path="/manage-dog-profiles" element={<DogProfile />} />
+            <Route path="/application" element={<Application />} />
           </>
         )}
 
@@ -73,9 +76,6 @@ function AppRouter() {
           </>
         )}
         <Route path="*" element={<NotFound />} />
-
-        {/* TODO: remove this route after Application has been integrated within the respective pages */}
-        <Route path="/application" element={<Application />} />
       </Routes>
     </Router>
   );

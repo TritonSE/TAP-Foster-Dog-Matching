@@ -41,7 +41,7 @@ function DefaultBody(props) {
   const { currentUser, signedIn } = React.useContext(AuthContext);
 
   const visiblePages = React.useMemo(() => {
-    if (currentUser.type === "admin")
+    if (currentUser && currentUser.type === "admin")
       switch (currentUser.role) {
         case "ambassador":
           return AMBASSADOR_PAGES;
