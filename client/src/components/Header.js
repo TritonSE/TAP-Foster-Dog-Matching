@@ -6,22 +6,28 @@
  * @summary     Reusable Header component for use on dashboard pages.
  * @author      Andrew Masek
  *
- * #TODO Signout button needs to be made functional
  */
 
 import React from "react";
 import "../css/header.css";
 import logoImage from "../images/logo1.png";
+import { signOutUser } from "../services/auth";
 
-function Header(props) {
+function Header({ firstName, role }) {
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      signOutUser();
+    }
+  };
+
   return (
     <div id="header">
       <div className="header-welcome">
         <img src={logoImage} alt="logo" />
         <div className="header-welcome-text">
-          Welcome {props.firstName} <br />
+          Welcome {firstName} <br />
           <strong>
-            <span id="foster-text">Foster</span>
+            <span id="foster-text">{role}</span>
           </strong>
         </div>
       </div>
@@ -31,7 +37,15 @@ function Header(props) {
           <strong>Learn how you can help us right now!</strong>
         </div>
       </div>
-      <div className="header-sign-out">Sign out</div>
+      <div
+        className="header-sign-out"
+        onClick={signOutUser}
+        onKeyDown={handleKeyDown}
+        role="button"
+        tabIndex={0}
+      >
+        Sign out
+      </div>
     </div>
   );
 }
