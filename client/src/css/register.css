@@ -1,3 +1,30 @@
+.signup-page #header {
+  display: grid;
+  grid-template-columns: 0.5fr 4fr 0.3fr;
+  grid-column-gap: 5%;
+  background-color: black;
+  height: 130px;
+}
+
+.signup-page .header-welcome-text {
+  display: none;
+}
+
+.signup-page .header-sign-out {
+  display: none;
+}
+
+.signup-page .header-message {
+  padding-left: 0px;
+  margin-bottom: 0.6vw;
+}
+
+.signup-page .header-welcome img {
+  width: 101px;
+  height: 84px;
+  padding: 23px calc(8px + 0.6vw) 0px 23px;
+}
+
 .form-header {
   height: auto;
   font-size: calc(24px + 0.5vh);

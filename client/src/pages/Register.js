@@ -6,7 +6,7 @@ import "../css/register.css";
 
 function Register() {
   return (
-    <div>
+    <div className="signup-page">
       <Header />
       <IntroForm formType="signup" accountType="Foster" header="Foster Sign Up" />
       {/* <IntroForm formType="signup" accountType="Admin" header="Admin Sign Up" /> */}
