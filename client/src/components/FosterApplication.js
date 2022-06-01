@@ -9,6 +9,8 @@ import { ControlledCheckboxes } from "./Checkboxes";
 import { ControlledRadios } from "./Radios";
 import { device } from "../utils/useResponsive";
 import { Colors } from "./Theme";
+import { createApplication, getApplication } from "../services/application";
+import { AuthContext } from "../contexts/AuthContext";
 
 const Button = styled.div`
   background: ${Colors.green};
@@ -24,12 +26,29 @@ const Button = styled.div`
   align-self: ${(props) => props.alignSelf || "unset"};
 `;
 
-function FosterApplicationView({ setView, setApplicationData }) {
+function FosterApplicationView({
+  setView,
+  setApplicationData,
+  applicationData,
+  admin,
+  curApplication,
+}) {
   const personalInfoRef = React.useRef();
   const fosterInfoRef = React.useRef();
   const outsideInfoRef = React.useRef();
+
+  const initialVals = () => {
+    console.log("in function");
+    console.log(admin, curApplication);
+    if (admin && curApplication != null) {
+      console.log("printing data");
+      return curApplication;
+    }
+    return applicationData;
+  };
   const { control, watch, handleSubmit } = useForm({
     reValidateMode: "onChange",
+    defaultValues: initialVals(),
   });
 
   const applicationSections = React.useMemo(
@@ -41,15 +60,19 @@ function FosterApplicationView({ setView, setApplicationData }) {
     []
   );
 
-  const onSubmit = (_) => {
-    // TODO: implement onSubmit
-    setView("agreement");
+  React.useEffect(() => {
+    console.log(curApplication);
+  }, []);
+
+  const onSubmit = (data) => {
+    // move onto agreement page + store data from current form for next page
     setApplicationData(data);
+    setView("agreement");
   };
 
-  const onError = (_) => {
+  const onError = (data) => {
     // TODO: implement onError
-    setView("agreement"); // uncomment this to see the foster agreement w/o filling out the form
+    // setView("agreement"); // uncomment this to see the foster agreement w/o filling out the form
   };
 
   return (
@@ -439,7 +462,7 @@ const SignatureContainer = styled.div`
   margin: auto;
 `;
 
-function FosterAgreementView({ setView, applicationData }) {
+function FosterAgreementView({ setView, applicationData, admin, curApplication }) {
   const { control, handleSubmit } = useForm();
 
   const onSubmit = (data) => {
@@ -452,27 +475,20 @@ function FosterAgreementView({ setView, applicationData }) {
       ...{ status: "Step 1: Application", completedActionItems: false },
       ...{ user: userId },
     };
-    reqBody.otherInfo.dogsNeutered = reqBody.otherInfo.dogsNeutered === "No" ? false : true;
-    reqBody.fosterInfo.permissionToVisit =
-      reqBody.fosterInfo.permissionToVisit === "No" ? false : true;
+
+    console.log(reqBody);
+    reqBody.otherInfo.dogsNeutered = reqBody.otherInfo.dogsNeutered !== "No";
+    reqBody.fosterInfo.permissionToVisit = reqBody.fosterInfo.permissionToVisit !== "No";
     reqBody.address.zipcode = parseInt(reqBody.address.zipcode, 10);
     reqBody.reference.yearsKnown = parseInt(reqBody.reference.yearsKnown, 10);
-    const format = (inputDate) => {
-      return [inputDate.slice(5, 7), inputDate.slice(8, 10), inputDate.slice(0, 4)].join("/");
-    };
+    const format = (inputDate) =>
+      [inputDate.slice(5, 7), inputDate.slice(8, 10), inputDate.slice(0, 4)].join("/");
     reqBody.agreement.date = format(reqBody.agreement.date);
 
     // make a new application
-    fetch("http://localhost:8000/api/application", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-        "Content-Length": JSON.stringify(reqBody).length,
-      },
-      body: JSON.stringify(reqBody),
-    }).then((res) => {
-      console.log(res);
+    createApplication(reqBody).then((response) => {
+      console.log(response.ok);
+      console.log(response.data);
     });
   };
 
@@ -508,11 +524,46 @@ function FosterAgreementView({ setView, applicationData }) {
 
 function FosterApplication() {
   const [view, setView] = React.useState("application");
-  const [applicationData, setApplicationData] = React.useState();
+  const [applicationData, setApplicationData] = React.useState({});
+
+  const { signedIn, currentUser } = React.useContext(AuthContext);
+
+  // admin view, want to see exitsting application
+  const curAppId = "6215a197a07c26eabdb20238";
+  const [curApplication, setCurApplication] = React.useState();
+  const [loaded, setLoaded] = React.useState(false);
+  // get data if data exists
+  React.useEffect(() => {
+    if (curAppId) {
+      getApplication(curAppId).then((res) => {
+        setCurApplication(res.data.application);
+        setLoaded(true);
+      });
+    }
+  }, []);
 
   if (view === "application")
-    return <FosterApplicationView setView={setView} setApplicationData={setApplicationData} />;
-  return <FosterAgreementView setView={setView} applicationData={applicationData} />;
+    return (
+      (loaded || !currentUser.type === "admin") && (
+        <FosterApplicationView
+          setView={setView}
+          applicationData={applicationData}
+          setApplicationData={setApplicationData}
+          admin={currentUser.type === "admin"}
+          curApplication={curApplication}
+        />
+      )
+    );
+  return (
+    (loaded || !currentUser.type === "admin") && (
+      <FosterAgreementView
+        setView={setView}
+        applicationData={applicationData}
+        admin={currentUser.type === "admin"}
+        curApplication={curApplication}
+      />
+    )
+  );
 }
 
 export default FosterApplication;
