@@ -567,10 +567,16 @@ function FosterAgreementView({
 
     if (curAppId) {
       // application already created in this instance, so update it
-      updateApplication(curAppId, reqBody);
+      updateApplication(curAppId, reqBody).then((response) => {
+        // console.log("updating"); // uncomment to see status of update app request
+        // console.log(response.ok); // uncomment to see status of update app request
+      });
     } else {
       // make a new application
-      createApplication(reqBody).then((response) => setCurAppId(response.data.application._id));
+      createApplication(reqBody).then((response) => {
+        // console.log(response.ok); // uncomment to see status of create app request
+        setCurAppId(response.data.application._id);
+      });
     }
   };
 
