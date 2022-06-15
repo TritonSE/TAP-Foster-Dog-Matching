@@ -5,8 +5,10 @@ import DashboardCard from "../components/DashboardCard";
 import IconButton from "../components/IconButton";
 import dogCollage from "../images/dogcollage2.png";
 import plus from "../images/plus.png";
-// import { AuthContext } from "../contexts/AuthContext";
+import { AuthContext } from "../contexts/AuthContext";
 import { device } from "../utils/useResponsive";
+import { getUser } from "../services/users";
+import { getData } from "../services/data";
 
 const DashboardCardsContainer = styled.div`
   display: flex;
@@ -16,23 +18,23 @@ const DashboardCardsContainer = styled.div`
 `;
 
 function DashboardCards() {
-  const [allDogs, setAllDogs] = useState();
+  const [allDogs, setAllDogs] = useState(null);
   const [loaded, setLoaded] = useState(false);
-  // const currentUser = React.useContext(AuthContext);
-  // console.log(currentUser);
-
+  const [user, setUser] = useState(null);
+  const [application, setApplication] = useState(null);
+  const { currentUser, signedIn } = React.useContext(AuthContext);
+  const [hasApplication, setHasApplication] = useState(null);
+  const [completedApplication, setCompletedApplication] = useState(null);
   // get dogs from backend
   useEffect(() => {
-    fetch("http://localhost:8000/api/dogs/", {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json.dogs);
-        setAllDogs(json.dogs);
-        setLoaded(true);
-      });
-  }, []);
+    if (!signedIn) return;
+    console.log(currentUser);
+    console.log(signedIn);
+    const userID = currentUser._id;
+    // Find if the user has an application
+    console.log(getData(`application/${userID}`));
+    getUser(userID);
+  }, [signedIn]);
 
   return (
     <div>
