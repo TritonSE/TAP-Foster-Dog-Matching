@@ -39,6 +39,7 @@ import FosterApplication from "../components/FosterApplication";
 import Meetings from "../components/Meeting";
 import logo from "../images/logo-inverted.png";
 import ApplicationContext from "../contexts/ApplicationContext";
+import FosterMatchingAdmin from "../components/FosterMatchingAdmin";
 import InterviewInfo from "../components/InterviewInfo";
 import StatusUpdate from "../components/StatusUpdate";
 import ConfirmMeetGreet from "../components/ConfirmMeetGreet";
@@ -127,7 +128,8 @@ function Application() {
     }, //  Step 3
     {
       intro: <h1>step 4 intro here</h1>,
-      content: <DogSelection />,
+      content: <FosterMatchingAdmin />,
+      // content: <DogSelection />, TODO this should be rendered for admin side
     }, //  Step 4
     {
       intro: <h1>step 5 intro here</h1>,
