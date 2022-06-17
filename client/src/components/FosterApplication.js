@@ -254,7 +254,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
               label="How many hours are you home a day?"
               name="fosterInfo.hoursAtHome"
               type="number"
-              rules={{ max: 24 }}
+              rules={{ min: 0, max: 24 }}
               readOnly={admin}
               required
             />
@@ -424,6 +424,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
                   type="number"
                   name="reference.yearsKnown"
                   readOnly={admin}
+                  rules={{ min: 0 }}
                   required
                 />
               </Form.Column>
