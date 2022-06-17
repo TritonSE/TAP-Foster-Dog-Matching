@@ -43,7 +43,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
   // clean up date if it was fetched (on admin side)
   // if on foster side load stored data if they go back from agreement page
   const initialFormVals = () => {
-    if (admin) {
+    if (applicationData) {
       applicationData.otherInfo.dogsNeutered = applicationData.otherInfo.dogsNeutered
         ? "Yes"
         : "No";
