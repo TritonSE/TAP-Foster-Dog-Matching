@@ -1,9 +1,5 @@
-.signup-page #header {
-  display: grid;
-  grid-template-columns: 0.5fr 4fr 0.3fr;
-  grid-column-gap: 5%;
-  background-color: black;
-  height: 130px;
+.signup-page {
+
 }
 
 .signup-page .header-welcome-text {
