@@ -23,10 +23,9 @@
  *   />
  */
 
-import React, { useState, useEffect, useContext } from "react";
-import { NavLink as Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { NavLink as Link } from "react-router-dom";
 import styled from "styled-components";
-import { AuthContext } from "../contexts/AuthContext";
 import burger from "../images/burger.png";
 import { signOutUser } from "../services/auth";
 import { device } from "../utils/useResponsive";
@@ -134,10 +133,8 @@ export const SignOut = styled.button`
 `;
 
 function Navbar(props) {
-  const navigate = useNavigate();
   const [renderNav, setRenderNav] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const { currentUser, loadingUser } = useContext(AuthContext);
 
   // Update screenHeight to viewport size
   useEffect(() => {
@@ -149,11 +146,6 @@ function Navbar(props) {
       window.removeEventListener("resize", changeWidth);
     };
   }, []);
-
-  // Redirect to home page when user clicks sign out
-  useEffect(() => {
-    if (!loadingUser && !currentUser) navigate("/");
-  }, [loadingUser, currentUser]);
 
   return (
     <>
