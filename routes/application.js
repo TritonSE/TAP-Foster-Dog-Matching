@@ -85,15 +85,15 @@ const validators = [
   body("agreement.date").notEmpty().isDate({ format: "MM-DD-YYYY" }),
   body("agreement.signature").notEmpty().isString(),
   body("status").notEmpty().isString(),
-  body("ambassador").notEmpty().isMongoId(),
-  body("coordinator").notEmpty().isMongoId(),
+  body("ambassador").optional().isMongoId(),
+  body("coordinator").optional().isMongoId(),
   body("completedActionItems").notEmpty().isBoolean(),
   body("selectedDogs")
-    .notEmpty()
+    .optional()
     .isArray()
     .custom((input) => input.every((value) => typeof value === "string")),
   body("preference")
-    .notEmpty()
+    .optional()
     .isArray()
     .custom((input) => input.every((value) => typeof value === "string")),
 ];
