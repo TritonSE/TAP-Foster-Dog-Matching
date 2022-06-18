@@ -1,5 +1,6 @@
 import { React, useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
+import { Colors } from "./Theme";
 import SplitCardContainer from "./SplitCardContainer";
 import PenIcon from "../images/penicon.png";
 import GridImage1 from "../images/griddog1.png";
@@ -23,14 +24,6 @@ import GridImage3 from "../images/griddog3.png";
  *
  */
 
-const ExitButton = styled.a`
-  color: black;
-  font-size: 25px;
-  text-decoration: none;
-  position: absolute;
-  margin-left: -9px;
-  margin-top: -27px;
-`;
 const FosterProfileContainer = styled.div`
   text-align: center;
   width: 100% !important;
@@ -107,7 +100,7 @@ const UpdateContainer = styled.div`
   line-height: 20px;
   text-align: center;
   padding: 4px;
-  background-color: #8dc442; //TODO make this come from theme
+  background-color: ${Colors.green};
 `;
 
 const GeneralNotes = styled.span`
@@ -128,7 +121,7 @@ const TableCell = styled.td`
   padding: 16px 0 16px 47px;
 `;
 const ViewApplicationButton = styled.button`
-  background-color: #8dc442; //TODO make this come from theme
+  background-color: ${Colors.green};
   border-radius: 10px;
   border: none;
   font-size: 20px;
@@ -207,7 +200,7 @@ const DogCardCheckbox = styled.input`
   left: ${(props) => (props.leftOffset ? props.leftOffset : "0")};
   cursor: pointer;
   :checked {
-    accent-color: #8dc442;
+    accent-color: ${Colors.green};
   }
 `;
 const DogCardImage = styled.img`
@@ -277,7 +270,7 @@ function DogGrid() {
 }
 
 const SubmitButton = styled.button`
-  background-color: #8dc442;
+  background-color: ${Colors.green};
   border: none;
   font-size: 25px;
   padding: 9px 38px;
@@ -286,8 +279,7 @@ const SubmitButton = styled.button`
   cursor: pointer;
 `;
 
-// TODO give href to exit button
-function FosterMatchingAdmin() {
+function FosterMatchingAdmin({ handleConfirm }) {
   return (
     <OuterContainer>
       <PaddingContainer>
@@ -352,7 +344,7 @@ function FosterMatchingAdmin() {
           </AvailableDogsContainer>
         </SplitCardContainer>
         <CenterAlign>
-          <SubmitButton>Confirm</SubmitButton>
+          <SubmitButton onClick={handleConfirm}>Confirm</SubmitButton>
         </CenterAlign>
       </PaddingContainer>
     </OuterContainer>
