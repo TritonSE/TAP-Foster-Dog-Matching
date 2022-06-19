@@ -6,10 +6,11 @@ const { requireAuthenticatedUserOrAdminRoles } = require("../middleware/auth");
 const { ADMIN_ROLES } = require("../services/admins");
 
 const router = express.Router();
-
+// TODO make applications route add new application to assosciated user
 const validators = [
   body("firstName").notEmpty().isString(),
   body("lastName").notEmpty().isString(),
+  body("applications").isArray(),
   body("email").notEmpty().isString().isEmail(),
   body("password").notEmpty().isString().isLength({ min: 8 }),
 ];

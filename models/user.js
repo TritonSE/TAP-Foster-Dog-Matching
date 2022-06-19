@@ -22,6 +22,10 @@ module.exports = mongoose.model(
       required: true,
       unique: true,
     },
+    applications: {
+      type: [ObjectId],
+      required: true,
+    },
     lastActive: {
       type: Date,
       required: true,

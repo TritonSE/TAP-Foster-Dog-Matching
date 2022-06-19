@@ -1,6 +1,7 @@
 const express = require("express");
 const { body } = require("express-validator");
 const { getApplication, createApplication, updateApplication } = require("../services/application");
+const { updateUser } = require("../services/users");
 const { validateRequest } = require("../middleware/validation");
 
 const router = express.Router();
