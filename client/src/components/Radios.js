@@ -74,9 +74,11 @@ const RadioLabel = styled.div`
   }
 `;
 
-const Radios = React.forwardRef(({ options, value, onChange, invalid }, ref) => {
+const Radios = React.forwardRef(({ options, value, onChange, invalid, readOnly }, ref) => {
   function handleSelect(newValue) {
-    onChange(newValue);
+    if (!readOnly) {
+      onChange(newValue);
+    }
   }
 
   function isSelected(optionValue) {

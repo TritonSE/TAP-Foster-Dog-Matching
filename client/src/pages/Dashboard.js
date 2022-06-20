@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import DefaultBody from "../components/DefaultBody";
 import DashboardCard from "../components/DashboardCard";
 import IconButton from "../components/IconButton";
@@ -15,6 +16,8 @@ const DashboardCardsContainer = styled.div`
 `;
 
 function Dashboard() {
+  const navigate = useNavigate();
+
   return (
     <DefaultBody>
       <DashboardCardsContainer>
@@ -26,6 +29,7 @@ function Dashboard() {
           iconButton={
             <IconButton icon={plus} altText="ContinueButton" leftOffset="83%" topOffset="72%" />
           }
+          onClick={() => navigate("/application")}
         />
       </DashboardCardsContainer>
     </DefaultBody>

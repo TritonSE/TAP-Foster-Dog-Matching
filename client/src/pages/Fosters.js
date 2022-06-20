@@ -5,6 +5,7 @@ import TableCellButton from "../components/TableCellButton";
 import Select from "../components/Select";
 import { Colors, Typography } from "../components/Theme";
 import DefaultBody from "../components/DefaultBody";
+import { AuthContext } from "../contexts/AuthContext";
 
 const DUMMY_REPEAT_FOSTERS_DATA = [
   {
@@ -97,9 +98,11 @@ const SpacedCellContainer = styled.div`
   gap: 20px;
 `;
 
-const role = "management"; // OR "ambassador" OR "coordinator" OR "management"; // TODO: Replace with actual user role
-
 function CompletedActionItemsCell({ completed }) {
+  const {
+    currentUser: { role },
+  } = React.useContext(AuthContext);
+
   return (
     <SpacedCellContainer>
       {completed ? "Status updated" : "Waiting for update"}
@@ -162,6 +165,10 @@ function AmbassadorSelect({ initialValue }) {
 }
 
 function RepeatFosters() {
+  const {
+    currentUser: { role },
+  } = React.useContext(AuthContext);
+
   const columns = React.useMemo(
     () => [
       {
@@ -214,6 +221,10 @@ function RepeatFosters() {
 }
 
 function AccountStatusCell({ active }) {
+  const {
+    currentUser: { role },
+  } = React.useContext(AuthContext);
+
   return (
     <SpacedCellContainer>
       {active ? "Active" : "Inactive"}
@@ -226,6 +237,9 @@ function AccountStatusCell({ active }) {
 }
 
 function AllFosters() {
+  const {
+    currentUser: { role },
+  } = React.useContext(AuthContext);
   const [fostersView, setFostersView] = React.useState("all");
   const columns = React.useMemo(
     () => [
@@ -307,6 +321,10 @@ const FostersContainer = styled.div`
 `;
 
 function Fosters() {
+  const {
+    currentUser: { role },
+  } = React.useContext(AuthContext);
+
   return (
     <DefaultBody>
       <FostersContainer>

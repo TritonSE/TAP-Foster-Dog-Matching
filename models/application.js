@@ -199,11 +199,11 @@ module.exports = mongoose.model(
       },
       ambassador: {
         type: Schema.Types.ObjectId,
-        required: true,
+        required: false,
       },
       coordinator: {
         type: Schema.Types.ObjectId,
-        required: true,
+        required: false,
       },
       completedActionItems: {
         type: Boolean,
@@ -211,11 +211,11 @@ module.exports = mongoose.model(
       },
       selectedDogs: {
         type: [String],
-        required: true,
+        required: false,
       },
       preference: {
         type: [String],
-        required: true,
+        required: false,
       },
     },
     { timestamps: {} }
