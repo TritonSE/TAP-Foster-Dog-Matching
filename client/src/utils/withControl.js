@@ -33,7 +33,7 @@ function withControl(Component) {
 
     const {
       field: { onChange: formOnChange, ...field },
-      fieldState,
+      fieldState: { error, isTouched, isDirty },
     } = useController({
       name,
       control,
@@ -43,9 +43,11 @@ function withControl(Component) {
 
     return (
       <Component
-        {...fieldState}
         {...field}
         {...inputProps}
+        invalid={!!error}
+        isTouched={isTouched}
+        isDirty={isDirty}
         onChange={(val) => {
           if (onChange) onChange(val);
           else formOnChange(val);

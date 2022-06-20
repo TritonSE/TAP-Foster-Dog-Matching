@@ -10,7 +10,7 @@ import "../css/dashboardcard.css";
 
 function DashboardCard(props) {
   return (
-    <div className="dashboard-card">
+    <div className="dashboard-card" onClick={props.onClick}>
       {props.iconButton}
       <div className="dashboard-card-image-container">
         <img className="dashboard-card-image" src={props.imagePath} alt={props.imageAltText} />

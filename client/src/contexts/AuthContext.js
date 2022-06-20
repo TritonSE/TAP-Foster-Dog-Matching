@@ -5,7 +5,6 @@
  * Provides current user object to entire app
  *
  * Value:
- *      - loadingUser (boolean) - true if user is loading
  *      - currentUser (object) - current user/admin object
  *      - signedIn (boolean) - indicates whether user is signed in or not
  *
@@ -13,9 +12,23 @@
  */
 
 import React from "react";
+import styled from "styled-components";
 import { getAdmin } from "../services/admins";
 import { getUser } from "../services/users";
 import { auth } from "../utils/firebase-config";
+import loadingCircle from "../images/loadingcircle.png";
+import "../css/loadingBox.css";
+
+const LoadingContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  & > img {
+    width: 10vh;
+  }
+`;
 
 export const AuthContext = React.createContext({});
 
@@ -47,9 +60,16 @@ export function AuthProvider({ children }) {
   }, []);
 
   const value = React.useMemo(
-    () => ({ loadingUser, currentUser, signedIn: currentUser !== undefined }),
-    [currentUser, loadingUser]
+    () => ({ currentUser, signedIn: currentUser !== undefined }),
+    [currentUser]
   );
+
+  if (loadingUser)
+    return (
+      <LoadingContainer>
+        <img src={loadingCircle} className="loading-image" alt="loading circle" />
+      </LoadingContainer>
+    );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
