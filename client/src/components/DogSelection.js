@@ -47,6 +47,7 @@ import styled from "styled-components";
 import DogSummary from "./DogSummary";
 import PassFail from "./PassFail";
 import DogHappy from "../images/DogHappy.png";
+import FOSTER_EVALUATION_INITIAL_MESSAGES from "../constants/FOSTER_EVALUATION_INITIAL_MESSAGES";
 
 const dog1 = {
   name: "Happy",
@@ -190,7 +191,7 @@ function DogSelection() {
         visible={showConfirmDialog}
         setVisible={setShowConfirmDialog}
         status="Confirm Meet & Greet"
-        initialMessage=""
+        initialMessage={FOSTER_EVALUATION_INITIAL_MESSAGES.MEET_AND_GREET.CONFIRM}
       />
     </Content>
   );

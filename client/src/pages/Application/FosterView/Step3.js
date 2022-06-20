@@ -67,13 +67,7 @@ export default {
     <Meetings
       textCard={
         <div>
-          <p>Hello, Shelby</p>
-          <br />
-
-          <p>Congratulations!! Your initial interview was a success, you have passed Step 2!</p>
-          <p>Please click on Step 3 to schedule your home check with a TAP team member.</p>
-          <p>Best,</p>
-          <p>The Animal Pad Team</p>
+          {/* TODO */}
           <img src={logo} alt="logo" />
         </div>
       }

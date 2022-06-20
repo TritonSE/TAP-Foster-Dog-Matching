@@ -6,12 +6,12 @@
  * 
  * Props:
  * -status: used as title, and the type of message to send ex: 'Pass', 'Fail'
- * -initialMessage: starter message you want to send, must be in the form of html as string
+ * -initialMessage: starter message you want to send, must be a function (that takes a name arg) that returns html as a string
  * 
  * Ex)
  * <PassFail 
         status = 'Pass'
-        initialMessage = '<p>Test Message, I love food!</p>'
+        initialMessage = (name) => '<p>Hi ${name}. Test Message, I love food!</p>'
       />
  */
 
@@ -21,11 +21,13 @@ import { Editor } from "react-draft-wysiwyg";
 import x from "../images/X.png";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "../css/passFail.css";
+import ApplicationContext from "../contexts/ApplicationContext";
 
 function PassFail({ visible, setVisible, status, initialMessage }) {
+  const { applicationState } = React.useContext(ApplicationContext);
   const [editorState, setEditorState] = React.useState(
     EditorState.createWithContent(
-      ContentState.createFromBlockArray(convertFromHTML(initialMessage))
+      ContentState.createFromBlockArray(convertFromHTML(initialMessage(applicationState.firstName)))
     )
   );
 

@@ -130,12 +130,7 @@ export default {
     <Meetings
       textCard={
         <div>
-          <p>Hello, Shelby</p>
-          <br />
-          <p>Congratulations!! Your home screen was a success, you have passed Step 3!</p>
-          <p>Please click on Step 4 to move to your foster matching process.</p>
-          <p>Best,</p>
-          <p>The Animal Pad Team</p>
+          {/* TODO */}
           <img src={logo} alt="logo" />
         </div>
       }

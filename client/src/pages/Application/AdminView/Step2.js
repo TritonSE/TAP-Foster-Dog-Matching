@@ -7,6 +7,7 @@ import LoadingBox from "../../../components/LoadingBox";
 import Meeting from "../../../components/Meeting";
 import StatusUpdate from "../../../components/StatusUpdate";
 import InterviewInfo from "../../../components/InterviewInfo";
+import FOSTER_EVALUATION_INITIAL_MESSAGES from "../../../constants/FOSTER_EVALUATION_INITIAL_MESSAGES";
 
 function InterviewInformation() {
   const waiting = false; // TODO: use actual application status
@@ -33,7 +34,13 @@ function InterviewInformation() {
           location="Zoom"
         />
       }
-      interviewInfo={<InterviewInfo title="After Interview" />}
+      interviewInfo={
+        <InterviewInfo
+          title="After Interview"
+          passInitialMessage={FOSTER_EVALUATION_INITIAL_MESSAGES.INTERVIEW.PASS}
+          rejectInitialMessage={FOSTER_EVALUATION_INITIAL_MESSAGES.INTERVIEW.REJECT}
+        />
+      }
     />
   );
 }

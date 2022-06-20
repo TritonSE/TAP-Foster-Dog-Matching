@@ -7,6 +7,7 @@ import LoadingBox from "../../../components/LoadingBox";
 import Meeting from "../../../components/Meeting";
 import StatusUpdate from "../../../components/StatusUpdate";
 import InterviewInfo from "../../../components/InterviewInfo";
+import FOSTER_EVALUATION_INITIAL_MESSAGES from "../../../constants/FOSTER_EVALUATION_INITIAL_MESSAGES";
 
 function HomeScreenInformation() {
   const waiting = false; // TODO: use actual application status
@@ -33,7 +34,15 @@ function HomeScreenInformation() {
           location="Zoom"
         />
       }
-      interviewInfo={<InterviewInfo title="After Home Screen" contingent />}
+      interviewInfo={
+        <InterviewInfo
+          title="After Home Screen"
+          passInitialMessage={FOSTER_EVALUATION_INITIAL_MESSAGES.HOME_SCREEN.PASS}
+          rejectInitialMessage={FOSTER_EVALUATION_INITIAL_MESSAGES.HOME_SCREEN.REJECT}
+          contingentInitialMessage={FOSTER_EVALUATION_INITIAL_MESSAGES.HOME_SCREEN.CONTINGENT}
+          contingent
+        />
+      }
     />
   );
 }

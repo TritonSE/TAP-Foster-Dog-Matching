@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
 import React from "react";
 import { ControlledInput } from "./Input";
-import Form from "./Form";
 import PassFail from "./PassFail";
 import "../css/interviewInfo.css";
 
@@ -56,19 +55,21 @@ function InterviewInfo(props) {
         visible={showPassDialog}
         setVisible={setShowPassDialog}
         status="Pass"
-        initialMessage=""
+        initialMessage={props.passInitialMessage}
       />
-      <PassFail
-        visible={showContingentDialog}
-        setVisible={setShowContingentDialog}
-        status="Contingent"
-        initialMessage=""
-      />
+      {props.contingent && (
+        <PassFail
+          visible={showContingentDialog}
+          setVisible={setShowContingentDialog}
+          status="Contingent"
+          initialMessage={props.contingentInitialMessage}
+        />
+      )}
       <PassFail
         visible={showRejectDialog}
         setVisible={setShowRejectDialog}
         status="Reject"
-        initialMessage=""
+        initialMessage={props.rejectInitialMessage}
       />
     </div>
   );

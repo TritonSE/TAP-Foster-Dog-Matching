@@ -71,14 +71,7 @@ export default {
     <Meetings
       textCard={
         <div>
-          <p>Hello, Shelby</p>
-          <br />
-          <p>The TAP team has matched you with Skippy as your next foster!</p>
-          <br />
-          <p>Click on step 5 to schedule your meet and greet with Skippy!</p>
-          <br />
-          <p>Best,</p>
-          <p>The Animal Pad Team</p>
+          {/* TODO */}
           <img src={logo} alt="logo" />
         </div>
       }
