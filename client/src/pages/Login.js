@@ -20,7 +20,11 @@ function Login() {
   return (
     <div className="intro-page">
       <Header />
-      <IntroForm formType="login" header={`${state ? state.type : "Foster"} Log In`} />
+      <IntroForm
+        formType="login"
+        header={`${state ? state.accountType : "Foster"} Log In`}
+        accountType={state ? state.accountType : "Foster"}
+      />
       <div className="right-panel">
         <img className="dog-image" src={dog} alt="Cute dog!" />
         <div className="copyright">

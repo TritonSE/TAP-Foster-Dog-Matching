@@ -7,7 +7,7 @@
  */
 
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "./Button";
 import { getAuthErrorMessage, signInUser } from "../services/auth";
 
@@ -36,6 +36,8 @@ function IntroForm(props) {
       .catch((e) => setError(getAuthErrorMessage(e.code)));
   };
 
+  const handleSignUp = () => {};
+
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       handleSignIn();
@@ -50,12 +52,12 @@ function IntroForm(props) {
           <Button
             className="foster"
             name="Foster"
-            onClick={() => navigate("/login", { state: { type: "Foster" } })}
+            onClick={() => navigate("/login", { state: { accountType: "Foster" } })}
           />
           <Button
             className="admin"
             name="Admin"
-            onClick={() => navigate("/login", { state: { type: "Admin" } })}
+            onClick={() => navigate("/login", { state: { accountType: "Admin" } })}
           />
         </>
       );
@@ -80,11 +82,11 @@ function IntroForm(props) {
             onChange={(e) => setPassword(e.target.value)}
             onKeyDown={handleKeyDown}
           />
-          {error && <p className="error-message">{error}</p>}
+          {error && <p classNamfe="error-message">{error}</p>}
           <Button className="login" name="Log In" onClick={handleSignIn} />
-          <a href="/register" className="sign-up">
+          <Link to="/register" state={{ accountType: props.accountType }} className="sign-up">
             Sign Up
-          </a>
+          </Link>
         </>
       );
       break;
@@ -109,9 +111,9 @@ function IntroForm(props) {
             <input type="password" className="signup-re-password" placeholder="Re-enter Password" />
             {/* TODO: Make Signup button work */}
             <Button className="signup" name="Continue" />
-            <a href="/login" className="log-in">
+            <Link to="/login" state={{ accountType: props.accountType }} className="log-in">
               Log In
-            </a>
+            </Link>
           </>
         );
       } else if (props.accountType === "Foster") {
@@ -124,9 +126,9 @@ function IntroForm(props) {
             <input type="password" className="signup-re-password" placeholder="Re-enter Password" />
             {/* TODO: Make Signup button work */}
             <Button className="signup" name="Continue" />
-            <a href="/login" className="log-in">
+            <Link to="/login" state={{ accountType: props.accountType }} className="log-in">
               Log In
-            </a>
+            </Link>
           </>
         );
       }
