@@ -8,9 +8,29 @@ import StatusUpdate from "../../../components/StatusUpdate";
 import Meetings from "../../../components/Meeting";
 import logo from "../../../images/logo-inverted.png";
 import doggo from "../../../images/good-boi.png";
+import ApplicationContext from "../../../contexts/ApplicationContext";
+
+function Intro() {
+  const { applicationState } = React.useContext(ApplicationContext);
+
+  return (
+    <Meetings
+      textCard={
+        <div>
+          <p className="message-from-admin">
+            {applicationState.messages?.stage4.replace(/\n/g, "\n\n")}
+          </p>
+          <img src={logo} alt="logo" />
+        </div>
+      }
+      imagePath={doggo}
+    />
+  );
+}
 
 function ScheduleMeetAndGreet() {
   const [view, setView] = React.useState("schedule");
+  const { applicationState } = React.useContext(ApplicationContext);
 
   const setInterviewConfirmed = React.useCallback(() => setView("confirmed"), []);
   if (view === "schedule")
@@ -37,7 +57,7 @@ function ScheduleMeetAndGreet() {
       title="Meet & Greet Confirmed"
       textCard={
         <div>
-          <p>Hello, Shelby</p>
+          <p>Hello, {applicationState.firstName}</p>
           <p>
             Your Meet & Greet has been confirmed! An ambassador from TAP has been assigned to your
             application and they will be in contact with you shortly.
@@ -67,16 +87,6 @@ function ScheduleMeetAndGreet() {
 }
 
 export default {
-  intro: (
-    <Meetings
-      textCard={
-        <div>
-          {/* TODO */}
-          <img src={logo} alt="logo" />
-        </div>
-      }
-      imagePath={doggo}
-    />
-  ),
+  intro: <Intro />,
   content: <ScheduleMeetAndGreet />,
 };

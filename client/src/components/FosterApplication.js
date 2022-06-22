@@ -690,12 +690,13 @@ function FosterAgreementView({
 }
 
 function ApplicationSubmittedView() {
+  const { applicationState } = React.useContext(ApplicationContext);
+
   return (
     <Meetings
       textCard={
         <div>
-          <p>Hello, Shelby</p>
-          <br />
+          <p>Hello, {applicationState.firstName}</p>
           <p>Thank you so much for showing interest in volunteering to foster with us.</p>
           <p>
             Your application has been received and is under review! Hang tight, you will receive a

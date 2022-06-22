@@ -8,6 +8,7 @@ import Meetings from "../../../components/Meeting";
 import logo from "../../../images/logo-inverted.png";
 import doggo from "../../../images/good-boi.png";
 import DogCard from "../../../components/DogProfileCard";
+import ApplicationContext from "../../../contexts/ApplicationContext";
 
 const searchingForMatchesContent = (
   <>
@@ -70,7 +71,26 @@ const Green = styled.div`
   font-size: 22px;
 `;
 
+function Intro() {
+  const { applicationState } = React.useContext(ApplicationContext);
+
+  return (
+    <Meetings
+      textCard={
+        <div>
+          <p className="message-from-admin">
+            {applicationState.messages.stage3.replace(/\n/g, "\n\n")}
+          </p>
+          <img src={logo} alt="logo" />
+        </div>
+      }
+      imagePath={doggo}
+    />
+  );
+}
+
 function FosterMatches() {
+  const { applicationState } = React.useContext(ApplicationContext);
   const [matches, setMatches] = React.useState([
     {
       name: "tom",
@@ -96,8 +116,7 @@ function FosterMatches() {
       title="Status Update"
       textCard={
         <div>
-          <p>Hello, Shelby</p>
-          <br />
+          <p>Hello, {applicationState.firstName}</p>
           {matches.length === 0 ? searchingForMatchesContent : matchesFoundContent}
           <p>Best,</p>
           <p>The Animal Pad Team</p>
@@ -126,16 +145,6 @@ function FosterMatches() {
 }
 
 export default {
-  intro: (
-    <Meetings
-      textCard={
-        <div>
-          {/* TODO */}
-          <img src={logo} alt="logo" />
-        </div>
-      }
-      imagePath={doggo}
-    />
-  ),
+  intro: <Intro />,
   content: <FosterMatches />,
 };

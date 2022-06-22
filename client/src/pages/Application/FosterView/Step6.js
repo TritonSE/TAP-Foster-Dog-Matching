@@ -10,6 +10,7 @@ import Meetings from "../../../components/Meeting";
 import logo from "../../../images/logo-inverted.png";
 import doggo from "../../../images/good-boi.png";
 import DogProfileSummary from "../../../components/DogProfileSummary";
+import ApplicationContext from "../../../contexts/ApplicationContext";
 
 const FosterResourcesActions = styled.div`
   display: flex;
@@ -36,8 +37,36 @@ const RightColumn = styled.div`
   justify-content: space-between;
 `;
 
+function Intro() {
+  const { applicationState } = React.useContext(ApplicationContext);
+
+  return (
+    <Meetings
+      textCard={
+        <div>
+          <p>Hello, {applicationState.firstName}</p>
+
+          <p>
+            Congratulations!! Your Meet & Greet was a success, you have been passed step 5 and are
+            now a TAP foster!
+          </p>
+          <p>
+            Please click on Step 6 to communicate with us during your time fostering. Best, The
+            Animal Pad Team
+          </p>
+          <p>Best,</p>
+          <p>The Animal Pad Team</p>
+          <img src={logo} alt="logo" />
+        </div>
+      }
+      imagePath={doggo}
+    />
+  );
+}
+
 function FosterInHomeContent() {
   const navigate = useNavigate();
+  const { applicationState } = React.useContext(ApplicationContext);
   const [view, setView] = React.useState("resources");
 
   if (view === "resources")
@@ -80,7 +109,7 @@ function FosterInHomeContent() {
       title="Adoption"
       textCard={
         <div>
-          <p>Hello, Shelby</p>
+          <p>Hello, {applicationState.firstName}</p>
           <p>
             Thank you for your interest in making an adoption. We are so excited for you to become a
             foster! A member from our adoption team will reach out to you shortly. Please feel free
@@ -96,27 +125,6 @@ function FosterInHomeContent() {
 }
 
 export default {
-  intro: (
-    <Meetings
-      textCard={
-        <div>
-          <p>Hello, Shelby</p>
-          <br />
-          <p>
-            Congratulations!! Your Meet & Greet was a success, you have been passed step 5 and are
-            now a TAP foster!
-          </p>
-          <p>
-            Please click on Step 6 to communicate with us during your time fostering. Best, The
-            Animal Pad Team
-          </p>
-          <p>Best,</p>
-          <p>The Animal Pad Team</p>
-          <img src={logo} alt="logo" />
-        </div>
-      }
-      imagePath={doggo}
-    />
-  ),
+  intro: <Intro />,
   content: <FosterInHomeContent />,
 };
