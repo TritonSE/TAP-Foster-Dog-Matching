@@ -14,7 +14,7 @@ const VIEW = {
 };
 
 function AdminFosterMatchingFlow() {
-  const [view, setView] = React.useState(VIEW.AVAILABLE_DOGS); // NOTE: manually set to to VIEW.CONFIRM_MEET_AND_GREET to see DogSelection component
+  const [view, setView] = React.useState(VIEW.CONFIRM_MEET_AND_GREET); // NOTE: manually set to to VIEW.CONFIRM_MEET_AND_GREET to see DogSelection component
 
   const handleSelectAvailableDogs = () => {
     // TODO: handle saving available dog logic here

@@ -193,6 +193,24 @@ module.exports = mongoose.model(
           required: true,
         },
       },
+      messages: {
+        stage1: {
+          type: String,
+          required: false,
+        },
+        stage2: {
+          type: String,
+          required: false,
+        },
+        stage3: {
+          type: String,
+          required: false,
+        },
+        stage4: {
+          type: String,
+          required: false,
+        },
+      },
       status: {
         type: String,
         required: true,

@@ -56,6 +56,7 @@ function InterviewInfo(props) {
         setVisible={setShowPassDialog}
         status="Pass"
         initialMessage={props.passInitialMessage}
+        onConfirm={props.onPassConfirm}
       />
       {props.contingent && (
         <PassFail
@@ -63,6 +64,7 @@ function InterviewInfo(props) {
           setVisible={setShowContingentDialog}
           status="Contingent"
           initialMessage={props.contingentInitialMessage}
+          onConfirm={props.onContingentConfirm}
         />
       )}
       <PassFail
@@ -70,6 +72,7 @@ function InterviewInfo(props) {
         setVisible={setShowRejectDialog}
         status="Reject"
         initialMessage={props.rejectInitialMessage}
+        onConfirm={props.onRejectConfirm}
       />
     </div>
   );

@@ -7,6 +7,7 @@
  * Props:
  * -status: used as title, and the type of message to send ex: 'Pass', 'Fail'
  * -initialMessage: starter message you want to send, must be a function (that takes a name arg) that returns html as a string
+ * -onConfirm: function that will be called when the user clicks the confirm button (takes content arg with the content of the editor)  
  * 
  * Ex)
  * <PassFail 
@@ -23,7 +24,7 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "../css/passFail.css";
 import ApplicationContext from "../contexts/ApplicationContext";
 
-function PassFail({ visible, setVisible, status, initialMessage }) {
+function PassFail({ visible, setVisible, status, onConfirm, initialMessage }) {
   const { applicationState } = React.useContext(ApplicationContext);
   const [editorState, setEditorState] = React.useState(
     EditorState.createWithContent(
@@ -31,19 +32,14 @@ function PassFail({ visible, setVisible, status, initialMessage }) {
     )
   );
 
-  // const [editorState, setEditorState] = React.useState(
-  //   EditorState.createEmpty()
-  // );
-
   const onChange = (change) => {
     setEditorState(change);
   };
 
-  const onConfirm = () => {
-    // TODO
+  const handleConfirm = () => {
+    const content = editorState.getCurrentContent().getPlainText();
+    onConfirm(content);
     setVisible(false);
-
-    // console.log(editorState.getCurrentContent().getPlainText('\u0001'));
   };
 
   const onClose = () => {
@@ -74,7 +70,7 @@ function PassFail({ visible, setVisible, status, initialMessage }) {
             />
           </div>
 
-          <button type="button" className="button" onClick={onConfirm}>
+          <button type="button" className="button" onClick={handleConfirm}>
             Confirm
           </button>
         </div>

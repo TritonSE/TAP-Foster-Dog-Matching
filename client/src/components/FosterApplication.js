@@ -555,7 +555,7 @@ function FosterAgreementView({
   });
   const [showPassDialog, setShowPassDialog] = React.useState(false);
   const [showRejectDialog, setShowRejectDialog] = React.useState(false);
-  const { applicationView } = React.useContext(ApplicationContext);
+  const { applicationView, setApplicationState } = React.useContext(ApplicationContext);
 
   const onSubmit = (data) => {
     if (admin) {
@@ -597,6 +597,29 @@ function FosterAgreementView({
     console.log(errors);
     setView("done");
   };
+
+  const onPassConfirm = React.useCallback((content) => {
+    const reqBody = {
+      messages: {
+        stage1: content,
+      },
+    };
+    updateApplication(curAppId, reqBody).then((response) =>
+      setApplicationState(response.data.application)
+    );
+  }, []);
+
+  const onRejectConfirm = React.useCallback((content) => {
+    const reqBody = {
+      status: "rejected",
+      messages: {
+        stage1: content,
+      },
+    };
+    updateApplication(curAppId, reqBody).then((response) =>
+      setApplicationState(response.data.application)
+    );
+  }, []);
 
   return (
     <FosterAgreementContainer>
@@ -653,12 +676,14 @@ function FosterAgreementView({
         setVisible={setShowPassDialog}
         status="Pass"
         initialMessage={FOSTER_EVALUATION_INITIAL_MESSAGES.FOSTER_APPLICATION.PASS}
+        onConfirm={onPassConfirm}
       />
       <PassFail
         visible={showRejectDialog}
         setVisible={setShowRejectDialog}
         status="Reject"
         initialMessage={FOSTER_EVALUATION_INITIAL_MESSAGES.FOSTER_APPLICATION.REJECT}
+        onConfirm={onRejectConfirm}
       />
     </FosterAgreementContainer>
   );

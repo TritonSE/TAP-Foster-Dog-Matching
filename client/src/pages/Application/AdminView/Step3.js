@@ -8,9 +8,55 @@ import Meeting from "../../../components/Meeting";
 import StatusUpdate from "../../../components/StatusUpdate";
 import InterviewInfo from "../../../components/InterviewInfo";
 import FOSTER_EVALUATION_INITIAL_MESSAGES from "../../../constants/FOSTER_EVALUATION_INITIAL_MESSAGES";
+import { updateApplication } from "../../../services/application";
+import ApplicationContext from "../../../contexts/ApplicationContext";
 
 function HomeScreenInformation() {
+  const { applicationId, setApplicationState } = React.useContext(ApplicationContext);
   const waiting = false; // TODO: use actual application status
+
+  const onPassConfirm = React.useCallback(
+    (content) => {
+      const reqBody = {
+        messages: {
+          stage3: content,
+        },
+      };
+      updateApplication(applicationId, reqBody).then((response) =>
+        setApplicationState(response.data.application)
+      );
+    },
+    [applicationId]
+  );
+
+  const onContingentConfirm = React.useCallback(
+    (content) => {
+      const reqBody = {
+        messages: {
+          stage3: content,
+        },
+      };
+      updateApplication(applicationId, reqBody).then((response) =>
+        setApplicationState(response.data.application)
+      );
+    },
+    [applicationId]
+  );
+
+  const onRejectConfirm = React.useCallback(
+    (content) => {
+      const reqBody = {
+        status: "rejected",
+        messages: {
+          stage3: content,
+        },
+      };
+      updateApplication(applicationId, reqBody).then((response) =>
+        setApplicationState(response.data.application)
+      );
+    },
+    [applicationId]
+  );
 
   if (waiting)
     return (
@@ -40,6 +86,9 @@ function HomeScreenInformation() {
           passInitialMessage={FOSTER_EVALUATION_INITIAL_MESSAGES.HOME_SCREEN.PASS}
           rejectInitialMessage={FOSTER_EVALUATION_INITIAL_MESSAGES.HOME_SCREEN.REJECT}
           contingentInitialMessage={FOSTER_EVALUATION_INITIAL_MESSAGES.HOME_SCREEN.CONTINGENT}
+          onPassConfirm={onPassConfirm}
+          onRejectConfirm={onRejectConfirm}
+          onContingentConfirm={onContingentConfirm}
           contingent
         />
       }
