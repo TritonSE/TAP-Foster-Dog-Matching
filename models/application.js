@@ -210,7 +210,7 @@ module.exports = mongoose.model(
         required: true,
       },
       selectedDogs: {
-        type: [String],
+        type: [Schema.Types.ObjectId],
         required: true,
       },
       preference: {

@@ -1,7 +1,6 @@
 const express = require("express");
 const { body } = require("express-validator");
 const { getApplication, createApplication, updateApplication } = require("../services/application");
-const { updateUser } = require("../services/users");
 const { validateRequest } = require("../middleware/validation");
 
 const router = express.Router();
@@ -89,14 +88,8 @@ const validators = [
   body("ambassador").notEmpty().isMongoId(),
   body("coordinator").notEmpty().isMongoId(),
   body("completedActionItems").notEmpty().isBoolean(),
-  body("selectedDogs")
-    .notEmpty()
-    .isArray()
-    .custom((input) => input.every((value) => typeof value === "string")),
-  body("preference")
-    .notEmpty()
-    .isArray()
-    .custom((input) => input.every((value) => typeof value === "string")),
+  body("selectedDogs").notEmpty().isArray(),
+  body("preference").notEmpty().isArray(),
 ];
 
 /**
