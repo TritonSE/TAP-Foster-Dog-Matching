@@ -1,6 +1,8 @@
 /**
  * Reusable card for the dashboard that contains an iconButton component, image, and text.
  *
+ * Takes imagePath, imageAltText, and an optional link path as props.
+ *
  * @summary     Card meant for the dashboard.
  * @author      Andrew Masek
  */
