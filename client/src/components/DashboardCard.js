@@ -6,11 +6,16 @@
  */
 
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "../css/dashboardcard.css";
 
 function DashboardCard(props) {
+  const navigate = useNavigate();
   return (
-    <div className="dashboard-card">
+    <div
+      className="dashboard-card"
+      onClick={props.navigationPath ? () => navigate(props.navigationPath) : undefined}
+    >
       {props.iconButton}
       <div className="dashboard-card-image-container">
         <img className="dashboard-card-image" src={props.imagePath} alt={props.imageAltText} />
