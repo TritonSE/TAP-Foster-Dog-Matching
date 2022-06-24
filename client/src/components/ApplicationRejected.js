@@ -9,6 +9,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import ApplicationContext from "../contexts/ApplicationContext";
+import { AuthContext } from "../contexts/AuthContext";
 import { Colors } from "./Theme";
 
 const Container = styled.div`
@@ -19,7 +21,7 @@ const Container = styled.div`
   margin: 0 auto;
   border-radius: 40px;
   border: 5px solid #91c649;
-  padding: 5% 0;
+  padding: 5%;
   margin: 1em;
 `;
 
@@ -44,12 +46,42 @@ const Button = styled.div`
 
 function ApplicationRejected() {
   const navigate = useNavigate();
+  const {
+    applicationState: {
+      messages: {
+        stage1: stage1RejectionMessage,
+        stage2: stage2RejectionMessage,
+        stage3: stage3RejectionMessage,
+        stage4: stage4RejectionMessage,
+      },
+    },
+  } = React.useContext(ApplicationContext);
+  const { currentUser } = React.useContext(AuthContext);
+
   return (
     <Container>
-      <Text>
-        Applicant has been rejected. Their application can be reactivated with director’s approval.
-      </Text>
-      <Button onClick={() => navigate("/pending-applications")}>Dashboard</Button>
+      {currentUser.type === "admin" ? (
+        <Text>
+          Applicant has been rejected. Their application can be reactivated with director&apos;s
+          approval.
+        </Text>
+      ) : (
+        <div className="message-from-admin">
+          {(
+            stage4RejectionMessage ||
+            stage3RejectionMessage ||
+            stage2RejectionMessage ||
+            stage1RejectionMessage
+          ).replace(/\n/g, "\n\n")}
+        </div>
+      )}
+      <Button
+        onClick={() =>
+          navigate(currentUser.type === "admin" ? "/pending-applications" : "/dashboard")
+        }
+      >
+        Dashboard
+      </Button>
     </Container>
   );
 }
