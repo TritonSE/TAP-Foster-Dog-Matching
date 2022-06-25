@@ -100,6 +100,10 @@
   bottom: 5%;
 }
 
+.signup-success {
+  color: #8dc442;
+}
+
 @media only screen and (max-width: 1050px) {
   .intro-page #header {
     display: grid;
@@ -162,7 +166,7 @@
   .error-message {
     color: red;
     position: absolute;
-    bottom: 20%;
+    bottom: 24%;
   }
 
   .button-border-login {

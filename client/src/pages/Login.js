@@ -24,6 +24,7 @@ function Login() {
         formType="login"
         header={`${state ? state.accountType : "Foster"} Log In`}
         accountType={state ? state.accountType : "Foster"}
+        showSignUpSuccessMessage={state && state.signUpSuccessful}
       />
       <div className="right-panel">
         <img className="dog-image" src={dog} alt="Cute dog!" />

@@ -10,12 +10,18 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "./Button";
 import { getAuthErrorMessage, signInUser } from "../services/auth";
+import { createAdmin } from "../services/admins";
+import { createUser } from "../services/users";
 
 function IntroForm(props) {
   let content;
   const navigate = useNavigate();
   const [email, setEmail] = React.useState();
   const [password, setPassword] = React.useState();
+  const [firstName, setFirstName] = React.useState();
+  const [lastName, setLastName] = React.useState();
+  const [confirmPassword, setConfirmPassword] = React.useState();
+  const [role, setRole] = React.useState();
   const [error, setError] = React.useState();
 
   const handleSignIn = () => {
@@ -36,11 +42,57 @@ function IntroForm(props) {
       .catch((e) => setError(getAuthErrorMessage(e.code)));
   };
 
-  const handleSignUp = () => {};
+  const handleSignUp = () => {
+    if (!firstName) {
+      setError("Please enter a first name.");
+      return;
+    }
+    if (!lastName) {
+      setError("Please enter a last name.");
+      return;
+    }
+    if (!email) {
+      setError("Please enter an email.");
+      return;
+    }
+    if (!password) {
+      setError("Please enter a password.");
+      return;
+    }
+    if (password !== confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+
+    const newUser = {
+      firstName,
+      lastName,
+      email,
+      password,
+    };
+
+    if (props.accountType === "Admin") {
+      if (!role) {
+        setError("Please select a role.");
+        return;
+      }
+      newUser.role = role;
+    }
+
+    (props.accountType === "Admin" ? createAdmin : createUser)(newUser).then((response) => {
+      if (!response.ok) {
+        setError(response.data.message);
+      } else {
+        setError();
+        navigate("/login", { state: { accountType: props.accountType, signUpSuccessful: true } });
+      }
+    });
+  };
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
-      handleSignIn();
+      if (props.formType === "login") handleSignIn();
+      else if (props.formType === "signup") handleSignUp();
     }
   };
 
@@ -82,7 +134,7 @@ function IntroForm(props) {
             onChange={(e) => setPassword(e.target.value)}
             onKeyDown={handleKeyDown}
           />
-          {error && <p classNamfe="error-message">{error}</p>}
+          {error && <p className="error-message">{error}</p>}
           <Button className="login" name="Log In" onClick={handleSignIn} />
           <Link to="/register" state={{ accountType: props.accountType }} className="sign-up">
             Sign Up
@@ -96,7 +148,7 @@ function IntroForm(props) {
         content = (
           <>
             <div className="form-signup-question"> I am a... </div>
-            <select className="selector">
+            <select className="selector" value={role} onChange={(e) => setRole(e.target.value)}>
               <option value="" disabled selected>
                 Select an option
               </option>
@@ -104,13 +156,46 @@ function IntroForm(props) {
               <option value="ambassador">Ambassador</option>
               <option value="coordinator">Coordinator</option>
             </select>
-            <input className="signup-first-name" placeholder="First Name" />
-            <input className="signup-last-name" placeholder="Last Name" />
-            <input type="email" className="signup-email" placeholder="Email" />
-            <input type="password" className="signup-password" placeholder="Password" />
-            <input type="password" className="signup-re-password" placeholder="Re-enter Password" />
-            {/* TODO: Make Signup button work */}
-            <Button className="signup" name="Continue" />
+            <input
+              className="signup-first-name"
+              placeholder="First Name"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              onKeyDown={handleKeyDown}
+            />
+            <input
+              className="signup-last-name"
+              placeholder="Last Name"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              onKeyDown={handleKeyDown}
+            />
+            <input
+              type="email"
+              className="signup-email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              onKeyDown={handleKeyDown}
+            />
+            <input
+              type="password"
+              className="signup-password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={handleKeyDown}
+            />
+            <input
+              type="password"
+              className="signup-re-password"
+              placeholder="Re-enter Password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              onKeyDown={handleKeyDown}
+            />
+            {error && <p className="error-message">{error}</p>}
+            <Button className="signup" name="Continue" onClick={handleSignUp} />
             <Link to="/login" state={{ accountType: props.accountType }} className="log-in">
               Log In
             </Link>
@@ -119,13 +204,46 @@ function IntroForm(props) {
       } else if (props.accountType === "Foster") {
         content = (
           <>
-            <input className="signup-first-name" placeholder="First Name" />
-            <input className="signup-last-name" placeholder="Last Name" />
-            <input type="email" className="signup-email" placeholder="Email" />
-            <input type="password" className="signup-password" placeholder="Password" />
-            <input type="password" className="signup-re-password" placeholder="Re-enter Password" />
-            {/* TODO: Make Signup button work */}
-            <Button className="signup" name="Continue" />
+            <input
+              className="signup-first-name"
+              placeholder="First Name"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              onKeyDown={handleKeyDown}
+            />
+            <input
+              className="signup-last-name"
+              placeholder="Last Name"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              onKeyDown={handleKeyDown}
+            />
+            <input
+              type="email"
+              className="signup-email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              onKeyDown={handleKeyDown}
+            />
+            <input
+              type="password"
+              className="signup-password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={handleKeyDown}
+            />
+            <input
+              type="password"
+              className="signup-re-password"
+              placeholder="Re-enter Password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              onKeyDown={handleKeyDown}
+            />
+            {error && <p className="error-message">{error}</p>}
+            <Button className="signup" name="Continue" onClick={handleSignUp} />
             <Link to="/login" state={{ accountType: props.accountType }} className="log-in">
               Log In
             </Link>
@@ -214,6 +332,9 @@ function IntroForm(props) {
           {" "}
           {props.header}{" "}
         </b>
+        {props.showSignUpSuccessMessage && (
+          <p className="signup-success">Successfully signed up. Please log in.</p>
+        )}
         {content}
       </div>
       <div className="copyright-mobile">

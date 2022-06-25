@@ -23,7 +23,7 @@ module.exports = mongoose.model(
     },
     phone: {
       type: String,
-      required: true,
+      required: false,
     },
     role: {
       type: String,
@@ -31,11 +31,11 @@ module.exports = mongoose.model(
     },
     photoURL: {
       type: String,
-      required: true,
+      required: false,
     },
     schedule: {
       type: Object,
-      required: true,
+      required: false,
     },
   })
 );
