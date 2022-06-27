@@ -105,17 +105,19 @@ const ProgressMilestoneText = styled.div`
 `;
 
 function ApplicationProgress() {
-  const { currentStep, currentSubStep, goToStep, goToNextSubStep } =
+  const { currentStep, currentSubStep, goToStep, goToNextSubStep, applicationState } =
     React.useContext(ApplicationContext);
   const { isTablet } = useResponsive();
 
   // TODO: Block onClick if step is not unlocked yet
   const handleStepClicked = React.useCallback(
     (index) => {
-      if (currentStep === index) goToNextSubStep();
-      else goToStep(index);
+      if (applicationState.status !== "rejected") {
+        if (currentStep === index) goToNextSubStep();
+        else goToStep(index);
+      }
     },
-    [currentStep, goToNextSubStep, goToStep]
+    [currentStep, goToNextSubStep, goToStep, applicationState]
   );
 
   return (
