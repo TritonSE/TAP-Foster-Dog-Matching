@@ -13,9 +13,12 @@ import { getAuthErrorMessage, signInUser } from "../services/auth";
 import { createAdmin } from "../services/admins";
 import { createUser } from "../services/users";
 
+const ADMIN_SIGN_UP_KEY = ["1", "1", "1", "1", "1"];
+
 function IntroForm(props) {
   let content;
   const navigate = useNavigate();
+  const [formType, setFormType] = React.useState(props.formType);
   const [email, setEmail] = React.useState();
   const [password, setPassword] = React.useState();
   const [firstName, setFirstName] = React.useState();
@@ -23,6 +26,12 @@ function IntroForm(props) {
   const [confirmPassword, setConfirmPassword] = React.useState();
   const [role, setRole] = React.useState();
   const [error, setError] = React.useState();
+  // Signup Key Page States
+  const [key1, setKey1] = React.useState();
+  const [key2, setKey2] = React.useState();
+  const [key3, setKey3] = React.useState();
+  const [key4, setKey4] = React.useState();
+  const [key5, setKey5] = React.useState();
 
   const handleSignIn = () => {
     if (!email) {
@@ -77,6 +86,20 @@ function IntroForm(props) {
         return;
       }
       newUser.role = role;
+      // Advance to the signup key page
+      if (formType === "signup") {
+        setError();
+        setFormType("signup-key");
+        return;
+      }
+      // Check if sign up key is correct
+      const keys = [key1, key2, key3, key4, key5];
+      for (let i = 0; i < 5; i++) {
+        if (ADMIN_SIGN_UP_KEY[i] !== keys[i]) {
+          setError("Invalid sign up key.");
+          return;
+        }
+      }
     }
 
     (props.accountType === "Admin" ? createAdmin : createUser)(newUser).then((response) => {
@@ -84,7 +107,9 @@ function IntroForm(props) {
         setError(response.data.message);
       } else {
         setError();
-        navigate("/login", { state: { accountType: props.accountType, signUpSuccessful: true } });
+        navigate("/login", {
+          state: { accountType: props.accountType, signUpSuccessful: true },
+        });
       }
     });
   };
@@ -96,7 +121,7 @@ function IntroForm(props) {
     }
   };
 
-  switch (props.formType) {
+  switch (formType) {
     case "landing": {
       content = (
         <>
@@ -256,7 +281,7 @@ function IntroForm(props) {
     case "signup-key": {
       content = (
         <>
-          <a href="/register" className="back-to-register">
+          <a className="back-to-register" onClick={() => setFormType("signup")}>
             Back
           </a>
           <div className="form-signup-key-text">
@@ -264,59 +289,89 @@ function IntroForm(props) {
             Please enter the correct {props.accountType} sign up key to complete account creation.{" "}
           </div>
           <div className="key-input">
-            <input type="text" maxLength="1" id="key-1" />
-            <input type="text" maxLength="1" id="key-2" />
-            <input type="text" maxLength="1" id="key-3" />
-            <input type="text" maxLength="1" id="key-4" />
-            <input type="text" maxLength="1" id="key-5" />
+            <input
+              type="text"
+              maxLength="1"
+              id="key-1"
+              value={key1}
+              onChange={(e) => setKey1(e.target.value)}
+            />
+            <input
+              type="text"
+              maxLength="1"
+              id="key-2"
+              value={key2}
+              onChange={(e) => setKey2(e.target.value)}
+            />
+            <input
+              type="text"
+              maxLength="1"
+              id="key-3"
+              value={key3}
+              onChange={(e) => setKey3(e.target.value)}
+            />
+            <input
+              type="text"
+              maxLength="1"
+              id="key-4"
+              value={key4}
+              onChange={(e) => setKey4(e.target.value)}
+            />
+            <input
+              type="text"
+              maxLength="1"
+              id="key-5"
+              value={key5}
+              onChange={(e) => setKey5(e.target.value)}
+            />
           </div>
-          {/* TODO: Make Confirm button work */}
-          <Button className="confirm" name="Confirm" />
+          {error && <p className="error-message">{error}</p>}
+          <Button className="confirm" name="Confirm" onClick={handleSignUp} />
         </>
       );
 
-      window.onload = function moveFocus() {
-        const key1 = document.getElementById("key-1");
-        const key2 = document.getElementById("key-2");
-        const key3 = document.getElementById("key-3");
-        const key4 = document.getElementById("key-4");
-        const key5 = document.getElementById("key-5");
+      window.onload = () => {
+        const key1Input = document.getElementById("key-1");
+        const key2Input = document.getElementById("key-2");
+        const key3Input = document.getElementById("key-3");
+        const key4Input = document.getElementById("key-4");
+        const key5Input = document.getElementById("key-5");
 
-        key1.addEventListener("keyup", (e) => {
+        key1Input.addEventListener("keyup", (e) => {
           if (e.key === "Backspace") {
-            key1.value = "";
+            key1Input.value = "";
           } else {
-            key2.focus();
+            key2Input.focus();
           }
         });
-        key2.addEventListener("keyup", (e) => {
+        key2Input.addEventListener("keyup", (e) => {
           if (e.key === "Backspace") {
-            key2.value = "";
-            key1.focus();
+            key2Input.value = "";
+            key1Input.focus();
           } else {
-            key3.focus();
+            key3Input.focus();
           }
         });
-        key3.addEventListener("keyup", (e) => {
+        key3Input.addEventListener("keyup", (e) => {
           if (e.key === "Backspace") {
-            key3.value = "";
-            key2.focus();
+            key3Input.value = "";
+            key2Input.focus();
           } else {
-            key4.focus();
+            key4Input.focus();
           }
         });
-        key4.addEventListener("keyup", (e) => {
+        key4Input.addEventListener("keyup", (e) => {
           if (e.key === "Backspace") {
-            key4.value = "";
-            key3.focus();
+            key4Input.value = "";
+            key3Input.focus();
           } else {
-            key5.focus();
+            key5Input.focus();
           }
         });
-        key5.addEventListener("keyup", (e) => {
+        key5Input.addEventListener("keyup", (e) => {
           if (e.key === "Backspace") {
-            key5.value = "";
-            key4.focus();
+            key5Input.value = "";
+            key4Input.focus();
           }
         });
       };

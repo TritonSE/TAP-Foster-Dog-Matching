@@ -143,6 +143,7 @@ input {
   font-size: calc(20px + 0.5vh);
   color: #9b9a9a;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .form-signup-key-text {

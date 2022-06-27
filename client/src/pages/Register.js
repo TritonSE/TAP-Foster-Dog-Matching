@@ -16,9 +16,6 @@ function Register() {
         accountType={state ? state.accountType : "Foster"}
         header={`${state ? state.accountType : "Foster"} Sign Up`}
       />
-      {/* <IntroForm formType="signup" accountType="Admin" header="Admin Sign Up" /> */}
-      {/* <IntroForm formType="signup-key" accountType="Foster" header="Foster Sign Up" /> */}
-      {/* <IntroForm formType="signup-key" accountType="Admin" header="Admin Sign Up" /> */}
       <div className="right-panel">
         <img className="dog-image" src={dog} alt="Cute dog!" />
         <div className="copyright">
