@@ -13,7 +13,11 @@ import { getAuthErrorMessage, signInUser } from "../services/auth";
 import { createAdmin } from "../services/admins";
 import { createUser } from "../services/users";
 
-const ADMIN_SIGN_UP_KEY = ["1", "1", "1", "1", "1"];
+const ADMIN_SIGN_UP_KEYS = {
+  management: ["1", "8", "7", "7", "6"],
+  ambassador: ["5", "1", "1", "8", "3"],
+  coordinator: ["9", "8", "1", "4", "5"],
+};
 
 function IntroForm(props) {
   let content;
@@ -95,7 +99,7 @@ function IntroForm(props) {
       // Check if sign up key is correct
       const keys = [key1, key2, key3, key4, key5];
       for (let i = 0; i < 5; i++) {
-        if (ADMIN_SIGN_UP_KEY[i] !== keys[i]) {
+        if (ADMIN_SIGN_UP_KEYS[role][i] !== keys[i]) {
           setError("Invalid sign up key.");
           return;
         }
