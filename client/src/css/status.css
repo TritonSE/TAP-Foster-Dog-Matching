@@ -1,0 +1,107 @@
+.status-card {
+  text-align: center;
+  width: 100%;
+  height: min(63vh, 540px);
+  /* min-height: 520px; */
+  /* min-width: 400px; */
+  background-color: white;
+  border-radius: 20px;
+  padding-top: 2vw;
+  padding-bottom: 1vw;
+  box-sizing: border-box;
+  padding: 15px;
+}
+
+.pfp {
+  border: 1px solid #c4c4c4;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  margin-right: 5px;
+  margin-top: 5px;
+  margin-bottom: 0px;
+  float: left;
+}
+
+.smaller {
+  width: 3vw;
+  height: 3vw;
+  margin-right: 10px;
+  margin-top: 17px;
+}
+
+.card-title {
+  color: black;
+}
+
+.information-box {
+  display: flex;
+  flex-direction: column;
+  gap: 1vw;
+  text-align: left;
+  margin: 20px;
+}
+
+.information-box-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 2vw;
+}
+
+.information-box-item-label {
+  display: flex;
+  flex: 1;
+  align-items: center;
+}
+
+.information-box-item-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+  flex: 1;
+}
+
+.box-ambassador {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.line {
+  height: 2px;
+  width: 100%;
+  color: #8dc442;
+  background-color: #8dc442;
+}
+
+.linegray {
+  height: 2px;
+  background: #f4f4f4;
+  border-radius: 10px;
+  transform: matrix(1, 0, 0, -1, 0, 0);
+}
+
+@media only screen and (max-width: 750px) {
+  .status-card {
+    height: 100%;
+  }
+  .pfp {
+    width: 10vw;
+    height: 10vw;
+    vertical-align: bottom;
+  }
+
+  .information-box-item {
+    flex-direction: column;
+  }
+}
+
+@media only screen and (max-width: 300px) {
+  .pfp {
+    width: 10vw;
+    height: 10vw;
+    vertical-align: bottom;
+  }
+}

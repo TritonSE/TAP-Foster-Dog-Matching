@@ -1,0 +1,53 @@
+.dashboard-card {
+  width: calc(150px + 12.675vw);
+  height: calc(85.6px + 7.2vw);
+  border-radius: 15px;
+  background: #ffffff;
+  border: 0.5px solid #9b9a9a;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+  padding: 0 40px 0 40px;
+  text-align: center;
+  font-size: 20px;
+  box-sizing: border-box;
+  position: relative;
+  cursor: pointer;
+}
+
+.dashboard-card-image-container {
+  width: 100%;
+  height: 62%;
+  border: 0.5px solid #c4c4c4;
+  box-sizing: border-box;
+  border-radius: 15px;
+  vertical-align: bottom;
+  position: relative;
+  margin-top: 5%;
+}
+
+.dashboard-card-image {
+  width: calc(100% - 10px);
+  position: absolute;
+  bottom: 0;
+  left: 6px;
+  border-radius: 8px;
+}
+
+.dashboard-card-text {
+  height: 66px;
+  padding-top: calc(4px + 0.9vw);
+  font-size: calc(12px + 0.449vw);
+}
+
+@media only screen and (max-width: 750px) {
+  .dashboard-card {
+    width: 68vw;
+    height: 38.7vw;
+  }
+
+  .dashboard-card-text {
+    height: 20%;
+    padding-top: 8%;
+    font-size: calc(2px + 3.3vw);
+    line-height: 1;
+  }
+}

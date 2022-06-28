@@ -1,0 +1,460 @@
+.box::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.box::-webkit-scrollbar:vertical {
+  width: 12px;
+}
+
+.box::-webkit-scrollbar:horizontal {
+  height: 12px;
+}
+
+.box::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 4px solid transparent;
+  border-radius: 9px;
+  background-clip: content-box;
+}
+
+.box::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+.popup-box {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+@supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+  .popup-box {
+    background: rgba(112, 112, 112, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+}
+
+.box {
+  position: relative;
+  width: auto;
+  max-width: 85vh;
+  min-width: 767px;
+  margin: 0 auto;
+  height: auto;
+  max-height: 90vh;
+  top: 50%; /* TODO: move box lower when Header is merged  */
+  transform: translateY(-50%);
+  background: #fff;
+  border-radius: 54.1399px;
+  overflow: auto;
+}
+
+.close-icon {
+  content: "✕";
+  font-weight: bold;
+  cursor: pointer;
+  position: fixed;
+  margin-left: 25px;
+  margin-top: 25px;
+  border-radius: 50%;
+  line-height: 20px;
+  font-size: 30px;
+  outline: none;
+}
+
+.box-divider {
+  box-sizing: border-box;
+  margin: 0 auto;
+  max-width: 766px;
+  height: 3px;
+  background: #8dc442;
+  border-radius: 13.535px;
+  transform: matrix(1, 0, 0, -1, 0, 0);
+  width: 85%;
+}
+
+.box-section1 {
+  padding: 77px 160px 25px 160px;
+}
+
+.pfp-container {
+  position: relative;
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  margin-left: -18px;
+  border-radius: 50%;
+  padding-right: 30px;
+  line-height: 90px;
+}
+
+.pfp {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.blurred-pfp {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: blur(1px) brightness(50%);
+}
+
+.edit-pfp-button {
+  cursor: pointer;
+  position: absolute;
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  border-radius: 2px;
+  width: 66px;
+  height: 23px;
+  top: 34px;
+  margin: 0 12px;
+}
+
+.edit-pfp-button-text {
+  font-family: Myriad Pro;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 10px;
+  line-height: 23px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.name-text {
+  display: inline-block;
+  vertical-align: 50%;
+  font-family: Myriad Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 51.0625px;
+  line-height: 61px;
+
+  color: #000000;
+}
+
+.box-section1-text {
+  margin-top: 25px;
+  font-family: Myriad Pro;
+  font-style: normal;
+  font-size: 27px;
+  line-height: 36px;
+}
+
+.text-bold {
+  display: inline-block;
+  font-weight: bold;
+}
+
+.box-section2 {
+  padding: 0px 160px 0px 160px;
+}
+
+.box-section2-text {
+  font-family: Myriad Pro;
+  font-style: normal;
+  font-size: 27px;
+  line-height: 95px;
+}
+
+.text-left {
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.text-right {
+  position: absolute;
+  left: 399px;
+  display: inline-block;
+}
+
+.user-info {
+  padding-left: 72.5px;
+}
+
+.user-info-editable {
+  line-height: 68px;
+  text-align: center;
+  outline: 0px solid transparent;
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 0px 5px;
+}
+
+.user-info-container {
+  display: inline-block;
+  width: 330px;
+  height: 68px;
+  border: 3px solid #c4c4c4;
+  box-sizing: border-box;
+  border-radius: 25px;
+}
+
+.box-section3 {
+  height: 181px;
+  padding-top: 50px;
+}
+
+.change-password-button {
+  margin-left: auto;
+  margin-right: auto;
+  width: 329px;
+  height: 74px;
+  background: #8dc442;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 13px;
+  cursor: pointer;
+}
+
+.change-password-button-text {
+  text-align: center;
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30.1662px;
+  color: #ffffff;
+  line-height: 74px;
+}
+
+.edit-profile-button {
+  cursor: pointer;
+  float: right;
+  margin-right: 40px;
+  margin-top: 35px;
+  padding-bottom: 25px;
+  outline: none;
+}
+
+.edit-profile-text {
+  margin-left: 5px;
+  display: inline-block;
+  vertical-align: bottom;
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.edit-profile-image-container {
+  display: inline-block;
+  width: 34px;
+  height: 34px;
+}
+
+.edit-profile-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+
+.save-changes-button {
+  width: 235px;
+  height: 74px;
+  background: #8dc442;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 13px;
+  cursor: pointer;
+  float: right;
+  margin-right: 40px;
+  margin-top: 61px;
+  margin-bottom: 37px;
+  outline: none;
+}
+
+.save-changes-text {
+  text-align: center;
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30.1662px;
+  color: #ffffff;
+  line-height: 74px;
+}
+
+@media screen and (max-width: 850px) {
+  .box {
+    width: 97.5%;
+    min-width: 312px;
+  }
+  .box-section1 {
+    padding: max(28.8px, 8vw) 0vw max(10px, 2.941vw) 0vw;
+    text-align: center;
+  }
+  .pfp-container {
+    padding-right: max(18.46px, 3.529vw);
+  }
+
+  .edit-pfp-button {
+    margin-left: 17px;
+  }
+
+  .box-section2 {
+    padding: 0vw 0vw 0vw 0vw;
+  }
+
+  .box-section2-text {
+    text-align: center;
+  }
+
+  .box-section1-text .text-bold {
+    padding-right: max(0px, 40.4vw);
+    width: 19.547vw;
+    text-align: left;
+  }
+
+  .box-section2-text .text-bold {
+    padding-right: max(0px, 40.4vw);
+    width: fit-content;
+    text-align: left;
+  }
+
+  .text-left {
+    text-align: left;
+    padding-right: max(0px, 38.124vw);
+  }
+
+  .text-right {
+    left: max(150.211px, 46.941vw);
+    margin-right: max(68.2656px, 21.333vw);
+  }
+
+  .user-info {
+    padding-left: max(27.2928px, 8.529vw);
+    padding-right: 5px;
+  }
+
+  .user-info-container {
+    width: max(124.234px, 38.824vw);
+    margin-left: max(4.8px, 1.5vw);
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .pfp-container {
+    width: max(61.5px, 19.231vw);
+    height: max(61.5px, 19.231vw);
+    margin-left: max(6.4px, 2vw);
+    margin-top: 5px;
+    padding-right: max(18.4608px, 5.769vw);
+    line-height: max(55.3856px, 17.308vw);
+  }
+
+  .edit-pfp-button {
+    top: max(20.9216px, 6.538vw);
+    margin-left: max(10.4608px, 3.269vw);
+    width: max(40.6px, 12.692vw);
+    height: max(14.14px, 4.423vw);
+  }
+
+  .edit-pfp-button-text {
+    line-height: max(14.7728px, 4.423vw);
+  }
+
+  .name-text {
+    font-size: max(31.5222px, 9.82vw);
+    line-height: max(37.6565px, 11.731vw);
+  }
+
+  .box-section1-text {
+    font-size: max(16.6144px, 5.192vw);
+    line-height: max(58.46px, 6.923vw);
+  }
+
+  .text-bold {
+    width: max(102.766px, 32.115vw);
+  }
+
+  .box-divider {
+    min-width: 265px;
+  }
+
+  .box-section2-text {
+    font-size: max(16.6144px, 5.192vw);
+    line-height: max(58.4608px, 18.269vw);
+  }
+
+  .user-info-container {
+    height: max(41.8438px, 13.077vw);
+  }
+
+  .user-info-editable {
+    line-height: max(41.8438px, 13.077vw);
+    margin: 0px max(2.925px, 0.962vw);
+  }
+  .box-section3 {
+    height: 34.808vw;
+    padding-top: 9.615vw;
+  }
+  .change-password-button {
+    width: max(202.453px, 63.269vw);
+    height: max(45.5312px, 14.231vw);
+  }
+
+  .change-password-button-text {
+    font-size: max(18.5632px, 5.801vw);
+    line-height: max(45.54px, 14.231vw);
+  }
+
+  .edit-profile-button {
+    margin-right: max(24.6144px, 7.692vw);
+    margin-top: max(21.5392px, 6.731vw);
+    padding-bottom: max(15.3856px, 4.808vw);
+  }
+
+  .edit-profile-text {
+    margin-left: max(3.0874px, 0.962vw);
+    font-size: max(18.4608px, 5.769vw);
+  }
+
+  .edit-profile-image-container {
+    width: max(20.9px, 6.538vw);
+    height: max(20.9px, 6.538vw);
+  }
+
+  .save-changes-button {
+    width: max(144.609px, 45.192vw);
+    height: max(39.125px, 12.231vw);
+    margin-right: max(24.6144px, 7.692vw);
+    margin-top: max(24.7072px, 11.731vw);
+    margin-bottom: max(22.768px, 7.115vw);
+  }
+
+  .save-changes-text {
+    font-size: max(18.5632px, 5.801vw);
+    line-height: max(40.74px, 12.731vw);
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .box {
+    min-width: 0px;
+    overflow-x: auto;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .box-section2-text {
+    text-align: left;
+    margin-left: 15px;
+  }
+  .text-left {
+    padding-right: 10px;
+  }
+  .text-right {
+    left: 120px;
+    margin-right: max(68.2656px, 21.333vw);
+  }
+  .user-info-container {
+    margin-left: 20px;
+  }
+
+  .save-changes-button {
+    margin-top: 18.75vw;
+  }
+}

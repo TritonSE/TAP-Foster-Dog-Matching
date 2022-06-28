@@ -2,6 +2,7 @@ const express = require("express");
 const { body } = require("express-validator");
 const { getDogs, getDog, createDog, updateDog } = require("../services/dogs");
 const { validateRequest } = require("../middleware/validation");
+const { requireAuthentication, requireAuthenticatedAdmin } = require("../middleware/auth");
 
 const router = express.Router();
 
@@ -12,6 +13,7 @@ const validators = [
   body("weight").notEmpty().isNumeric(),
   body("breed").notEmpty().isString(),
   body("imageUrl").notEmpty().isArray().isURL(),
+  body("category").notEmpty().isIn(["new", "in home", "adopted"]),
   body("backgroundInfo").notEmpty().isString(),
   body("vettingInfo").notEmpty().isString(),
   body("internalNotes").optional().isString(),
@@ -20,46 +22,55 @@ const validators = [
 /**
  * GET /dogs - Return all dog profiles
  */
-router.get("/", (req, res, next) => {
+router.get("/", [requireAuthenticatedAdmin], (req, res, next) => {
   getDogs()
-    .then((dogs) =>
-      res.status(200).json({
-        dogs,
-      })
-    )
-    .catch((err) => {
-      next(err);
-    });
+    .then((dogs) => {
+      if (dogs) {
+        return res.status(200).json({
+          dogs,
+        });
+      }
+      return res.status(400).json({
+        errors: [{ message: `Something went wrong, dog profiles could not be retrieved` }],
+      });
+    })
+    .catch((err) => next(err));
 });
 
 /**
  * GET /dogs/:dogId - Return a dog profile by ID
  */
-router.get("/:dogId", (req, res, next) => {
+router.get("/:dogId", [requireAuthentication], (req, res, next) => {
   getDog(req.params.dogId)
-    .then((dog) =>
-      res.status(200).json({
-        dog,
-      })
-    )
-    .catch((err) => {
-      next(err);
-    });
+    .then((dog) => {
+      if (dog) {
+        return res.status(200).json({
+          dog,
+        });
+      }
+      return res.status(400).json({
+        errors: [{ message: `Something went wrong, dog profile could not be retrieved` }],
+      });
+    })
+    .catch((err) => next(err));
 });
 
 /**
  * POST /dogs - Create a dog profile
  */
-router.post("/", [...validators, validateRequest], (req, res, next) => {
+router.post("/", [...validators, validateRequest, requireAuthenticatedAdmin], (req, res, next) => {
   createDog(req.body)
     .then((dog) => {
-      res.status(200).json({
-        dog,
+      if (dog) {
+        return res.status(200).json({
+          dog,
+        });
+      }
+      return res.status(400).json({
+        errors: [{ message: `Something went wrong, new dog profile could not be created` }],
       });
     })
-    .catch((err) => {
-      next(err);
-    });
+    .catch((err) => next(err));
 });
 
 /**
@@ -67,21 +78,24 @@ router.post("/", [...validators, validateRequest], (req, res, next) => {
  */
 router.put(
   "/:dogId",
-  [...validators.map((validator) => validator.optional()), validateRequest], // all fields for update are optional
+  [
+    ...validators.map((validator) => validator.optional()), // all fields for update are optional
+    validateRequest,
+    requireAuthenticatedAdmin,
+  ],
   (req, res, next) => {
     updateDog(req.params.dogId, req.body)
       .then((dog) => {
         if (dog) {
-          res.status(200).json({
+          return res.status(200).json({
             dog,
           });
-        } else {
-          throw new Error("Dog profile was not updated.");
         }
+        return res.status(400).json({
+          errors: [{ message: `Something went wrong, dog profile could not be updated` }],
+        });
       })
-      .catch((err) => {
-        next(err);
-      });
+      .catch((err) => next(err));
   }
 );
 

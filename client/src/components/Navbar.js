@@ -3,7 +3,7 @@
  *
  * Component that renders the navbar
  *
- * @summary    resuable and responsive navbar component
+ * @summary    reusable and responsive navbar component
  * @author     Parth Patel
  *
  */
@@ -25,35 +25,33 @@
 
 import React, { useState, useEffect } from "react";
 import { NavLink as Link } from "react-router-dom";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import burger from "../images/burger.png";
-
-// Styled components
-const slideIn = keyframes`
- 0% { right: -50%; }
- 20% { right: -40%; }
- 40% { right: -30%; }
- 60% { right: -20%; }
- 80% { right: -10%; }
- 100% { right: 0%; }
-`;
+import { signOutUser } from "../services/auth";
+import { device } from "../utils/useResponsive";
 
 export const Nav = styled.nav`
-  position: absolute;
   width: max(250px, 16vw);
-  height: 85%;
-  top: 15%;
+  height: 100%;
   background-color: #000000;
 
-  @media screen and (max-width: 750px) {
-    top: 15%;
-    right: 0%;
-    width: min(300px, 45vw);
-    z-index: 5;
+  ${device.tablet} {
+    width: max(180px, 16vw);
+  }
 
-    animation-name: ${slideIn};
-    animation-duration: 0.5s;
-    animation-iteration-count: 1;
+  ${device.mobile} {
+    position: fixed;
+    right: -300px;
+    width: min(300px, 45vw);
+    height: 100%;
+    z-index: 5;
+    transform: translateX(0%);
+    transition: right 0.5s;
+
+    &.active {
+      right: 0px;
+      transition: right 1s ease;
+    }
   }
 `;
 
@@ -62,9 +60,10 @@ export const ToggleNavbar = styled.button`
 
   @media screen and (max-width: 750px) {
     display: inline;
-    position: absolute;
+    position: fixed;
     right: 5%;
-    top: 5%;
+    top: 40px;
+    z-index: 101;
 
     background: none;
     color: inherit;
@@ -76,7 +75,9 @@ export const ToggleNavbar = styled.button`
   }
 `;
 
-export const Burger = styled.img``;
+export const Burger = styled.img`
+  z-index: 5;
+`;
 
 export const NavMenu = styled.div`
   display: flex;
@@ -126,8 +127,7 @@ export const SignOut = styled.button`
     cursor: pointer;
 
     position: absolute;
-    bottom: 0;
-
+    bottom: 100px;
     padding: 25px 0px;
   }
 `;
@@ -147,11 +147,6 @@ function Navbar(props) {
     };
   }, []);
 
-  // logout function
-  const logout = () => {
-    // code to log user out of page
-  };
-
   return (
     <>
       <ToggleNavbar onClick={() => setRenderNav(!renderNav)}>
@@ -159,8 +154,9 @@ function Navbar(props) {
       </ToggleNavbar>
 
       {/* Conditionally Rendered Navigation Panel */}
-      {renderNav || screenWidth > 750 ? (
-        <Nav>
+
+      <div>
+        <Nav className={renderNav ? "active" : ""}>
           <NavMenu>
             {Object.entries(props.pages).map(([page, path]) => (
               <NavLink to={path} activeStyle>
@@ -168,11 +164,11 @@ function Navbar(props) {
               </NavLink>
             ))}
             {screenWidth < 750 || renderNav ? (
-              <SignOut onClick={() => logout()}>Sign Out</SignOut>
+              <SignOut onClick={signOutUser}>Sign Out</SignOut>
             ) : undefined}
           </NavMenu>
         </Nav>
-      ) : undefined}
+      </div>
     </>
   );
 }

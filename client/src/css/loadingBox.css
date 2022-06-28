@@ -1,0 +1,56 @@
+.loading-box-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  border-radius: 40px;
+  border: 5px solid #91c649;
+  padding: 2%;
+  margin: 1em;
+  max-width: max-content;
+}
+
+.loading-text {
+  text-align: left;
+  font-size: min(4vh, 4vw);
+}
+
+.waiting-text {
+  /* margin-bottom: 3vh; */
+}
+
+.dog-image {
+  width: 100%;
+  height: 40vh;
+}
+
+.loading-image {
+  -webkit-animation: spin 4s linear infinite;
+  -moz-animation: spin 4s linear infinite;
+  animation: spin 4s linear infinite;
+  width: 100%;
+  height: 10vh;
+}
+
+@-moz-keyframes spin {
+  100% {
+    -moz-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .loading-box-wrapper {
+    padding: 15px;
+  }
+}
