@@ -2,47 +2,190 @@
  * Dog Card Component
  *
  * @summary  Reusable card component for each dog with general info (age, breed, bio, etc.)
- * @author   Artyom Muradyan
+ * @author   Artyom Muradyan, Parth Patel
  *
  */
 
 import React from "react";
+import styled from "styled-components";
+import { device } from "../utils/useResponsive";
+// image assets
 import love from "../images/love.png";
 import like from "../images/like.png";
 import dislike from "../images/dislike.png";
-import "../dogcard.css";
+import greenlove from "../images/greenlove.png";
+import greenlike from "../images/greenlike.png";
+import greendislike from "../images/greendislike.png";
+
+const DogInfoContainer = styled.div`
+  width: min(max(500px, 70vw), 1151px);
+  height: min(max(400px, 60vh), 750px);
+
+  background: #ffffff;
+  border-radius: 20px;
+  border: 5px solid #8dc442;
+  box-sizing: border-box;
+  border-radius: 20px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 4%;
+  overflow-y: scroll;
+
+  ${device.mobile} {
+    flex-direction: column;
+    align-items: center;
+    gap: 3vh;
+    overflow-y: scroll;
+    height: 75vh;
+  }
+`;
+
+const Left = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  ${device.mobile} {
+    width: 90%;
+  }
+`;
+
+const Name = styled.p`
+  margin: 0;
+  font-weight: bold;
+  font-size: 50px;
+  color: #8dc442;
+
+  ${device.mobile} {
+    font-size: max(4.5vw, 20px);
+  }
+`;
+
+const DogImg = styled.img`
+  width: min(300px, 80%);
+  height: min(300px, 80%);
+`;
+
+const PreferenceWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 4vw;
+`;
+
+const IconContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const LikeImg = styled.img`
+  width: 70px;
+  cursor: pointer;
+`;
+
+const DogInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 5%;
+  width: 45%;
+  ${device.mobile} {
+    width: 90%;
+  }
+`;
+
+const InlineInfo = styled.p`
+  font-weight: bold;
+  font-size: 29px;
+  max-width: 100%;
+  color: #8dc442;
+  margin: 0;
+
+  ${device.mobile} {
+    font-size: max(15px, 3vw);
+    margin-bottom: 2vh;
+  }
+`;
+
+const BlockInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const MultilineInfo = styled.p`
+  margin: 0;
+  max-height: 10vh;
+  min-height: 5vh;
+  overflow-y: scroll;
+`;
 
 function DogCard(props) {
+  const [preference, setPreference] = React.useState("");
+
+  const updatePreference = (update) => {
+    setPreference(update);
+  };
+
   return (
-    <div className="card-border">
-      <div className="name"> {props.name} </div>
-      <img className="image" src={props.image} alt="Cute dog!" />
-      <img className="love" src={love} alt="Love" />
-      <img className="like" src={like} alt="Like" />
-      <img className="dislike" src={dislike} alt="Dislike" />
-      <div className="age info-title">
-        Age:
-        <span className="info-text"> {props.age} </span>
-      </div>
-      <div className="gender info-title">
-        Gender:
-        <span className="info-text"> {props.gender} </span>
-      </div>
-      <div className="breed info-title">
-        Breed:
-        <span className="info-text"> {props.breed} </span>
-      </div>
-      <div className="weight info-title">
-        Weight:
-        <span className="info-text"> {props.weight} </span>
-      </div>
+    <DogInfoContainer>
+      <Left>
+        <Name> {props.name} </Name>
+        <DogImg src={props.image} alt="Cute dog!" />
+        <PreferenceWrapper>
+          <IconContainer>
+            <LikeImg
+              onClick={() => updatePreference("love")}
+              src={preference === "love" ? greenlove : love}
+              alt="Love"
+            />
+            <div>Love</div>
+          </IconContainer>
+          <IconContainer>
+            <LikeImg
+              onClick={() => updatePreference("like")}
+              src={preference === "like" ? greenlike : like}
+              alt="Like"
+            />
+            <div>Like</div>
+          </IconContainer>
+          <IconContainer>
+            <LikeImg
+              onClick={() => updatePreference("dislike")}
+              src={preference === "dislike" ? greendislike : dislike}
+              alt="Dislike"
+            />
+            <div>Dislike</div>
+          </IconContainer>
+        </PreferenceWrapper>
+      </Left>
 
-      <div className="background info-title"> Background </div>
-      <div className="background-text"> {props.background} </div>
-
-      <div className="vetting info-title"> Vetting Information </div>
-      <div className="vetting-text"> {props.vetting} </div>
-    </div>
+      <DogInfo>
+        <InlineInfo>
+          {" "}
+          Age: <span style={{ color: "black", fontWeight: "normal" }}>{props.age}</span>{" "}
+        </InlineInfo>
+        <InlineInfo>
+          Gender: <span style={{ color: "black", fontWeight: "normal" }}>{props.gender}</span>
+        </InlineInfo>
+        <InlineInfo>
+          Breed: <span style={{ color: "black", fontWeight: "normal" }}>{props.breed}</span>
+        </InlineInfo>
+        <InlineInfo>
+          Weight: <span style={{ color: "black", fontWeight: "normal" }}>{props.weight}</span>
+        </InlineInfo>
+        <BlockInfo>
+          <InlineInfo> Background </InlineInfo>
+          <MultilineInfo> {props.background} </MultilineInfo>
+        </BlockInfo>
+        <BlockInfo>
+          <InlineInfo> Vetting Information </InlineInfo>
+          <MultilineInfo> {props.vettingInfo} </MultilineInfo>
+        </BlockInfo>
+      </DogInfo>
+    </DogInfoContainer>
   );
 }
 
