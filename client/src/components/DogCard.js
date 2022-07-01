@@ -97,7 +97,7 @@ const LikeImg = styled.img`
 const DogInfo = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 5%;
+  gap: 3.5vh;
   width: 45%;
   ${device.mobile} {
     width: 90%;
