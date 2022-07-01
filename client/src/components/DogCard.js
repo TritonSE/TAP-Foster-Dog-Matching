@@ -16,6 +16,7 @@ import dislike from "../images/dislike.png";
 import greenlove from "../images/greenlove.png";
 import greenlike from "../images/greenlike.png";
 import greendislike from "../images/greendislike.png";
+import X from "../images/X.png";
 
 const DogInfoContainer = styled.div`
   width: min(max(500px, 70vw), 1151px);
@@ -33,12 +34,16 @@ const DogInfoContainer = styled.div`
   padding: 4%;
   overflow-y: scroll;
 
+  position: relative;
+
   ${device.mobile} {
     flex-direction: column;
     align-items: center;
     gap: 3vh;
     overflow-y: scroll;
     height: 75vh;
+    width: 90%;
+    left: 5%;
   }
 `;
 
@@ -58,6 +63,7 @@ const Name = styled.p`
   font-weight: bold;
   font-size: 50px;
   color: #8dc442;
+  margin-bottom: 3vh;
 
   ${device.mobile} {
     font-size: max(4.5vw, 20px);
@@ -73,6 +79,7 @@ const PreferenceWrapper = styled.div`
   display: flex;
   flex-direction: row;
   gap: 4vw;
+  margin-top: 3vh;
 `;
 
 const IconContainer = styled.div`
@@ -122,6 +129,14 @@ const MultilineInfo = styled.p`
   overflow-y: scroll;
 `;
 
+const XButton = styled.img`
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  width: 25px;
+  height: 25px;
+`;
+
 function DogCard(props) {
   const [preference, setPreference] = React.useState("");
 
@@ -131,6 +146,8 @@ function DogCard(props) {
 
   return (
     <DogInfoContainer>
+      {/* TODO: implement onClick to close pop up */}
+      <XButton src={X} />
       <Left>
         <Name> {props.name} </Name>
         <DogImg src={props.image} alt="Cute dog!" />
