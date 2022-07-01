@@ -78,46 +78,46 @@ function DayScheduling(props) {
   };
 
   return (
-    <div className="day" key={props.day}>
-      <div className="day-text">{props.day}</div>
-      <div className="day-times-container">
+    <div className="day-scheduling-day" key={props.day}>
+      <div className="day-scheduling-day-text">{props.day}</div>
+      <div className="day-scheduling-day-times-container">
         {timeSlotKeys.map((timeSlotKey) => (
-          <div className="time-slot" key={timeSlotKey}>
+          <div className="day-scheduling-time-slot" key={timeSlotKey}>
             <Select
-              className="time-slot-begin"
+              className="day-scheduling-time-slot-begin"
               components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
               options={time}
               styles={customStyles}
               placeholder=""
             />
-            <div className="time-slot-divider" />
+            <div className="day-scheduling-time-slot-divider" />
             <Select
-              className="time-slot-end"
+              className="day-scheduling-time-slot-end"
               components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
               options={time}
               styles={customStyles}
               placeholder=""
             />
             <div
-              className="trash-button"
+              className="day-scheduling-trash-button"
               role="button"
               tabIndex={0}
               onClick={(event) => removeTimeSlot(timeSlotKey, event)}
               onKeyDown={(event) => removeTimeSlot(timeSlotKey, event)}
             >
-              <img className="trash-button-image" src={trash} alt="Remove Button" />
+              <img className="day-scheduling-trash-button-image" src={trash} alt="Remove Button" />
             </div>
           </div>
         ))}
       </div>
       <div
-        className="day-add-button"
+        className="day-scheduling-day-add-button"
         role="button"
         tabIndex={0}
         onClick={addTimeSlot}
         onKeyDown={addTimeSlot}
       >
-        <img className="day-add-button-image" src={add} alt="Add Button" />
+        <img className="day-scheduling-day-add-button-image" src={add} alt="Add Button" />
       </div>
     </div>
   );

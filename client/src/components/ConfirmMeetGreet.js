@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { device } from "../utils/useResponsive";
 import pfp from "../images/pfp.png";
 import After from "./AfterMeetAndGreet";
-import MeetInfo from "./MeetAndGreetInfo";
+import StatusUpdate from "./StatusUpdate";
 
 const ConfirmContainer = styled.div`
   display: flex;
@@ -39,7 +39,8 @@ const ContentWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 2vh 0vh;
+  gap: 1.875vw;
+  padding: 1.875vw;
 
   ${device.tablet} {
     flex-direction: column;
@@ -48,11 +49,8 @@ const ContentWrapper = styled.div`
 `;
 
 const InfoWrapper = styled.div`
-  width: 40%;
-  height: 580px;
-
-  margin: 1% 3% 1% 6%;
-
+  display: flex;
+  flex: 1;
   overflow: hidden;
   border-radius: 35px;
 
@@ -67,12 +65,9 @@ const InfoWrapper = styled.div`
 `;
 
 const AfterWrapper = styled.div`
-  width: 40%;
-  height: 580px;
+  display: flex;
   overflow: hidden;
-
-  margin: 1% 6% 1% 3%;
-
+  flex: 1;
   border-radius: 35px;
 
   ${device.tablet} {
@@ -107,15 +102,16 @@ function ConfirmMeetGreet() {
       <ComponentHeader>Meet & Greet Information</ComponentHeader>
       <ContentWrapper>
         <InfoWrapper>
-          <MeetInfo
+          <StatusUpdate
             title="Meet and Greet Info"
             ambassador="Dhanush"
             phone="123-456-7890"
             email="test@tap.com"
             date="1/1/2022"
             time="6-7:00PM"
-            location="Zoom"
+            tapFacilityLocation="Zoom"
             image={pfp}
+            meetAndGreetView
           />
         </InfoWrapper>
         <AfterWrapper>

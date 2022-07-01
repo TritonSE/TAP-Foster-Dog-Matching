@@ -10,6 +10,7 @@ import styled, { css } from "styled-components";
 import { Colors } from "./Theme";
 import withControl from "../utils/withControl";
 import { device } from "../utils/useResponsive";
+import Input from "./Input";
 
 const RadioContainer = styled.div`
   display: flex;
@@ -41,6 +42,7 @@ const RadioContainer = styled.div`
  *      - value [boolean] - if radio is selected
  *      - onChange [function] - function to run on value change
  *      - invalid [boolean] - if field should show red error border
+ *      - otherOption [boolean] - if should include a free response "other" option radio
  */
 
 export function Radio({ value, onChange, invalid }) {
@@ -74,32 +76,68 @@ const RadioLabel = styled.div`
   }
 `;
 
-const Radios = React.forwardRef(({ options, value, onChange, invalid, readOnly }, ref) => {
-  function handleSelect(newValue) {
-    if (!readOnly) {
-      onChange(newValue);
+const Radios = React.forwardRef(
+  ({ options, value, onChange, invalid, otherOption, readOnly }, ref) => {
+    const [otherSelected, setOtherSelected] = React.useState(false);
+    const [otherText, setOtherText] = React.useState();
+
+    function handleSelect(newValue) {
+      if (!readOnly) {
+        setOtherSelected(false);
+        setOtherText("");
+        onChange(newValue);
+      }
     }
-  }
 
-  function isSelected(optionValue) {
-    return value === optionValue;
-  }
+    const handleOtherSelect = React.useCallback(() => {
+      if (!readOnly) {
+        setOtherSelected(true);
+        onChange(otherText);
+      }
+    }, [otherText, readOnly]);
 
-  return (
-    <RadiosContainer ref={ref}>
-      {options.map((option) => (
-        <RadioGroup key={option}>
-          <Radio
-            value={isSelected(option)}
-            onChange={() => handleSelect(option)}
-            invalid={invalid}
-          />
-          <RadioLabel onClick={() => handleSelect(option)}>{option}</RadioLabel>
-        </RadioGroup>
-      ))}
-    </RadiosContainer>
-  );
-});
+    const handleOtherTextChange = React.useCallback(
+      (newValue) => {
+        if (!readOnly) {
+          setOtherText(newValue);
+          onChange(newValue);
+        }
+      },
+      [readOnly]
+    );
+
+    function isSelected(optionValue) {
+      return !otherSelected && value === optionValue;
+    }
+
+    return (
+      <RadiosContainer ref={ref}>
+        {options.map((option) => (
+          <RadioGroup key={option}>
+            <Radio
+              value={isSelected(option)}
+              onChange={() => handleSelect(option)}
+              invalid={invalid}
+            />
+            <RadioLabel onClick={() => handleSelect(option)}>{option}</RadioLabel>
+          </RadioGroup>
+        ))}
+        {otherOption && (
+          <RadioGroup>
+            <Radio value={otherSelected} onChange={handleOtherSelect} invalid={invalid} />
+            <Input
+              value={otherText}
+              onClick={handleOtherSelect}
+              onChange={handleOtherTextChange}
+              placeholder="Other"
+              disabled={readOnly}
+            />
+          </RadioGroup>
+        )}
+      </RadiosContainer>
+    );
+  }
+);
 
 export const ControlledRadio = withControl(Radio);
 
