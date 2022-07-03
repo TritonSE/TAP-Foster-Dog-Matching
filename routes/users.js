@@ -11,7 +11,11 @@ const validators = [
   body("firstName").notEmpty().isString(),
   body("lastName").notEmpty().isString(),
   body("email").notEmpty().isString().isEmail(),
-  body("password").notEmpty().isString().isLength({ min: 8 }),
+  body("password")
+    .notEmpty()
+    .isString()
+    .isLength({ min: 8 })
+    .withMessage("Password must have at least 8 characters"),
 ];
 
 /**

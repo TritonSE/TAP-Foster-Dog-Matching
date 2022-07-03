@@ -97,7 +97,8 @@
 .error-message {
   color: red;
   position: absolute;
-  bottom: 5%;
+  bottom: 3%;
+  text-align: center;
 }
 
 .signup-success {

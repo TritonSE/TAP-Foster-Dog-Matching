@@ -87,8 +87,16 @@ function IntroForm(props) {
       newUser.role = role;
       // Advance to the signup key page
       if (formType === "signup") {
-        setError();
-        setFormType("signup-key");
+        // Initial validation of fields
+        newUser.validateOnly = true;
+        createAdmin(newUser).then((response) => {
+          if (!response.ok) {
+            setError(response.data.message);
+          } else {
+            setError();
+            setFormType("signup-key");
+          }
+        });
         return;
       }
       // Check if sign up key is correct
