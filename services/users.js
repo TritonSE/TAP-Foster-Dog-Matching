@@ -15,7 +15,7 @@ async function createUser(rawUser) {
     ...rawUser,
     currentlyFostering: false,
     lastActive: Date.now(),
-    pastFosters: 0,
+    fosters: { past: [], current: [] },
     ambassador: null,
     coordinator: null,
     accountStatus: "active",
