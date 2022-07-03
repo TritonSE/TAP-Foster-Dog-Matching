@@ -93,7 +93,7 @@ const validators = [
 ];
 
 /**
- * GET /applications/:applicationId - Return an application by ID
+ * GET /application/:applicationId - Return an application by ID
  */
 router.get("/:applicationId", (req, res) => {
   getApplication(req.params.applicationId)
@@ -113,7 +113,7 @@ router.get("/:applicationId", (req, res) => {
 });
 
 /**
- * POST /applications - Create an application
+ * POST /application - Create an application
  */
 
 router.post("/", [...validators, validateRequest], (req, res) => {
@@ -134,7 +134,7 @@ router.post("/", [...validators, validateRequest], (req, res) => {
 });
 
 /**
- * PUT /applications/:applicationId - Update an application
+ * PUT /application/:applicationId - Update an application
  */
 router.put(
   "/:applicationId",
