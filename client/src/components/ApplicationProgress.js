@@ -31,8 +31,15 @@ const ProgressBarContainer = styled.div`
   margin-bottom: 60px;
   ${device.tablet} {
     flex-direction: column;
-    margin-top: 40px;
-    margin-bottom: 20px;
+    position: sticky;
+    top: 60px;
+    height: 75vh;
+    margin-top: 50px;
+    margin-bottom: 0;
+  }
+  ${device.mobile} {
+    top: 30px;
+    margin-top: 50px;
   }
 `;
 
@@ -84,29 +91,33 @@ const ProgressMilestoneText = styled.div`
   text-align: center;
   min-width: 60px;
   ${device.tablet} {
-    top: -30px;
-    left: 100%;
+    top: -50px;
+    left: -10px;
     font-size: 20px;
-    min-width: 50px;
+    min-width: 80px;
   }
   ${device.mobile} {
-    left: 75%;
+    top: -30px;
+    left: -0;
     font-size: 3vw;
+    min-width: 50px;
   }
 `;
 
 function ApplicationProgress() {
-  const { currentStep, currentSubStep, goToStep, goToNextSubStep } =
+  const { currentStep, currentSubStep, goToStep, goToNextSubStep, applicationState } =
     React.useContext(ApplicationContext);
   const { isTablet } = useResponsive();
 
   // TODO: Block onClick if step is not unlocked yet
   const handleStepClicked = React.useCallback(
     (index) => {
-      if (currentStep === index) goToNextSubStep();
-      else goToStep(index);
+      if (applicationState.status !== "rejected") {
+        if (currentStep === index) goToNextSubStep();
+        else goToStep(index);
+      }
     },
-    [currentStep, goToNextSubStep, goToStep]
+    [currentStep, goToNextSubStep, goToStep, applicationState]
   );
 
   return (

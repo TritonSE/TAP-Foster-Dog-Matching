@@ -193,17 +193,35 @@ module.exports = mongoose.model(
           required: true,
         },
       },
+      messages: {
+        stage1: {
+          type: String,
+          required: false,
+        },
+        stage2: {
+          type: String,
+          required: false,
+        },
+        stage3: {
+          type: String,
+          required: false,
+        },
+        stage4: {
+          type: String,
+          required: false,
+        },
+      },
       status: {
         type: String,
         required: true,
       },
       ambassador: {
         type: Schema.Types.ObjectId,
-        required: true,
+        required: false,
       },
       coordinator: {
         type: Schema.Types.ObjectId,
-        required: true,
+        required: false,
       },
       completedActionItems: {
         type: Boolean,
@@ -211,11 +229,11 @@ module.exports = mongoose.model(
       },
       selectedDogs: {
         type: [String],
-        required: true,
+        required: false,
       },
       preference: {
         type: [String],
-        required: true,
+        required: false,
       },
     },
     { timestamps: {} }

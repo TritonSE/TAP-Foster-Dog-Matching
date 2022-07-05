@@ -1,32 +1,34 @@
 .meeting-card {
   display: flex;
-  border-radius: 15px;
+  border-radius: 25px;
   background: #000000;
   display: flex;
   text-align: center;
   flex-direction: column;
   text-align: center;
-  padding-left: 2%;
-  padding-right: 2%;
-  padding-top: 5px;
-  padding-bottom: 2%;
-  height: calc(100% - 40px);
-  width: 100%;
+  padding: 1.875vw;
+  height: fit-content;
+  width: fit-content;
+  box-sizing: border-box;
+  margin-bottom: 3vh;
 }
 
 .meeting-card h2 {
-  font-size: 2em;
-  margin: 10px;
+  font-size: 30px;
+  margin: 0;
+  margin-top: -1.5vw;
+  margin-bottom: 10px;
 }
 
 .meeting-card-content {
   display: flex;
-  flex: 1;
+  flex: 4;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
+  gap: 2vw;
 }
 
-.title {
+.meeting-card .title {
   color: white;
   text-align: center;
   width: 100%;
@@ -34,19 +36,27 @@
 
 .text-card {
   background: #fff;
-  flex: 2;
+  flex: 1;
   border-radius: 15px;
   padding: 2%;
   text-align: left;
   max-width: 50%;
 }
 
-.image-card {
+.text-card:only-child {
+  margin: auto;
+}
+
+.info-card {
   margin-left: 2vw;
-  flex: 2;
+  flex: 1;
   border-radius: 15px;
   width: 100%;
   height: 100%;
+}
+
+.image-card {
+  flex: 1;
 }
 
 .image {
@@ -55,8 +65,7 @@
 }
 
 .status {
-  width: 100%;
-  height: 100%;
+  flex: 1;
   border-radius: 15px;
 }
 
@@ -65,35 +74,44 @@
   height: 0;
 }
 
-@media only screen and (max-width: 750px) {
+.message-from-admin {
+  white-space: pre-line;
+  margin-bottom: 20px;
+}
+
+@media only screen and (max-width: 1024px) {
   .meeting-card {
     display: flex;
     flex-direction: column;
-    padding-left: 4%;
-    padding-right: 5%;
-    padding-top: 5px;
-    padding-bottom: 3%;
+    padding: 2vw;
     font-size: 1.2em;
+    overflow: auto;
+    height: fit-content;
+  }
+
+  .title {
+    margin-top: 0px;
   }
 
   .meeting-card-content {
     flex-direction: column;
   }
 
-  h2 {
-    font-size: 1.5em;
+  .meeting-card h2 {
+    font-size: 2em;
+    margin: 0;
   }
 
   .text-card {
+    flex: 2;
     min-height: 50vw;
     width: auto;
-    margin: 1% 1% 4% 1%;
+    margin: 1.5;
     max-width: unset;
   }
 
-  .image-card {
-    flex: 1;
-    margin: 1%;
+  .info-card {
+    margin: 1.5%;
   }
 
   .image {

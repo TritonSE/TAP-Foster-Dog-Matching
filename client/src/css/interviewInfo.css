@@ -1,0 +1,118 @@
+.interview-info-wrapper {
+  background-color: white;
+  border-radius: 20px;
+  width: 100%;
+  height: min(63vh, 540px);
+  display: flex;
+  align-items: center;
+}
+
+.interview-info-input {
+  margin: 6%;
+  text-align: left;
+}
+
+.info-content {
+  text-align: center;
+  width: 100%;
+  height: min(63vh, 540px);
+  background-color: white;
+  border-radius: 20px;
+  box-sizing: border-box;
+  padding: 15px;
+  padding-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-color: none;
+}
+
+.interview-info-title {
+  align-self: center;
+  margin-bottom: 1vh;
+}
+
+.reject-button {
+  width: min(7vw, 170px);
+  min-width: 100px;
+  height: 50px;
+  right: 20px;
+  bottom: 20px;
+  text-align: center;
+  cursor: pointer;
+  background: white;
+  padding: 3px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  color: black;
+  border-color: black;
+  border-width: 1px;
+  /* font-family: Nunito; */
+  font-size: 18px;
+}
+
+.contingent-button {
+  width: min(7vw, 170px);
+  min-width: 100px;
+  height: 50px;
+  right: 20px;
+  bottom: 20px;
+  text-align: center;
+  cursor: pointer;
+  background: #868686;
+  padding: 3px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  color: white;
+  border-color: black;
+  border-width: 1px;
+  /* font-family: Nunito; */
+  font-size: 18px;
+}
+
+.pass-button {
+  width: min(7vw, 170px);
+  min-width: 100px;
+  height: 50px;
+  right: 20px;
+  bottom: 20px;
+  text-align: center;
+  cursor: pointer;
+
+  background: #8dc442;
+  padding: 3px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  color: white;
+  border-color: black;
+  border-width: 1px;
+  /* font-family: Nunito; */
+  font-size: 18px;
+}
+
+.button-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: center;
+}
+
+@media screen and (max-width: 750px) {
+  .pass-button {
+    width: min(100px, 50vw);
+    height: 45px;
+    font-size: min(17px, 5vw);
+  }
+
+  .contingent-button {
+    width: min(100px, 50vw);
+    height: 45px;
+    font-size: min(17px, 5vw);
+  }
+
+  .reject-button {
+    width: min(100px, 50vw);
+    height: 45px;
+    font-size: min(17px, 5vw);
+  }
+}
