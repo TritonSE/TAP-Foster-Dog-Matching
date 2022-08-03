@@ -9,7 +9,7 @@ const validateRequest = (req, res, next) => {
   if (validationRes.isEmpty()) {
     return next();
   }
-  const badFields = new Set(validationRes.errors.map((error) => error.param));
+  const badFields = new Set(validationRes.errors.map((error) => `${error.param} (${error.msg})`));
   return res.status(400).json({
     message: `Invalid or missing fields: ${[...badFields].join(", ")}`,
   });
