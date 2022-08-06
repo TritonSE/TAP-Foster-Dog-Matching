@@ -191,7 +191,6 @@ function MeetingScheduling(props) {
     };
 
     createInterview(reqBody).then((response) => {
-      console.log(response.data.interview);
       if (response.ok) props.interviewConfirmedCallback(response.data.interview._id);
       else console.error(response.body);
     });

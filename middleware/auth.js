@@ -98,7 +98,7 @@ function requireAuthenticatedUserOrAdminRoles(...allowedRoles) {
 
       if (!user) {
         // User must be Admin, so check role
-        return requireAdminRoles(allowedRoles)(req, res, next);
+        return requireAdminRoles(...allowedRoles)(req, res, next);
       }
 
       req.currentUser = user;

@@ -9,15 +9,15 @@
 const { getData, sendData } = require("./data");
 
 /**
- * Get an inteview
+ * Get an interview
  *
  * @export
- * @param {string} interviewId - interview id to get
+ * @param {string} userId - userId of interview to get
  * @param {string} interviewStage - stage of interview
  * @return {object} - interview object (as a makeRequest response. see data.js)
  */
-export async function getInterview(interviewId, interviewStage) {
-  return getData(`interviews/${interviewId}?stage=${interviewStage}`);
+export async function getInterview(userId, interviewStage) {
+  return getData(`interviews/${userId}?stage=${interviewStage}`);
 }
 
 /**

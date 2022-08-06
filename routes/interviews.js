@@ -25,23 +25,16 @@ const validators = [
 ];
 
 /**
- * GET /interviews/:interviewId - Return an interview by ID
+ * GET /interviews/:userId - Return an interview for userId
  *
- * @queryParam stage - Current stage of the interview
+ * @queryParam stage - stage of the interview to query for
  */
 router.get(
-  "/:interviewId",
+  "/:userId",
   [requireAuthenticatedUserOrAdminRoles(ADMIN_ROLES.MANAGEMENT, ADMIN_ROLES.AMBASSADOR)],
   (req, res, next) => {
-    getInterview(req.params.interviewId, req.query.stage)
-      .then((interview) => {
-        if (interview) {
-          return res.status(200).json({ interview });
-        }
-        return res.status(400).json({
-          errors: [{ message: `Something went wrong, interview could not be retrieved` }],
-        });
-      })
+    getInterview(req.params.userId, req.query.stage)
+      .then((interview) => res.status(200).json({ interview }))
       .catch((err) => next(err));
   }
 );
