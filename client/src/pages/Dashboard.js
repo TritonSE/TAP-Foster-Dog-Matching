@@ -21,7 +21,6 @@ const DashboardCardsContainer = styled.div`
   }
 `;
 
-<<<<<<< HEAD
 function DashboardCards() {
   const [loaded, setLoaded] = useState(false);
   const { currentUser, signedIn } = React.useContext(AuthContext);
@@ -46,10 +45,6 @@ function DashboardCards() {
     if (applications !== [] && applications.length === currentUser.applications.length)
       setLoaded(true);
   }, [applications]);
-=======
-function Dashboard() {
-  const navigate = useNavigate();
->>>>>>> 48fd2787b69a5ad5d1d28c1ed9a37de064825a54
 
   return (
     <div>
