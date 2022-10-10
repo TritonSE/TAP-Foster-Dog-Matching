@@ -1,0 +1,335 @@
+.form-header {
+  height: auto;
+  font-size: calc(24px + 0.5vh);
+}
+
+#form-container-signup {
+  min-height: 400px;
+  max-height: 1000px;
+  height: 80.5%;
+}
+
+#form-header-signup {
+  bottom: 90%;
+}
+
+input {
+  background: white;
+  border: 3px solid #c4c4c4;
+  box-sizing: border-box;
+  border-radius: 20px;
+
+  font-size: calc(8px + 1vh);
+  padding-left: 4%;
+}
+
+.form-container input::placeholder {
+  position: absolute;
+  left: 7%;
+  bottom: calc(10% + 0.5vh);
+
+  font-size: calc(8px + 0.75vh);
+  line-height: calc(8px + 0.75vh);
+  color: #9b9a9a;
+}
+
+.form-signup-question {
+  position: absolute;
+  width: 65%;
+  bottom: calc(88% - 1vh);
+
+  font-size: calc(12px + 0.5vh);
+}
+
+.selector {
+  position: absolute;
+  width: 65%;
+  height: calc(20px + 0.5vh);
+  bottom: 81%;
+
+  background: #c6c6c6;
+  border-radius: 10px;
+  font-size: calc(10px + 0.5vh);
+}
+
+.selector * {
+  background: white;
+  width: 20%;
+  font-size: calc(10px + 0.5vh);
+}
+
+.signup-first-name {
+  outline: 0;
+  position: absolute;
+  width: 65%;
+  height: calc(6% + 0.5vh);
+  bottom: 70.5%;
+}
+
+.signup-last-name {
+  outline: 0;
+  position: absolute;
+  width: 65%;
+  height: calc(6% + 0.5vh);
+  /* min-height: 52.5px; */
+  bottom: 60.5%;
+}
+
+.signup-email {
+  outline: 0;
+  position: absolute;
+  width: 65%;
+  height: calc(6% + 0.5vh);
+  bottom: 50.5%;
+}
+
+.signup-password {
+  outline: 0;
+  position: absolute;
+  width: 65%;
+  height: calc(6% + 0.5vh);
+  bottom: 40.5%;
+}
+
+.signup-re-password {
+  outline: 0;
+  position: absolute;
+  width: 65%;
+  height: calc(6% + 0.5vh);
+  bottom: 30.5%;
+}
+
+.button-border-signup {
+  position: absolute;
+  width: 55%;
+  height: calc(6% + 0.5vh);
+  bottom: 20%;
+}
+
+.button-name-signup {
+  font-size: calc(16px + 0.5vh);
+}
+
+.log-in {
+  position: absolute;
+  height: 29px;
+  bottom: 12%;
+  right: 23%;
+
+  color: #9b9a9a;
+  font-size: calc(14px + 0.5vh);
+  text-decoration: none;
+}
+
+/* Signup Code */
+
+#form-container-signup-key {
+  /* min-height: 650px;
+  max-height: 90%;
+  height: 87.5%; */
+  width: 70%;
+}
+
+#form-header-signup-key {
+  bottom: 85%;
+}
+
+.back-to-register {
+  position: absolute;
+  bottom: 90%;
+  left: 5%;
+
+  font-weight: bold;
+  font-size: calc(20px + 0.5vh);
+  color: #9b9a9a;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.form-signup-key-text {
+  position: absolute;
+  width: 70%;
+  height: 22.5%;
+  bottom: 60%;
+
+  font-size: calc(16px + 0.5vh);
+
+  color: #000000;
+}
+
+.key-input {
+  position: absolute;
+  max-height: 100px;
+  min-height: 50px;
+  height: 15%;
+  max-width: 1000px;
+  width: 65%;
+  bottom: 40%;
+}
+
+.key-input > input {
+  border: 2px solid #53575a;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-size: calc(20px + 0.5vh);
+}
+
+.key-input > input:focus {
+  border: 2px solid yellowgreen;
+  outline: none;
+}
+
+#key-2,
+#key-3,
+#key-4 {
+  border-radius: 0px;
+}
+
+#key-1 {
+  border-radius: 20px 0 0 20px;
+}
+
+#key-5 {
+  border-radius: 0 20px 20px 0px;
+}
+
+.button-border-confirm {
+  position: absolute;
+  width: 50%;
+  height: 46px;
+  bottom: 20%;
+}
+
+@media only screen and (max-width: 1050px) {
+  input {
+    border-radius: 10px;
+  }
+
+  .selector {
+    height: calc(16px + 0.5vh);
+    width: 65%;
+    font-size: calc(8px + 0.5vh);
+    border-radius: 8px;
+  }
+
+  .form-container input::placeholder {
+    position: absolute;
+    left: 7%;
+    bottom: calc(10% + 0.5vh);
+
+    font-size: calc(8px + 0.5vh);
+    line-height: calc(8px + 0.5vh);
+    color: #9b9a9a;
+  }
+
+  .form-signup-question {
+    font-size: calc(12px + 0.5vh);
+    bottom: calc(88% - 1vh);
+  }
+
+  .form-header {
+    font-size: calc(16px + 0.5vh);
+  }
+
+  #form-container-signup {
+    min-height: 500px;
+    max-height: 50%;
+    height: 87.5%;
+  }
+
+  .button-border-signup {
+    position: absolute;
+    width: 55%;
+    height: calc(20px + 0.5vh);
+    bottom: 20%;
+  }
+
+  .button-name-signup {
+    font-size: calc(10px + 0.5vh);
+  }
+
+  #form-header-signup {
+    top: 1%;
+  }
+
+  .button-name-login {
+    font-size: 17.1429px;
+  }
+
+  .log-in {
+    position: absolute;
+    bottom: 11%;
+    right: 14%;
+
+    font-size: calc(10px + 0.5vh);
+  }
+
+  /* Signup Code */
+
+  .back-to-register {
+    font-size: calc(8px + 1vh);
+  }
+
+  .form-signup-key-text {
+    font-size: calc(7px + 1vh);
+    bottom: 60%;
+  }
+
+  .key-input {
+    position: absolute;
+    max-height: 100px;
+    min-height: 50px;
+    height: 20%;
+    width: 85%;
+    bottom: 40%;
+  }
+
+  .key-input > input {
+    font-size: calc(18px + 0.5vh);
+  }
+
+  .button-border-confirm {
+    position: absolute;
+    width: 50%;
+    height: 15%;
+    bottom: 20%;
+  }
+
+  .button-name-confirm {
+    font-size: calc(18px + 0.5vh);
+  }
+
+  @media only screen and (max-height: 950px) {
+    #form-container-signup {
+      min-height: 450px;
+      bottom: 20vh;
+    }
+
+    .form-container input::placeholder {
+      position: absolute;
+      left: 7%;
+      bottom: calc(10% + 0.5vh);
+
+      font-size: calc(8px + 0.5vh);
+      line-height: calc(8px + 0.5vh);
+      color: #9b9a9a;
+    }
+
+    .form-signup-key-text {
+      bottom: 60%;
+    }
+  }
+
+  @media only screen and (max-height: 700px) {
+    #form-container-signup {
+      min-height: 360px;
+      bottom: 15vh;
+    }
+
+    .form-signup-key-text {
+      bottom: 60%;
+    }
+  }
+}

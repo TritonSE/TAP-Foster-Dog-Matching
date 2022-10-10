@@ -85,11 +85,22 @@ const validators = [
   body("agreement.date").notEmpty().isDate({ format: "MM-DD-YYYY" }),
   body("agreement.signature").notEmpty().isString(),
   body("status").notEmpty().isString(),
-  body("ambassador").notEmpty().isMongoId(),
-  body("coordinator").notEmpty().isMongoId(),
+  body("ambassador").optional().isMongoId(),
+  body("coordinator").optional().isMongoId(),
   body("completedActionItems").notEmpty().isBoolean(),
+<<<<<<< HEAD
   body("selectedDogs").notEmpty().isArray(),
   body("preference").notEmpty().isArray(),
+=======
+  body("selectedDogs")
+    .optional()
+    .isArray()
+    .custom((input) => input.every((value) => typeof value === "string")),
+  body("preference")
+    .optional()
+    .isArray()
+    .custom((input) => input.every((value) => typeof value === "string")),
+>>>>>>> 48fd2787b69a5ad5d1d28c1ed9a37de064825a54
 ];
 
 /**

@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+<<<<<<< HEAD
 
+=======
+import { useNavigate } from "react-router-dom";
+>>>>>>> 48fd2787b69a5ad5d1d28c1ed9a37de064825a54
 import DefaultBody from "../components/DefaultBody";
 import DashboardCard from "../components/DashboardCard";
 import IconButton from "../components/IconButton";
@@ -17,6 +21,7 @@ const DashboardCardsContainer = styled.div`
   }
 `;
 
+<<<<<<< HEAD
 function DashboardCards() {
   const [loaded, setLoaded] = useState(false);
   const { currentUser, signedIn } = React.useContext(AuthContext);
@@ -41,6 +46,10 @@ function DashboardCards() {
     if (applications !== [] && applications.length === currentUser.applications.length)
       setLoaded(true);
   }, [applications]);
+=======
+function Dashboard() {
+  const navigate = useNavigate();
+>>>>>>> 48fd2787b69a5ad5d1d28c1ed9a37de064825a54
 
   return (
     <div>
@@ -54,6 +63,7 @@ function DashboardCards() {
           iconButton={
             <IconButton icon={plus} altText="ContinueButton" leftOffset="83%" topOffset="72%" />
           }
+          onClick={() => navigate("/application")}
         />
       )}
 

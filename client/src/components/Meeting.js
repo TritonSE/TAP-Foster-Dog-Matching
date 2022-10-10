@@ -35,16 +35,10 @@ import "../css/meeting.css";
 function Meetings(props) {
   return (
     <div className="meeting-card">
-      <div className="title">
-        <h2>{props.title}</h2>
-      </div>
+      <div className="title">{props.title && <h2>{props.title}</h2>}</div>
       <div className="meeting-card-content">
         {props.textCard && <div className="text-card">{props.textCard}</div>}
-        {props.status && (
-          <div className="image-card">
-            <div className="status">{props.status}</div>
-          </div>
-        )}
+        {props.status && <div className="status">{props.status}</div>}
         {props.interviewInfo && (
           <div className="info-card">
             <div className="status">{props.interviewInfo}</div>

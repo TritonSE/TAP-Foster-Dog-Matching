@@ -16,19 +16,33 @@ const validators = [
   body("firstName").notEmpty().isString(),
   body("lastName").notEmpty().isString(),
   body("email").notEmpty().isString().isEmail(),
-  body("password").notEmpty().isString().isLength({ min: 8 }),
-  body("phone").notEmpty().isString().isMobilePhone("en-US"),
+  body("password")
+    .notEmpty()
+    .isString()
+    .isLength({ min: 8 })
+    .withMessage("Password must have at least 8 characters"),
+  body("phone").isString().isMobilePhone("en-US"),
   body("role").notEmpty().isString().isIn(Object.values(ADMIN_ROLES)),
-  body("photoURL").notEmpty().isString().isURL(),
-  body("schedule").isObject().notEmpty(),
+  body("photoURL").isString().isURL(),
+  body("schedule").isObject(),
 ];
 
 /**
  * POST /admins - Create an admin
+ *
+ * To only validate the fields (w/o creating an admin), set validateOnly: true in the body
  */
 router.post("/", [...validators, validateRequest], (req, res, next) => {
-  createAdmin(req.body)
+  const {
+    body: { validateOnly },
+  } = req;
+  createAdmin(req.body, validateOnly)
     .then((admin) => {
+      if (validateOnly) {
+        return res.status(200).json({
+          valid: true,
+        });
+      }
       if (admin) {
         return res.status(200).json({
           admin,
