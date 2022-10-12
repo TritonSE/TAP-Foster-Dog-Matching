@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-<<<<<<< HEAD
-
-=======
 import { useNavigate } from "react-router-dom";
->>>>>>> 48fd2787b69a5ad5d1d28c1ed9a37de064825a54
 import DefaultBody from "../components/DefaultBody";
 import DashboardCard from "../components/DashboardCard";
 import IconButton from "../components/IconButton";
