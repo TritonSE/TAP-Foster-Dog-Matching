@@ -26,12 +26,15 @@ function getAdmin(adminId) {
 /**
  * Create an admin profile
  * @param newAdmin - new Admin information
+ * @param validateOnly - if true, only perform validation and don't create the admin.
  */
-async function createAdmin(newAdmin) {
+async function createAdmin(newAdmin, validateOnly) {
   const existingAdmin = await Admin.findOne({ email: newAdmin.email }).exec();
   if (existingAdmin) {
     throw ServiceError(400, "An account with this email already exists");
   }
+
+  if (validateOnly) return null;
 
   const admin = await new Admin(newAdmin).save();
   await createFirebaseUser(admin.id.toString(), newAdmin.email, newAdmin.password, "admin");

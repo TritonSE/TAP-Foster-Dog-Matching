@@ -28,8 +28,7 @@ const Container = styled.div`
   ${device.tablet} {
     flex-direction: column;
     flex: 5;
-    max-height: 100vh;
-    margin-top: -60px;
+    max-height: 85vh;
   }
 `;
 

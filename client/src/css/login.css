@@ -97,7 +97,13 @@
 .error-message {
   color: red;
   position: absolute;
-  bottom: 5%;
+  bottom: 3%;
+  text-align: center;
+}
+
+.signup-success {
+  margin-top: 5px;
+  color: #8dc442;
 }
 
 @media only screen and (max-width: 1050px) {
@@ -162,7 +168,7 @@
   .error-message {
     color: red;
     position: absolute;
-    bottom: 20%;
+    bottom: 24%;
   }
 
   .button-border-login {

@@ -45,7 +45,11 @@ dog = {
 import React, { useState } from "react";
 import styled from "styled-components";
 import DogSummary from "./DogSummary";
+import PassFail from "./PassFail";
 import DogHappy from "../images/DogHappy.png";
+import FOSTER_EVALUATION_INITIAL_MESSAGES from "../constants/FOSTER_EVALUATION_INITIAL_MESSAGES";
+import { updateApplication } from "../services/application";
+import ApplicationContext from "../contexts/ApplicationContext";
 
 const dog1 = {
   name: "Happy",
@@ -153,16 +157,31 @@ function DogSummaryWrap({ dog, active, onClick }) {
   );
 }
 
-const handleSubmit = (current) => {
-  if (current === -1) {
-    // nothing was submitted, so do nothing
-  } else {
-    // TODO: handle submit where allDogs[current] is the dog we are dealing with
-  }
-};
-
 function DogSelection() {
+  const { applicationId, setApplicationState } = React.useContext(ApplicationContext);
+  const [showConfirmDialog, setShowConfirmDialog] = React.useState(false);
   const [current, setCurrent] = useState(-1);
+
+  const handleSubmit = (selection) => {
+    if (selection !== -1) {
+      setShowConfirmDialog(true);
+      // TODO: handle submit where allDogs[current] is the dog we are dealing with
+    }
+  };
+
+  const onConfirmMeetAndGreet = React.useCallback(
+    (content) => {
+      const reqBody = {
+        messages: {
+          stage4: content,
+        },
+      };
+      updateApplication(applicationId, reqBody).then((response) =>
+        setApplicationState(response.data.application)
+      );
+    },
+    [applicationId]
+  );
 
   return (
     <Content>
@@ -180,9 +199,16 @@ function DogSelection() {
           );
         })}
       </DogWrapper>
-      <Button cursor={!(current === -1)} onClick={handleSubmit(current)}>
+      <Button cursor={!(current === -1)} onClick={() => handleSubmit(current)}>
         Confirm
       </Button>
+      <PassFail
+        visible={showConfirmDialog}
+        setVisible={setShowConfirmDialog}
+        status="Confirm Meet & Greet"
+        initialMessage={FOSTER_EVALUATION_INITIAL_MESSAGES.MEET_AND_GREET.CONFIRM}
+        onConfirm={onConfirmMeetAndGreet}
+      />
     </Content>
   );
 }

@@ -1,17 +1,21 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 import Header from "../components/Header";
 import IntroForm from "../components/IntroForm";
 import dog from "../images/dog.png";
 import "../css/register.css";
 
 function Register() {
+  const { state } = useLocation();
+
   return (
     <div className="intro-page">
       <Header />
-      <IntroForm formType="signup" accountType="Foster" header="Foster Sign Up" />
-      {/* <IntroForm formType="signup" accountType="Admin" header="Admin Sign Up" /> */}
-      {/* <IntroForm formType="signup-key" accountType="Foster" header="Foster Sign Up" /> */}
-      {/* <IntroForm formType="signup-key" accountType="Admin" header="Admin Sign Up" /> */}
+      <IntroForm
+        formType="signup"
+        accountType={state ? state.accountType : "Foster"}
+        header={`${state ? state.accountType : "Foster"} Sign Up`}
+      />
       <div className="right-panel">
         <img className="dog-image" src={dog} alt="Cute dog!" />
         <div className="copyright">

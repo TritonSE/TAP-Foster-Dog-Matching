@@ -9,11 +9,17 @@ import { ControlledCheckboxes } from "./Checkboxes";
 import { ControlledRadios } from "./Radios";
 import { device } from "../utils/useResponsive";
 import { Colors } from "./Theme";
-import { createApplication, getApplication, updateApplication } from "../services/application";
+import Meetings from "./Meeting";
+import doggo from "../images/good-boi.png";
+import logo from "../images/logo-inverted.png";
+import ApplicationContext from "../contexts/ApplicationContext";
+import PassFail from "./PassFail";
+import { createApplication, updateApplication } from "../services/application";
 import { AuthContext } from "../contexts/AuthContext";
+import FOSTER_EVALUATION_INITIAL_MESSAGES from "../constants/FOSTER_EVALUATION_INITIAL_MESSAGES";
 
 const Button = styled.div`
-  background: ${Colors.green};
+  background: ${(props) => (props.gray ? Colors.gray : Colors.green)};
   font-size: 20px;
   padding: 10px 30px;
   display: flex;
@@ -40,26 +46,27 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
     []
   );
 
+  const { control, watch, handleSubmit, reset } = useForm({
+    reValidateMode: "onChange",
+  });
+
   // clean up date if it was fetched (on admin side)
   // if on foster side load stored data if they go back from agreement page
-  const initialFormVals = () => {
-    if (Object.keys(applicationData).length !== 0) {
-      applicationData.otherInfo.dogsNeutered = applicationData.otherInfo.dogsNeutered
-        ? "Yes"
-        : "No";
-      applicationData.fosterInfo.permissionToVisit = applicationData.fosterInfo.permissionToVisit
-        ? "Yes"
-        : "No";
-      applicationData.address.zipcode = applicationData.address.zipcode.toString();
-      applicationData.reference.yearsKnown = applicationData.reference.yearsKnown.toString();
+  React.useEffect(() => {
+    if (applicationData) {
+      if (Object.keys(applicationData).length !== 0) {
+        applicationData.otherInfo.dogsNeutered = applicationData.otherInfo.dogsNeutered
+          ? "Yes"
+          : "No";
+        applicationData.fosterInfo.permissionToVisit = applicationData.fosterInfo.permissionToVisit
+          ? "Yes"
+          : "No";
+        applicationData.address.zipcode = applicationData.address.zipcode.toString();
+        applicationData.reference.yearsKnown = applicationData.reference.yearsKnown.toString();
+      }
+      reset(applicationData);
     }
-    return applicationData;
-  };
-
-  const { control, watch, handleSubmit } = useForm({
-    reValidateMode: "onChange",
-    defaultValues: initialFormVals(),
-  });
+  }, [applicationData]);
 
   const onSubmit = (data) => {
     // move onto agreement page + store data from current form for next page
@@ -69,7 +76,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
 
   const onError = (_) => {
     // TODO: implement onError
-    // setView("agreement"); // uncomment this to see the foster agreement w/o filling out the form
+    setView("agreement"); // uncomment this to see the foster agreement w/o filling out the form
   };
 
   return (
@@ -334,6 +341,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
               name="fosterInfo.oneMonthCommitment"
               readOnly={admin}
               required
+              otherOption
             />
           </Form.SubSection>
           <Form.SubSection>
@@ -545,6 +553,9 @@ function FosterAgreementView({
   const { control, handleSubmit } = useForm({
     defaultValues: initialFormVals(),
   });
+  const [showPassDialog, setShowPassDialog] = React.useState(false);
+  const [showRejectDialog, setShowRejectDialog] = React.useState(false);
+  const { applicationView, setApplicationState } = React.useContext(ApplicationContext);
 
   const onSubmit = (data) => {
     if (admin) {
@@ -577,13 +588,38 @@ function FosterAgreementView({
       createApplication(reqBody).then((response) => {
         // console.log(response.ok); // uncomment to see status of create app request
         setCurAppId(response.data.application._id);
+        setView("done");
       });
     }
   };
 
-  const onError = (_) => {
-    // TODO: implement onError
+  const onError = (errors) => {
+    console.log(errors);
+    setView("done");
   };
+
+  const onPassConfirm = React.useCallback((content) => {
+    const reqBody = {
+      messages: {
+        stage1: content,
+      },
+    };
+    updateApplication(curAppId, reqBody).then((response) =>
+      setApplicationState(response.data.application)
+    );
+  }, []);
+
+  const onRejectConfirm = React.useCallback((content) => {
+    const reqBody = {
+      status: "rejected",
+      messages: {
+        stage1: content,
+      },
+    };
+    updateApplication(curAppId, reqBody).then((response) =>
+      setApplicationState(response.data.application)
+    );
+  }, []);
 
   return (
     <FosterAgreementContainer>
@@ -622,61 +658,92 @@ function FosterAgreementView({
         </SignatureContainer>
         <Form.Actions>
           <Button onClick={() => setView("application")}>Back</Button>
-          {!admin ? (
+          {applicationView === "user" ? (
             <Button onClick={handleSubmit(onSubmit, onError)}>Submit Application</Button>
-          ) : undefined}
+          ) : (
+            <>
+              <Button onClick={() => setShowRejectDialog(true)} gray>
+                Reject
+              </Button>
+              <Button onClick={() => setShowPassDialog(true)}>Pass</Button>
+            </>
+          )}
           <div /> {/* Spacer */}
         </Form.Actions>
       </Form.Container>
+      <PassFail
+        visible={showPassDialog}
+        setVisible={setShowPassDialog}
+        status="Pass"
+        initialMessage={FOSTER_EVALUATION_INITIAL_MESSAGES.FOSTER_APPLICATION.PASS}
+        onConfirm={onPassConfirm}
+      />
+      <PassFail
+        visible={showRejectDialog}
+        setVisible={setShowRejectDialog}
+        status="Reject"
+        initialMessage={FOSTER_EVALUATION_INITIAL_MESSAGES.FOSTER_APPLICATION.REJECT}
+        onConfirm={onRejectConfirm}
+      />
     </FosterAgreementContainer>
+  );
+}
+
+function ApplicationSubmittedView() {
+  const { applicationState } = React.useContext(ApplicationContext);
+
+  return (
+    <Meetings
+      textCard={
+        <div>
+          <p>Hello, {applicationState.firstName}</p>
+          <p>Thank you so much for showing interest in volunteering to foster with us.</p>
+          <p>
+            Your application has been received and is under review! Hang tight, you will receive a
+            notification when we&apos;re ready!
+          </p>
+          <p>Best,</p>
+          <p>The Animal Pad Team</p>
+          <img src={logo} alt="logo" />
+        </div>
+      }
+      imagePath={doggo}
+    />
   );
 }
 
 function FosterApplication() {
   const [view, setView] = React.useState("application");
-  const [applicationData, setApplicationData] = React.useState({});
   const { currentUser } = React.useContext(AuthContext);
-
-  // admin view, want to see exitsting application
-  const [curAppId, setCurAppId] = React.useState(
-    currentUser.type === "admin" ? "629846dd3f626453c2ba9de6" : null
-  );
-  const [loaded, setLoaded] = React.useState(false);
-
-  // get data if a application id is provided
-  React.useEffect(() => {
-    if (curAppId) {
-      getApplication(curAppId).then((res) => {
-        setApplicationData(res.data.application);
-        setLoaded(true);
-      });
-    }
-  }, []);
+  const { applicationState, setApplicationState, applicationId, setApplicationId } =
+    React.useContext(ApplicationContext);
 
   // only render content if the role is foster or application from id is loaded
   if (view === "application")
     return (
-      (loaded || currentUser.type === "user") && (
+      (applicationState || currentUser.type === "user") && (
         <FosterApplicationView
           setView={setView}
-          applicationData={applicationData}
-          setApplicationData={setApplicationData}
+          applicationData={applicationState}
+          setApplicationData={setApplicationState}
           admin={currentUser.type === "admin"}
         />
       )
     );
-  return (
-    (loaded || currentUser.type === "user") && (
-      <FosterAgreementView
-        setView={setView}
-        applicationData={applicationData}
-        admin={currentUser.type === "admin"}
-        curAppId={curAppId}
-        curUserId={currentUser._id}
-        setCurAppId={setCurAppId}
-      />
-    )
-  );
+  if (view === "agreement")
+    return (
+      (applicationState || currentUser.type === "user") && (
+        <FosterAgreementView
+          setView={setView}
+          applicationData={applicationState}
+          admin={currentUser.type === "admin"}
+          curAppId={applicationId}
+          curUserId={currentUser._id}
+          setCurAppId={setApplicationId}
+        />
+      )
+    );
+  return <ApplicationSubmittedView />;
 }
 
 export default FosterApplication;
