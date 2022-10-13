@@ -228,13 +228,8 @@ module.exports = mongoose.model(
         required: true,
       },
       selectedDogs: {
-<<<<<<< HEAD
         type: [Schema.Types.ObjectId],
         required: true,
-=======
-        type: [String],
-        required: false,
->>>>>>> 48fd2787b69a5ad5d1d28c1ed9a37de064825a54
       },
       preference: {
         type: [String],
