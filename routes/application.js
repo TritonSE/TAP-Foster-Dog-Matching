@@ -110,8 +110,8 @@ const validators = [
  *  - Other admins gets only pending applications assigned to them
  */
 router.get("/pending", [requireAuthenticatedAdmin], (req, res, next) => {
-  const options = {pending: true};
-  const adminRole = req.currentUser.role
+  const options = { pending: true };
+  const adminRole = req.currentUser.role;
   if (adminRole !== "management") {
     options.ambassador = req.currentUser._id;
   }

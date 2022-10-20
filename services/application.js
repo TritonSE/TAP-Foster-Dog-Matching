@@ -33,7 +33,7 @@ function getApplication(applicationId) {
  * Returns all applications
  *  - Filter options
  *   - pending (boolean): true (returns all pending applications) or false
- *   - ambassador (string): filter by ambassador id 
+ *   - ambassador (string): filter by ambassador id
  */
 function getApplications({ pending, ambassador } = {}) {
   const filter = {};
