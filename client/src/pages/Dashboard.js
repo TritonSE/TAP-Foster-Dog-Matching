@@ -77,7 +77,7 @@ function DashboardCards() {
           />
         ))}
       {loaded &&
-        currentUser.fosters.current.length !== 0 &&
+        currentUser.fosters.current.length !== 0 && <h1>Current Fosters</h1> &&
         currentUser.fosters.current.map((dog) => (
           <DashboardCard
             imagePath={dog.imageUrl.length > 0 ? dog.imageUrl[0] : dogCollage}
@@ -91,7 +91,7 @@ function DashboardCards() {
           />
         ))}
       {loaded &&
-        currentUser.fosters.past.length !== 0 &&
+        currentUser.fosters.past.length !== 0 && <h1>Past Fosters</h1> &&
         currentUser.fosters.past.map((dog) => (
           <DashboardCard
             imagePath={dog.imageUrl.length > 0 ? dog.imageUrl[0] : dogCollage}
