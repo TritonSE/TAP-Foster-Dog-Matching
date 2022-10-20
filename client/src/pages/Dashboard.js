@@ -25,7 +25,7 @@ function DashboardCards() {
   // Get user from backend
   useEffect(() => {
     if (!signedIn) return;
-
+    console.log(currentUser);
     currentUser.applications.map((applicationId) =>
       getApplication(applicationId).then((application) => {
         console.log(application);
@@ -54,7 +54,7 @@ function DashboardCards() {
           iconButton={
             <IconButton icon={plus} altText="ContinueButton" leftOffset="83%" topOffset="72%" />
           }
-          onClick={() => navigate("/application")}
+          // onClick={() => navigate("/application")}
         />
       )}
 
