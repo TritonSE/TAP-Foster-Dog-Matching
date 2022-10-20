@@ -2,13 +2,15 @@
  * Application (Foster View) Step 4
  */
 
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Meetings from "../../../components/Meeting";
 import logo from "../../../images/logo-inverted.png";
 import doggo from "../../../images/good-boi.png";
-import DogCard from "../../../components/DogProfileCard";
+import DogProfileCard from "../../../components/DogProfileCard";
+import DogCard from "../../../components/DogCard";
 import ApplicationContext from "../../../contexts/ApplicationContext";
+import { device } from "../../../utils/useResponsive";
 
 const searchingForMatchesContent = (
   <>
@@ -91,10 +93,18 @@ function Intro() {
 
 function FosterMatches() {
   const { applicationState } = React.useContext(ApplicationContext);
-  const [matches, setMatches] = React.useState([
+
+  // TODO: pull matches from backend and have them be dog objects
+  const [matches, setMatches] = useState([
     {
       name: "tom",
       imageRef: doggo,
+      age: 10,
+      gender: "male",
+      breed: "breed",
+      weight: 15,
+      background: "background info",
+      vettingInfo: "this is some vetting info",
     },
     {
       name: "tom",
@@ -110,6 +120,7 @@ function FosterMatches() {
       imageRef: doggo,
     },
   ]);
+  const [popUp, setPopUp] = useState(false);
 
   return (
     <Meetings
@@ -133,10 +144,13 @@ function FosterMatches() {
             ) : (
               <DogsContainer>
                 {matches.map((dog) => (
-                  <DogCard {...dog} />
+                  <DogProfileCard {...dog} onClick={() => setPopUp(true)} />
                 ))}
               </DogsContainer>
             )}
+
+            {/* info about dog when it is clicked */}
+            <DogCard {...matches[0]} isOpen={popUp} closeModal={() => setPopUp(false)} />
           </FosterMatchesContentContainer>
         </FosterMatchesContainer>
       }

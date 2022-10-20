@@ -9,6 +9,8 @@
 import React from "react";
 import styled from "styled-components";
 import { device } from "../utils/useResponsive";
+import Portal from "./Portal";
+
 // image assets
 import love from "../images/love.png";
 import like from "../images/like.png";
@@ -19,8 +21,8 @@ import greendislike from "../images/greendislike.png";
 import X from "../images/X.png";
 
 const DogInfoContainer = styled.div`
-  width: min(max(500px, 70vw), 1151px);
-  height: min(max(400px, 60vh), 750px);
+  width: 100%;
+  height: 100%;
 
   background: #ffffff;
   border-radius: 20px;
@@ -144,65 +146,71 @@ function DogCard(props) {
     setPreference(update);
   };
 
-  return (
-    <DogInfoContainer>
-      {/* TODO: implement onClick to close pop up */}
-      <XButton src={X} />
-      <Left>
-        <Name> {props.name} </Name>
-        <DogImg src={props.image} alt="Cute dog!" />
-        <PreferenceWrapper>
-          <IconContainer>
-            <LikeImg
-              onClick={() => updatePreference("love")}
-              src={preference === "love" ? greenlove : love}
-              alt="Love"
-            />
-            <div>Love</div>
-          </IconContainer>
-          <IconContainer>
-            <LikeImg
-              onClick={() => updatePreference("like")}
-              src={preference === "like" ? greenlike : like}
-              alt="Like"
-            />
-            <div>Like</div>
-          </IconContainer>
-          <IconContainer>
-            <LikeImg
-              onClick={() => updatePreference("dislike")}
-              src={preference === "dislike" ? greendislike : dislike}
-              alt="Dislike"
-            />
-            <div>Dislike</div>
-          </IconContainer>
-        </PreferenceWrapper>
-      </Left>
+  if (!props.isOpen) {
+    return null;
+  }
 
-      <DogInfo>
-        <InlineInfo>
-          {" "}
-          Age: <span style={{ color: "black", fontWeight: "normal" }}>{props.age}</span>{" "}
-        </InlineInfo>
-        <InlineInfo>
-          Gender: <span style={{ color: "black", fontWeight: "normal" }}>{props.gender}</span>
-        </InlineInfo>
-        <InlineInfo>
-          Breed: <span style={{ color: "black", fontWeight: "normal" }}>{props.breed}</span>
-        </InlineInfo>
-        <InlineInfo>
-          Weight: <span style={{ color: "black", fontWeight: "normal" }}>{props.weight}</span>
-        </InlineInfo>
-        <BlockInfo>
-          <InlineInfo> Background </InlineInfo>
-          <MultilineInfo> {props.background} </MultilineInfo>
-        </BlockInfo>
-        <BlockInfo>
-          <InlineInfo> Vetting Information </InlineInfo>
-          <MultilineInfo> {props.vettingInfo} </MultilineInfo>
-        </BlockInfo>
-      </DogInfo>
-    </DogInfoContainer>
+  return (
+    <Portal>
+      <DogInfoContainer>
+        {/* TODO: implement onClick to close pop up */}
+        <XButton src={X} onClick={props.closeModal} />
+        <Left>
+          <Name> {props.name} </Name>
+          <DogImg src={props.imageRef} alt="Cute dog!" />
+          <PreferenceWrapper>
+            <IconContainer>
+              <LikeImg
+                onClick={() => updatePreference("love")}
+                src={preference === "love" ? greenlove : love}
+                alt="Love"
+              />
+              <div>Love</div>
+            </IconContainer>
+            <IconContainer>
+              <LikeImg
+                onClick={() => updatePreference("like")}
+                src={preference === "like" ? greenlike : like}
+                alt="Like"
+              />
+              <div>Like</div>
+            </IconContainer>
+            <IconContainer>
+              <LikeImg
+                onClick={() => updatePreference("dislike")}
+                src={preference === "dislike" ? greendislike : dislike}
+                alt="Dislike"
+              />
+              <div>Dislike</div>
+            </IconContainer>
+          </PreferenceWrapper>
+        </Left>
+
+        <DogInfo>
+          <InlineInfo>
+            {" "}
+            Age: <span style={{ color: "black", fontWeight: "normal" }}>{props.age}</span>{" "}
+          </InlineInfo>
+          <InlineInfo>
+            Gender: <span style={{ color: "black", fontWeight: "normal" }}>{props.gender}</span>
+          </InlineInfo>
+          <InlineInfo>
+            Breed: <span style={{ color: "black", fontWeight: "normal" }}>{props.breed}</span>
+          </InlineInfo>
+          <InlineInfo>
+            Weight: <span style={{ color: "black", fontWeight: "normal" }}>{props.weight}</span>
+          </InlineInfo>
+          <BlockInfo>
+            <InlineInfo> Background </InlineInfo>
+            <MultilineInfo> {props.background} </MultilineInfo>
+          </BlockInfo>
+          <BlockInfo>
+            <InlineInfo> Vetting Information </InlineInfo>
+            <MultilineInfo> {props.vettingInfo} </MultilineInfo>
+          </BlockInfo>
+        </DogInfo>
+      </DogInfoContainer>
+    </Portal>
   );
 }
 
