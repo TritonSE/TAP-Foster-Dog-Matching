@@ -10,6 +10,7 @@ import React from "react";
 import styled from "styled-components";
 import { device } from "../utils/useResponsive";
 import Portal from "./Portal";
+import { updateApplication } from "../services/application";
 
 // image assets
 import love from "../images/love.png";
@@ -19,6 +20,8 @@ import greenlove from "../images/greenlove.png";
 import greenlike from "../images/greenlike.png";
 import greendislike from "../images/greendislike.png";
 import X from "../images/X.png";
+
+import doggo from "../images/good-boi.png";
 
 const DogInfoContainer = styled.div`
   width: 100%;
@@ -143,8 +146,18 @@ function DogCard(props) {
   const [preference, setPreference] = React.useState("");
 
   const updatePreference = (update) => {
+    if (preference === update) return;
+
     setPreference(update);
+    const temp = props.prefArr;
+    temp[props.isOpen - 1] = update;
+    updateApplication(props.appId, { preference: temp });
   };
+
+  // update inital preference
+  React.useEffect(() => {
+    setPreference(props.prefArr[props.isOpen - 1] || "");
+  }, [props]);
 
   if (!props.isOpen) {
     return null;
@@ -157,7 +170,7 @@ function DogCard(props) {
         <XButton src={X} onClick={props.closeModal} />
         <Left>
           <Name> {props.name} </Name>
-          <DogImg src={props.imageRef} alt="Cute dog!" />
+          <DogImg src={props.imageRef || doggo} alt="Cute dog!" />
           <PreferenceWrapper>
             <IconContainer>
               <LikeImg

@@ -10,7 +10,7 @@ import doggo from "../../../images/good-boi.png";
 import DogProfileCard from "../../../components/DogProfileCard";
 import DogCard from "../../../components/DogCard";
 import ApplicationContext from "../../../contexts/ApplicationContext";
-import { device } from "../../../utils/useResponsive";
+import { getDog } from "../../../services/dogs";
 
 const searchingForMatchesContent = (
   <>
@@ -93,34 +93,17 @@ function Intro() {
 
 function FosterMatches() {
   const { applicationState } = React.useContext(ApplicationContext);
+  const [matches, setMatches] = React.useState([]);
 
-  // TODO: pull matches from backend and have them be dog objects
-  const [matches, setMatches] = useState([
-    {
-      name: "tom",
-      imageRef: doggo,
-      age: 10,
-      gender: "male",
-      breed: "breed",
-      weight: 15,
-      background: "background info",
-      vettingInfo: "this is some vetting info",
-    },
-    {
-      name: "tom",
-      imageRef: doggo,
-    },
+  React.useEffect(() => {
+    applicationState.selectedDogs.map((dogId) =>
+      getDog(dogId).then((response) => {
+        setMatches((prevState) => [...prevState, response.data.dog]);
+      })
+    );
+  }, [applicationState]);
 
-    {
-      name: "tom",
-      imageRef: doggo,
-    },
-    {
-      name: "tom",
-      imageRef: doggo,
-    },
-  ]);
-  const [popUp, setPopUp] = useState(false);
+  const [curDog, setCurDog] = useState(null);
 
   return (
     <Meetings
@@ -140,17 +123,23 @@ function FosterMatches() {
           {matches.length > 0 && <p>Click on each card to show your interest!</p>}
           <FosterMatchesContentContainer>
             {matches.length === 0 ? (
-              <Green>Still looking for matches...</Green>
+              <Green>Looking for matches...</Green>
             ) : (
               <DogsContainer>
-                {matches.map((dog) => (
-                  <DogProfileCard {...dog} onClick={() => setPopUp(true)} />
+                {matches.map((dog, i) => (
+                  <DogProfileCard {...dog} onClick={() => setCurDog(i + 1)} />
                 ))}
               </DogsContainer>
             )}
 
             {/* info about dog when it is clicked */}
-            <DogCard {...matches[0]} isOpen={popUp} closeModal={() => setPopUp(false)} />
+            <DogCard
+              {...matches[curDog - 1]}
+              isOpen={curDog}
+              closeModal={() => setCurDog(null)}
+              prefArr={applicationState.preference}
+              appId={applicationState._id}
+            />
           </FosterMatchesContentContainer>
         </FosterMatchesContainer>
       }

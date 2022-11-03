@@ -17,7 +17,6 @@
 import React, { useEffect } from "react";
 import PortalReactDOM from "react-dom";
 import styled from "styled-components";
-import { device } from "../utils/useResponsive";
 
 const BlurBackground = styled.div`
   position: fixed;
