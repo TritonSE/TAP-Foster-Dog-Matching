@@ -18,6 +18,7 @@ import { createApplication, updateApplication } from "../services/application";
 import { AuthContext } from "../contexts/AuthContext";
 import FOSTER_EVALUATION_INITIAL_MESSAGES from "../constants/FOSTER_EVALUATION_INITIAL_MESSAGES";
 
+
 const Button = styled.div`
   background: ${(props) => (props.gray ? Colors.gray : Colors.green)};
   font-size: 20px;
@@ -70,15 +71,17 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
 
   const onSubmit = (data) => {
     // move onto agreement page + store data from current form for next page
+
     setApplicationData(data);
     setView("agreement");
   };
 
-  const onError = (_) => {
+  const onError = (args) => {
     // TODO: implement onError
+    console.log('ERROR')
+    console.log(args)
     setView("agreement"); // uncomment this to see the foster agreement w/o filling out the form
   };
-
   return (
     <PageSections sections={applicationSections}>
       <Form.Container>
@@ -190,7 +193,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
             />
           </Form.SubSection>
           <Form.SubSection>
-            <InputLabel>Landlord&apos;s Name (if you own, just write n/a)*</InputLabel>
+            <InputLabel>Landlord&apos;s Name (if you own, just write n/a for first name)*</InputLabel>
             <Form.Row>
               <Form.Column>
                 <ControlledInput
@@ -502,6 +505,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
         <Form.Actions>
           <div /> {/* Spacer */}
           <Button onClick={handleSubmit(onSubmit, onError)}>Continue</Button>
+          {/* <Button onClick={handleSubmit(onSubmit)}>Continue</Button> */}
         </Form.Actions>
       </Form.Container>
     </PageSections>
@@ -540,6 +544,9 @@ function FosterAgreementView({
   const initialFormVals = () => {
     if (!admin) {
       return {};
+    }
+    if(curAppId){
+
     }
 
     // reformat date so that it can be inserted into the form
@@ -580,13 +587,14 @@ function FosterAgreementView({
     if (curAppId) {
       // application already created in this instance, so update it
       updateApplication(curAppId, reqBody).then((response) => {
-        // console.log("updating"); // uncomment to see status of update app request
-        // console.log(response.ok); // uncomment to see status of update app request
+        console.log("updating"); // uncomment to see status of update app request
+        console.log(response.ok); // uncomment to see status of update app request
+        setView("done");
       });
     } else {
       // make a new application
       createApplication(reqBody).then((response) => {
-        // console.log(response.ok); // uncomment to see status of create app request
+        console.log(response.ok); // uncomment to see status of create app request
         setCurAppId(response.data.application._id);
         setView("done");
       });
@@ -717,7 +725,8 @@ function FosterApplication() {
   const { currentUser } = React.useContext(AuthContext);
   const { applicationState, setApplicationState, applicationId, setApplicationId } =
     React.useContext(ApplicationContext);
-
+  console.log('current user: ');
+  console.log(currentUser);
   // only render content if the role is foster or application from id is loaded
   if (view === "application")
     return (

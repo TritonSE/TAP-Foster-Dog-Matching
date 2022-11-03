@@ -13,6 +13,7 @@ import "../css/dashboardcard.css";
 
 function DashboardCard(props) {
   const navigate = useNavigate();
+  console.log(props)
   return (
     <div
       className="dashboard-card"

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import DefaultBody from "../components/DefaultBody";
 import DashboardCard from "../components/DashboardCard";
 import IconButton from "../components/IconButton";
@@ -21,7 +21,7 @@ function DashboardCards() {
   const [loaded, setLoaded] = useState(false);
   const { currentUser, signedIn } = React.useContext(AuthContext);
   const [applications, setApplications] = useState([]);
-
+  const navigate = useNavigate();
   // Get user from backend
   useEffect(() => {
     if (!signedIn) return;
@@ -29,16 +29,18 @@ function DashboardCards() {
     currentUser.applications.map((applicationId) =>
       getApplication(applicationId).then((application) => {
         console.log(application);
-        const applicationsCopy = applications;
+        const applicationsCopy = [];
         applicationsCopy.push(application.data.application);
         setApplications(applicationsCopy);
       })
     );
-  }, [signedIn]);
+  }, [signedIn, loaded]);
+  console.log(applications);
   // Load all application models from backend
   useEffect(() => {
     console.log(applications);
     if (applications !== [] && applications.length === currentUser.applications.length)
+      console.log('HERE')
       setLoaded(true);
   }, [applications]);
 
@@ -54,7 +56,7 @@ function DashboardCards() {
           iconButton={
             <IconButton icon={plus} altText="ContinueButton" leftOffset="83%" topOffset="72%" />
           }
-          // onClick={() => navigate("/application")}
+          onClick={() => navigate("/application")}
         />
       )}
 
@@ -62,18 +64,20 @@ function DashboardCards() {
         applications.length !== 0 &&
         applications.map((application) => (
           <DashboardCard
-            imagePath={
-              application.selectedDogs.length > 0 && application.selectedDogs[0].imageUrl.length > 0
-                ? application.selectedDogs[0].imageUrl[0]
-                : dogCollage
-            }
+            // imagePath={ //TODO ADD IMAGE PATH
+            //   application.selectedDogs.length > 0 && application.selectedDogs[0].imageUrl.length > 0
+            //     ? application.selectedDogs[0].imageUrl[0]
+            //     : dogCollage
+            // } 
+            imagePath={dogCollage}
             imageAltText="Dog decoration image"
             cardText="Continue your application"
             key={application._id}
-            navigationPath="/application"
+            navigationPath={`/application/${application._id}`}
             iconButton={
               <IconButton icon={plus} altText="ContinueButton" leftOffset="83%" topOffset="72%" />
             }
+            // onClick={() => navigate("/application")}
           />
         ))}
       {loaded &&

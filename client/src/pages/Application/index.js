@@ -42,6 +42,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { getApplication } from "../../services/application";
 import AdminView from "./AdminView";
 import FosterView from "./FosterView";
+import {useParams} from 'react-router-dom';
 
 const ApplicationContainer = styled.div`
   display: flex;
@@ -84,11 +85,14 @@ const ExitButton = styled.div`
 
 function Application({ id }) {
   const navigate = useNavigate();
+  const params = useParams()
+  console.log('ID')
+  console.log(params)
   const { currentUser } = React.useContext(AuthContext);
   const [currentStep, setCurrentStep] = React.useState(0);
   const [currentSubStep, setCurrentSubStep] = React.useState("content");
   const [applicationView, setApplicationView] = React.useState(); // Note: change this to 'foster' or 'admin' to test different views
-  const [applicationId, setApplicationId] = React.useState(id || "629846dd3f626453c2ba9de6"); // TODO: remove hardcoded applicationId
+  const [applicationId, setApplicationId] = React.useState(params.id);//|| "629846dd3f626453c2ba9de6"); // TODO: remove hardcoded applicationId
   const [applicationState, setApplicationState] = React.useState();
 
   React.useEffect(() => {
