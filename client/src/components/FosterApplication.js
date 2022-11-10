@@ -19,7 +19,6 @@ import { AuthContext } from "../contexts/AuthContext";
 import FOSTER_EVALUATION_INITIAL_MESSAGES from "../constants/FOSTER_EVALUATION_INITIAL_MESSAGES";
 // import application from "../../../models/application";
 
-
 const Button = styled.div`
   background: ${(props) => (props.gray ? Colors.gray : Colors.green)};
   font-size: 20px;
@@ -56,6 +55,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
   // if on foster side load stored data if they go back from agreement page
   React.useEffect(() => {
     if (applicationData) {
+      setView("submitted");
       if (Object.keys(applicationData).length !== 0) {
         applicationData.otherInfo.dogsNeutered = applicationData.otherInfo.dogsNeutered
           ? "Yes"
@@ -79,11 +79,10 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
 
   const onError = (args) => {
     // TODO: implement onError
-    console.log('ERROR')
-    console.log(args)
+    console.log("ERROR");
+    console.log(args);
     // setView("agreement"); // uncomment this to see the foster agreement w/o filling out the form
   };
-  console.log(applicationData)
   return (
     <PageSections sections={applicationSections}>
       <Form.Container>
@@ -195,7 +194,9 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
             />
           </Form.SubSection>
           <Form.SubSection>
-            <InputLabel>Landlord&apos;s Name (if you own, just write n/a for first name)*</InputLabel>
+            <InputLabel>
+              Landlord&apos;s Name (if you own, just write n/a for first name)*
+            </InputLabel>
             <Form.Row>
               <Form.Column>
                 <ControlledInput
@@ -507,7 +508,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
         <Form.Actions>
           <div /> {/* Spacer */}
           {/* {applicationData._id !== '0' &&  <Button onClick={handleSubmit(onSubmit, onError)}>Update</Button>} */}
-          <Button onClick={handleSubmit(onSubmit, onError)}>Coninue</Button>
+          <Button onClick={handleSubmit(onSubmit, onError)}>Continue</Button>
           {/* <Button onClick={handleSubmit(onSubmit)}>Continue</Button> */}
         </Form.Actions>
       </Form.Container>
@@ -547,9 +548,6 @@ function FosterAgreementView({
   const initialFormVals = () => {
     if (!admin) {
       return {};
-    }
-    if(curAppId){
-
     }
 
     // reformat date so that it can be inserted into the form
@@ -592,7 +590,7 @@ function FosterAgreementView({
       updateApplication(curAppId, reqBody).then((response) => {
         console.log("updating"); // uncomment to see status of update app request
         console.log(response.ok); // uncomment to see status of update app request
-        setView("done");  
+        setView("done");
       });
     } else {
       // make a new application
@@ -728,8 +726,6 @@ function FosterApplication() {
   const { currentUser } = React.useContext(AuthContext);
   const { applicationState, setApplicationState, applicationId, setApplicationId } =
     React.useContext(ApplicationContext);
-  console.log('current user: ');
-  console.log(currentUser);
   // only render content if the role is foster or application from id is loaded
   if (view === "application")
     return (
@@ -755,6 +751,7 @@ function FosterApplication() {
         />
       )
     );
+  if (view === "submitted") return <ApplicationSubmittedView />;
   return <ApplicationSubmittedView />;
 }
 

@@ -37,7 +37,7 @@ function AppRouter() {
             <Route path="/" element={<Navigate replace to="/dashboard" />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/contact" element={<ContactUs />} />
-            <Route path="/application/:id" element={<Application />} />
+            <Route path="/application" element={<Application />} />
           </>
         )}
 

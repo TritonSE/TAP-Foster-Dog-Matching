@@ -32,7 +32,7 @@
 
 import React from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import ApplicationProgress from "../../components/ApplicationProgress";
 import { device } from "../../utils/useResponsive";
 import DefaultBody from "../../components/DefaultBody";
@@ -42,7 +42,6 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { getApplication } from "../../services/application";
 import AdminView from "./AdminView";
 import FosterView from "./FosterView";
-import {useParams} from 'react-router-dom';
 
 const ApplicationContainer = styled.div`
   display: flex;
@@ -85,14 +84,12 @@ const ExitButton = styled.div`
 
 function Application({ id }) {
   const navigate = useNavigate();
-  const params = useParams()
-  console.log('ID')
-  console.log(params)
+  const location = useLocation();
   const { currentUser } = React.useContext(AuthContext);
   const [currentStep, setCurrentStep] = React.useState(0);
   const [currentSubStep, setCurrentSubStep] = React.useState("content");
   const [applicationView, setApplicationView] = React.useState(); // Note: change this to 'foster' or 'admin' to test different views
-  const [applicationId, setApplicationId] = React.useState(params.id);//|| "629846dd3f626453c2ba9de6"); // TODO: remove hardcoded applicationId
+  const [applicationId, setApplicationId] = React.useState(id); // || "629846dd3f626453c2ba9de6"); // TODO: remove hardcoded applicationId
   const [applicationState, setApplicationState] = React.useState();
 
   React.useEffect(() => {
@@ -101,12 +98,18 @@ function Application({ id }) {
 
   // get data if a application id is provided
   React.useEffect(() => {
+    if (location.state) {
+      setApplicationId(location.state.id);
+      getApplication(applicationId).then((res) => {
+        setApplicationState(res.data.application);
+      });
+    }
     if (applicationId) {
       getApplication(applicationId).then((res) => {
         setApplicationState(res.data.application);
       });
     }
-  }, []);
+  }, [applicationId]);
 
   // Switch application content based on current user role
   const applicationContent = React.useMemo(
@@ -152,7 +155,6 @@ function Application({ id }) {
       setApplicationState,
     ]
   );
-  console.log(currentStep)
   return (
     <DefaultBody>
       <ApplicationContext.Provider value={applicationData}>

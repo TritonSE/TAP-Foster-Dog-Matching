@@ -13,11 +13,10 @@ import "../css/dashboardcard.css";
 
 function DashboardCard(props) {
   const navigate = useNavigate();
-  console.log(props)
   return (
     <div
       className="dashboard-card"
-      onClick={props.navigationPath ? () => navigate(props.navigationPath) : undefined}
+      onClick={props.onClick} // props.navigationPath ? () => navigate(props.navigationPath, {state:{id:props.key}}) : undefined}
     >
       {props.iconButton}
       <div className="dashboard-card-image-container">

@@ -28,7 +28,6 @@ function DashboardCards() {
     console.log(currentUser);
     currentUser.applications.map((applicationId) =>
       getApplication(applicationId).then((application) => {
-        console.log(application);
         const applicationsCopy = [];
         applicationsCopy.push(application.data.application);
         setApplications(applicationsCopy);
@@ -40,7 +39,6 @@ function DashboardCards() {
   useEffect(() => {
     console.log(applications);
     if (applications !== [] && applications.length === currentUser.applications.length)
-      console.log('HERE')
       setLoaded(true);
   }, [applications]);
 
@@ -68,16 +66,16 @@ function DashboardCards() {
             //   application.selectedDogs.length > 0 && application.selectedDogs[0].imageUrl.length > 0
             //     ? application.selectedDogs[0].imageUrl[0]
             //     : dogCollage
-            // } 
+            // }
             imagePath={dogCollage}
             imageAltText="Dog decoration image"
             cardText="Continue your application"
             key={application._id}
-            navigationPath={`/application/${application._id}`}
+            navigationPath="/application"
             iconButton={
               <IconButton icon={plus} altText="ContinueButton" leftOffset="83%" topOffset="72%" />
             }
-            // onClick={() => navigate("/application")}
+            onClick={() => navigate("/application", { state: { id: application._id } })}
           />
         ))}
       {loaded &&
