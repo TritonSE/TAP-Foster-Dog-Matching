@@ -152,7 +152,7 @@ function Application({ id }) {
       setApplicationState,
     ]
   );
-
+  console.log(currentStep)
   return (
     <DefaultBody>
       <ApplicationContext.Provider value={applicationData}>
