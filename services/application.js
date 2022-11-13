@@ -30,6 +30,27 @@ function getApplication(applicationId) {
 }
 
 /**
+ * Returns all applications
+ *  - Filter options
+ *   - pending (boolean): true (returns all pending applications) or false
+ *   - ambassador (string): filter by ambassador id
+ */
+function getApplications({ pending, ambassador } = {}) {
+  const filter = {};
+  if (pending) {
+    filter.pending = { $ne: "done" };
+  }
+  if (ambassador) {
+    filter.ambassador = ambassador;
+  }
+  return Application.find(filter)
+    .populate("user")
+    .populate("coordinator")
+    .populate("ambassador")
+    .exec();
+}
+
+/**
  * Create a application
  * @param rawApplicationProfile - application to create
  */
@@ -57,6 +78,7 @@ async function updateApplication(applicationId, updatedApplicationProfile) {
 
 module.exports = {
   getApplication,
+  getApplications,
   createApplication,
   updateApplication,
 };

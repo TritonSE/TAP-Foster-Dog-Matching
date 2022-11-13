@@ -11,6 +11,7 @@ module.exports = mongoose.model(
     {
       user: {
         type: Schema.Types.ObjectId,
+        ref: "User",
         required: true,
       },
       firstName: {
@@ -217,10 +218,12 @@ module.exports = mongoose.model(
       },
       ambassador: {
         type: Schema.Types.ObjectId,
+        ref: "Admin",
         required: false,
       },
       coordinator: {
         type: Schema.Types.ObjectId,
+        ref: "Admin",
         required: false,
       },
       completedActionItems: {
@@ -237,5 +240,5 @@ module.exports = mongoose.model(
       },
     },
     { timestamps: {} }
-  ) // TODO make sure timestamps creates createdAt column properly
+  )
 );
