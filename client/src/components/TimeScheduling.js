@@ -41,6 +41,7 @@ import "../css/calendar.css";
 import "../css/timescheduling.css";
 import { AuthContext } from "../contexts/AuthContext";
 import { updateAdmin } from "../services/admins";
+import { DataContext } from "../contexts/DataContext";
 
 function dateToHumanFormat(date) {
   return date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
@@ -61,6 +62,7 @@ function TimeScheduling(props) {
   const [adminSchedule, setAdminSchedule] = useState({});
   const [saveError, setSaveError] = useState();
   const { currentUser } = React.useContext(AuthContext);
+  const { refetchData } = React.useContext(DataContext);
 
   React.useEffect(() => {
     // Load existing admin schedule
@@ -110,7 +112,10 @@ function TimeScheduling(props) {
       ...currentUser,
       schedule,
     };
-    updateAdmin(currentUser._id, updatedAdmin).then(togglePopup);
+    updateAdmin(currentUser._id, updatedAdmin).then(() => {
+      refetchData();
+      togglePopup();
+    });
   };
 
   const day = ["Sunday,", "Monday,", "Tuesday,", "Wednesday,", "Thursday,", "Friday,", "Saturday,"];
@@ -147,8 +152,11 @@ function TimeScheduling(props) {
     </div>
   ));
 
-  const dates = props.schedules.map((schedule) => schedule.date);
-  const [datesWithSchedules] = useState(new Set(dates));
+  const [datesWithSchedules, setDatesWithSchedules] = useState(new Set());
+
+  React.useEffect(() => {
+    setDatesWithSchedules(new Set(props.schedules.map((schedule) => schedule.date)));
+  }, [props.schedules]);
 
   const schedulerByDay = dayAbbr.map((d) => (
     <DayScheduling day={d} key={d} value={adminSchedule} onChange={handleOnChange} />
@@ -178,7 +186,7 @@ function TimeScheduling(props) {
               new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())
             }
             maxDate={
-              new Date(new Date().getFullYear(), new Date().getMonth() + 3, new Date().getDate())
+              new Date(new Date().getFullYear(), new Date().getMonth() + 2, new Date().getDate())
             }
             calendarType="US"
             minDetail="month"

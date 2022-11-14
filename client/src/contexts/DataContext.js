@@ -21,24 +21,30 @@ import { AuthContext } from "./AuthContext";
 export const DataContext = React.createContext({});
 
 export function DataProvider({ children }) {
+  const [allAdmin, setAllAdmin] = React.useState();
   const [allAmbassadors, setAllAmbassadors] = React.useState();
   const [allCoordinators, setAllCoordinators] = React.useState();
   const { currentUser } = React.useContext(AuthContext);
 
-  React.useEffect(() => {
+  const fetchData = React.useCallback(() => {
+    // Fetch all admins
     if (currentUser && currentUser.type === "admin") {
       getAllAdmins().then(({ data: { admin } }) => {
         const ambassadors = admin.filter((a) => a.role === "ambassador");
         const coordinators = admin.filter((a) => a.role === "coordinator");
+        setAllAdmin(admin);
         setAllAmbassadors(ambassadors);
         setAllCoordinators(coordinators);
       });
     }
+    // Fetch other necessary data here...
   }, [currentUser]);
 
+  React.useEffect(fetchData, [currentUser]);
+
   const value = React.useMemo(
-    () => ({ allAmbassadors, allCoordinators }),
-    [allAmbassadors, allCoordinators]
+    () => ({ allAdmin, allAmbassadors, allCoordinators, refetchData: fetchData }),
+    [allAdmin, allAmbassadors, allCoordinators, fetchData]
   );
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;

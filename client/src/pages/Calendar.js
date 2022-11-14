@@ -1,99 +1,86 @@
 import React from "react";
+import { nanoid } from "nanoid";
 import TimeScheduling from "../components/TimeScheduling";
 import DefaultBody from "../components/DefaultBody";
+import { DataContext } from "../contexts/DataContext";
+
+const weekday = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+
+const getDayOfTheWeek = (date) => weekday[date.getDay()];
+/**
+ * Helper to return an object mapping each day of the week to an array of dates for the next 3 months (including the current month)
+ *
+ *  ex. {
+ *        FRI : ['11/18/2022', '11/25/2022',...],
+ *         MON: ['11/14/2022', '11/21/2022', ...],
+ *         SAT: ['11/19/2022', '11/26/2022', ...]
+ *        ...
+ *      }
+ *
+ * @returns {Object} Object mapping each day of the week to an array of dates
+ */
+const everyDayOfTheWeek = () => {
+  const today = new Date();
+  const nextMonth = new Date(today.getFullYear(), today.getMonth() + 1, 1);
+  const nextNextMonth = new Date(nextMonth.getFullYear(), nextMonth.getMonth() + 1, 1);
+
+  const daysOfTheWeek = {
+    SUN: [],
+    MON: [],
+    TUE: [],
+    WED: [],
+    THU: [],
+    FRI: [],
+    SAT: [],
+  };
+
+  [today, nextMonth, nextNextMonth].forEach((date) => {
+    const month = date.getMonth();
+
+    while (date.getMonth() === month) {
+      const dayOfTheWeek = getDayOfTheWeek(date);
+      daysOfTheWeek[dayOfTheWeek].push(date.toLocaleDateString());
+      date.setDate(date.getDate() + 1);
+    }
+  });
+  return daysOfTheWeek;
+};
 
 /** Add NavBar and Header once merged */
 function Calendar() {
+  const { allAdmin } = React.useContext(DataContext);
+  const [adminAvailability, setAdminAvailability] = React.useState([]);
+  const allDaysOfTheWeek = React.useMemo(everyDayOfTheWeek, []);
+
+  // Construct admin repeating admin schedule for the next 3 months
+  React.useEffect(() => {
+    if (allAdmin)
+      setAdminAvailability(
+        allAdmin.reduce((availabilities, admin) => {
+          const result = [...availabilities];
+          if (admin.schedule) {
+            Object.entries(admin.schedule).forEach(([day, time]) => {
+              if (time.length > 0) {
+                allDaysOfTheWeek[day].forEach((date) => {
+                  result.push({
+                    _id: nanoid(),
+                    date,
+                    name: admin.firstName + " " + admin.lastName,
+                    time,
+                    role: admin.role.charAt(0).toUpperCase() + admin.role.slice(1),
+                  });
+                });
+              }
+            });
+          }
+          return result;
+        }, [])
+      );
+  }, [allAdmin]);
+
   return (
     <DefaultBody>
-      <TimeScheduling
-        schedules={[
-          {
-            _id: "1",
-            name: "Sam A.",
-            role: "Foster Ambassador",
-            date: "11/30/2022",
-            time: ["5-8 pm", "4-3 pm"],
-          },
-          {
-            _id: "2",
-            name: "Clara A.",
-            role: "Foster Ambassador",
-            date: "11/30/2022",
-            time: ["1-2 pm"],
-          },
-          {
-            _id: "3",
-            name: "Jodi C.",
-            role: "Foster Director",
-            date: "11/30/2022",
-            time: ["7-8 pm", "9-10 am"],
-          },
-          {
-            _id: "4",
-            name: "Mike H.",
-            role: "Foster Coordinator",
-            date: "11/30/2022",
-            time: ["1-2 pm"],
-          },
-          {
-            _id: "5",
-            name: "Sara L.",
-            role: "Foster Ambassador",
-            date: "11/30/2022",
-            time: ["5-7 pm"],
-          },
-          {
-            _id: "6",
-            name: "William J.",
-            role: "TAP Developer",
-            date: "7/212/2022",
-            time: ["1-3:30 am", "2-6 pm", "9-10 pm", "11pm-12am"],
-          },
-          {
-            _id: "7",
-            name: "Dhanush R.",
-            role: "TAP Engineering Manager",
-            date: "7/212/2022",
-            time: ["1-3:30 am", "8am-1pm", "2-3 pm", "5-6 pm", "9-10 pm", "11pm-12am"],
-          },
-          {
-            _id: "8",
-            name: "Philip Z.",
-            role: "TAP Developer",
-            date: "12/3/2022",
-            time: ["1-3 am"],
-          },
-          {
-            _id: "9",
-            name: "Andrew M.",
-            role: "TAP Developer",
-            date: "12/3/2022",
-            time: ["1-3:30 am", "2-6 pm"],
-          },
-          {
-            _id: "10",
-            name: "Parth P.",
-            role: "TAP Developer",
-            date: "12/3/2022",
-            time: ["9-10 pm", "11pm-12am"],
-          },
-          {
-            _id: "11",
-            name: "Artyom M.",
-            role: "TAP Developer",
-            date: "12/12/2022",
-            time: ["1-3 am"],
-          },
-          {
-            _id: "12",
-            name: "Jacob A.",
-            role: "TAP Developer",
-            date: "12/12/2022",
-            time: ["1-3 am", "4-7 am"],
-          },
-        ]}
-      />
+      <TimeScheduling schedules={adminAvailability} />
     </DefaultBody>
   );
 }
