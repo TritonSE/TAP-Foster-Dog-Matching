@@ -109,7 +109,11 @@ function Application({ id }) {
         setApplicationState(res.data.application);
       });
     }
-  }, [applicationId]);
+    if (applicationState && applicationState.status === "Step 2: Initial Interview"){
+      setCurrentStep(1);
+      setCurrentSubStep('content');
+    }
+  }, [applicationId, applicationState]);
 
   // Switch application content based on current user role
   const applicationContent = React.useMemo(

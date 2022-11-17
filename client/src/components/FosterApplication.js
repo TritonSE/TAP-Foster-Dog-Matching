@@ -55,7 +55,8 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
   // if on foster side load stored data if they go back from agreement page
   React.useEffect(() => {
     if (applicationData) {
-      setView("submitted");
+      // if(!admin)
+      //   setView("submitted");
       if (Object.keys(applicationData).length !== 0) {
         applicationData.otherInfo.dogsNeutered = applicationData.otherInfo.dogsNeutered
           ? "Yes"
@@ -407,8 +408,8 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
                 />
                 <ControlledInput
                   control={control}
-                  label="Relation"
-                  name="reference.relation*"
+                  label="Relation*"
+                  name="reference.relation"
                   readOnly={admin}
                   required
                 />
@@ -416,8 +417,8 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
               <Form.Column>
                 <ControlledInput
                   control={control}
-                  label="Last Name"
-                  name="reference.lastName*"
+                  label="Last Name*"
+                  name="reference.lastName"
                   readOnly={admin}
                   required
                 />
@@ -594,6 +595,7 @@ function FosterAgreementView({
       });
     } else {
       // make a new application
+      console.log(reqBody)
       createApplication(reqBody).then((response) => {
         console.log(response.ok); // uncomment to see status of create app request
         setCurAppId(response.data.application._id);
@@ -612,6 +614,7 @@ function FosterAgreementView({
       messages: {
         stage1: content,
       },
+      status: "Step 2: Initial Interview"
     };
     updateApplication(curAppId, reqBody).then((response) =>
       setApplicationState(response.data.application)

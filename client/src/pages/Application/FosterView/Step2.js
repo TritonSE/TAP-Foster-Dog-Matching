@@ -9,6 +9,7 @@ import Meetings from "../../../components/Meeting";
 import logo from "../../../images/logo-inverted.png";
 import doggo from "../../../images/good-boi.png";
 import ApplicationContext from "../../../contexts/ApplicationContext";
+import FOSTER_EVALUATION_INITIAL_MESSAGES from "../../../constants/FOSTER_EVALUATION_INITIAL_MESSAGES";
 
 function Intro() {
   const { applicationState } = React.useContext(ApplicationContext);
@@ -18,7 +19,14 @@ function Intro() {
       textCard={
         <div>
           <p className="message-from-admin">
-            {applicationState.messages.stage1.replace(/\n/g, "\n\n")}
+            {
+            <div>
+              <p>Hello, {applicationState.firstName}</p>
+              <p>Congratulations!! Your foster application has been approved!</p>
+              <p>Please click on Step 2 to schedule your initial interview with a TAP team member.</p>
+              <p>Best,</p>
+              <p>The Animal Pad Team</p>
+            </div>}
           </p>
           <img src={logo} alt="logo" />
         </div>

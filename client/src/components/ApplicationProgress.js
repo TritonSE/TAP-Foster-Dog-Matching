@@ -112,6 +112,7 @@ function ApplicationProgress() {
   // TODO: Block onClick if step is not unlocked yet
   const handleStepClicked = React.useCallback(
     (index) => {
+      console.log(applicationState)
       if (applicationState.status !== "rejected") {
         if (currentStep === index) goToNextSubStep();
         else goToStep(index);
