@@ -82,36 +82,46 @@ const TableCell = styled.td`
   text-align: center;
 `;
 
+const Message = styled.p`
+  text-align: center;
+  font-size: 26px;
+`;
+
 function Table({ columns, rows }) {
-  return (
-    <TableContainer>
-      <StyledTable>
-        <TableHead>
-          <TableRow>
-            {columns.map((column) => (
-              <TableHeader key={column.header}>{column.header}</TableHeader>
+  if (rows && rows.length > 0)
+    return (
+      <TableContainer>
+        <StyledTable>
+          <TableHead>
+            <TableRow>
+              {columns.map((column) => (
+                <TableHeader key={column.header}>{column.header}</TableHeader>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row, index) => (
+              <>
+                {/* eslint-disable react/no-array-index-key */}
+                <TableRow
+                  key={`${JSON.stringify(
+                    Object.values(row).filter((val) => typeof val !== "object")
+                  )}-${index}`}
+                >
+                  {columns.map((column) => (
+                    <TableCell key={row[column.accessor]}>{row[column.accessor]}</TableCell>
+                  ))}
+                </TableRow>
+              </>
             ))}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row, index) => (
-            <>
-              {/* eslint-disable react/no-array-index-key */}
-              <TableRow
-                key={`${JSON.stringify(
-                  Object.values(row).filter((val) => typeof val !== "object")
-                )}-${index}`}
-              >
-                {columns.map((column) => (
-                  <TableCell key={row[column.accessor]}>{row[column.accessor]}</TableCell>
-                ))}
-              </TableRow>
-            </>
-          ))}
-        </TableBody>
-      </StyledTable>
-    </TableContainer>
-  );
+          </TableBody>
+        </StyledTable>
+      </TableContainer>
+    );
+  // Data not loaded yet
+  if (!rows) return null;
+  // No data to show
+  return <Message>Nothing to see here.</Message>;
 }
 
 export default Table;
