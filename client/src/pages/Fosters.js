@@ -6,6 +6,8 @@ import Select from "../components/Select";
 import { Colors, Typography } from "../components/Theme";
 import DefaultBody from "../components/DefaultBody";
 import { AuthContext } from "../contexts/AuthContext";
+import AmbassadorSelect from "../components/AmbassadorSelect";
+import CoordinatorSelect from "../components/CoordinatorSelect";
 
 const DUMMY_REPEAT_FOSTERS_DATA = [
   {
@@ -116,54 +118,6 @@ function CompletedActionItemsCell({ completed }) {
   );
 }
 
-function CoordinatorSelect({ initialValue }) {
-  const [value, setValue] = React.useState(initialValue);
-
-  const handleSelect = React.useCallback((val) => {
-    setValue(val);
-  }, []);
-
-  return (
-    <Select
-      value={value}
-      options={[
-        // TODO: Replace with data
-        { label: "Kristin", value: "Kristin" },
-        { label: "Jim", value: "Jim" },
-        { label: "Amy", value: "Amy" },
-        { label: "Kristin", value: "Kristin" },
-        { label: "Amy", value: "Amy" },
-      ]}
-      onChange={handleSelect}
-      placeholder="N/A"
-    />
-  );
-}
-
-function AmbassadorSelect({ initialValue }) {
-  const [value, setValue] = React.useState(initialValue);
-
-  const handleSelect = React.useCallback((val) => {
-    setValue(val);
-  }, []);
-
-  return (
-    <Select
-      value={value}
-      options={[
-        // TODO: Replace with data
-        { label: "Kristin", value: "Kristin" },
-        { label: "Shelby", value: "Shelby" },
-        { label: "Amy", value: "Amy" },
-        { label: "Kristin", value: "Kristin" },
-        { label: "Amy", value: "Amy" },
-      ]}
-      onChange={handleSelect}
-      placeholder="N/A"
-    />
-  );
-}
-
 function RepeatFosters() {
   const {
     currentUser: { role },
@@ -199,13 +153,21 @@ function RepeatFosters() {
           role === "ambassador" ? (
             row.ambassador || "Not Assigned"
           ) : (
-            <AmbassadorSelect initialValue={row.ambassador} />
+            // TODO: doesn't work until real data is used
+            <AmbassadorSelect
+              initialValue={row.ambassador && row.ambassador._id}
+              applicationId={row._id}
+            />
           ),
         coordinator:
           role === "ambassador" ? (
             row.coordinator || "Not Assigned"
           ) : (
-            <CoordinatorSelect initialValue={row.coordinator} />
+            // TODO: doesn't work until real data is used
+            <CoordinatorSelect
+              initialValue={row.coordinator && row.coordinator._id}
+              applicationId={row._id}
+            />
           ),
         completedActionItems: <CompletedActionItemsCell completed={row.completedActionItems} />,
       })),
