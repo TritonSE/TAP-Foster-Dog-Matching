@@ -1,4 +1,5 @@
 const { Application } = require("../models");
+const { addApplication } = require("./users");
 
 /**
  * Convert object to dot notation
@@ -56,6 +57,7 @@ function getApplications({ pending, ambassador } = {}) {
  */
 async function createApplication(rawApplicationProfile) {
   const application = await new Application(rawApplicationProfile).save();
+  addApplication(rawApplicationProfile.user, application._id);
   return application;
 }
 

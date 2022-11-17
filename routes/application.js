@@ -126,6 +126,7 @@ router.get("/pending", [requireAuthenticatedAdmin], (req, res, next) => {
 
 /**
  * GET /applications/:applicationId - Return an application by ID
+ * GET /application/:applicationId - Return an application by ID
  */
 router.get("/:applicationId", (req, res, next) => {
   getApplication(req.params.applicationId)
@@ -143,7 +144,7 @@ router.get("/:applicationId", (req, res, next) => {
 });
 
 /**
- * POST /applications - Create an application
+ * POST /application - Create an application
  */
 
 router.post("/", [...validators, validateRequest], (req, res, next) => {
@@ -162,7 +163,7 @@ router.post("/", [...validators, validateRequest], (req, res, next) => {
 });
 
 /**
- * PUT /applications/:applicationId - Update an application
+ * PUT /application/:applicationId - Update an application
  */
 router.put(
   "/:applicationId",
