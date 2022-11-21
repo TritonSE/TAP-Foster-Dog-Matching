@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "../css/profilesection.css";
+import ProfileCard from "./ProfileCard";
+import pfp from "../images/pfp.png";
 
 // Used in Profile.js to divide the page into sections based on role
 function ProfileSection(props) {
@@ -11,9 +13,16 @@ function ProfileSection(props) {
     setViewAll(!viewAll);
   };
 
-  // Maps the array of profile cards to individual card objects
-  const cards = props.profileCards.map((card) => (
-    <div className="profile-section-card">{card}</div>
+  // Maps the array of profiles to individual card objects
+  const cards = props.profiles.map((profile) => (
+    <div className="profile-section-card">
+      <ProfileCard
+        imagePath={pfp} // TODO: replace with real profile image after we do image hosting
+        name={`${profile.firstName} ${profile.lastName}`}
+        phonenumber={profile.phone}
+        email={profile.email}
+      />
+    </div>
   ));
 
   return (

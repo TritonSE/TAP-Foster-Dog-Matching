@@ -36,6 +36,16 @@ export function AuthProvider({ children }) {
   const [loadingUser, setLoadingUser] = React.useState(true);
   const [currentUser, setCurrentUser] = React.useState();
 
+  const refetchCurrentUser = React.useCallback(async () => {
+    let userObject;
+    if (currentUser.type === "admin") {
+      userObject = (await getAdmin(currentUser._id)).data.admin;
+    } else {
+      userObject = (await getUser(currentUser._id)).data.user;
+    }
+    setCurrentUser({ type: currentUser.type, ...userObject });
+  }, [currentUser]);
+
   React.useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (firebaseUser) => {
       setLoadingUser(true);
@@ -60,7 +70,7 @@ export function AuthProvider({ children }) {
   }, []);
 
   const value = React.useMemo(
-    () => ({ currentUser, signedIn: currentUser !== undefined }),
+    () => ({ currentUser, signedIn: currentUser !== undefined, refetchCurrentUser }),
     [currentUser]
   );
 

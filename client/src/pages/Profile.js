@@ -1,238 +1,20 @@
 import React, { useState } from "react";
 import Popup from "../components/Popup";
-import ProfileCard from "../components/ProfileCard";
 import ProfileSection from "../components/ProfileSection";
 import MyProfileButton from "../components/MyProfileButton";
 import DefaultBody from "../components/DefaultBody";
+import { DataContext } from "../contexts/DataContext";
 import pfp from "../images/pfp.png";
-import edit from "../images/edit.png";
+import { AuthContext } from "../contexts/AuthContext";
 
 function Profile() {
   const [isOpen, setIsOpen] = useState(false);
+  const { allAmbassadors, allCoordinators, allManagement } = React.useContext(DataContext);
+  const { currentUser } = React.useContext(AuthContext);
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
   };
-
-  const manageProf = [
-    <ProfileCard
-      imagePath={pfp}
-      name="Clara Adams"
-      phonenumber="(917)-392-8936"
-      email="Clara@tap.com"
-    />,
-    <ProfileCard
-      imagePath={pfp}
-      name="Clara Adams"
-      phonenumber="(917)-392-8936"
-      email="Clara@tap.com"
-    />,
-    <ProfileCard
-      imagePath={pfp}
-      name="Clara Adams"
-      phonenumber="(917)-392-8936"
-      email="Clara@tap.com"
-    />,
-    <ProfileCard
-      imagePath={pfp}
-      name="Clara Adams"
-      phonenumber="(917)-392-8936"
-      email="Clara@tap.com"
-    />,
-    <ProfileCard
-      imagePath={pfp}
-      name="Clara Adams"
-      phonenumber="(917)-392-8936"
-      email="Clara@tap.com"
-    />,
-    <ProfileCard
-      imagePath={pfp}
-      name="Clara Adams"
-      phonenumber="(917)-392-8936"
-      email="Clara@tap.com"
-    />,
-    <ProfileCard
-      imagePath={pfp}
-      name="Clara Adams"
-      phonenumber="(917)-392-8936"
-      email="Clara@tap.com"
-    />,
-    <ProfileCard
-      imagePath={pfp}
-      name="Clara Adams"
-      phonenumber="(917)-392-8936"
-      email="Clara@tap.com"
-    />,
-    <ProfileCard
-      imagePath={pfp}
-      name="Clara Adams"
-      phonenumber="(917)-392-8936"
-      email="Clara@tap.com"
-    />,
-  ];
-
-  const ambassProf = [
-    <ProfileCard
-      imagePath={pfp}
-      name="Clara Adams"
-      phonenumber="(917)-392-8936"
-      email="Clara@tap.com"
-    />,
-    <ProfileCard
-      imagePath={pfp}
-      name="Clara Adams"
-      phonenumber="(917)-392-8936"
-      email="Clara@tap.com"
-    />,
-    <ProfileCard
-      imagePath={pfp}
-      name="Clara Adams"
-      phonenumber="(917)-392-8936"
-      email="Clara@tap.com"
-    />,
-    <ProfileCard
-      imagePath={pfp}
-      name="Clara Adams"
-      phonenumber="(917)-392-8936"
-      email="Clara@tap.com"
-    />,
-    <ProfileCard
-      imagePath={pfp}
-      name="Clara Adams"
-      phonenumber="(917)-392-8936"
-      email="Clara@tap.com"
-    />,
-    <ProfileCard
-      imagePath={pfp}
-      name="Clara Adams"
-      phonenumber="(917)-392-8936"
-      email="Clara@tap.com"
-    />,
-    <ProfileCard
-      imagePath={pfp}
-      name="Clara Adams"
-      phonenumber="(917)-392-8936"
-      email="Clara@tap.com"
-    />,
-    <ProfileCard
-      imagePath={pfp}
-      name="Clara Adams"
-      phonenumber="(917)-392-8936"
-      email="Clara@tap.com"
-    />,
-    <ProfileCard
-      imagePath={pfp}
-      name="Clara Adams"
-      phonenumber="(917)-392-8936"
-      email="Clara@tap.com"
-    />,
-    <ProfileCard
-      imagePath={pfp}
-      name="Clara Adams"
-      phonenumber="(917)-392-8936"
-      email="Clara@tap.com"
-    />,
-    <ProfileCard
-      imagePath={pfp}
-      name="Clara Adams"
-      phonenumber="(917)-392-8936"
-      email="Clara@tap.com"
-    />,
-  ];
-
-  const coordProf = [
-    <ProfileCard
-      imagePath={pfp}
-      imageAltText="Profile picture"
-      name="Clara Adams"
-      phonenumber="(917)-392-8936"
-      email="Clara@tap.com"
-    />,
-    <ProfileCard
-      imagePath={pfp}
-      imageAltText="Profile picture"
-      name="Clara Adams"
-      phonenumber="(917)-392-8936"
-      email="Clara@tap.com"
-    />,
-    <ProfileCard
-      imagePath={pfp}
-      imageAltText="Profile picture"
-      name="Clara Adams"
-      phonenumber="(917)-392-8936"
-      email="Clara@tap.com"
-    />,
-    <ProfileCard
-      imagePath={pfp}
-      imageAltText="Profile picture"
-      name="Clara Adams"
-      phonenumber="(917)-392-8936"
-      email="Clara@tap.com"
-    />,
-    <ProfileCard
-      imagePath={pfp}
-      imageAltText="Profile picture"
-      name="Clara Adams"
-      phonenumber="(917)-392-8936"
-      email="Clara@tap.com"
-    />,
-    <ProfileCard
-      imagePath={pfp}
-      imageAltText="Profile picture"
-      name="Clara Adams"
-      phonenumber="(917)-392-8936"
-      email="Clara@tap.com"
-    />,
-    <ProfileCard
-      imagePath={pfp}
-      imageAltText="Profile picture"
-      name="Clara Adams"
-      phonenumber="(917)-392-8936"
-      email="Clara@tap.com"
-    />,
-    <ProfileCard
-      imagePath={pfp}
-      imageAltText="Profile picture"
-      name="Clara Adams"
-      phonenumber="(917)-392-8936"
-      email="Clara@tap.com"
-    />,
-    <ProfileCard
-      imagePath={pfp}
-      imageAltText="Profile picture"
-      name="Clara Adams"
-      phonenumber="(917)-392-8936"
-      email="Clara@tap.com"
-    />,
-    <ProfileCard
-      imagePath={pfp}
-      imageAltText="Profile picture"
-      name="Clara Adams"
-      phonenumber="(917)-392-8936"
-      email="Clara@tap.com"
-    />,
-    <ProfileCard
-      imagePath={pfp}
-      imageAltText="Profile picture"
-      name="Clara Adams"
-      phonenumber="(917)-392-8936"
-      email="Clara@tap.com"
-    />,
-    <ProfileCard
-      imagePath={pfp}
-      imageAltText="Profile picture"
-      name="Clara Adams"
-      phonenumber="(917)-392-8936"
-      email="Clara@tap.com"
-    />,
-    <ProfileCard
-      imagePath={pfp}
-      imageAltText="Profile picture"
-      name="Clara Adams"
-      phonenumber="(917)-392-8936"
-      email="Clara@tap.com"
-    />,
-  ];
 
   return (
     <DefaultBody>
@@ -241,7 +23,7 @@ function Profile() {
         buttonText="View All"
         buttonAltText="View Less"
         buttonArrow="&#8594;"
-        profileCards={manageProf}
+        profiles={allManagement || []}
         myProfileButton={
           <MyProfileButton
             buttonText="My Profile"
@@ -256,36 +38,16 @@ function Profile() {
         buttonText="View All"
         buttonAltText="View Less"
         buttonArrow="&#8594;"
-        profileCards={ambassProf}
+        profiles={allAmbassadors || []}
       />
       <ProfileSection
         titleText="Coordinators"
         buttonText="View All"
         buttonAltText="View Less"
         buttonArrow="&#8594;"
-        profileCards={coordProf}
+        profiles={allCoordinators || []}
       />
-      {isOpen && (
-        <Popup
-          section1Name="Role: "
-          userRole="Ambassador"
-          section2Name="Contact info:"
-          contactMethod1="Phone Number:"
-          contactMethod2="Email:"
-          phone="123-456-7890"
-          email="Clara@tap.com"
-          changeButtonLabel="Change Password"
-          pfpPath={pfp}
-          pfpAltText="My Profile picture"
-          name="Clara Adams"
-          handleClose={togglePopup}
-          editProfileButtonLabel="Edit Profile"
-          editProfileButtonImage={edit}
-          editProfileButtonAltText="Edit Profile picture"
-          saveButtonLabel="Save Changes"
-          editPfpButtonLabel="Edit"
-        />
-      )}
+      {isOpen && <Popup profile={currentUser} handleClose={togglePopup} />}
     </DefaultBody>
   );
 }
