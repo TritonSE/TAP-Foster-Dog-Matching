@@ -41,3 +41,11 @@ export async function updateApplication(applicationId, updatedApplication) {
 export async function getApplication(applicationId) {
   return getData(`application/${applicationId}`);
 }
+
+/**
+ * Returns all Pending applications
+ * @returns {object} - Pending Applications (as a makeRequest response. see data.js)
+ */
+export async function getPendingApplications() {
+  return getData("application/pending");
+}

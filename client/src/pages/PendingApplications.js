@@ -1,37 +1,14 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import AmbassadorSelect from "../components/AmbassadorSelect";
+import CoordinatorSelect from "../components/CoordinatorSelect";
 import DefaultBody from "../components/DefaultBody";
-import Select from "../components/Select";
 import Table from "../components/Table";
 import TableCellButton from "../components/TableCellButton";
 import { Colors, Typography } from "../components/Theme";
-
-const DUMMY_DATA = [
-  {
-    firstName: "Shelby",
-    createdAt: "04/16/21",
-    status: "Step 4: Foster Matching",
-    ambassador: "Shelby",
-    coordinator: "Kristin",
-    completedActionItems: false,
-  },
-  {
-    firstName: "Shelby",
-    createdAt: "04/16/21",
-    status: "Step 2: Initial Interview",
-    ambassador: "Shelby",
-    coordinator: null,
-    completedActionItems: true,
-  },
-  {
-    firstName: "Shelby",
-    createdAt: "04/16/21",
-    status: "Step 4: Foster Matching",
-    ambassador: "Shelby",
-    coordinator: "Kristin",
-    completedActionItems: false,
-  },
-];
+import { AuthContext } from "../contexts/AuthContext";
+import { getPendingApplications } from "../services/application";
 
 const Heading = styled.div`
   ${Typography.heading}
@@ -46,15 +23,19 @@ const CompletedCellContainer = styled.div`
 `;
 
 function CompletedActionItemsCell({ completed }) {
+  const navigate = useNavigate();
+
   return (
     <CompletedCellContainer>
       {completed ? "Status updated" : "Waiting for update"}
       {completed ? (
-        <TableCellButton color={Colors.salmon} onClick={() => {}}>
+        // TODO: Send application id in navigate state
+        <TableCellButton color={Colors.salmon} onClick={() => navigate("/application")}>
           Review
         </TableCellButton>
       ) : (
-        <TableCellButton color={Colors.lightBlue} onClick={() => {}}>
+        // TODO: Send application id in navigate state
+        <TableCellButton color={Colors.lightBlue} onClick={() => navigate("/application")}>
           View
         </TableCellButton>
       )}
@@ -62,54 +43,11 @@ function CompletedActionItemsCell({ completed }) {
   );
 }
 
-function CoordinatorSelect({ initialValue }) {
-  const [value, setValue] = React.useState(initialValue);
-
-  const handleSelect = React.useCallback((val) => {
-    setValue(val);
-  }, []);
-
-  return (
-    <Select
-      value={value}
-      options={[
-        // TODO: Replace with data
-        { label: "Kristin", value: "Kristin" },
-        { label: "Amy", value: "Amy" },
-        { label: "Kristin", value: "Kristin" },
-        { label: "Amy", value: "Amy" },
-      ]}
-      onChange={handleSelect}
-      placeholder="N/A"
-    />
-  );
-}
-
-function AmbassadorSelect({ initialValue }) {
-  const [value, setValue] = React.useState(initialValue);
-
-  const handleSelect = React.useCallback((val) => {
-    setValue(val);
-  }, []);
-
-  return (
-    <Select
-      value={value}
-      options={[
-        // TODO: Replace with data
-        { label: "Shelby", value: "Shelby" },
-        { label: "Amy", value: "Amy" },
-        { label: "Kristin", value: "Kristin" },
-        { label: "Amy", value: "Amy" },
-      ]}
-      onChange={handleSelect}
-      placeholder="N/A"
-    />
-  );
-}
-
-const role = "management"; // OR "ambassador" TODO: Replace with actual user role
 function PendingApplications() {
+  const {
+    currentUser: { role },
+  } = React.useContext(AuthContext);
+
   const columns = React.useMemo(
     () => [
       {
@@ -131,26 +69,40 @@ function PendingApplications() {
     []
   );
 
-  const rows = React.useMemo(
-    () =>
-      DUMMY_DATA.map((row) => ({
-        ...row,
-        ambassador:
-          role === "ambassador" ? (
-            row.ambassador || "Not Assigned"
-          ) : (
-            <AmbassadorSelect initialValue={row.ambassador} />
-          ),
-        coordinator:
-          role === "ambassador" ? (
-            row.coordinator || "Not Assigned"
-          ) : (
-            <CoordinatorSelect initialValue={row.coordinator} />
-          ),
-        completedActionItems: <CompletedActionItemsCell completed={row.completedActionItems} />,
-      })),
-    []
-  );
+  const [rows, setRows] = React.useState();
+
+  React.useEffect(() => {
+    (async () => {
+      getPendingApplications().then(({ data: { applications } }) =>
+        setRows(
+          applications.map((row) => ({
+            ...row,
+            ambassador:
+              role === "ambassador" ? (
+                (row.ambassador && row.ambassador.firstName) || "Not Assigned"
+              ) : (
+                <AmbassadorSelect
+                  initialValue={row.ambassador && row.ambassador._id}
+                  applicationId={row._id}
+                />
+              ),
+            coordinator:
+              role === "ambassador" ? (
+                (row.coordinator && row.coordinator.firstName) || "Not Assigned"
+              ) : (
+                <CoordinatorSelect
+                  initialValue={row.coordinator && row.coordinator._id}
+                  applicationId={row._id}
+                />
+              ),
+            completedActionItems: <CompletedActionItemsCell completed={row.completedActionItems} />,
+            createdAt: new Date(row.createdAt).toLocaleDateString(),
+          }))
+        )
+      );
+    })();
+  }, []);
+
   return (
     <DefaultBody>
       <Heading>Your Pending Applicants</Heading>

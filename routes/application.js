@@ -1,7 +1,13 @@
 const express = require("express");
 const { body } = require("express-validator");
-const { getApplication, createApplication, updateApplication } = require("../services/application");
+const {
+  getApplication,
+  getApplications,
+  createApplication,
+  updateApplication,
+} = require("../services/application");
 const { validateRequest } = require("../middleware/validation");
+const { requireAuthenticatedAdmin } = require("../middleware/auth");
 
 const router = express.Router();
 
@@ -99,9 +105,29 @@ const validators = [
 ];
 
 /**
+ * GET /pending - Return all pending applications depending on role
+ *  - Management gets all pending applications
+ *  - Other admins gets only pending applications assigned to them
+ */
+router.get("/pending", [requireAuthenticatedAdmin], (req, res, next) => {
+  const options = { pending: true };
+  const adminRole = req.currentUser.role;
+  if (adminRole !== "management") {
+    options.ambassador = req.currentUser._id;
+  }
+  getApplications(options)
+    .then((applications) => {
+      res.status(200).json({
+        applications,
+      });
+    })
+    .catch((err) => next(err));
+});
+
+/**
  * GET /applications/:applicationId - Return an application by ID
  */
-router.get("/:applicationId", (req, res) => {
+router.get("/:applicationId", (req, res, next) => {
   getApplication(req.params.applicationId)
     .then((application) => {
       if (application) {
@@ -113,16 +139,14 @@ router.get("/:applicationId", (req, res) => {
         errors: [{ message: `Something went wrong, application could not be found` }],
       });
     })
-    .catch((err) => {
-      res.status(500).json({ message: err });
-    });
+    .catch((err) => next(err));
 });
 
 /**
  * POST /applications - Create an application
  */
 
-router.post("/", [...validators, validateRequest], (req, res) => {
+router.post("/", [...validators, validateRequest], (req, res, next) => {
   createApplication(req.body)
     .then((application) => {
       if (application) {
@@ -134,9 +158,7 @@ router.post("/", [...validators, validateRequest], (req, res) => {
         errors: [{ message: `Something went wrong, new application could not be created` }],
       });
     })
-    .catch((err) => {
-      res.status(500).json({ message: err });
-    });
+    .catch((err) => next(err));
 });
 
 /**
@@ -145,7 +167,7 @@ router.post("/", [...validators, validateRequest], (req, res) => {
 router.put(
   "/:applicationId",
   [...validators.map((validator) => validator.optional()), validateRequest], // all fields for update are optional
-  (req, res) => {
+  (req, res, next) => {
     updateApplication(req.params.applicationId, req.body)
       .then((application) => {
         if (application) {
@@ -157,9 +179,7 @@ router.put(
           errors: [{ message: `Something went wrong, application could not be updated` }],
         });
       })
-      .catch((err) => {
-        res.status(500).json({ message: err });
-      });
+      .catch((err) => next(err));
   }
 );
 

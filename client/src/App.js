@@ -14,6 +14,7 @@ import Register from "./pages/Register";
 import PendingApplications from "./pages/PendingApplications";
 import DogProfile from "./pages/DogProfile";
 import NotFound from "./pages/NotFound";
+import { DataProvider } from "./contexts/DataContext";
 
 function AppRouter() {
   const { signedIn, currentUser } = React.useContext(AuthContext);
@@ -84,8 +85,10 @@ function AppRouter() {
 function App() {
   return (
     <AuthProvider>
-      <AppRouter />
-      <div id="modal" />
+      <DataProvider>
+        <AppRouter />
+        <div id="modal" />
+      </DataProvider>
     </AuthProvider>
   );
 }
