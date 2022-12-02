@@ -31,10 +31,10 @@ function DashboardCards() {
         const applicationsCopy = [];
         applicationsCopy.push(application.data.application);
         setApplications(applicationsCopy);
+        setLoaded(false)
       })
     );
   }, [signedIn, loaded]);
-  console.log(applications);
   // Load all application models from backend
   useEffect(() => {
     console.log(applications);

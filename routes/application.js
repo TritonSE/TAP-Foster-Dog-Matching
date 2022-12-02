@@ -126,7 +126,6 @@ router.get("/pending", [requireAuthenticatedAdmin], (req, res, next) => {
 
 /**
  * GET /applications/:applicationId - Return an application by ID
- * GET /application/:applicationId - Return an application by ID
  */
 router.get("/:applicationId", (req, res, next) => {
   getApplication(req.params.applicationId)

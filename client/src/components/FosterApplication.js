@@ -727,7 +727,7 @@ function ApplicationSubmittedView() {
 function FosterApplication() {
   const [view, setView] = React.useState("application");
   const { currentUser } = React.useContext(AuthContext);
-  const { applicationState, setApplicationState, applicationId, setApplicationId } =
+  const { applicationState, setApplicationState, applicationId, setApplicationId, currentStep } =
     React.useContext(ApplicationContext);
   // only render content if the role is foster or application from id is loaded
   if (view === "application")

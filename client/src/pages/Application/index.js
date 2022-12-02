@@ -91,6 +91,7 @@ function Application({ id }) {
   const [applicationView, setApplicationView] = React.useState(); // Note: change this to 'foster' or 'admin' to test different views
   const [applicationId, setApplicationId] = React.useState(id); // || "629846dd3f626453c2ba9de6"); // TODO: remove hardcoded applicationId
   const [applicationState, setApplicationState] = React.useState();
+  const [loaded, setLoaded] = React.useState(false);
 
   React.useEffect(() => {
     if (currentUser) setApplicationView(currentUser.type);
@@ -102,6 +103,7 @@ function Application({ id }) {
       setApplicationId(location.state.id);
       getApplication(applicationId).then((res) => {
         setApplicationState(res.data.application);
+        setLoaded(false);
       });
     }
     if (applicationId) {
@@ -113,7 +115,13 @@ function Application({ id }) {
       setCurrentStep(1);
       setCurrentSubStep('content');
     }
-  }, [applicationId, applicationState]);
+  }, [applicationId, loaded]);
+
+  React.useEffect(() => {
+    if(applicationState !== []){
+      setLoaded(true)
+    }
+  },[applicationState])
 
   // Switch application content based on current user role
   const applicationContent = React.useMemo(
@@ -160,6 +168,8 @@ function Application({ id }) {
     ]
   );
   return (
+    <div>
+      {loaded &&(
     <DefaultBody>
       <ApplicationContext.Provider value={applicationData}>
         <ApplicationContainer>
@@ -176,7 +186,8 @@ function Application({ id }) {
           </ApplicationContentContainer>
         </ApplicationContainer>
       </ApplicationContext.Provider>
-    </DefaultBody>
+    </DefaultBody>)}
+    </div>
   );
 }
 
