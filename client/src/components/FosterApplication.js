@@ -17,6 +17,7 @@ import PassFail from "./PassFail";
 import { createApplication, updateApplication } from "../services/application";
 import { AuthContext } from "../contexts/AuthContext";
 import FOSTER_EVALUATION_INITIAL_MESSAGES from "../constants/FOSTER_EVALUATION_INITIAL_MESSAGES";
+// import application from "../../../models/application";
 
 const Button = styled.div`
   background: ${(props) => (props.gray ? Colors.gray : Colors.green)};
@@ -54,6 +55,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
   // if on foster side load stored data if they go back from agreement page
   React.useEffect(() => {
     if (applicationData) {
+      setView("submitted");
       if (Object.keys(applicationData).length !== 0) {
         applicationData.otherInfo.dogsNeutered = applicationData.otherInfo.dogsNeutered
           ? "Yes"
@@ -70,15 +72,17 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
 
   const onSubmit = (data) => {
     // move onto agreement page + store data from current form for next page
+
     setApplicationData(data);
     setView("agreement");
   };
 
-  const onError = (_) => {
+  const onError = (args) => {
     // TODO: implement onError
-    setView("agreement"); // uncomment this to see the foster agreement w/o filling out the form
+    console.log("ERROR");
+    console.log(args);
+    // setView("agreement"); // uncomment this to see the foster agreement w/o filling out the form
   };
-
   return (
     <PageSections sections={applicationSections}>
       <Form.Container>
@@ -87,14 +91,14 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
           <Form.SubSection title="Name">
             <ControlledInput
               control={control}
-              label="First Name"
+              label="First Name*"
               name="firstName"
               readOnly={admin}
               required
             />
             <ControlledInput
               control={control}
-              label="Last Name"
+              label="Last Name*"
               name="lastName"
               readOnly={admin}
               required
@@ -103,7 +107,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
           <Form.SubSection title="Address">
             <ControlledInput
               control={control}
-              label="Street Address"
+              label="Street Address*"
               name="address.addressOne"
               readOnly={admin}
               required
@@ -117,7 +121,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
             <Form.Row>
               <ControlledInput
                 control={control}
-                label="City"
+                label="City*"
                 name="address.city"
                 readOnly={admin}
                 required
@@ -133,7 +137,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
             <Form.Row>
               <ControlledInput
                 control={control}
-                label="Zipcode"
+                label="Zipcode*"
                 name="address.zipcode"
                 type="number"
                 rules={{
@@ -145,7 +149,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
               />
               <ControlledInput
                 control={control}
-                label="Country"
+                label="Country*"
                 name="address.country"
                 defaultValue="United States"
                 readOnly={admin}
@@ -156,7 +160,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
           <Form.SubSection title="E-mail">
             <ControlledInput
               control={control}
-              label="ex: myname@example.com"
+              label="ex: myname@example.com*"
               name="email"
               rules={{
                 pattern:
@@ -169,7 +173,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
           <Form.SubSection title="Date of Birth">
             <ControlledInput
               control={control}
-              label="mm-dd-yyyy"
+              label="mm-dd-yyyy*"
               name="dateOfBirth"
               rules={{
                 maxLength: 10,
@@ -180,7 +184,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
             />
           </Form.SubSection>
           <Form.SubSection>
-            <InputLabel>Do you own or rent your home?</InputLabel>
+            <InputLabel>Do you own or rent your home?*</InputLabel>
             <ControlledRadios
               control={control}
               options={["Own", "Rent"]}
@@ -190,12 +194,14 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
             />
           </Form.SubSection>
           <Form.SubSection>
-            <InputLabel>Landlord&apos;s Name (if you own, just write n/a)*</InputLabel>
+            <InputLabel>
+              Landlord&apos;s Name (if you own, just write n/a for first name)*
+            </InputLabel>
             <Form.Row>
               <Form.Column>
                 <ControlledInput
                   control={control}
-                  label="First Name"
+                  label="First Name*"
                   name="landlord.firstName"
                   readOnly={admin}
                   required
@@ -239,7 +245,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
           <Form.SubSection>
             <ControlledInput
               control={control}
-              label="Do you have any breed and/or size restrictions where you live. If yes, please list."
+              label="Do you have any breed and/or size restrictions where you live. If yes, please list.*"
               numLines={6}
               name="fosterInfo.restrictions"
               readOnly={admin}
@@ -249,7 +255,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
           <Form.SubSection>
             <ControlledInput
               control={control}
-              label="Where will your foster dog sleep at night?"
+              label="Where will your foster dog sleep at night?*"
               name="fosterInfo.sleepLocation"
               readOnly={admin}
               required
@@ -258,7 +264,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
           <Form.SubSection>
             <ControlledInput
               control={control}
-              label="How many hours are you home a day?"
+              label="How many hours are you home a day?*"
               name="fosterInfo.hoursAtHome"
               type="number"
               rules={{ min: 0, max: 24 }}
@@ -269,7 +275,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
           <Form.SubSection>
             <ControlledInput
               control={control}
-              label="Please describe a typical day for your dog while you are away."
+              label="Please describe a typical day for your dog while you are away.*"
               numLines={6}
               name="fosterInfo.typicalDay"
               readOnly={admin}
@@ -279,7 +285,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
           <Form.SubSection>
             <ControlledInput
               control={control}
-              label="Who will be the primary caregiver for this foster dog?"
+              label="Who will be the primary caregiver for this foster dog?*"
               name="fosterInfo.primaryCaregiver"
               readOnly={admin}
               required
@@ -288,7 +294,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
           <Form.SubSection>
             <InputLabel>
               If you reside with other adults in the household, are they onboard to bring in a
-              foster dog?
+              foster dog?*
             </InputLabel>
             <ControlledRadios
               control={control}
@@ -299,7 +305,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
             />
           </Form.SubSection>
           <Form.SubSection>
-            <InputLabel>Do we have permission to do a home visit?</InputLabel>
+            <InputLabel>Do we have permission to do a home visit?*</InputLabel>
             <ControlledRadios
               control={control}
               options={["Yes", "No"]}
@@ -311,7 +317,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
           <Form.SubSection>
             <ControlledInput
               control={control}
-              label="Have you ever fostered a dog before? If so, please describe the experience and include as much detail as possible."
+              label="Have you ever fostered a dog before? If so, please describe the experience and include as much detail as possible.*"
               numLines={14}
               name="fosterInfo.pastExperience"
               readOnly={admin}
@@ -321,7 +327,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
           <Form.SubSection>
             <ControlledInput
               control={control}
-              label="Why do you wish to foster a dog?"
+              label="Why do you wish to foster a dog?*"
               numLines={14}
               name="fosterInfo.whyFoster"
               readOnly={admin}
@@ -384,14 +390,14 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
               <Form.Column>
                 <ControlledInput
                   control={control}
-                  label="First Name"
+                  label="First Name*"
                   name="reference.firstName"
                   readOnly={admin}
                   required
                 />
                 <ControlledInput
                   control={control}
-                  label="Reference's Phone Number"
+                  label="Reference's Phone Number*"
                   name="reference.phone"
                   rules={{
                     pattern: /^(\+\d{1,2}\s?)?1?-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}/,
@@ -402,7 +408,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
                 <ControlledInput
                   control={control}
                   label="Relation"
-                  name="reference.relation"
+                  name="reference.relation*"
                   readOnly={admin}
                   required
                 />
@@ -411,13 +417,13 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
                 <ControlledInput
                   control={control}
                   label="Last Name"
-                  name="reference.lastName"
+                  name="reference.lastName*"
                   readOnly={admin}
                   required
                 />
                 <ControlledInput
                   control={control}
-                  label="Reference's Email Address"
+                  label="Reference's Email Address*"
                   name="reference.email"
                   rules={{
                     pattern:
@@ -428,7 +434,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
                 />
                 <ControlledInput
                   control={control}
-                  label="Years Known"
+                  label="Years Known*"
                   type="number"
                   name="reference.yearsKnown"
                   readOnly={admin}
@@ -441,7 +447,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
           <Form.SubSection>
             <ControlledInput
               control={control}
-              label="How did you hear about TAP?"
+              label="How did you hear about TAP?*"
               numLines={6}
               name="otherInfo.howDidYouHearAboutTAP"
               readOnly={admin}
@@ -451,7 +457,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
           <Form.SubSection>
             <ControlledInput
               control={control}
-              label="If you have any other pets, please list the number, age, types, and any issues they may have with a new dog."
+              label="If you have any other pets, please list the number, age, types, and any issues they may have with a new dog.*"
               numLines={10}
               name="otherInfo.otherPets"
               readOnly={admin}
@@ -461,7 +467,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
           <Form.SubSection>
             <ControlledInput
               control={control}
-              label="Are all the dogs in your home up to date on vaccines and in good health?"
+              label="Are all the dogs in your home up to date on vaccines and in good health?*"
               numLines={10}
               name="otherInfo.dogsHealth"
               readOnly={admin}
@@ -469,7 +475,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
             />
           </Form.SubSection>
           <Form.SubSection>
-            <InputLabel>If you have other dogs in the home, are they spayed/neutered?</InputLabel>
+            <InputLabel>If you have other dogs in the home, are they spayed/neutered?*</InputLabel>
             <ControlledRadios
               control={control}
               options={["Yes", "No"]}
@@ -481,7 +487,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
           <Form.SubSection>
             <ControlledInput
               control={control}
-              label="Do you have any children? If so, please list the number and their experience with dogs."
+              label="Do you have any children? If so, please list the number and their experience with dogs.*"
               numLines={10}
               name="otherInfo.children"
               readOnly={admin}
@@ -491,7 +497,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
           <Form.SubSection>
             <ControlledInput
               control={control}
-              label="Please describe your living situation. If you rent, please tell us about your arrangement with your landlord pertaining to dogs."
+              label="Please describe your living situation. If you rent, please tell us about your arrangement with your landlord pertaining to dogs.*"
               numLines={10}
               name="otherInfo.livingSituation"
               readOnly={admin}
@@ -501,7 +507,9 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
         </Form.Section>
         <Form.Actions>
           <div /> {/* Spacer */}
+          {/* {applicationData._id !== '0' &&  <Button onClick={handleSubmit(onSubmit, onError)}>Update</Button>} */}
           <Button onClick={handleSubmit(onSubmit, onError)}>Continue</Button>
+          {/* <Button onClick={handleSubmit(onSubmit)}>Continue</Button> */}
         </Form.Actions>
       </Form.Container>
     </PageSections>
@@ -580,13 +588,14 @@ function FosterAgreementView({
     if (curAppId) {
       // application already created in this instance, so update it
       updateApplication(curAppId, reqBody).then((response) => {
-        // console.log("updating"); // uncomment to see status of update app request
-        // console.log(response.ok); // uncomment to see status of update app request
+        console.log("updating"); // uncomment to see status of update app request
+        console.log(response.ok); // uncomment to see status of update app request
+        setView("done");
       });
     } else {
       // make a new application
       createApplication(reqBody).then((response) => {
-        // console.log(response.ok); // uncomment to see status of create app request
+        console.log(response.ok); // uncomment to see status of create app request
         setCurAppId(response.data.application._id);
         setView("done");
       });
@@ -717,7 +726,6 @@ function FosterApplication() {
   const { currentUser } = React.useContext(AuthContext);
   const { applicationState, setApplicationState, applicationId, setApplicationId } =
     React.useContext(ApplicationContext);
-
   // only render content if the role is foster or application from id is loaded
   if (view === "application")
     return (
@@ -743,6 +751,7 @@ function FosterApplication() {
         />
       )
     );
+  if (view === "submitted") return <ApplicationSubmittedView />;
   return <ApplicationSubmittedView />;
 }
 

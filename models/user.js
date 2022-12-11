@@ -22,6 +22,10 @@ module.exports = mongoose.model(
       required: true,
       unique: true,
     },
+    applications: {
+      type: [ObjectId],
+      required: true,
+    },
     lastActive: {
       type: Date,
       required: true,
@@ -30,9 +34,15 @@ module.exports = mongoose.model(
       type: Boolean,
       required: true,
     },
-    pastFosters: {
-      type: Number,
-      required: true,
+    fosters: {
+      past: {
+        type: [ObjectId],
+        required: true,
+      },
+      current: {
+        type: [ObjectId],
+        required: true,
+      },
     },
     ambassador: {
       type: ObjectId,

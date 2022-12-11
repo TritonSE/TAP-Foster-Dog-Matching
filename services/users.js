@@ -15,7 +15,7 @@ async function createUser(rawUser) {
     ...rawUser,
     currentlyFostering: false,
     lastActive: Date.now(),
-    pastFosters: 0,
+    fosters: { past: [], current: [] },
     ambassador: null,
     coordinator: null,
     accountStatus: "active",
@@ -33,7 +33,34 @@ function getUser(userId) {
   return User.findById(userId).exec();
 }
 
+/**
+ * Adds an application the user's applications list
+ * @param userId - The user to add the application to
+ * @param applicationId - The application to add to the user
+ */
+async function addApplication(userId, applicationId) {
+  const user = await User.findById(userId).exec();
+  const applications = user.applications === undefined ? [] : user.applications;
+
+  applications.push(applicationId);
+  console.log(applications);
+  User.findByIdAndUpdate(userId, { applications }).exec();
+}
+/**
+ * Update a user
+ * @param userId - id of user to update
+ * @param updatedUser - updated user properties
+ */
+async function updateUser(userId, updatedUserProperties) {
+  const updatedUser = await User.findByIdAndUpdate(userId, updatedUserProperties, {
+    new: true,
+  }).exec();
+  return updatedUser;
+}
+
 module.exports = {
   createUser,
   getUser,
+  updateUser,
+  addApplication,
 };
