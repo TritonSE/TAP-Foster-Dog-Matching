@@ -14,10 +14,11 @@
 
 import React from "react";
 import styled from "styled-components";
+import doggo from "../images/good-boi.png";
 
 const DogContainer = styled.div`
-  width: 245px;
-  height: 145px;
+  width: 280px;
+  height: 245px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,17 +36,16 @@ const DogContainer = styled.div`
 
 const DogImg = styled.img`
   padding-top: 20px;
-  width: 194px;
-  height: 98px;
+  width: 150px;
   border-radius: 5%;
 `;
 
 const DogName = styled.p``;
 
-function DogCard({ imageRef, name }) {
+function DogCard({ imageRef, name, onClick }) {
   return (
-    <DogContainer>
-      <DogImg src={imageRef} />
+    <DogContainer onClick={onClick}>
+      <DogImg src={imageRef || doggo} />
       <DogName>{name}</DogName>
     </DogContainer>
   );
