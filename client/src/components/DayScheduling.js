@@ -1,21 +1,36 @@
-import React, { useState } from "react";
+import React from "react";
 import Select from "react-select";
+import { nanoid } from "nanoid";
 import add from "../images/add.svg";
 import trash from "../images/trash.svg";
 
 import "../css/dayscheduling.css";
 
 function DayScheduling(props) {
-  const [timeSlotKeys, setTimeSlotKeys] = useState([]);
-
   const addTimeSlot = () => {
-    const key = new Date().getTime();
-    setTimeSlotKeys([...timeSlotKeys, key]);
+    props.onChange({
+      ...props.value,
+      [props.day]: [...props.value[props.day], { key: nanoid() }],
+    });
   };
 
-  const removeTimeSlot = (timeSlotKey, e) => {
+  const removeTimeSlot = (keyToRemove, e) => {
     e.stopPropagation();
-    setTimeSlotKeys(timeSlotKeys.filter((key) => timeSlotKey !== key));
+    const updatedSchedule = props.value[props.day].filter(({ key }) => keyToRemove !== key);
+    props.onChange({
+      ...props.value,
+      [props.day]: updatedSchedule,
+    });
+  };
+
+  const onTimeSlotChange = (key, bound, value) => {
+    const updatedSchedule = props.value[props.day];
+    const changedTimeSlot = updatedSchedule.find(({ key: timeSlotKey }) => key === timeSlotKey);
+    changedTimeSlot[bound] = value;
+    props.onChange({
+      ...props.value,
+      [props.day]: updatedSchedule,
+    });
   };
 
   const time = [
@@ -81,14 +96,16 @@ function DayScheduling(props) {
     <div className="day-scheduling-day" key={props.day}>
       <div className="day-scheduling-day-text">{props.day}</div>
       <div className="day-scheduling-day-times-container">
-        {timeSlotKeys.map((timeSlotKey) => (
-          <div className="day-scheduling-time-slot" key={timeSlotKey}>
+        {props.value[props.day].map(({ key, begin, end }) => (
+          <div className="day-scheduling-time-slot" key={key}>
             <Select
               className="day-scheduling-time-slot-begin"
               components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
               options={time}
               styles={customStyles}
               placeholder=""
+              defaultValue={{ label: begin, value: begin }}
+              onChange={({ value }) => onTimeSlotChange(key, "begin", value)}
             />
             <div className="day-scheduling-time-slot-divider" />
             <Select
@@ -97,13 +114,15 @@ function DayScheduling(props) {
               options={time}
               styles={customStyles}
               placeholder=""
+              defaultValue={{ label: end, value: end }}
+              onChange={({ value }) => onTimeSlotChange(key, "end", value)}
             />
             <div
               className="day-scheduling-trash-button"
               role="button"
               tabIndex={0}
-              onClick={(event) => removeTimeSlot(timeSlotKey, event)}
-              onKeyDown={(event) => removeTimeSlot(timeSlotKey, event)}
+              onClick={(event) => removeTimeSlot(key, event)}
+              onKeyDown={(event) => removeTimeSlot(key, event)}
             >
               <img className="day-scheduling-trash-button-image" src={trash} alt="Remove Button" />
             </div>

@@ -32,12 +32,16 @@
 
 import React, { useState } from "react";
 import Calendar from "react-calendar";
+import { nanoid } from "nanoid";
 import DayScheduling from "./DayScheduling";
 import left from "../images/left.svg";
 import right from "../images/right.svg";
 import plus from "../images/plus.png";
 import "../css/calendar.css";
 import "../css/timescheduling.css";
+import { AuthContext } from "../contexts/AuthContext";
+import { updateAdmin } from "../services/admins";
+import { DataContext } from "../contexts/DataContext";
 
 function dateToHumanFormat(date) {
   return date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
@@ -50,13 +54,68 @@ function sortSchedulesByLastName(schedules) {
       : a.name.split(" ").shift().localeCompare(b.name.split(" ").shift())
   );
 }
+const dayAbbr = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
 
 function TimeScheduling(props) {
   const [currDate, onChange] = useState(new Date());
   const [isOpen, setIsOpen] = useState(false);
+  const [adminSchedule, setAdminSchedule] = useState({});
+  const [saveError, setSaveError] = useState();
+  const { currentUser } = React.useContext(AuthContext);
+  const { refetchData } = React.useContext(DataContext);
+
+  React.useEffect(() => {
+    // Load existing admin schedule
+    const { schedule } = currentUser;
+    if (!schedule) {
+      setAdminSchedule(Object.fromEntries(dayAbbr.map((day) => [day, []])));
+      return;
+    }
+    const transformedSchedule = {};
+    Object.keys(schedule).forEach((day) => {
+      transformedSchedule[day] = schedule[day].map((time) => {
+        const [begin, end] = time.split("-");
+        return {
+          key: nanoid(),
+          begin,
+          end,
+        };
+      });
+    });
+    setAdminSchedule(transformedSchedule);
+  }, []);
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleOnChange = (value) => {
+    setAdminSchedule(value);
+    setSaveError(); // Clear error message
+  };
+
+  const handleSave = () => {
+    // Check if schedule is valid
+    const allTimes = Object.values(adminSchedule).flat();
+
+    if (allTimes.some((time) => !("begin" in time) || !("end" in time))) {
+      setSaveError("Make sure all time slots have a start and end time.");
+      return;
+    }
+
+    const schedule = {};
+    Object.keys(adminSchedule).forEach((day) => {
+      schedule[day] = adminSchedule[day].map((time) => `${time.begin}-${time.end}`);
+    });
+
+    const updatedAdmin = {
+      ...currentUser,
+      schedule,
+    };
+    updateAdmin(currentUser._id, updatedAdmin).then(() => {
+      refetchData();
+      togglePopup();
+    });
   };
 
   const day = ["Sunday,", "Monday,", "Tuesday,", "Wednesday,", "Thursday,", "Friday,", "Saturday,"];
@@ -93,11 +152,15 @@ function TimeScheduling(props) {
     </div>
   ));
 
-  const dates = props.schedules.map((schedule) => schedule.date);
-  const [datesWithSchedules] = useState(new Set(dates));
+  const [datesWithSchedules, setDatesWithSchedules] = useState(new Set());
 
-  const dayAbbr = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
-  const schedulerByDay = dayAbbr.map((d) => <DayScheduling day={d} key={d} />);
+  React.useEffect(() => {
+    setDatesWithSchedules(new Set(props.schedules.map((schedule) => schedule.date)));
+  }, [props.schedules]);
+
+  const schedulerByDay = dayAbbr.map((d) => (
+    <DayScheduling day={d} key={d} value={adminSchedule} onChange={handleOnChange} />
+  ));
 
   return (
     <>
@@ -123,7 +186,7 @@ function TimeScheduling(props) {
               new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())
             }
             maxDate={
-              new Date(new Date().getFullYear(), new Date().getMonth() + 3, new Date().getDate())
+              new Date(new Date().getFullYear(), new Date().getMonth() + 2, new Date().getDate())
             }
             calendarType="US"
             minDetail="month"
@@ -162,13 +225,14 @@ function TimeScheduling(props) {
             </label>
             <div className="time-scheduling-repeat-text">Repeat?</div>
             <div className="time-scheduling-weekly-schedule-container">{schedulerByDay}</div>
+            <div className="time-scheduling-save-error-text">{saveError}</div>
             <div className="time-scheduling-save-button">
               <div
                 className="time-scheduling-save-button-text"
                 role="button"
                 tabIndex={0}
-                onClick={togglePopup}
-                onKeyDown={togglePopup}
+                onClick={handleSave}
+                onKeyDown={handleSave}
               >
                 Save Changes
               </div>

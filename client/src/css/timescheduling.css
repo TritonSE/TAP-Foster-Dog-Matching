@@ -346,6 +346,12 @@ input:checked + .time-scheduling-repeat-slider:before {
   row-gap: 5px;
 }
 
+.time-scheduling-save-error-text {
+  text-align: center;
+  color: red;
+  height: 18px;
+}
+
 .time-scheduling-save-button {
   width: 164.67px;
   height: 37.67px;
@@ -355,7 +361,7 @@ input:checked + .time-scheduling-repeat-slider:before {
   outline: none;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 17px;
+  margin-top: 8px;
 }
 
 .time-scheduling-save-button-text {
