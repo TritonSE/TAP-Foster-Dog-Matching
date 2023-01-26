@@ -12,15 +12,9 @@ import { Colors } from "./Theme";
 import check from "../images/check.png";
 import useResponsive, { device } from "../utils/useResponsive";
 import ApplicationContext from "../contexts/ApplicationContext";
+import APPLICATION_STAGES from "../constants/APPLICATION_STAGES";
 
-const MILESTONES = [
-  "Application Submitted",
-  "Initial Interview",
-  "Home Screen",
-  "Foster Matching",
-  "Meet & Greet",
-  "Foster in Home",
-];
+const MILESTONES = Object.values(APPLICATION_STAGES);
 
 const ProgressBarContainer = styled.div`
   display: flex;
