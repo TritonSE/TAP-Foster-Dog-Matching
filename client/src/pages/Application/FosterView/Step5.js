@@ -9,6 +9,8 @@ import Meetings from "../../../components/Meeting";
 import logo from "../../../images/logo-inverted.png";
 import doggo from "../../../images/good-boi.png";
 import ApplicationContext from "../../../contexts/ApplicationContext";
+import APPLICATION_STAGES from "../../../constants/APPLICATION_STAGES";
+import useInterview from "../../../hooks/useInterview";
 
 function Intro() {
   const { applicationState } = React.useContext(ApplicationContext);
@@ -31,12 +33,25 @@ function Intro() {
 function ScheduleMeetAndGreet() {
   const [view, setView] = React.useState("schedule");
   const { applicationState } = React.useContext(ApplicationContext);
+  const { interview, refetchInterview } = useInterview(
+    applicationState.user,
+    APPLICATION_STAGES.MEET_AND_GREET
+  );
 
-  const setInterviewConfirmed = React.useCallback(() => setView("confirmed"), []);
+  React.useEffect(() => {
+    if (interview) setView("confirmed");
+  }, [interview]);
+
+  const setInterviewConfirmed = React.useCallback(() => {
+    refetchInterview();
+    setView("confirmed");
+  }, []);
+
   if (view === "schedule")
     return (
       <MeetingScheduling
         title="Meet & Greet Scheduling"
+        stage={APPLICATION_STAGES.MEET_AND_GREET}
         times={[
           "11:00 AM",
           "11:30 AM",
@@ -71,17 +86,7 @@ function ScheduleMeetAndGreet() {
           <img src={logo} alt="logo" />
         </div>
       }
-      status={
-        <StatusUpdate
-          title="Meet & Greet Info"
-          ambassador="Dhanush"
-          phone="123-456-7890"
-          email="test@tap.com"
-          date="1/1/2022"
-          time="6-7:00PM"
-          location="Zoom"
-        />
-      }
+      status={<StatusUpdate title="Meet & Greet Info" {...interview} />}
     />
   );
 }

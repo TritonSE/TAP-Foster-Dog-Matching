@@ -143,7 +143,7 @@ router.get("/:applicationId", (req, res, next) => {
 });
 
 /**
- * POST /applications - Create an application
+ * POST /application - Create an application
  */
 
 router.post("/", [...validators, validateRequest], (req, res, next) => {
@@ -162,7 +162,7 @@ router.post("/", [...validators, validateRequest], (req, res, next) => {
 });
 
 /**
- * PUT /applications/:applicationId - Update an application
+ * PUT /application/:applicationId - Update an application
  */
 router.put(
   "/:applicationId",

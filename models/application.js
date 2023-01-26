@@ -231,8 +231,8 @@ module.exports = mongoose.model(
         required: true,
       },
       selectedDogs: {
-        type: [String],
-        required: false,
+        type: [Schema.Types.ObjectId],
+        required: true,
       },
       preference: {
         type: [String],

@@ -1,9 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { device } from "../utils/useResponsive";
-import pfp from "../images/pfp.png";
 import After from "./AfterMeetAndGreet";
 import StatusUpdate from "./StatusUpdate";
+import useInterview from "../hooks/useInterview";
+import ApplicationContext from "../contexts/ApplicationContext";
+import APPLICATION_STAGES from "../constants/APPLICATION_STAGES";
 
 const ConfirmContainer = styled.div`
   display: flex;
@@ -93,6 +95,9 @@ const ConfirmButton = styled.button`
 `;
 
 function ConfirmMeetGreet() {
+  const { applicationState } = React.useContext(ApplicationContext);
+  const { interview } = useInterview(applicationState.user, APPLICATION_STAGES.MEET_AND_GREET);
+
   const handleConfirm = () => {
     // TODO: Handle confirmation with backend
   };
@@ -104,13 +109,9 @@ function ConfirmMeetGreet() {
         <InfoWrapper>
           <StatusUpdate
             title="Meet and Greet Info"
-            ambassador="Dhanush"
-            phone="123-456-7890"
-            email="test@tap.com"
-            date="1/1/2022"
-            time="6-7:00PM"
-            tapFacilityLocation="Zoom"
-            image={pfp}
+            {...interview}
+            location=""
+            tapFacilityLocation={interview && interview.location}
             meetAndGreetView
           />
         </InfoWrapper>

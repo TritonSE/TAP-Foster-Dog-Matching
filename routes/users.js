@@ -6,7 +6,6 @@ const { requireAuthenticatedUserOrAdminRoles } = require("../middleware/auth");
 const { ADMIN_ROLES } = require("../services/admins");
 
 const router = express.Router();
-
 const validators = [
   body("firstName").notEmpty().isString(),
   body("lastName").notEmpty().isString(),

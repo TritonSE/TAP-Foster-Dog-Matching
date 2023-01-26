@@ -24,6 +24,7 @@ export function DataProvider({ children }) {
   const [allAdmin, setAllAdmin] = React.useState();
   const [allAmbassadors, setAllAmbassadors] = React.useState();
   const [allCoordinators, setAllCoordinators] = React.useState();
+  const [allManagement, setAllManagement] = React.useState();
   const { currentUser } = React.useContext(AuthContext);
 
   const fetchData = React.useCallback(() => {
@@ -32,9 +33,11 @@ export function DataProvider({ children }) {
       getAllAdmins().then(({ data: { admin } }) => {
         const ambassadors = admin.filter((a) => a.role === "ambassador");
         const coordinators = admin.filter((a) => a.role === "coordinator");
+        const management = admin.filter((a) => a.role === "management");
         setAllAdmin(admin);
         setAllAmbassadors(ambassadors);
         setAllCoordinators(coordinators);
+        setAllManagement(management);
       });
     }
     // Fetch other necessary data here...
@@ -43,8 +46,8 @@ export function DataProvider({ children }) {
   React.useEffect(fetchData, [currentUser]);
 
   const value = React.useMemo(
-    () => ({ allAdmin, allAmbassadors, allCoordinators, refetchData: fetchData }),
-    [allAdmin, allAmbassadors, allCoordinators, fetchData]
+    () => ({ allAdmin, allAmbassadors, allCoordinators, allManagement, refetchData: fetchData }),
+    [allAdmin, allAmbassadors, allCoordinators, allManagement, fetchData]
   );
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
