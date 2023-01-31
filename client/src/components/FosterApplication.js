@@ -565,7 +565,6 @@ function FosterAgreementView({
   const [showPassDialog, setShowPassDialog] = React.useState(false);
   const [showRejectDialog, setShowRejectDialog] = React.useState(false);
   const { applicationView, setApplicationState } = React.useContext(ApplicationContext);
-
   const onSubmit = (data) => {
     if (admin) {
       return;

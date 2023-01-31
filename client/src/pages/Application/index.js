@@ -116,7 +116,7 @@ function Application({ id }) {
       setCurrentSubStep('content');
     }
   }, [applicationId, loaded]);
-
+  console.log(applicationState)
   React.useEffect(() => {
     if(applicationState !== []){
       setLoaded(true)
