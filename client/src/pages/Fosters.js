@@ -8,6 +8,12 @@ import DefaultBody from "../components/DefaultBody";
 import { AuthContext } from "../contexts/AuthContext";
 import AmbassadorSelect from "../components/AmbassadorSelect";
 import CoordinatorSelect from "../components/CoordinatorSelect";
+import { getPendingApplications } from "../services/application";
+import { getUsers } from "../services/users";
+import { getAdmin } from "../services/admins"
+import { useNavigate } from "react-router-dom";
+
+// const { currentUser, signedIn } = React.useContext(AuthContext);
 
 const DUMMY_REPEAT_FOSTERS_DATA = [
   {
@@ -105,23 +111,51 @@ function CompletedActionItemsCell({ completed }) {
     currentUser: { role },
   } = React.useContext(AuthContext);
 
+  const navigate = useNavigate();
+
+
   return (
     <SpacedCellContainer>
       {completed ? "Status updated" : "Waiting for update"}
       {role === "management" &&
         (completed ? (
-          <CellButton color={Colors.salmon}>Review</CellButton>
+          <CellButton color={Colors.salmon} onClick={() => navigate("/application")}>Review</CellButton>
         ) : (
-          <CellButton color={Colors.lightBlue}>View</CellButton>
+          <CellButton color={Colors.lightBlue} onClick={() => navigate("/application")}>View</CellButton>
         ))}
     </SpacedCellContainer>
   );
 }
 
 function RepeatFosters() {
-  const {
-    currentUser: { role },
-  } = React.useContext(AuthContext);
+  // const {
+  //   currentUser: { role },
+  // } = React.useContext(AuthContext);
+
+  const { currentUser, signedIn } = React.useContext(AuthContext);
+  const [repeatApplications, setRepeatApplications] = React.useState([]);
+
+  React.useEffect(() => {
+    getPendingApplications().then((applications) => {
+      setRepeatApplications(applications.data.applications)
+    })
+  }, [currentUser])
+
+  // console.log(repeatApplications)
+
+  const repeatFosters = repeatApplications.map((application) => {
+    return {
+      firstName: application.firstName,
+      createdAt: application.updatedAt,
+      status: application.status,
+      ambassador: application.ambassador ? application.ambassador : "not yet assigned",
+      coordinator: application.coordinator ? application.coordinator : "not yet assigned",
+      completedActionItems: application.completedActionItems,
+      _id: application._id
+    }
+  })
+
+  console.log(repeatFosters)
 
   const columns = React.useMemo(
     () => [
@@ -143,36 +177,35 @@ function RepeatFosters() {
     ],
     []
   );
-
-  const rows = React.useMemo(
-    () =>
-      // TODO: Fetch real data
-      DUMMY_REPEAT_FOSTERS_DATA.map((row) => ({
-        ...row,
-        ambassador:
-          role === "ambassador" ? (
-            row.ambassador || "Not Assigned"
-          ) : (
-            // TODO: doesn't work until real data is used
-            <AmbassadorSelect
-              initialValue={row.ambassador && row.ambassador._id}
-              applicationId={row._id}
-            />
-          ),
-        coordinator:
-          role === "ambassador" ? (
-            row.coordinator || "Not Assigned"
-          ) : (
-            // TODO: doesn't work until real data is used
-            <CoordinatorSelect
-              initialValue={row.coordinator && row.coordinator._id}
-              applicationId={row._id}
-            />
-          ),
-        completedActionItems: <CompletedActionItemsCell completed={row.completedActionItems} />,
-      })),
-    []
-  );
+    const rows = React.useMemo(
+      () => 
+        // TODO: Fetch real data
+        repeatFosters.map((row) => ({
+          ...row,
+          ambassador:
+            currentUser.role === "ambassador" ? (
+              row.ambassador.firstName || "Not Assigned"
+            ) : (
+              // TODO: doesn't work until real data is used
+              <AmbassadorSelect
+                initialValue={row.ambassador && row.ambassador._id}
+                applicationId={row._id}
+              />
+            ),
+          coordinator:
+            currentUser.role === "ambassador" ? (
+              row.coordinator.firstName || "Not Assigned"
+            ) : (
+              // TODO: doesn't work until real data is used
+              <CoordinatorSelect
+                initialValue={row.coordinator && row.coordinator._id}
+                applicationId={row._id}
+              />
+            ),
+          completedActionItems: <CompletedActionItemsCell completed={row.completedActionItems} />,
+        })),
+      [repeatFosters]
+    );
 
   return (
     <div>
@@ -198,11 +231,60 @@ function AccountStatusCell({ active }) {
   );
 }
 
+
 function AllFosters() {
-  const {
-    currentUser: { role },
-  } = React.useContext(AuthContext);
+  const { currentUser, signedIn } = React.useContext(AuthContext);
+  const [users, setUsers] = React.useState([]);
   const [fostersView, setFostersView] = React.useState("all");
+
+
+  React.useEffect(() => {
+    getUsers().then((users) => {
+      console.log(users)
+      users.data.applications.forEach((user) => {
+        if(user.ambassador){
+          getAdmin(user.ambassador).then((admin) => {
+            if(admin.data.errors){
+              user.ambassadorObj = {}
+              user.ambassadorObj.firstName = "N/A"
+            }
+            else{
+              user.ambassadorObj = admin.data.admin
+            }
+            if(user.coordinator){
+              if(admin.data.errors){
+                user.coordinatorObj = {}
+                user.coordinatorObj.firstName = "N/A"
+              }
+              else{
+                user.coordinatorObj = admin.data.admin
+              }
+            }
+          })
+        }
+        
+      })
+      setUsers(users.data.applications)    
+    })
+  }, [currentUser])
+
+  console.log(users)
+  
+  const userRow = users.map((user) => {
+
+    return {
+      firstName: user.firstName,
+      lastActive: user.lastActive,
+      accountActive: user.accountActive,
+      currentlyFostering: user.currentlyFostering ? "Yes" : "No",
+      pastFosters: user.fosters.past.length,
+      ambassador: user.ambassadorObj ? user.ambassadorObj.firstName : "N/A",
+      coordinator: user.coordinatorObj ? user.coordinatorObj.firstName : "N/A",
+    }
+  })
+
+  const finished = userRow
+
   const columns = React.useMemo(
     () => [
       {
@@ -234,7 +316,7 @@ function AllFosters() {
   const rows = React.useMemo(
     () =>
       // TODO: Fetch real data
-      DUMMY_ALL_FOSTERS_DATA.filter((foster) => {
+      userRow.filter((foster) => {
         switch (fostersView) {
           case "active":
             return foster.accountActive;
@@ -250,14 +332,14 @@ function AllFosters() {
         coordinator: row.coordinator || "Not Assigned",
         accountActive: <AccountStatusCell active={row.accountActive} />,
       })),
-    [fostersView]
+    [fostersView, finished]
   );
 
   return (
     <div>
       <HeadingContainer>
-        <Heading>{role === "management" ? "All Fosters" : "My Fosters Information"}</Heading>
-        {role === "management" && (
+        <Heading>{currentUser.role === "management" ? "All Fosters" : "My Fosters Information"}</Heading>
+        {currentUser.role === "management" && (
           <Select
             value={fostersView}
             onChange={setFostersView}

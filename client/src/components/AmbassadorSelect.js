@@ -16,7 +16,6 @@ import Select from "./Select";
 function AmbassadorSelect({ initialValue, applicationId }) {
   const { allAmbassadors } = React.useContext(DataContext);
   const [value, setValue] = React.useState(initialValue);
-
   const options = React.useMemo(
     () =>
       allAmbassadors &&

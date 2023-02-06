@@ -58,9 +58,27 @@ async function updateUser(userId, updatedUserProperties) {
   return updatedUser;
 }
 
+/**
+ * Returns all applications
+ *  - Filter options
+ *   - pending (boolean): true (returns all pending applications) or false
+ *   - ambassador (string): filter by ambassador id
+ */
+function getUsers({ ambassador } = {}) {
+  const filter = {};
+  if (ambassador) {
+    filter.ambassador = ambassador;
+  }
+  return User.find(filter)
+  .populate("coordinator")
+  .populate("ambassador")
+  .exec();
+}
+
 module.exports = {
   createUser,
   getUser,
+  getUsers,
   updateUser,
   addApplication,
 };

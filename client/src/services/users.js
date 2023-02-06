@@ -29,3 +29,11 @@ export async function createUser(newUser) {
 export async function getUser(userId) {
   return getData(`users/${userId}`);
 }
+
+/**
+ * Returns all users
+ * @returns {object} - Users (as a makeRequest response. see data.js)
+ */
+export async function getUsers() {
+  return getData(`users`);
+}
