@@ -14,6 +14,7 @@
 
 import React from "react";
 import styled from "styled-components";
+import doggo from "../images/good-boi.png";
 
 const DogContainer = styled.div`
   width: 245px;
@@ -45,7 +46,7 @@ const DogName = styled.p``;
 function DogCard({ imageRef, name }) {
   return (
     <DogContainer>
-      <DogImg src={imageRef} />
+      <DogImg src={imageRef || doggo} />
       <DogName>{name}</DogName>
     </DogContainer>
   );

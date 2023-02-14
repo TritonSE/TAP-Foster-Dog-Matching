@@ -87,6 +87,7 @@ function App() {
     <AuthProvider>
       <DataProvider>
         <AppRouter />
+        <div id="modal" />
       </DataProvider>
     </AuthProvider>
   );

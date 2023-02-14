@@ -9,7 +9,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import DefaultBody from "../components/DefaultBody";
-import DogCard from "../components/DogProfileCard";
+import DogProfileCard from "../components/DogProfileCard";
 import CreateDogPopUp from "../components/CreateDogPopUp";
 import Arrow from "../images/arrow.png";
 import Doggo from "../images/good-boi-2.png";
@@ -89,7 +89,7 @@ const ViewAllButtonImg = styled.img`
   width: 20px;
 `;
 
-const DogConainer = styled.div`
+const DogContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   max-width: 1385px;
@@ -156,7 +156,7 @@ function DogInfoBlock({ blockTitle, dogs, validator, loaded, setDogPopUp, setCur
             <BottomLine />
           </HeaderWrapper>
 
-          <DogConainer hidden={hidden}>
+          <DogContainer hidden={hidden}>
             {loaded && (
               <>
                 {dogs.map((dog) => {
@@ -169,7 +169,7 @@ function DogInfoBlock({ blockTitle, dogs, validator, loaded, setDogPopUp, setCur
                           setCurDog(dog);
                         }}
                       >
-                        <DogCard name={dog.name} imageRef={Doggo} />
+                        <DogProfileCard name={dog.name} imageRef={Doggo} />
                       </ClickableDogCard>
                     );
                   }
@@ -177,7 +177,7 @@ function DogInfoBlock({ blockTitle, dogs, validator, loaded, setDogPopUp, setCur
                 })}
               </>
             )}
-          </DogConainer>
+          </DogContainer>
         </DogInfoWrapper>
       )}
     </div>

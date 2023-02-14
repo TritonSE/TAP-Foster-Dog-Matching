@@ -10,10 +10,13 @@ import InterviewInfo from "../../../components/InterviewInfo";
 import FOSTER_EVALUATION_INITIAL_MESSAGES from "../../../constants/FOSTER_EVALUATION_INITIAL_MESSAGES";
 import { updateApplication } from "../../../services/application";
 import ApplicationContext from "../../../contexts/ApplicationContext";
+import APPLICATION_STAGES from "../../../constants/APPLICATION_STAGES";
+import useInterview from "../../../hooks/useInterview";
 
 function HomeScreenInformation() {
-  const { applicationId, setApplicationState } = React.useContext(ApplicationContext);
-  const waiting = false; // TODO: use actual application status
+  const { applicationId, setApplicationState, applicationState } =
+    React.useContext(ApplicationContext);
+  const { interview } = useInterview(applicationState.user, APPLICATION_STAGES.HOME_SCREEN);
 
   const onPassConfirm = React.useCallback(
     (content) => {
@@ -58,7 +61,7 @@ function HomeScreenInformation() {
     [applicationId]
   );
 
-  if (waiting)
+  if (!interview)
     return (
       <LoadingBox
         message="Waiting for applicant to respond, click on the progress bar to see previous steps"
@@ -69,17 +72,7 @@ function HomeScreenInformation() {
   return (
     <Meeting
       title="Home Screen Information"
-      status={
-        <StatusUpdate
-          title="Home Screen Info"
-          ambassador="Dhanush"
-          phone="123-456-7890"
-          email="test@tap.com"
-          date="1/1/2022"
-          time="6-7:00PM"
-          location="Zoom"
-        />
-      }
+      status={<StatusUpdate title="Home Screen Info" {...interview} />}
       interviewInfo={
         <InterviewInfo
           title="After Home Screen"
