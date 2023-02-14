@@ -111,17 +111,17 @@ function Application({ id }) {
         setApplicationState(res.data.application);
       });
     }
-    if (applicationState && applicationState.status === "Step 2: Initial Interview"){
+    if (applicationState && applicationState.status === "Step 2: Initial Interview") {
       setCurrentStep(1);
-      setCurrentSubStep('content');
+      setCurrentSubStep("content");
     }
   }, [applicationId, loaded]);
-  console.log(applicationState)
+  console.log(applicationState);
   React.useEffect(() => {
-    if(applicationState !== []){
-      setLoaded(true)
+    if (applicationState !== []) {
+      setLoaded(true);
     }
-  },[applicationState])
+  }, [applicationState]);
 
   // Switch application content based on current user role
   const applicationContent = React.useMemo(
@@ -168,26 +168,25 @@ function Application({ id }) {
     ]
   );
   return (
-    <div>
-      {loaded &&(
     <DefaultBody>
-      <ApplicationContext.Provider value={applicationData}>
-        <ApplicationContainer>
-          <ExitButton onClick={() => navigate("/dashboard")}>Exit</ExitButton>
-          <ApplicationProgress />
-          <ApplicationContentContainer>
-            {applicationState && applicationState.status === "rejected" ? (
-              <ApplicationRejected />
-            ) : (
-              applicationContent[currentStep][currentSubStep] ||
-              applicationContent[currentStep]["intro"] ||
-              applicationContent[currentStep]["content"]
-            )}
-          </ApplicationContentContainer>
-        </ApplicationContainer>
-      </ApplicationContext.Provider>
-    </DefaultBody>)}
-    </div>
+        {loaded && (
+          <ApplicationContext.Provider value={applicationData}>
+            <ApplicationContainer>
+              <ExitButton onClick={() => navigate("/dashboard")}>Exit</ExitButton>
+              <ApplicationProgress />
+              <ApplicationContentContainer>
+                {applicationState && applicationState.status === "rejected" ? (
+                  <ApplicationRejected />
+                ) : (
+                  applicationContent[currentStep][currentSubStep] ||
+                  applicationContent[currentStep]["intro"] ||
+                  applicationContent[currentStep]["content"]
+                )}
+              </ApplicationContentContainer>
+            </ApplicationContainer>
+          </ApplicationContext.Provider>
+        )}
+    </DefaultBody>
   );
 }
 
