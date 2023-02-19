@@ -15,62 +15,9 @@ import { useNavigate } from "react-router-dom";
 
 // const { currentUser, signedIn } = React.useContext(AuthContext);
 
-const DUMMY_REPEAT_FOSTERS_DATA = [
-  {
-    firstName: "Shelby",
-    createdAt: "04/16/21",
-    status: "Step 4: Foster Matching",
-    ambassador: "Shelby",
-    coordinator: "Kristin",
-    completedActionItems: false,
-  },
-  {
-    firstName: "Shelby",
-    createdAt: "04/16/21",
-    status: "Step 4: Foster Matching",
-    ambassador: "Shelby",
-    coordinator: "Jim",
-    completedActionItems: true,
-  },
-  {
-    firstName: "Shelby",
-    createdAt: "04/16/21",
-    status: "Step 4: Foster Matching",
-    ambassador: "Shelby",
-    coordinator: "Kristin",
-    completedActionItems: false,
-  },
-];
 
-const DUMMY_ALL_FOSTERS_DATA = [
-  {
-    firstName: "Shelby",
-    lastActive: "04/16/21",
-    accountActive: true,
-    currentlyFostering: "Yes",
-    pastFosters: 4,
-    ambassador: "Shelby",
-    coordinator: "Kristin",
-  },
-  {
-    firstName: "Shelby",
-    lastActive: "04/16/21",
-    accountActive: false,
-    currentlyFostering: "No",
-    pastFosters: 4,
-    ambassador: "Shelby",
-    coordinator: "Jim",
-  },
-  {
-    firstName: "Shelby",
-    lastActive: "04/16/21",
-    accountActive: true,
-    currentlyFostering: "Yes",
-    pastFosters: 3,
-    ambassador: "Shelby",
-    coordinator: "Kristin",
-  },
-];
+
+
 const Heading = styled.div`
   ${Typography.heading}
   margin-bottom: 30px;
@@ -144,6 +91,9 @@ function RepeatFosters() {
   // console.log(repeatApplications)
 
   const repeatFosters = repeatApplications.map((application) => {
+    const date = new Date(application.updatedAt);
+    application.updatedAt =
+              date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
     return {
       firstName: application.firstName,
       createdAt: application.updatedAt,
@@ -154,8 +104,6 @@ function RepeatFosters() {
       _id: application._id
     }
   })
-
-  console.log(repeatFosters)
 
   const columns = React.useMemo(
     () => [
@@ -230,8 +178,7 @@ function AccountStatusCell({ active }) {
     </SpacedCellContainer>
   );
 }
-
-
+ 
 function AllFosters() {
   const { currentUser, signedIn } = React.useContext(AuthContext);
   const [users, setUsers] = React.useState([]);
@@ -240,7 +187,6 @@ function AllFosters() {
 
   React.useEffect(() => {
     getUsers().then((users) => {
-      console.log(users)
       users.data.applications.forEach((user) => {
         if(user.ambassador){
           getAdmin(user.ambassador).then((admin) => {
@@ -269,19 +215,43 @@ function AllFosters() {
   }, [currentUser])
 
   console.log(users)
-  
-  const userRow = users.map((user) => {
 
-    return {
-      firstName: user.firstName,
-      lastActive: user.lastActive,
-      accountActive: user.accountActive,
-      currentlyFostering: user.currentlyFostering ? "Yes" : "No",
-      pastFosters: user.fosters.past.length,
-      ambassador: user.ambassadorObj ? user.ambassadorObj.firstName : "N/A",
-      coordinator: user.coordinatorObj ? user.coordinatorObj.firstName : "N/A",
-    }
-  })
+  const [userRow, setUserRow] = React.useState([])
+
+  React.useEffect(() => {
+    const row = users.map((user) => {
+      const date = new Date(user.lastActive);
+      user.lastActive =
+                date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
+      console.log(user.ambassadorObj ? user.ambassadorObj.firstName : "N/A")
+      return {
+        firstName: user.firstName,
+        lastActive: user.lastActive,
+        accountActive: user.accountActive,
+        currentlyFostering: user.currentlyFostering ? "Yes" : "No",
+        pastFosters: user.fosters.past.length,
+        ambassador: user.ambassadorObj ? user.ambassadorObj.firstName : "N/A",
+        coordinator: user.coordinatorObj ? user.coordinatorObj.firstName : "N/A",
+      }
+    })
+    setUserRow(row)
+  },[users])
+  
+  // const row = users.map((user) => {
+  //   const date = new Date(user.lastActive);
+  //   user.lastActive =
+  //             date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
+  //   // console.log(user.ambassadorObj ? user.ambassadorObj.firstName : "N/A")
+  //   return {
+  //     firstName: user.firstName,
+  //     lastActive: user.lastActive,
+  //     accountActive: user.accountActive,
+  //     currentlyFostering: user.currentlyFostering ? "Yes" : "No",
+  //     pastFosters: user.fosters.past.length,
+  //     ambassador: user.ambassadorObj ? user.ambassadorObj.firstName : "N/A",
+  //     coordinator: user.coordinatorObj ? user.coordinatorObj.firstName : "N/A",
+  //   }
+  // })
 
   const finished = userRow
 
