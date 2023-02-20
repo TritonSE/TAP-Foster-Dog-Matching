@@ -57,7 +57,6 @@ router.get(
   }
 );
 
-
 /**
  * GET / - Return all pending applications depending on role
  *  - Management gets all pending applications

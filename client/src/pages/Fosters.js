@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Table from "../components/Table";
 import TableCellButton from "../components/TableCellButton";
@@ -10,13 +11,9 @@ import AmbassadorSelect from "../components/AmbassadorSelect";
 import CoordinatorSelect from "../components/CoordinatorSelect";
 import { getPendingApplications } from "../services/application";
 import { getUsers } from "../services/users";
-import { getAdmin } from "../services/admins"
-import { useNavigate } from "react-router-dom";
+import { getAdmin } from "../services/admins";
 
 // const { currentUser, signedIn } = React.useContext(AuthContext);
-
-
-
 
 const Heading = styled.div`
   ${Typography.heading}
@@ -60,15 +57,18 @@ function CompletedActionItemsCell({ completed }) {
 
   const navigate = useNavigate();
 
-
   return (
     <SpacedCellContainer>
       {completed ? "Status updated" : "Waiting for update"}
       {role === "management" &&
         (completed ? (
-          <CellButton color={Colors.salmon} onClick={() => navigate("/application")}>Review</CellButton>
+          <CellButton color={Colors.salmon} onClick={() => navigate("/application")}>
+            Review
+          </CellButton>
         ) : (
-          <CellButton color={Colors.lightBlue} onClick={() => navigate("/application")}>View</CellButton>
+          <CellButton color={Colors.lightBlue} onClick={() => navigate("/application")}>
+            View
+          </CellButton>
         ))}
     </SpacedCellContainer>
   );
@@ -84,16 +84,14 @@ function RepeatFosters() {
 
   React.useEffect(() => {
     getPendingApplications().then((applications) => {
-      setRepeatApplications(applications.data.applications)
-    })
-  }, [currentUser])
+      setRepeatApplications(applications.data.applications);
+    });
+  }, [currentUser]);
 
-  // console.log(repeatApplications)
 
   const repeatFosters = repeatApplications.map((application) => {
     const date = new Date(application.updatedAt);
-    application.updatedAt =
-              date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
+    application.updatedAt = date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
     return {
       firstName: application.firstName,
       createdAt: application.updatedAt,
@@ -101,9 +99,9 @@ function RepeatFosters() {
       ambassador: application.ambassador ? application.ambassador : "not yet assigned",
       coordinator: application.coordinator ? application.coordinator : "not yet assigned",
       completedActionItems: application.completedActionItems,
-      _id: application._id
-    }
-  })
+      _id: application._id,
+    };
+  });
 
   const columns = React.useMemo(
     () => [
@@ -125,35 +123,35 @@ function RepeatFosters() {
     ],
     []
   );
-    const rows = React.useMemo(
-      () => 
-        // TODO: Fetch real data
-        repeatFosters.map((row) => ({
-          ...row,
-          ambassador:
-            currentUser.role === "ambassador" ? (
-              row.ambassador.firstName || "Not Assigned"
-            ) : (
-              // TODO: doesn't work until real data is used
-              <AmbassadorSelect
-                initialValue={row.ambassador && row.ambassador._id}
-                applicationId={row._id}
-              />
-            ),
-          coordinator:
-            currentUser.role === "ambassador" ? (
-              row.coordinator.firstName || "Not Assigned"
-            ) : (
-              // TODO: doesn't work until real data is used
-              <CoordinatorSelect
-                initialValue={row.coordinator && row.coordinator._id}
-                applicationId={row._id}
-              />
-            ),
-          completedActionItems: <CompletedActionItemsCell completed={row.completedActionItems} />,
-        })),
-      [repeatFosters]
-    );
+  const rows = React.useMemo(
+    () =>
+      // TODO: Fetch real data
+      repeatFosters.map((row) => ({
+        ...row,
+        ambassador:
+          currentUser.role === "ambassador" ? (
+            row.ambassador.firstName || "Not Assigned"
+          ) : (
+            // TODO: doesn't work until real data is used
+            <AmbassadorSelect
+              initialValue={row.ambassador && row.ambassador._id}
+              applicationId={row._id}
+            />
+          ),
+        coordinator:
+          currentUser.role === "ambassador" ? (
+            row.coordinator.firstName || "Not Assigned"
+          ) : (
+            // TODO: doesn't work until real data is used
+            <CoordinatorSelect
+              initialValue={row.coordinator && row.coordinator._id}
+              applicationId={row._id}
+            />
+          ),
+        completedActionItems: <CompletedActionItemsCell completed={row.completedActionItems} />,
+      })),
+    [repeatFosters]
+  );
 
   return (
     <div>
@@ -178,82 +176,64 @@ function AccountStatusCell({ active }) {
     </SpacedCellContainer>
   );
 }
- 
+
 function AllFosters() {
   const { currentUser, signedIn } = React.useContext(AuthContext);
   const [users, setUsers] = React.useState([]);
   const [fostersView, setFostersView] = React.useState("all");
-
-
-  React.useEffect(() => {
-    getUsers().then((users) => {
-      users.data.applications.forEach((user) => {
-        if(user.ambassador){
-          getAdmin(user.ambassador).then((admin) => {
-            if(admin.data.errors){
-              user.ambassadorObj = {}
-              user.ambassadorObj.firstName = "N/A"
-            }
-            else{
-              user.ambassadorObj = admin.data.admin
-            }
-            if(user.coordinator){
-              if(admin.data.errors){
-                user.coordinatorObj = {}
-                user.coordinatorObj.firstName = "N/A"
-              }
-              else{
-                user.coordinatorObj = admin.data.admin
-              }
-            }
-          })
-        }
-        
-      })
-      setUsers(users.data.applications)    
-    })
-  }, [currentUser])
-
-  console.log(users)
-
-  const [userRow, setUserRow] = React.useState([])
+  const [done, setDone] = React.useState(false);
 
   React.useEffect(() => {
-    const row = users.map((user) => {
-      const date = new Date(user.lastActive);
-      user.lastActive =
-                date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
-      console.log(user.ambassadorObj ? user.ambassadorObj.firstName : "N/A")
-      return {
-        firstName: user.firstName,
-        lastActive: user.lastActive,
-        accountActive: user.accountActive,
-        currentlyFostering: user.currentlyFostering ? "Yes" : "No",
-        pastFosters: user.fosters.past.length,
-        ambassador: user.ambassadorObj ? user.ambassadorObj.firstName : "N/A",
-        coordinator: user.coordinatorObj ? user.coordinatorObj.firstName : "N/A",
-      }
-    })
-    setUserRow(row)
-  },[users])
-  
-  // const row = users.map((user) => {
-  //   const date = new Date(user.lastActive);
-  //   user.lastActive =
-  //             date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
-  //   // console.log(user.ambassadorObj ? user.ambassadorObj.firstName : "N/A")
-  //   return {
-  //     firstName: user.firstName,
-  //     lastActive: user.lastActive,
-  //     accountActive: user.accountActive,
-  //     currentlyFostering: user.currentlyFostering ? "Yes" : "No",
-  //     pastFosters: user.fosters.past.length,
-  //     ambassador: user.ambassadorObj ? user.ambassadorObj.firstName : "N/A",
-  //     coordinator: user.coordinatorObj ? user.coordinatorObj.firstName : "N/A",
-  //   }
-  // })
+    getUsers().then((data) => {
+      setUsers(data.data.applications);
+    });
+  }, [currentUser]);
 
-  const finished = userRow
+  React.useEffect(() => {
+    if (users.length > 0) {
+      users.forEach((user) => {
+        getAdmin(user.ambassador).then((admin) => {
+          if (admin.data.errors) {
+            user.ambassadorObj = { firstName: "N/A" };
+          } else {
+            user.ambassadorObj = admin.data.admin;
+          }
+        });
+      });
+      setDone(true);
+      setUsers(users);
+    }
+  }, [users]);
+
+  const [userRow, setUserRow] = React.useState([]);
+
+  React.useEffect(() => {
+    if (done) {
+      const row = users.map((user) => {
+        const date = new Date(user.lastActive);
+        user.lastActive = date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
+        // console.log(user)
+        // console.log(JSON.stringify(user))
+        // var temp = JSON.parse(JSON.stringify(user))
+        // console.log(temp)
+        return {
+          firstName: user.firstName,
+          lastActive: user.lastActive,
+          accountActive: user.accountActive,
+          currentlyFostering: user.currentlyFostering ? "Yes" : "No",
+          pastFosters: user.fosters.past.length,
+          ambassador:
+            typeof user.ambassadorObj !== "undefined" && user.ambassadorObj !== null
+              ? user.ambassadorObj.firstName
+              : "N/A",
+          coordinator: user.coordinatorObj ? user.coordinatorObj.firstName : "N/A",
+        };
+      });
+      setUserRow(row);
+    }
+  }, [done]);
+
+  const finished = userRow;
 
   const columns = React.useMemo(
     () => [
@@ -286,29 +266,33 @@ function AllFosters() {
   const rows = React.useMemo(
     () =>
       // TODO: Fetch real data
-      userRow.filter((foster) => {
-        switch (fostersView) {
-          case "active":
-            return foster.accountActive;
-          case "inactive":
-            return !foster.accountActive;
-          default:
-            // fostersView is set to 'all'
-            return true;
-        }
-      }).map((row) => ({
-        ...row,
-        ambassador: row.ambassador || "Not Assigned",
-        coordinator: row.coordinator || "Not Assigned",
-        accountActive: <AccountStatusCell active={row.accountActive} />,
-      })),
-    [fostersView, finished]
+      userRow
+        .filter((foster) => {
+          switch (fostersView) {
+            case "active":
+              return foster.accountActive;
+            case "inactive":
+              return !foster.accountActive;
+            default:
+              // fostersView is set to 'all'
+              return true;
+          }
+        })
+        .map((row) => ({
+          ...row,
+          ambassador: row.ambassador || "Not Assigned",
+          coordinator: row.coordinator || "Not Assigned",
+          accountActive: <AccountStatusCell active={row.accountActive} />,
+        })),
+    [fostersView, userRow]
   );
 
   return (
     <div>
       <HeadingContainer>
-        <Heading>{currentUser.role === "management" ? "All Fosters" : "My Fosters Information"}</Heading>
+        <Heading>
+          {currentUser.role === "management" ? "All Fosters" : "My Fosters Information"}
+        </Heading>
         {currentUser.role === "management" && (
           <Select
             value={fostersView}

@@ -69,10 +69,7 @@ function getUsers({ ambassador } = {}) {
   if (ambassador) {
     filter.ambassador = ambassador;
   }
-  return User.find(filter)
-  .populate("coordinator")
-  .populate("ambassador")
-  .exec();
+  return User.find(filter).populate("coordinator").populate("ambassador").exec();
 }
 
 module.exports = {

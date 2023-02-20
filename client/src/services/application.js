@@ -50,6 +50,6 @@ export async function getPendingApplications() {
   return getData("application/pending");
 }
 
-export async function getAllApplications(){
+export async function getAllApplications() {
   return getData("application/all");
 }
