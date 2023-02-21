@@ -13,8 +13,6 @@ import { getPendingApplications } from "../services/application";
 import { getUsers } from "../services/users";
 import { getAdmin } from "../services/admins";
 
-// const { currentUser, signedIn } = React.useContext(AuthContext);
-
 const Heading = styled.div`
   ${Typography.heading}
   margin-bottom: 30px;
@@ -87,7 +85,6 @@ function RepeatFosters() {
       setRepeatApplications(applications.data.applications);
     });
   }, [currentUser]);
-
 
   const repeatFosters = repeatApplications.map((application) => {
     const date = new Date(application.updatedAt);
@@ -181,7 +178,8 @@ function AllFosters() {
   const { currentUser, signedIn } = React.useContext(AuthContext);
   const [users, setUsers] = React.useState([]);
   const [fostersView, setFostersView] = React.useState("all");
-  const [done, setDone] = React.useState(false);
+  const [ambassadorDone, setAmbassadorDone] = React.useState(false);
+  const [coordinatorDone, setCoordinatorDone] = React.useState(false);
 
   React.useEffect(() => {
     getUsers().then((data) => {
@@ -191,31 +189,55 @@ function AllFosters() {
 
   React.useEffect(() => {
     if (users.length > 0) {
-      users.forEach((user) => {
-        getAdmin(user.ambassador).then((admin) => {
-          if (admin.data.errors) {
+      const promises = users.map((user) =>
+        getAdmin(user.ambassador)
+          .then((admin) => {
+            if (admin.data.errors) {
+              user.ambassadorObj = { firstName: "N/A" };
+            } else {
+              user.ambassadorObj = admin.data.admin;
+            }
+          })
+          .catch(() => {
             user.ambassadorObj = { firstName: "N/A" };
-          } else {
-            user.ambassadorObj = admin.data.admin;
-          }
-        });
+          })
+      );
+      Promise.allSettled(promises).then(() => {
+        setAmbassadorDone(true);
       });
-      setDone(true);
-      setUsers(users);
+    }
+  }, [users]);
+
+  React.useEffect(() => {
+    if (users.length > 0) {
+      console.log(users);
+      const promises = users.map((user) =>
+        getAdmin(user.coordinator)
+          .then((admin) => {
+            if (admin.data.errors) {
+              user.coordinatorObj = { firstName: "N/A" };
+            } else {
+              user.coordinatorObj = admin.data.admin;
+            }
+          })
+          .catch(() => {
+            user.coordinatorObj = { firstName: "N/A" };
+          })
+      );
+
+      Promise.allSettled(promises).then(() => {
+        setCoordinatorDone(true);
+      });
     }
   }, [users]);
 
   const [userRow, setUserRow] = React.useState([]);
 
   React.useEffect(() => {
-    if (done) {
+    if (ambassadorDone && coordinatorDone) {
       const row = users.map((user) => {
         const date = new Date(user.lastActive);
         user.lastActive = date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
-        // console.log(user)
-        // console.log(JSON.stringify(user))
-        // var temp = JSON.parse(JSON.stringify(user))
-        // console.log(temp)
         return {
           firstName: user.firstName,
           lastActive: user.lastActive,
@@ -231,7 +253,7 @@ function AllFosters() {
       });
       setUserRow(row);
     }
-  }, [done]);
+  }, [ambassadorDone, coordinatorDone]);
 
   const finished = userRow;
 
