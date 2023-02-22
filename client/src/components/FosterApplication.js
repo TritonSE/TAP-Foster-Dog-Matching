@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import React from "react";
 import styled from "styled-components";
+import { isValidPhoneNumber } from "react-phone-number-input";
 import Form from "./Form";
 import { ControlledInput, InputLabel } from "./Input";
 import PageSections from "./PageSections";
@@ -17,8 +18,6 @@ import PassFail from "./PassFail";
 import { createApplication, updateApplication } from "../services/application";
 import { AuthContext } from "../contexts/AuthContext";
 import FOSTER_EVALUATION_INITIAL_MESSAGES from "../constants/FOSTER_EVALUATION_INITIAL_MESSAGES";
-import { isValidPhoneNumber } from "react-phone-number-input";
-
 
 const Button = styled.div`
   background: ${(props) => (props.gray ? Colors.gray : Colors.green)};
@@ -214,7 +213,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
                   name="landlord.phone"
                   rules={{
                     pattern: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im,
-                    validate: (value) => isValidPhoneNumber(value, "US")
+                    validate: (value) => isValidPhoneNumber(value, "US"),
                   }}
                   readOnly={admin}
                   required={watch("landlord.firstName") !== "n/a"}
@@ -404,7 +403,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
                   name="reference.phone"
                   rules={{
                     pattern: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im,
-                    validate: (value) => isValidPhoneNumber(value, "US")
+                    validate: (value) => isValidPhoneNumber(value, "US"),
                   }}
                   readOnly={admin}
                   required
@@ -597,7 +596,7 @@ function FosterAgreementView({
       });
     } else {
       // make a new application
-      console.log(reqBody)
+      console.log(reqBody);
       createApplication(reqBody).then((response) => {
         console.log(response.ok); // uncomment to see status of create app request
         setCurAppId(response.data.application._id);
@@ -616,7 +615,7 @@ function FosterAgreementView({
       messages: {
         stage1: content,
       },
-      status: "Step 2: Initial Interview"
+      status: "Step 2: Initial Interview",
     };
     updateApplication(curAppId, reqBody).then((response) =>
       setApplicationState(response.data.application)

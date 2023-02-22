@@ -31,7 +31,7 @@ function DashboardCards() {
         const applicationsCopy = [];
         applicationsCopy.push(application.data.application);
         setApplications(applicationsCopy);
-        setLoaded(false)
+        setLoaded(false);
       })
     );
   }, [signedIn, loaded]);

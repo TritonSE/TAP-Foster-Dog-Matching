@@ -115,8 +115,18 @@ function Application({ id }) {
       setCurrentStep(1);
       setCurrentSubStep("content");
     }
+
+    if (applicationState && applicationState.status === "Step 3: Home Screen") {
+      setCurrentStep(2);
+      setCurrentSubStep("content");
+    }
+
+    if (applicationState && applicationState.status === "Step 4: Foster Matching") {
+      setCurrentStep(3);
+      setCurrentSubStep("content");
+    }
   }, [applicationId, loaded]);
-  console.log(applicationState);
+
   React.useEffect(() => {
     if (applicationState !== []) {
       setLoaded(true);
@@ -169,23 +179,23 @@ function Application({ id }) {
   );
   return (
     <DefaultBody>
-        {loaded && (
-          <ApplicationContext.Provider value={applicationData}>
-            <ApplicationContainer>
-              <ExitButton onClick={() => navigate("/dashboard")}>Exit</ExitButton>
-              <ApplicationProgress />
-              <ApplicationContentContainer>
-                {applicationState && applicationState.status === "rejected" ? (
-                  <ApplicationRejected />
-                ) : (
-                  applicationContent[currentStep][currentSubStep] ||
-                  applicationContent[currentStep]["intro"] ||
-                  applicationContent[currentStep]["content"]
-                )}
-              </ApplicationContentContainer>
-            </ApplicationContainer>
-          </ApplicationContext.Provider>
-        )}
+      {loaded && (
+        <ApplicationContext.Provider value={applicationData}>
+          <ApplicationContainer>
+            <ExitButton onClick={() => navigate("/dashboard")}>Exit</ExitButton>
+            <ApplicationProgress />
+            <ApplicationContentContainer>
+              {applicationState && applicationState.status === "rejected" ? (
+                <ApplicationRejected />
+              ) : (
+                applicationContent[currentStep][currentSubStep] ||
+                applicationContent[currentStep]["intro"] ||
+                applicationContent[currentStep]["content"]
+              )}
+            </ApplicationContentContainer>
+          </ApplicationContainer>
+        </ApplicationContext.Provider>
+      )}
     </DefaultBody>
   );
 }

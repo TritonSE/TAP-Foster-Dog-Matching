@@ -11,7 +11,6 @@ import { AuthContext } from "../contexts/AuthContext";
 import { getPendingApplications } from "../services/application";
 import ApplicationContext from "../contexts/ApplicationContext";
 
-
 const Heading = styled.div`
   ${Typography.heading}
   margin-bottom: 30px;
@@ -32,12 +31,18 @@ function CompletedActionItemsCell({ completed, id }) {
       {completed ? "Status updated" : "Waiting for update"}
       {completed ? (
         // TODO: Send application id in navigate state
-        <TableCellButton color={Colors.salmon} onClick={() => navigate("/application",  { state: { id: id } })}>
+        <TableCellButton
+          color={Colors.salmon}
+          onClick={() => navigate("/application", { state: { id } })}
+        >
           Review
         </TableCellButton>
       ) : (
         // TODO: Send application id in navigate state
-        <TableCellButton color={Colors.lightBlue} onClick={() => navigate("/application",  { state: { id: id }})}>
+        <TableCellButton
+          color={Colors.lightBlue}
+          onClick={() => navigate("/application", { state: { id } })}
+        >
           View
         </TableCellButton>
       )}
@@ -97,7 +102,9 @@ function PendingApplications() {
                   applicationId={row._id}
                 />
               ),
-            completedActionItems: <CompletedActionItemsCell completed={row.completedActionItems} id={row._id}/>,
+            completedActionItems: (
+              <CompletedActionItemsCell completed={row.completedActionItems} id={row._id} />
+            ),
             createdAt: new Date(row.createdAt).toLocaleDateString(),
           }))
         )
