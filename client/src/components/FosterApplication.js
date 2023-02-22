@@ -17,7 +17,8 @@ import PassFail from "./PassFail";
 import { createApplication, updateApplication } from "../services/application";
 import { AuthContext } from "../contexts/AuthContext";
 import FOSTER_EVALUATION_INITIAL_MESSAGES from "../constants/FOSTER_EVALUATION_INITIAL_MESSAGES";
-// import application from "../../../models/application";
+import { isValidPhoneNumber } from "react-phone-number-input";
+
 
 const Button = styled.div`
   background: ${(props) => (props.gray ? Colors.gray : Colors.green)};
@@ -212,7 +213,8 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
                   label="Landlord's Phone Number"
                   name="landlord.phone"
                   rules={{
-                    pattern: /^(\+\d{1,2}\s?)?1?-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}/,
+                    pattern: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im,
+                    validate: (value) => isValidPhoneNumber(value, "US")
                   }}
                   readOnly={admin}
                   required={watch("landlord.firstName") !== "n/a"}
@@ -401,7 +403,8 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
                   label="Reference's Phone Number*"
                   name="reference.phone"
                   rules={{
-                    pattern: /^(\+\d{1,2}\s?)?1?-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}/,
+                    pattern: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im,
+                    validate: (value) => isValidPhoneNumber(value, "US")
                   }}
                   readOnly={admin}
                   required
