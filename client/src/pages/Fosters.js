@@ -122,14 +122,12 @@ function RepeatFosters() {
   );
   const rows = React.useMemo(
     () =>
-      // TODO: Fetch real data
       repeatFosters.map((row) => ({
         ...row,
         ambassador:
           currentUser.role === "ambassador" ? (
             row.ambassador.firstName || "Not Assigned"
           ) : (
-            // TODO: doesn't work until real data is used
             <AmbassadorSelect
               initialValue={row.ambassador && row.ambassador._id}
               applicationId={row._id}
@@ -139,7 +137,6 @@ function RepeatFosters() {
           currentUser.role === "ambassador" ? (
             row.coordinator.firstName || "Not Assigned"
           ) : (
-            // TODO: doesn't work until real data is used
             <CoordinatorSelect
               initialValue={row.coordinator && row.coordinator._id}
               applicationId={row._id}
@@ -287,7 +284,6 @@ function AllFosters() {
 
   const rows = React.useMemo(
     () =>
-      // TODO: Fetch real data
       userRow
         .filter((foster) => {
           switch (fostersView) {
