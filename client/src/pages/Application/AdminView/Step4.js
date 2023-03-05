@@ -18,14 +18,11 @@ const VIEW = {
 };
 
 function AdminFosterMatchingFlow() {
-  const { applicationId, applicationState } = React.useContext(ApplicationContext);
+  const { applicationId, applicationState, setApplicationState } =
+    React.useContext(ApplicationContext);
   const [view, setView] = React.useState(VIEW.AVAILABLE_DOGS);
   const { interview } = useInterview(applicationState.user, APPLICATION_STAGES.HOME_SCREEN);
   const [selectedDogs, setSelectedDogs] = useState(() => new Set()); // set of ids of admin checked dogs
-
-  useEffect(() => {
-    console.log(selectedDogs);
-  }, [selectedDogs]);
 
   useEffect(() => {
     if (applicationState.preference.length === applicationState.selectedDogs.length)

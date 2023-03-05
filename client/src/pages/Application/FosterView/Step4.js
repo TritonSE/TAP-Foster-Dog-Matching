@@ -132,10 +132,9 @@ function FosterMatches() {
               <Green>Looking for matches...</Green>
             ) : (
               <DogsContainer>
-                {matches.map((dog, i) => {
-                  console.log(dog);
-                  return <DogProfileCard {...dog} onClick={() => setCurDog(i + 1)} />;
-                })}
+                {matches.map((dog, i) => (
+                  <DogProfileCard {...dog} onClick={() => setCurDog(i + 1)} />
+                ))}
               </DogsContainer>
             )}
 

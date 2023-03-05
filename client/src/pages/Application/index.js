@@ -126,7 +126,7 @@ function Application({ id }) {
     if (
       applicationState &&
       applicationState.status === "Step 4: Foster Matching" &&
-      applicationState.messages.hasOwnProperty("stage4")
+      Object.prototype.hasOwnProperty.call(applicationState.messages, "stage4")
     ) {
       setCurrentSubStep("outro");
     }

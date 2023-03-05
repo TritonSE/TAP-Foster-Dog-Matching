@@ -271,7 +271,7 @@ function DogGrid(props) {
   return (
     <DogGridStyled>
       {dogs.map((dog) => {
-        if (dog.category === "adopted") return;
+        if (dog.category === "adopted") return null;
         return (
           <DogCard
             dogName={dog?.name}

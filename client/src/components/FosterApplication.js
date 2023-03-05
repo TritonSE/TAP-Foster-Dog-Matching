@@ -212,7 +212,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
                   label="Landlord's Phone Number"
                   name="landlord.phone"
                   rules={{
-                    pattern: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im,
+                    pattern: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im, //eslint-disable-line
                     validate: (value) => isValidPhoneNumber(value, "US"),
                   }}
                   readOnly={admin}
@@ -402,7 +402,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
                   label="Reference's Phone Number*"
                   name="reference.phone"
                   rules={{
-                    pattern: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im,
+                    pattern: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im, //eslint-disable-line
                     validate: (value) => isValidPhoneNumber(value, "US"),
                   }}
                   readOnly={admin}
