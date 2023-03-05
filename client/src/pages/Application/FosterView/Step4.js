@@ -96,12 +96,15 @@ function FosterMatches() {
   const [matches, setMatches] = React.useState([]);
 
   React.useEffect(() => {
-    applicationState.selectedDogs.map((dogId) =>
-      getDog(dogId).then((response) => {
-        setMatches((prevState) => [...prevState, response.data.dog]);
-      })
-    );
-  }, [applicationState]);
+    let res = [];
+    Promise.all([
+      applicationState.selectedDogs.map((dogId) => getDog(dogId).then(response => {return response.data.dog})),
+    ]).then((values) => {
+      values[0].map(val => val.then(data => res.push(data)))
+    });
+
+    setMatches(res);
+  }, []);
 
   const [curDog, setCurDog] = useState(null);
 
@@ -126,9 +129,10 @@ function FosterMatches() {
               <Green>Looking for matches...</Green>
             ) : (
               <DogsContainer>
-                {matches.map((dog, i) => (
-                  <DogProfileCard {...dog} onClick={() => setCurDog(i + 1)} />
-                ))}
+                {matches.map((dog, i) => {
+                  console.log(dog);
+                  return <DogProfileCard {...dog} onClick={() => setCurDog(i + 1)} />;
+                })}
               </DogsContainer>
             )}
 
