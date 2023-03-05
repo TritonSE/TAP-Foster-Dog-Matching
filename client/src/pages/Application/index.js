@@ -111,20 +111,32 @@ function Application({ id }) {
         setApplicationState(res.data.application);
       });
     }
-    if (applicationState && applicationState.status === "Step 2: Initial Interview") {
-      setCurrentStep(1);
-      setCurrentSubStep("content");
+
+    const goToStepForStage = (stage, step) => {
+      if (applicationState && applicationState.status === stage) {
+        setCurrentStep(step);
+        setCurrentSubStep("content");
+      }
+    };
+
+
+    goToStepForStage("Step 2: Initial Interview", 1);
+    goToStepForStage("Step 3: Home Screen", 2);
+    goToStepForStage("Step 4: Foster Matching", 3);
+
+    if (
+      applicationState &&
+      applicationState.status === "Step 4: Foster Matching" &&
+      applicationState.messages.hasOwnProperty("stage4")
+    ) {
+      setCurrentSubStep("outro");
     }
 
-    if (applicationState && applicationState.status === "Step 3: Home Screen") {
-      setCurrentStep(2);
-      setCurrentSubStep("content");
-    }
 
-    if (applicationState && applicationState.status === "Step 4: Foster Matching") {
-      setCurrentStep(3);
-      setCurrentSubStep("content");
-    }
+    goToStepForStage("Step 5: Meet & Greet", 4);
+    goToStepForStage("Step 6: Foster in Home", 5);
+
+
   }, [applicationId, loaded]);
 
   React.useEffect(() => {
@@ -190,7 +202,8 @@ function Application({ id }) {
               ) : (
                 applicationContent[currentStep][currentSubStep] ||
                 applicationContent[currentStep]["intro"] ||
-                applicationContent[currentStep]["content"]
+                applicationContent[currentStep]["content"] ||
+                applicationContent[currentStep]["outro"]
               )}
             </ApplicationContentContainer>
           </ApplicationContainer>

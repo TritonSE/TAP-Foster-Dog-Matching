@@ -105,6 +105,8 @@ function Interested(props) {
 }
 
 function DogSummary({ props }) {
+
+
   return (
     <DogContainer>
       <Intro>

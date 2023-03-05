@@ -28,7 +28,9 @@ function AdminFosterMatchingFlow() {
   }, [selectedDogs]);
 
   useEffect(() => {
-    if (interview) setView(VIEW.CONFIRM_MEET_AND_GREET);
+    if (applicationState.preference.length === applicationState.selectedDogs.length)
+      setView(VIEW.CONFIRM_MEET_AND_GREET);
+    else if (interview) setView(VIEW.CONFIRM_MEET_AND_GREET);
     else if (applicationState.selectedDogs.length > 0) setView(VIEW.WAITING);
   }, []);
 

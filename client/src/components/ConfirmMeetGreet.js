@@ -6,6 +6,9 @@ import StatusUpdate from "./StatusUpdate";
 import useInterview from "../hooks/useInterview";
 import ApplicationContext from "../contexts/ApplicationContext";
 import APPLICATION_STAGES from "../constants/APPLICATION_STAGES";
+import FOSTER_EVALUATION_INITIAL_MESSAGES from "../constants/FOSTER_EVALUATION_INITIAL_MESSAGES";
+import { updateApplication } from "../services/application";
+import PassFail from "./PassFail";
 
 const ConfirmContainer = styled.div`
   display: flex;
@@ -95,12 +98,25 @@ const ConfirmButton = styled.button`
 `;
 
 function ConfirmMeetGreet() {
-  const { applicationState } = React.useContext(ApplicationContext);
+  const { applicationState, setApplicationState, applicationId } =
+    React.useContext(ApplicationContext);
   const { interview } = useInterview(applicationState.user, APPLICATION_STAGES.MEET_AND_GREET);
+  const [showConfirmDialog, setShowConfirmDialog] = React.useState(false);
 
-  const handleConfirm = () => {
-    // TODO: Handle confirmation with backend
-  };
+  const onConfirmMeetAndGreet = React.useCallback(
+    (content) => {
+      const reqBody = {
+        messages: {
+          stage4: content,
+        },
+        status: "Step 6: Foster in Home",
+      };
+      updateApplication(applicationId, reqBody).then((response) =>
+        setApplicationState(response.data.application)
+      );
+    },
+    [applicationId]
+  );
 
   return (
     <ConfirmContainer>
@@ -126,7 +142,14 @@ function ConfirmMeetGreet() {
           />
         </AfterWrapper>
       </ContentWrapper>
-      <ConfirmButton onClick={handleConfirm()}>Confirm</ConfirmButton>
+      <ConfirmButton onClick={() => setShowConfirmDialog(true)}>Confirm</ConfirmButton>
+      <PassFail
+        visible={showConfirmDialog}
+        setVisible={setShowConfirmDialog}
+        status="Confirm Meet & Greet"
+        initialMessage={FOSTER_EVALUATION_INITIAL_MESSAGES.FOSTER_IN_HOME.CONFIRM}
+        onConfirm={onConfirmMeetAndGreet}
+      />
     </ConfirmContainer>
   );
 }
