@@ -242,7 +242,7 @@ function DogCard(props) {
 }
 function DogGrid(props) {
   const [dogs, setDogs] = useState([]);
-  const {selectedDogs, setSelectedDogs} = props.selectedDogs
+  const { selectedDogs, setSelectedDogs } = props.selectedDogs;
 
   const MAX_CHECKED_CARDS = 5;
 
@@ -296,7 +296,7 @@ const SubmitButton = styled.button`
   cursor: pointer;
 `;
 
-function FosterMatchingAdmin({ handleConfirm,selectedDogs }) {
+function FosterMatchingAdmin({ handleConfirm, selectedDogs }) {
   return (
     <OuterContainer>
       <PaddingContainer>
@@ -357,7 +357,7 @@ function FosterMatchingAdmin({ handleConfirm,selectedDogs }) {
           <AvailableDogsContainer>
             <TitleText>Available Dogs</TitleText>
             <SubtitleText>Scroll to view all available dogs</SubtitleText>
-            <DogGrid selectedDogs={selectedDogs}/>
+            <DogGrid selectedDogs={selectedDogs} />
           </AvailableDogsContainer>
         </SplitCardContainer>
         <CenterAlign>

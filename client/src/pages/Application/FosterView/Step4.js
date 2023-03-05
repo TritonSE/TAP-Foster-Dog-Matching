@@ -97,12 +97,10 @@ function FosterMatches() {
   const [matches, setMatches] = React.useState([]);
 
   React.useEffect(() => {
-    let res = [];
+    const res = [];
     Promise.all([
       applicationState.selectedDogs.map((dogId) =>
-        getDog(dogId).then((response) => {
-          return response.data.dog;
-        })
+        getDog(dogId).then((response) => response.data.dog)
       ),
     ]).then((values) => {
       values[0].map((val) => val.then((data) => res.push(data)));

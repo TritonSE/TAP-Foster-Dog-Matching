@@ -119,7 +119,6 @@ function Application({ id }) {
       }
     };
 
-
     goToStepForStage("Step 2: Initial Interview", 1);
     goToStepForStage("Step 3: Home Screen", 2);
     goToStepForStage("Step 4: Foster Matching", 3);
@@ -132,11 +131,8 @@ function Application({ id }) {
       setCurrentSubStep("outro");
     }
 
-
     goToStepForStage("Step 5: Meet & Greet", 4);
     goToStepForStage("Step 6: Foster in Home", 5);
-
-
   }, [applicationId, loaded]);
 
   React.useEffect(() => {
