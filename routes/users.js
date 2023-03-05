@@ -1,8 +1,10 @@
 const express = require("express");
 const { body } = require("express-validator");
-const { createUser, getUser } = require("../services/users");
+const { createUser, getUser, getUsers } = require("../services/users");
 const { validateRequest } = require("../middleware/validation");
 const { requireAuthenticatedUserOrAdminRoles } = require("../middleware/auth");
+const { requireAuthenticatedAdmin } = require("../middleware/auth");
+
 const { ADMIN_ROLES } = require("../services/admins");
 
 const router = express.Router();
@@ -54,5 +56,25 @@ router.get(
       .catch((err) => next(err));
   }
 );
+
+/**
+ * GET / - Return all pending applications depending on role
+ *  - Management gets all pending applications
+ *  - Other admins gets only pending applications assigned to them
+ */
+router.get("/", [requireAuthenticatedAdmin], (req, res, next) => {
+  const options = {};
+  const adminRole = req.currentUser.role;
+  if (adminRole !== "management") {
+    options.ambassador = req.currentUser._id;
+  }
+  getUsers(options)
+    .then((applications) => {
+      res.status(200).json({
+        applications,
+      });
+    })
+    .catch((err) => next(err));
+});
 
 module.exports = router;
