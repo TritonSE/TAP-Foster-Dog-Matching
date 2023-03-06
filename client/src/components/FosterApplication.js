@@ -213,10 +213,9 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
                   name="landlord.phone"
                   rules={{
                     pattern: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im, //eslint-disable-line
-                    validate: (value) => isValidPhoneNumber(value, "US"),
+                    validate: (value) => !value || isValidPhoneNumber(value, "US"),
                   }}
                   readOnly={admin}
-                  required={watch("landlord.firstName") !== "n/a"}
                 />
               </Form.Column>
               <Form.Column>
@@ -225,7 +224,6 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
                   label="Last Name"
                   name="landlord.lastName"
                   readOnly={admin}
-                  required={watch("landlord.firstName") !== "n/a"}
                 />
                 <ControlledInput
                   control={control}
@@ -236,7 +234,6 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
                       /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i,
                   }}
                   readOnly={admin}
-                  required={watch("landlord.firstName") !== "n/a"}
                 />
               </Form.Column>
             </Form.Row>
