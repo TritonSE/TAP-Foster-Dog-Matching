@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import React from "react";
 import styled from "styled-components";
+import { isValidPhoneNumber } from "react-phone-number-input";
 import Form from "./Form";
 import { ControlledInput, InputLabel } from "./Input";
 import PageSections from "./PageSections";
@@ -17,7 +18,6 @@ import PassFail from "./PassFail";
 import { createApplication, updateApplication } from "../services/application";
 import { AuthContext } from "../contexts/AuthContext";
 import FOSTER_EVALUATION_INITIAL_MESSAGES from "../constants/FOSTER_EVALUATION_INITIAL_MESSAGES";
-// import application from "../../../models/application";
 
 const Button = styled.div`
   background: ${(props) => (props.gray ? Colors.gray : Colors.green)};
@@ -55,7 +55,8 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
   // if on foster side load stored data if they go back from agreement page
   React.useEffect(() => {
     if (applicationData) {
-      setView("submitted");
+      // if(!admin)
+      //   setView("submitted");
       if (Object.keys(applicationData).length !== 0) {
         applicationData.otherInfo.dogsNeutered = applicationData.otherInfo.dogsNeutered
           ? "Yes"
@@ -211,10 +212,10 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
                   label="Landlord's Phone Number"
                   name="landlord.phone"
                   rules={{
-                    pattern: /^(\+\d{1,2}\s?)?1?-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}/,
+                    pattern: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im, //eslint-disable-line
+                    validate: (value) => !value || isValidPhoneNumber(value, "US"),
                   }}
                   readOnly={admin}
-                  required={watch("landlord.firstName") !== "n/a"}
                 />
               </Form.Column>
               <Form.Column>
@@ -223,7 +224,6 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
                   label="Last Name"
                   name="landlord.lastName"
                   readOnly={admin}
-                  required={watch("landlord.firstName") !== "n/a"}
                 />
                 <ControlledInput
                   control={control}
@@ -234,7 +234,6 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
                       /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i,
                   }}
                   readOnly={admin}
-                  required={watch("landlord.firstName") !== "n/a"}
                 />
               </Form.Column>
             </Form.Row>
@@ -400,15 +399,16 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
                   label="Reference's Phone Number*"
                   name="reference.phone"
                   rules={{
-                    pattern: /^(\+\d{1,2}\s?)?1?-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}/,
+                    pattern: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im, //eslint-disable-line
+                    validate: (value) => isValidPhoneNumber(value, "US"),
                   }}
                   readOnly={admin}
                   required
                 />
                 <ControlledInput
                   control={control}
-                  label="Relation"
-                  name="reference.relation*"
+                  label="Relation*"
+                  name="reference.relation"
                   readOnly={admin}
                   required
                 />
@@ -416,8 +416,8 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
               <Form.Column>
                 <ControlledInput
                   control={control}
-                  label="Last Name"
-                  name="reference.lastName*"
+                  label="Last Name*"
+                  name="reference.lastName"
                   readOnly={admin}
                   required
                 />
@@ -564,7 +564,6 @@ function FosterAgreementView({
   const [showPassDialog, setShowPassDialog] = React.useState(false);
   const [showRejectDialog, setShowRejectDialog] = React.useState(false);
   const { applicationView, setApplicationState } = React.useContext(ApplicationContext);
-
   const onSubmit = (data) => {
     if (admin) {
       return;
@@ -594,6 +593,7 @@ function FosterAgreementView({
       });
     } else {
       // make a new application
+      console.log(reqBody);
       createApplication(reqBody).then((response) => {
         console.log(response.ok); // uncomment to see status of create app request
         setCurAppId(response.data.application._id);
@@ -612,6 +612,7 @@ function FosterAgreementView({
       messages: {
         stage1: content,
       },
+      status: "Step 2: Initial Interview",
     };
     updateApplication(curAppId, reqBody).then((response) =>
       setApplicationState(response.data.application)
@@ -724,7 +725,7 @@ function ApplicationSubmittedView() {
 function FosterApplication() {
   const [view, setView] = React.useState("application");
   const { currentUser } = React.useContext(AuthContext);
-  const { applicationState, setApplicationState, applicationId, setApplicationId } =
+  const { applicationState, setApplicationState, applicationId, setApplicationId, currentStep } =
     React.useContext(ApplicationContext);
   // only render content if the role is foster or application from id is loaded
   if (view === "application")

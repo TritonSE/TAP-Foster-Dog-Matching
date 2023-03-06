@@ -43,9 +43,9 @@ const DogImg = styled.img`
 
 const DogName = styled.p``;
 
-function DogCard({ imageRef, name }) {
+function DogCard({ imageRef, name, onClick }) {
   return (
-    <DogContainer>
+    <DogContainer onClick={onClick}>
       <DogImg src={imageRef || doggo} />
       <DogName>{name}</DogName>
     </DogContainer>

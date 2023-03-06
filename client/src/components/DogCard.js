@@ -151,10 +151,12 @@ function DogCard(props) {
     setPreference(update);
     const temp = props.prefArr;
     temp[props.isOpen - 1] = update;
-    updateApplication(props.appId, { preference: temp });
+    updateApplication(props.appId, { preference: temp }).then((response) =>
+      props.setApplicationState(response.data.application)
+    );
   };
 
-  // update inital preference
+  // update initial preference
   React.useEffect(() => {
     setPreference(props.prefArr[props.isOpen - 1] || "");
   }, [props]);

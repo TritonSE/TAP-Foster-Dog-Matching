@@ -26,8 +26,6 @@ import ApplicationContext from "../contexts/ApplicationContext";
 
 function PassFail({ visible, setVisible, status, onConfirm, initialMessage }) {
   const { applicationState } = React.useContext(ApplicationContext);
-  console.log("application state pass fail");
-  console.log(applicationState);
 
   const [editorState, setEditorState] = React.useState(
     EditorState.createWithContent(

@@ -58,10 +58,21 @@ const FOSTER_EVALUATION_INITIAL_MESSAGES = {
           <br />
           <p>The TAP team has matched you with ___ as your next foster!</p>
           <br />
-          <p>Click on step 5 to schedule your meet and greet with Skippy!</p>
+          <p>Click anywhere on this card to schedule your meet and greet with Skippy!</p>
           <br />
           <p>Best,</p>
           <p>The Animal Pad Team</p>`,
+  },
+  FOSTER_IN_HOME: {
+    CONFIRM: (name) => `<p>Hello, ${name}</p>
+      <br />
+      <p>Congratulations!! Your Meet & Greet was a success, you have been passed step 5 and are now a TAP foster!</p>
+      <br />
+      <p>Please click on Step 6 to communicate with us during your time fostering.</p>
+      <br />
+      <p>Best,</p>
+      <p>The Animal Pad Team</p>
+      `,
   },
 };
 

@@ -91,6 +91,7 @@ function Application({ id }) {
   const [applicationView, setApplicationView] = React.useState(); // Note: change this to 'foster' or 'admin' to test different views
   const [applicationId, setApplicationId] = React.useState(id); // || "629846dd3f626453c2ba9de6"); // TODO: remove hardcoded applicationId
   const [applicationState, setApplicationState] = React.useState();
+  const [loaded, setLoaded] = React.useState(false);
 
   React.useEffect(() => {
     if (currentUser) setApplicationView(currentUser.type);
@@ -102,6 +103,7 @@ function Application({ id }) {
       setApplicationId(location.state.id);
       getApplication(applicationId).then((res) => {
         setApplicationState(res.data.application);
+        setLoaded(false);
       });
     }
     if (applicationId) {
@@ -109,7 +111,35 @@ function Application({ id }) {
         setApplicationState(res.data.application);
       });
     }
-  }, [applicationId]);
+
+    const goToStepForStage = (stage, step) => {
+      if (applicationState && applicationState.status === stage) {
+        setCurrentStep(step);
+        setCurrentSubStep("content");
+      }
+    };
+
+    goToStepForStage("Step 2: Initial Interview", 1);
+    goToStepForStage("Step 3: Home Screen", 2);
+    goToStepForStage("Step 4: Foster Matching", 3);
+
+    if (
+      applicationState &&
+      applicationState.status === "Step 4: Foster Matching" &&
+      Object.prototype.hasOwnProperty.call(applicationState.messages, "stage4")
+    ) {
+      setCurrentSubStep("outro");
+    }
+
+    goToStepForStage("Step 5: Meet & Greet", 4);
+    goToStepForStage("Step 6: Foster in Home", 5);
+  }, [applicationId, loaded]);
+
+  React.useEffect(() => {
+    if (applicationState !== []) {
+      setLoaded(true);
+    }
+  }, [applicationState]);
 
   // Switch application content based on current user role
   const applicationContent = React.useMemo(
@@ -157,21 +187,24 @@ function Application({ id }) {
   );
   return (
     <DefaultBody>
-      <ApplicationContext.Provider value={applicationData}>
-        <ApplicationContainer>
-          <ExitButton onClick={() => navigate("/dashboard")}>Exit</ExitButton>
-          <ApplicationProgress />
-          <ApplicationContentContainer>
-            {applicationState && applicationState.status === "rejected" ? (
-              <ApplicationRejected />
-            ) : (
-              applicationContent[currentStep][currentSubStep] ||
-              applicationContent[currentStep]["intro"] ||
-              applicationContent[currentStep]["content"]
-            )}
-          </ApplicationContentContainer>
-        </ApplicationContainer>
-      </ApplicationContext.Provider>
+      {loaded && (
+        <ApplicationContext.Provider value={applicationData}>
+          <ApplicationContainer>
+            <ExitButton onClick={() => navigate("/dashboard")}>Exit</ExitButton>
+            <ApplicationProgress />
+            <ApplicationContentContainer>
+              {applicationState && applicationState.status === "rejected" ? (
+                <ApplicationRejected />
+              ) : (
+                applicationContent[currentStep][currentSubStep] ||
+                applicationContent[currentStep]["intro"] ||
+                applicationContent[currentStep]["content"] ||
+                applicationContent[currentStep]["outro"]
+              )}
+            </ApplicationContentContainer>
+          </ApplicationContainer>
+        </ApplicationContext.Provider>
+      )}
     </DefaultBody>
   );
 }

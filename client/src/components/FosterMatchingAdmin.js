@@ -3,9 +3,8 @@ import styled from "styled-components";
 import { Colors } from "./Theme";
 import SplitCardContainer from "./SplitCardContainer";
 import PenIcon from "../images/penicon.png";
-import GridImage1 from "../images/griddog1.png";
-import GridImage2 from "../images/griddog2.png";
 import GridImage3 from "../images/griddog3.png";
+import { getDogs } from "../services/dogs";
 
 /**
  * This component is used as the fourth step of the
@@ -179,6 +178,8 @@ const DogGridStyled = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   column-gap: 2.7%;
   row-gap: 30px;
+  max-height: 550px;
+  overflow-y: auto;
 `;
 
 const DogCardBackground = styled.div`
@@ -208,6 +209,7 @@ const DogCardImage = styled.img`
   object-fit: contain;
   padding: 0 14px;
 `;
+
 function DogCard(props) {
   const [checked, setChecked] = useState(false);
   let checkboxDOMElement;
@@ -229,7 +231,7 @@ function DogCard(props) {
   return (
     <DogCardBackground
       checked={checked}
-      onClick={(_) => props.updateCard(setChecked, !checked, checkboxDOMElement)}
+      onClick={(_) => props.updateCard(setChecked, !checked, checkboxDOMElement, props.id)}
     >
       <DogCardImage src={props.dogImage} alt={props.dogName} />
       <br />
@@ -238,32 +240,47 @@ function DogCard(props) {
     </DogCardBackground>
   );
 }
-function DogGrid() {
-  const [numChecked, setNumChecked] = useState(0);
+function DogGrid(props) {
+  const [dogs, setDogs] = useState([]);
+  const { selectedDogs, setSelectedDogs } = props.selectedDogs;
+
   const MAX_CHECKED_CARDS = 5;
 
-  const tryCheckDogCard = useCallback((cardSetChecked, newValue, checkboxDOMElement) => {
+  useEffect(() => {
+    getDogs().then((res) => setDogs(res.data.dogs));
+  }, []);
+
+  const tryCheckDogCard = useCallback((cardSetChecked, newValue, checkboxDOMElement, id) => {
     if (newValue) {
-      if (numChecked + 1 <= MAX_CHECKED_CARDS) {
-        setNumChecked(numChecked + 1);
+      if (selectedDogs.size + 1 <= MAX_CHECKED_CARDS) {
         cardSetChecked(true);
+        setSelectedDogs((prev) => new Set(prev).add(id));
       } else {
         checkboxDOMElement.checked = false;
       }
     } else {
-      setNumChecked(numChecked - 1);
       cardSetChecked(false);
+      setSelectedDogs((prev) => {
+        const next = new Set(prev);
+        next.delete(id);
+        return next;
+      });
     }
   });
 
   return (
     <DogGridStyled>
-      {Array.from(Array(12).keys()).map((index) => {
-        if (index % 3 === 0)
-          return <DogCard dogName="Lolita" dogImage={GridImage1} updateCard={tryCheckDogCard} />;
-        if (index % 3 === 1)
-          return <DogCard dogName="Flower" dogImage={GridImage2} updateCard={tryCheckDogCard} />;
-        return <DogCard dogName="Shelly" dogImage={GridImage3} updateCard={tryCheckDogCard} />;
+      {dogs.map((dog) => {
+        if (dog.category === "adopted") return null;
+        return (
+          <DogCard
+            dogName={dog?.name}
+            dogImage={GridImage3}
+            updateCard={tryCheckDogCard}
+            id={dog?._id}
+            setSelectedDogs={setSelectedDogs}
+          />
+        );
       })}
     </DogGridStyled>
   );
@@ -279,7 +296,7 @@ const SubmitButton = styled.button`
   cursor: pointer;
 `;
 
-function FosterMatchingAdmin({ handleConfirm }) {
+function FosterMatchingAdmin({ handleConfirm, selectedDogs }) {
   return (
     <OuterContainer>
       <PaddingContainer>
@@ -340,7 +357,7 @@ function FosterMatchingAdmin({ handleConfirm }) {
           <AvailableDogsContainer>
             <TitleText>Available Dogs</TitleText>
             <SubtitleText>Scroll to view all available dogs</SubtitleText>
-            <DogGrid />
+            <DogGrid selectedDogs={selectedDogs} />
           </AvailableDogsContainer>
         </SplitCardContainer>
         <CenterAlign>

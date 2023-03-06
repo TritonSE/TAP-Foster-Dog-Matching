@@ -24,6 +24,7 @@ function HomeScreenInformation() {
         messages: {
           stage3: content,
         },
+        status: "Step 4: Foster Matching",
       };
       updateApplication(applicationId, reqBody).then((response) =>
         setApplicationState(response.data.application)
