@@ -37,6 +37,7 @@ function FosterAndDogInformation() {
         ambassadorName="Kristin"
         coordinatorName="Andy L."
         fosterHistory={[{ name: "Lolita" }, { name: "Flower" }]}
+        internalNotes="Lorem ipsum internal notes here"
       />
       <Meetings
         title="Dog Profile"

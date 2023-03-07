@@ -30,6 +30,9 @@ const Title = styled.div`
 const CardTitle = styled.div`
   font-size: 30px;
 `;
+const NotesTitle = styled.span`
+  font-size: 16px;
+`;
 const ContentBox = styled.div`
   width: min-content;
   border: 3px solid #8dc442;
@@ -52,6 +55,13 @@ function FosterProfile(props) {
           <br />
           {props.coordinatorName ? "Coordinator: " + props.coordinatorName : ""}
         </p>
+        {props.internalNotes && (
+          <>
+            <NotesTitle>Internal Notes:</NotesTitle>
+            <br />
+            {props.internalNotes}
+          </>
+        )}
         {props.fosterHistory && (
           <ContentBox>
             <CardTitle>Foster History:</CardTitle>
