@@ -154,38 +154,8 @@ function FosterMatches() {
   );
 }
 
-function Outro() {
-  const { applicationState, applicationId, setApplicationState } =
-    React.useContext(ApplicationContext);
-
-  const moveToStage5 = () => {
-    const reqBody = {
-      status: "Step 5: Meet & Greet",
-    };
-    updateApplication(applicationId, reqBody).then((response) =>
-      setApplicationState(response.data.application)
-    );
-  };
-
-  return (
-    <div onClick={moveToStage5} style={{ cursor: "pointer" }}>
-      <Meetings
-        textCard={
-          <div>
-            <p className="message-from-admin">
-              {applicationState.messages.stage4.replace(/\n/g, "\n\n")}
-            </p>
-            <img src={logo} alt="logo" />
-          </div>
-        }
-        imagePath={doggo}
-      />
-    </div>
-  );
-}
 
 export default {
   intro: <Intro />,
   content: <FosterMatches />,
-  outro: <Outro />,
 };

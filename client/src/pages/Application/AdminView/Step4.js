@@ -25,7 +25,10 @@ function AdminFosterMatchingFlow() {
   const [selectedDogs, setSelectedDogs] = useState(() => new Set()); // set of ids of admin checked dogs
 
   useEffect(() => {
-    if (applicationState.preference.length === applicationState.selectedDogs.length)
+    if (
+      applicationState.preference.length === applicationState.selectedDogs.length &&
+      applicationState.selectedDogs.length > 0
+    )
       setView(VIEW.CONFIRM_MEET_AND_GREET);
     else if (interview) setView(VIEW.CONFIRM_MEET_AND_GREET);
     else if (applicationState.selectedDogs.length > 0) setView(VIEW.WAITING);
