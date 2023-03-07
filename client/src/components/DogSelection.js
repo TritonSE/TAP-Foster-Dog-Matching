@@ -175,7 +175,7 @@ function DogSelection() {
         messages: {
           stage4: content,
         },
-        status: "Step 5: Meet & Greet"
+        status: "Step 5: Meet & Greet",
       };
       updateApplication(applicationId, reqBody).then((response) =>
         setApplicationState(response.data.application)

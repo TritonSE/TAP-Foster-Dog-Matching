@@ -29,7 +29,7 @@ function PassFail({ visible, setVisible, status, onConfirm, initialMessage }) {
 
   const [editorState, setEditorState] = React.useState(
     EditorState.createWithContent(
-      ContentState.createFromBlockArray(convertFromHTML(initialMessage(applicationState.firstName)))
+      ContentState.createFromBlockArray(convertFromHTML(initialMessage(applicationState?.firstName)))
     )
   );
 
