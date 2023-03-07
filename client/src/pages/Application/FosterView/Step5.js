@@ -17,7 +17,7 @@ function Match() {
   const { applicationState, goToStep } = React.useContext(ApplicationContext);
 
   return (
-    <div onClick={() => goToStep(4)}>
+    <div style={{ cursor: "pointer" }} onClick={() => goToStep(4, "content")}>
       <Meetings
         textCard={
           <div>

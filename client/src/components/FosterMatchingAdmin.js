@@ -247,7 +247,9 @@ function DogGrid(props) {
   const MAX_CHECKED_CARDS = 5;
 
   useEffect(() => {
-    getDogs().then((res) => setDogs(res.data.dogs));
+    getDogs().then((res) => {
+      setDogs(res.data.dogs.filter((dog) => dog.category === "new"));
+    });
   }, []);
 
   const tryCheckDogCard = useCallback((cardSetChecked, newValue, checkboxDOMElement, id) => {

@@ -112,10 +112,10 @@ function Application({ id }) {
       });
     }
 
-    const goToStepForStage = (stage, step) => {
+    const goToStepForStage = (stage, step, subStep=undefined) => {
       if (applicationState && applicationState.status === stage) {
         setCurrentStep(step);
-        setCurrentSubStep("content");
+        setCurrentSubStep(subStep || "content");
       }
     };
 
@@ -123,7 +123,7 @@ function Application({ id }) {
     goToStepForStage("Step 3: Home Screen", 2);
     goToStepForStage("Step 4: Foster Matching", 3);
 
-    goToStepForStage("Step 5: Meet & Greet", 4);
+    goToStepForStage("Step 5: Meet & Greet", 4, "match");
     goToStepForStage("Step 6: Foster in Home", 5);
   }, [applicationId, loaded]);
 
@@ -189,7 +189,6 @@ function Application({ id }) {
                 <ApplicationRejected />
               ) : (
                 applicationContent[currentStep][currentSubStep] ||
-                applicationContent[currentStep]["Match"] || // needed in step 4 to show which dog the foster was matched with before they schedule and interview
                 applicationContent[currentStep]["intro"] ||
                 applicationContent[currentStep]["content"]
               )}
