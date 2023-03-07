@@ -7,6 +7,7 @@ import styled from "styled-components";
 import StatusUpdate from "../../../components/StatusUpdate";
 import Meetings from "../../../components/Meeting";
 import DogProfileSummary from "../../../components/DogProfileSummary";
+import FosterProfile from "../../../components/FosterProfile";
 
 const InternalNotes = styled.div`
   width: 100%;
@@ -31,9 +32,11 @@ const Column = styled.div`
 function FosterAndDogInformation() {
   return (
     <Column>
-      <Meetings
-        title="Foster  Profile"
-        // TODO
+      <FosterProfile
+        name="Amy C."
+        ambassadorName="Kristin"
+        coordinatorName="Andy L."
+        fosterHistory={[{ name: "Lolita" }, { name: "Flower" }]}
       />
       <Meetings
         title="Dog Profile"

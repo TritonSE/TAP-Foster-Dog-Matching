@@ -47,7 +47,6 @@ function FosterProfile(props) {
       <Title>Foster Profile</Title>
       <ContentBackground>
         <CardTitle>{props.name}</CardTitle>
-        <CardTitle>Current</CardTitle>
         <p>
           {props.ambassadorName ? "Ambassador: " + props.ambassadorName + " " : ""}
           <br />
