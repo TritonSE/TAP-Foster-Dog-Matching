@@ -56,7 +56,7 @@ const FOSTER_EVALUATION_INITIAL_MESSAGES = {
   MEET_AND_GREET: {
     CONFIRM: (name) => `<p>Hello, ${name}</p>
           <br />
-          <p>The TAP team has matched you with ___ as your next foster!</p>
+          <p>The TAP team has matched you with ~DOG NAME~ as your next foster!</p>
           <br />
           <p>Click anywhere on this card to schedule your meet and greet with Skippy!</p>
           <br />

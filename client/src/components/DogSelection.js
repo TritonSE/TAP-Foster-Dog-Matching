@@ -2,84 +2,20 @@
  * Dog Selection Component
  *
  * Component for the "select a dog page"
- * TODO: populate real dog data, handle selected meet and greet
  *
  * @summary    Component for the fosters page
  * @author     Parth Patel
  *
  */
 
-/*
-Data is mapped to page from allDogs dictionary which is populated by 
-a dictionary of the following format. 
-{ 1: dog1, 2: dog2 ... 5: dog5}
-There can be at most 5 dogs in this dictionary.
-
-Each dog object (dog1, dog2...) has the following format:
-
-dog = {
-  name: [string],
-  image: [image variable from import],
-  curInterested: {
-    preference: [string],
-    time: [string],
-  },
-  notes: [string],
-  othersInterested: [
-    {
-      name: [string],
-      preference: [string],
-      time: [string],
-    },
-    {
-      name: [string],
-      preference: [string],
-      time: [string],
-    },
-  ],
-  active: [boolean],
-}
-
-*/
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import DogSummary from "./DogSummary";
 import PassFail from "./PassFail";
-import DogHappy from "../images/DogHappy.png";
 import FOSTER_EVALUATION_INITIAL_MESSAGES from "../constants/FOSTER_EVALUATION_INITIAL_MESSAGES";
 import { updateApplication } from "../services/application";
 import ApplicationContext from "../contexts/ApplicationContext";
-
-const dog1 = {
-  name: "Happy",
-  image: DogHappy,
-  curInterested: {
-    preference: "Love",
-    time: "11:00 PM",
-  },
-  notes:
-    "Lorem Ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
-  othersInterested: [
-    {
-      name: "Stacy",
-      preference: "Like",
-      time: "12:05 PM",
-    },
-    {
-      name: "Molly",
-      preference: "Love",
-      time: "1:42 PM",
-    },
-  ],
-  active: false,
-};
-const dog2 = dog1;
-const dog3 = dog1;
-const dog4 = dog1;
-const dog5 = dog1;
-// dummy data
-const allDogs = { 1: dog1, 2: dog2, 3: dog3, 4: dog4, 5: dog5 };
+import { getDog } from "../services/dogs";
 
 const Content = styled.div`
   display: flex;
@@ -152,22 +88,31 @@ const Text = styled.p`
 function DogSummaryWrap({ dog, active, onClick }) {
   return (
     <ActiveWrapper onClick={onClick} active={active}>
-      <DogSummary props={dog} />
+      <DogSummary dog={dog} />
     </ActiveWrapper>
   );
 }
 
 function DogSelection() {
-  const { applicationId, setApplicationState } = React.useContext(ApplicationContext);
+  const { applicationId, setApplicationState, applicationState } =
+    React.useContext(ApplicationContext);
   const [showConfirmDialog, setShowConfirmDialog] = React.useState(false);
   const [current, setCurrent] = useState(-1);
+  const [matches, setMatches] = React.useState([]);
 
-  const handleSubmit = (selection) => {
-    if (selection !== -1) {
-      setShowConfirmDialog(true);
-      // TODO: handle submit where allDogs[current] is the dog we are dealing with
-    }
-  };
+  useEffect(() => {
+    const res = [];
+
+    Promise.all([
+      applicationState.selectedDogs.map((dogId) =>
+        getDog(dogId).then((response) => response.data.dog)
+      ),
+    ]).then((values) => {
+      values[0].map((val) => val.then((data) => res.push(data)));
+    });
+
+    setMatches(res);
+  }, []);
 
   const onConfirmMeetAndGreet = React.useCallback(
     (content) => {
@@ -175,21 +120,25 @@ function DogSelection() {
         messages: {
           stage4: content,
         },
+        finalDog: applicationState.selectedDogs[current],
         status: "Step 5: Meet & Greet",
       };
       updateApplication(applicationId, reqBody).then((response) =>
         setApplicationState(response.data.application)
       );
     },
-    [applicationId]
+    [applicationId, current]
   );
+
+  useEffect(() => console.log(current), [current]);
 
   return (
     <Content>
       <Text>Select a dog to confirm Meet & Greet</Text>
       {/* map out the dogs */}
       <DogWrapper>
-        {Object.entries(allDogs).map(([key, dog]) => {
+        {matches.map((dog, key) => {
+          dog.preference = applicationState.preference[key];
           if (key === current) {
             // element is active
             return <DogSummaryWrap onClick={() => setCurrent(-1)} active dog={dog} key={key} />;
@@ -200,7 +149,10 @@ function DogSelection() {
           );
         })}
       </DogWrapper>
-      <Button cursor={!(current === -1)} onClick={() => handleSubmit(current)}>
+      <Button
+        cursor={!(current === -1)}
+        onClick={() => (current !== -1 ? setShowConfirmDialog(true) : void 0)}
+      >
         Confirm
       </Button>
       <PassFail

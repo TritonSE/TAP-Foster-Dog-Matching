@@ -14,11 +14,10 @@ import useInterview from "../../../hooks/useInterview";
 
 // for which dog the foster was matched with to meet and greet
 function Match() {
-  const { applicationState, goToStep } =
-    React.useContext(ApplicationContext);
+  const { applicationState, goToStep } = React.useContext(ApplicationContext);
 
   return (
-    <div onClick={() => goToStep(4)}> 
+    <div onClick={() => goToStep(4)}>
       <Meetings
         textCard={
           <div>

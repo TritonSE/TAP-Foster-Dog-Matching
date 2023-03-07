@@ -26,10 +26,11 @@ import ApplicationContext from "../contexts/ApplicationContext";
 
 function PassFail({ visible, setVisible, status, onConfirm, initialMessage }) {
   const { applicationState } = React.useContext(ApplicationContext);
-
   const [editorState, setEditorState] = React.useState(
     EditorState.createWithContent(
-      ContentState.createFromBlockArray(convertFromHTML(initialMessage(applicationState?.firstName)))
+      ContentState.createFromBlockArray(
+        convertFromHTML(initialMessage(applicationState?.firstName))
+      )
     )
   );
 
