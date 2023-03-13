@@ -25,6 +25,7 @@ const TableCellButton = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  font-size: ${(props) => props.fontSize || "inherit"};
 `;
 
 export default TableCellButton;

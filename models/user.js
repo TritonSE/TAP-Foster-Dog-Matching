@@ -46,9 +46,11 @@ module.exports = mongoose.model(
     },
     ambassador: {
       type: ObjectId,
+      ref: "Admin",
     },
     coordinator: {
       type: ObjectId,
+      ref: "Admin",
     },
     accountStatus: {
       type: String,

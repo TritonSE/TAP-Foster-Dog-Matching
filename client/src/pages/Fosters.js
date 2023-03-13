@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Table from "../components/Table";
 import TableCellButton from "../components/TableCellButton";
@@ -8,6 +8,9 @@ import DefaultBody from "../components/DefaultBody";
 import { AuthContext } from "../contexts/AuthContext";
 import AmbassadorSelect from "../components/AmbassadorSelect";
 import CoordinatorSelect from "../components/CoordinatorSelect";
+import { getUser } from "../services/users";
+import { getAdmin } from "../services/admins";
+import FosterProfile from "../components/FosterProfile";
 
 const DUMMY_REPEAT_FOSTERS_DATA = [
   {
@@ -190,7 +193,9 @@ function AccountStatusCell({ active }) {
   return (
     <SpacedCellContainer>
       {active ? "Active" : "Inactive"}
-      <TableCellButton>View</TableCellButton>
+      <TableCellButton color={Colors.green} fontSize="12px">
+        View Profile
+      </TableCellButton>
       {!active && role === "management" && (
         <TableCellButton color={Colors.green}>Activate</TableCellButton>
       )}
@@ -199,6 +204,43 @@ function AccountStatusCell({ active }) {
 }
 
 function AllFosters() {
+  const [userData, setUserData] = useState([]);
+  const [loaded, setLoaded] = useState(false);
+  /*
+  useEffect(
+    () =>
+      getUsers().then((users) => {
+        console.log(users["data"]["users"]);
+        setUserData(
+          users["data"]["users"].map((user) => {
+            const newUser = { ...user };
+            // Set coordinator and ambassador names
+            if (user.coordinator && user.coordinator.firstName && user.coordinator.lastName) {
+              newUser.coordinator = user.coordinator.firstName + " " + user.coordinator.lastName;
+            }
+
+            if (user.ambassador && user.ambassador.firstName && user.ambassador.lastName)
+              newUser.ambassador = user.ambassador.firstName + " " + user.ambassador.lastName;
+
+            // Set currently fostering
+            if (user.currentlyFostering != null)
+              newUser.currentlyFostering = user.currentlyFostering ? "Yes" : "No";
+
+            // Format date
+            if (user.lastActive) {
+              const date = new Date(user.lastActive);
+              newUser.lastActive =
+                date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
+            }
+            return newUser;
+          })
+        );
+      }),
+    []
+  );
+  
+  */
+  useEffect(() => setLoaded(userData && userData.length > 0), [userData]);
   const {
     currentUser: { role },
   } = React.useContext(AuthContext);
@@ -233,24 +275,25 @@ function AllFosters() {
 
   const rows = React.useMemo(
     () =>
-      // TODO: Fetch real data
-      DUMMY_ALL_FOSTERS_DATA.filter((foster) => {
-        switch (fostersView) {
-          case "active":
-            return foster.accountActive;
-          case "inactive":
-            return !foster.accountActive;
-          default:
-            // fostersView is set to 'all'
-            return true;
-        }
-      }).map((row) => ({
-        ...row,
-        ambassador: row.ambassador || "Not Assigned",
-        coordinator: row.coordinator || "Not Assigned",
-        accountActive: <AccountStatusCell active={row.accountActive} />,
-      })),
-    [fostersView]
+      userData
+        .filter((foster) => {
+          switch (fostersView) {
+            case "active":
+              return foster.accountActive;
+            case "inactive":
+              return !foster.accountActive;
+            default:
+              // fostersView is set to 'all'
+              return true;
+          }
+        })
+        .map((row) => ({
+          ...row,
+          ambassador: row.ambassador || "Not Assigned",
+          coordinator: row.coordinator || "Not Assigned",
+          accountActive: <AccountStatusCell active={row.accountActive} />,
+        })),
+    [fostersView, loaded]
   );
 
   return (
@@ -293,6 +336,12 @@ function Fosters() {
         {(role === "ambassador" || role === "management") && <RepeatFosters />}
         {(role === "management" || role === "coordinator") && <AllFosters />}
       </FostersContainer>
+      <FosterProfile
+        name="Amy C."
+        ambassadorName="Kristin"
+        coordinatorName="Andy L."
+        fosterHistory={[{ name: "Lolita" }, { name: "Flower" }]}
+      />
     </DefaultBody>
   );
 }

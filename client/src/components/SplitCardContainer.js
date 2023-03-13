@@ -3,8 +3,6 @@
  * by the fostermatching page. It sizes them equally
  * using a CSS grid with a gap between them.
  *
- * Takes a titleText prop to determine if extra height
- * should be added to give more space for the title.
  *
  *
  * @summary     Container to hold two cards.
@@ -16,9 +14,10 @@ import React from "react";
 import styled from "styled-components";
 
 export const Background = styled.div`
+  max-width: 100%;
   width: 100%;
-  margin-left: 1%;
   border-radius: 35px;
+  max-width: 100%;
 `;
 
 export const GridContainer = styled.div`
