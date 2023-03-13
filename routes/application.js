@@ -102,7 +102,7 @@ const validators = [
     .optional()
     .isArray()
     .custom((input) => input.every((value) => typeof value === "string")),
-    body("finalDog").optional().isString()
+  body("finalDog").optional().isString(),
 ];
 
 /**
