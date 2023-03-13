@@ -9,7 +9,6 @@ import DogProfileSummary from "../../../components/DogProfileSummary";
 import { getDog } from "../../../services/dogs";
 import ApplicationContext from "../../../contexts/ApplicationContext";
 
-
 const InternalNotes = styled.div`
   width: 100%;
   height: 100%;

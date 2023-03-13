@@ -38,6 +38,7 @@ function AdminFosterMatchingFlow() {
     // update dogs admin selected
     const reqBody = {
       selectedDogs: Array.from(selectedDogs),
+      preference: Array(selectedDogs.size).fill("?"),
     };
     updateApplication(applicationId, reqBody).then((response) =>
       setApplicationState(response.data.application)
@@ -56,7 +57,7 @@ function AdminFosterMatchingFlow() {
     return (
       <LoadingBox
         message="Waiting for applicant to respond, click on the progress bar to see previous steps"
-        currentStage="Applicant is scheduling their interview"
+        currentStage="Applicant is inputting their dog preferences"
       />
     );
   return <DogSelection />;

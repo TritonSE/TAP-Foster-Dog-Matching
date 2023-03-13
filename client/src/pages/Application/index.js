@@ -112,7 +112,7 @@ function Application({ id }) {
       });
     }
 
-    const goToStepForStage = (stage, step, subStep=undefined) => {
+    const goToStepForStage = (stage, step, subStep = undefined) => {
       if (applicationState && applicationState.status === stage) {
         setCurrentStep(step);
         setCurrentSubStep(subStep || "content");

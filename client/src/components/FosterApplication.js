@@ -682,10 +682,11 @@ function FosterAgreementView({
               <Button
                 onClick={() => {
                   console.log(applicationState.ambassador);
-                  applicationState.ambassador !== undefined
-                    ? setShowPassDialog(true)
-                    : setPromptAssigning(true); // instantiate error message asking admin to assign ambassador
-                  console.log(promptAssigning);
+                  if (applicationState.ambassador !== undefined) {
+                    setShowPassDialog(true);
+                  } else {
+                    setPromptAssigning(true); // instantiate error message asking admin to assign ambassador
+                  }
                 }}
               >
                 Pass
