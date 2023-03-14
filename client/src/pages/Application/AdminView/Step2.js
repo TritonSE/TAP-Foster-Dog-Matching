@@ -24,6 +24,7 @@ function InterviewInformation() {
         messages: {
           stage2: content,
         },
+        status: "Step 3: Home Screen",
       };
       updateApplication(applicationId, reqBody).then((response) =>
         setApplicationState(response.data.application)

@@ -238,7 +238,12 @@ module.exports = mongoose.model(
         type: [String],
         required: false,
       },
+      finalDog: {
+        type: String,
+        required: false,
+      },
     },
+
     { timestamps: {} }
   )
 );

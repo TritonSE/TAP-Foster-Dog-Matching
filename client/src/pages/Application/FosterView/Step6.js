@@ -2,7 +2,7 @@
  * Application (Foster View) Step 6
  */
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import StatusUpdate from "../../../components/StatusUpdate";
@@ -11,6 +11,7 @@ import logo from "../../../images/logo-inverted.png";
 import doggo from "../../../images/good-boi.png";
 import DogProfileSummary from "../../../components/DogProfileSummary";
 import ApplicationContext from "../../../contexts/ApplicationContext";
+import { getDog } from "../../../services/dogs";
 
 const FosterResourcesActions = styled.div`
   display: flex;
@@ -68,25 +69,17 @@ function FosterInHomeContent() {
   const navigate = useNavigate();
   const { applicationState } = React.useContext(ApplicationContext);
   const [view, setView] = React.useState("resources");
+  const [dog, setDog] = useState();
+
+  useEffect(() => {
+    getDog(applicationState?.finalDog).then((res) => setDog(res.data.dog));
+  }, []);
 
   if (view === "resources")
     return (
       <Meetings
         title="Foster Resources"
-        textCard={
-          <DogProfileSummary
-            // TODO: api call to get actual dog
-            dog={{
-              name: "tom",
-              age: 34,
-              gender: "Male",
-              breed: "German Dog",
-              weight: 40,
-              vettingInfo: "sample text",
-              backgroundInfo: "sample text",
-            }}
-          />
-        }
+        textCard={<DogProfileSummary dog={{ ...dog }} />}
         status={
           <RightColumn>
             <StatusUpdate

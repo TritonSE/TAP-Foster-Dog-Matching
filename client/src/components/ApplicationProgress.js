@@ -108,7 +108,7 @@ function ApplicationProgress() {
     (index) => {
       if (applicationState.status !== "rejected") {
         if (currentStep === index) goToNextSubStep();
-        else goToStep(index);
+        // else goToStep(index);
       }
     },
     [currentStep, goToNextSubStep, goToStep, applicationState]

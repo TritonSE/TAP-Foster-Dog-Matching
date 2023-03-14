@@ -8,11 +8,9 @@
  */
 
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import "../css/dashboardcard.css";
 
 function DashboardCard(props) {
-  const navigate = useNavigate();
   return (
     <div
       className="dashboard-card"
