@@ -100,7 +100,7 @@ function IntroForm(props) {
       // Check if sign up key is correct
       if (ADMIN_SIGN_UP_KEYS.admin !== signupKey) {
         setError("Invalid sign up key.");
-        console.log(error)
+        console.log(error);
         return;
       }
     }
@@ -116,7 +116,6 @@ function IntroForm(props) {
       }
     });
   };
-
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {

@@ -47,8 +47,3 @@ export async function getJWTToken() {
 export function getAuthErrorMessage(errorCode) {
   return FIREBASE_AUTH_ERROR_MESSAGES[errorCode] || "Something went wrong :(";
 }
-
-export async function sendSignUpCode(email){
-  console.log(email)
-  return sendData("signup", "POST", email, false);
-}
