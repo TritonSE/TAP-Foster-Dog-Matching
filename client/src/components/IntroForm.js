@@ -14,9 +14,7 @@ import { createAdmin } from "../services/admins";
 import { createUser } from "../services/users";
 
 const ADMIN_SIGN_UP_KEYS = {
-  management: process.env.REACT_APP_MANAGEMENT_SIGN_UP_KEY || "12345",
-  ambassador: process.env.REACT_APP_AMBASSADOR_SIGN_UP_KEY || "12345",
-  coordinator: process.env.REACT_APP_COORDINATOR_SIGN_UP_KEY || "12345",
+  admin: process.env.REACT_APP_ADMIN_TOKEN,
 };
 
 function IntroForm(props) {
@@ -29,7 +27,7 @@ function IntroForm(props) {
   const [lastName, setLastName] = React.useState();
   const [confirmPassword, setConfirmPassword] = React.useState();
   const [role, setRole] = React.useState();
-  const [error, setError] = React.useState();
+  const [error, setError] = React.useState("");
   const [signupKey, setSignupKey] = React.useState();
 
   const handleSignIn = () => {
@@ -100,8 +98,9 @@ function IntroForm(props) {
         return;
       }
       // Check if sign up key is correct
-      if (ADMIN_SIGN_UP_KEYS[role] !== signupKey) {
+      if (ADMIN_SIGN_UP_KEYS.admin !== signupKey) {
         setError("Invalid sign up key.");
+        console.log(error)
         return;
       }
     }
@@ -117,6 +116,7 @@ function IntroForm(props) {
       }
     });
   };
+
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
@@ -296,11 +296,12 @@ function IntroForm(props) {
             <input
               type="text"
               value={signupKey}
-              maxLength={5}
+              maxLength={10}
               onChange={(e) => setSignupKey(e.target.value)}
             />
           </div>
           {error && <p className="error-message">{error}</p>}
+          <p className="error-message">{error}</p>
           <Button className="confirm" name="Confirm" onClick={handleSignUp} />
         </>
       );

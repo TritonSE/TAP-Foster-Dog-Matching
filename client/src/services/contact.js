@@ -24,6 +24,6 @@ export async function sendContact(name, email, team, message) {
     email,
     team,
     message,
-    toEmail: "tapmatching@gmail.com",
+    toEmail: "jacobau.inbox@gmail.com",
   });
 }

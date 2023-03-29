@@ -10,6 +10,7 @@
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import FIREBASE_AUTH_ERROR_MESSAGES from "../constants/FIREBASE_AUTH_ERROR_MESSAGES";
 import { auth } from "../utils/firebase-config";
+import { sendData } from "./data";
 
 /**
  * Sign a user in
@@ -45,4 +46,9 @@ export async function getJWTToken() {
 
 export function getAuthErrorMessage(errorCode) {
   return FIREBASE_AUTH_ERROR_MESSAGES[errorCode] || "Something went wrong :(";
+}
+
+export async function sendSignUpCode(email){
+  console.log(email)
+  return sendData("signup", "POST", email, false);
 }
