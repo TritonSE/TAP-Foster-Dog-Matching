@@ -25,7 +25,10 @@ function AdminFosterMatchingFlow() {
   const [selectedDogs, setSelectedDogs] = useState(() => new Set()); // set of ids of admin checked dogs
 
   useEffect(() => {
-    if (applicationState.preference.length === applicationState.selectedDogs.length)
+    if (
+      applicationState.preference.length === applicationState.selectedDogs.length &&
+      applicationState.selectedDogs.length > 0
+    )
       setView(VIEW.CONFIRM_MEET_AND_GREET);
     else if (interview) setView(VIEW.CONFIRM_MEET_AND_GREET);
     else if (applicationState.selectedDogs.length > 0) setView(VIEW.WAITING);
@@ -35,6 +38,7 @@ function AdminFosterMatchingFlow() {
     // update dogs admin selected
     const reqBody = {
       selectedDogs: Array.from(selectedDogs),
+      preference: Array(selectedDogs.size).fill("?"),
     };
     updateApplication(applicationId, reqBody).then((response) =>
       setApplicationState(response.data.application)
@@ -53,7 +57,7 @@ function AdminFosterMatchingFlow() {
     return (
       <LoadingBox
         message="Waiting for applicant to respond, click on the progress bar to see previous steps"
-        currentStage="Applicant is scheduling their interview"
+        currentStage="Applicant is inputting their dog preferences"
       />
     );
   return <DogSelection />;

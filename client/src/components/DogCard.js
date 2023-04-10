@@ -168,7 +168,6 @@ function DogCard(props) {
   return (
     <Portal>
       <DogInfoContainer>
-        {/* TODO: implement onClick to close pop up */}
         <XButton src={X} onClick={props.closeModal} />
         <Left>
           <Name> {props.name} </Name>

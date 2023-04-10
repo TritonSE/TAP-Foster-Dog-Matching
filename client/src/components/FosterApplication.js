@@ -82,7 +82,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
     // TODO: implement onError
     console.log("ERROR");
     console.log(args);
-    // setView("agreement"); // uncomment this to see the foster agreement w/o filling out the form
+    setView("agreement"); // uncomment this to see the foster agreement w/o filling out the form
   };
   return (
     <PageSections sections={applicationSections}>
@@ -544,7 +544,7 @@ function FosterAgreementView({
   curUserId,
   setCurAppId,
 }) {
-  // set inital state of application
+  // set initial state of application
   const initialFormVals = () => {
     if (!admin) {
       return {};
@@ -563,7 +563,10 @@ function FosterAgreementView({
   });
   const [showPassDialog, setShowPassDialog] = React.useState(false);
   const [showRejectDialog, setShowRejectDialog] = React.useState(false);
-  const { applicationView, setApplicationState } = React.useContext(ApplicationContext);
+  const { applicationView, setApplicationState, applicationState } =
+    React.useContext(ApplicationContext);
+  const [promptAssigning, setPromptAssigning] = React.useState(false); // state to show error message if application is not assigned an ambassador
+
   const onSubmit = (data) => {
     if (admin) {
       return;
@@ -604,7 +607,6 @@ function FosterAgreementView({
 
   const onError = (errors) => {
     console.log(errors);
-    setView("done");
   };
 
   const onPassConfirm = React.useCallback((content) => {
@@ -669,17 +671,35 @@ function FosterAgreementView({
         <Form.Actions>
           <Button onClick={() => setView("application")}>Back</Button>
           {applicationView === "user" ? (
-            <Button onClick={handleSubmit(onSubmit, onError)}>Submit Application</Button>
+            <Button onClick={handleSubmit(onSubmit, onError)}>
+              {curAppId ? "Update Application" : "Submit Application"}
+            </Button>
           ) : (
             <>
               <Button onClick={() => setShowRejectDialog(true)} gray>
                 Reject
               </Button>
-              <Button onClick={() => setShowPassDialog(true)}>Pass</Button>
+              <Button
+                onClick={() => {
+                  console.log(applicationState.ambassador);
+                  if (applicationState.ambassador !== undefined) {
+                    setShowPassDialog(true);
+                  } else {
+                    setPromptAssigning(true); // instantiate error message asking admin to assign ambassador
+                  }
+                }}
+              >
+                Pass
+              </Button>
             </>
           )}
           <div /> {/* Spacer */}
         </Form.Actions>
+        {admin && promptAssigning && (
+          <div style={{ marginTop: "10px", color: "red", textAlign: "center" }}>
+            Please assign an ambassador to this application before attempting to pass it.
+          </div>
+        )}
       </Form.Container>
       <PassFail
         visible={showPassDialog}
@@ -706,7 +726,7 @@ function ApplicationSubmittedView() {
     <Meetings
       textCard={
         <div>
-          <p>Hello, {applicationState.firstName}</p>
+          <p>Hello, {applicationState?.firstName}</p>
           <p>Thank you so much for showing interest in volunteering to foster with us.</p>
           <p>
             Your application has been received and is under review! Hang tight, you will receive a
@@ -723,10 +743,10 @@ function ApplicationSubmittedView() {
 }
 
 function FosterApplication() {
-  const [view, setView] = React.useState("application");
   const { currentUser } = React.useContext(AuthContext);
   const { applicationState, setApplicationState, applicationId, setApplicationId, currentStep } =
     React.useContext(ApplicationContext);
+  const [view, setView] = React.useState("application");
   // only render content if the role is foster or application from id is loaded
   if (view === "application")
     return (

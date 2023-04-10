@@ -1,12 +1,13 @@
 /**
  * Application (Admin View) Step 6
  */
-
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import StatusUpdate from "../../../components/StatusUpdate";
 import Meetings from "../../../components/Meeting";
 import DogProfileSummary from "../../../components/DogProfileSummary";
+import { getDog } from "../../../services/dogs";
+import ApplicationContext from "../../../contexts/ApplicationContext";
 import FosterProfile from "../../../components/FosterProfile";
 
 const InternalNotes = styled.div`
@@ -30,6 +31,13 @@ const Column = styled.div`
 `;
 
 function FosterAndDogInformation() {
+  const { applicationState } = React.useContext(ApplicationContext);
+
+  const [dog, setDog] = useState();
+  useEffect(() => {
+    getDog(applicationState?.finalDog).then((res) => setDog(res.data.dog));
+  }, []);
+
   return (
     <Column>
       <FosterProfile
@@ -41,20 +49,7 @@ function FosterAndDogInformation() {
       />
       <Meetings
         title="Dog Profile"
-        textCard={
-          <DogProfileSummary
-            // TODO: api call to get actual dog
-            dog={{
-              name: "tom",
-              age: 34,
-              gender: "Male",
-              breed: "German Dog",
-              weight: 40,
-              vettingInfo: "sample text",
-              backgroundInfo: "sample text",
-            }}
-          />
-        }
+        textCard={<DogProfileSummary dog={{ ...dog }} />}
         status={
           <Column>
             <StatusUpdate

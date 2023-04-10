@@ -112,10 +112,10 @@ function Application({ id }) {
       });
     }
 
-    const goToStepForStage = (stage, step) => {
+    const goToStepForStage = (stage, step, subStep = undefined) => {
       if (applicationState && applicationState.status === stage) {
         setCurrentStep(step);
-        setCurrentSubStep("content");
+        setCurrentSubStep(subStep || "content");
       }
     };
 
@@ -123,15 +123,7 @@ function Application({ id }) {
     goToStepForStage("Step 3: Home Screen", 2);
     goToStepForStage("Step 4: Foster Matching", 3);
 
-    if (
-      applicationState &&
-      applicationState.status === "Step 4: Foster Matching" &&
-      Object.prototype.hasOwnProperty.call(applicationState.messages, "stage4")
-    ) {
-      setCurrentSubStep("outro");
-    }
-
-    goToStepForStage("Step 5: Meet & Greet", 4);
+    goToStepForStage("Step 5: Meet & Greet", 4, "match");
     goToStepForStage("Step 6: Foster in Home", 5);
   }, [applicationId, loaded]);
 
@@ -198,8 +190,7 @@ function Application({ id }) {
               ) : (
                 applicationContent[currentStep][currentSubStep] ||
                 applicationContent[currentStep]["intro"] ||
-                applicationContent[currentStep]["content"] ||
-                applicationContent[currentStep]["outro"]
+                applicationContent[currentStep]["content"]
               )}
             </ApplicationContentContainer>
           </ApplicationContainer>

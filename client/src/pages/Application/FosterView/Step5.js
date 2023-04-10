@@ -12,6 +12,27 @@ import ApplicationContext from "../../../contexts/ApplicationContext";
 import APPLICATION_STAGES from "../../../constants/APPLICATION_STAGES";
 import useInterview from "../../../hooks/useInterview";
 
+// for which dog the foster was matched with to meet and greet
+function Match() {
+  const { applicationState, goToStep } = React.useContext(ApplicationContext);
+
+  return (
+    <div style={{ cursor: "pointer" }} onClick={() => goToStep(4, "content")}>
+      <Meetings
+        textCard={
+          <div>
+            <p className="message-from-admin">
+              {applicationState.messages.stage4.replace(/\n/g, "\n\n")}
+            </p>
+            <img src={logo} alt="logo" />
+          </div>
+        }
+        imagePath={doggo}
+      />
+    </div>
+  );
+}
+
 function Intro() {
   const { applicationState } = React.useContext(ApplicationContext);
 
@@ -92,6 +113,7 @@ function ScheduleMeetAndGreet() {
 }
 
 export default {
+  match: <Match />,
   intro: <Intro />,
   content: <ScheduleMeetAndGreet />,
 };

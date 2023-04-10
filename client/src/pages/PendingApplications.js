@@ -30,7 +30,6 @@ function CompletedActionItemsCell({ completed, id }) {
     <CompletedCellContainer>
       {completed ? "Status updated" : "Waiting for update"}
       {completed ? (
-        // TODO: Send application id in navigate state
         <TableCellButton
           color={Colors.salmon}
           onClick={() => navigate("/application", { state: { id } })}
@@ -38,7 +37,6 @@ function CompletedActionItemsCell({ completed, id }) {
           Review
         </TableCellButton>
       ) : (
-        // TODO: Send application id in navigate state
         <TableCellButton
           color={Colors.lightBlue}
           onClick={() => navigate("/application", { state: { id } })}
