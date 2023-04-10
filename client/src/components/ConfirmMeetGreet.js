@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { device } from "../utils/useResponsive";
 import After from "./AfterMeetAndGreet";
@@ -6,6 +6,10 @@ import StatusUpdate from "./StatusUpdate";
 import useInterview from "../hooks/useInterview";
 import ApplicationContext from "../contexts/ApplicationContext";
 import APPLICATION_STAGES from "../constants/APPLICATION_STAGES";
+import FOSTER_EVALUATION_INITIAL_MESSAGES from "../constants/FOSTER_EVALUATION_INITIAL_MESSAGES";
+import { updateApplication } from "../services/application";
+import PassFail from "./PassFail";
+import { getDog, updateDog } from "../services/dogs";
 
 const ConfirmContainer = styled.div`
   display: flex;
@@ -95,12 +99,31 @@ const ConfirmButton = styled.button`
 `;
 
 function ConfirmMeetGreet() {
-  const { applicationState } = React.useContext(ApplicationContext);
+  const { applicationState, setApplicationState, applicationId } =
+    React.useContext(ApplicationContext);
   const { interview } = useInterview(applicationState.user, APPLICATION_STAGES.MEET_AND_GREET);
+  const [showConfirmDialog, setShowConfirmDialog] = React.useState(false);
+  const [dog, setDog] = useState({});
 
-  const handleConfirm = () => {
-    // TODO: Handle confirmation with backend
-  };
+  useEffect(() => {
+    getDog(applicationState?.finalDog).then((res) => setDog(res.data.dog));
+  }, []);
+
+  const onConfirmMeetAndGreet = React.useCallback(
+    (content) => {
+      const reqBody = {
+        messages: {
+          stage4: content,
+        },
+        status: "Step 6: Foster in Home",
+      };
+      updateApplication(applicationId, reqBody).then((response) =>
+        setApplicationState(response.data.application)
+      );
+      updateDog(applicationState?.finalDog, { category: "in home" });
+    },
+    [applicationId]
+  );
 
   return (
     <ConfirmContainer>
@@ -117,8 +140,8 @@ function ConfirmMeetGreet() {
         </InfoWrapper>
         <AfterWrapper>
           <After
-            dogMet="Shelly"
-            dogHome="Skippy"
+            dogMet={dog.name}
+            dogHome={dog.name}
             supplies={[
               "Lorem Ipsum dolor sit amet, consectetur adipiscing elit.",
               "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -126,7 +149,14 @@ function ConfirmMeetGreet() {
           />
         </AfterWrapper>
       </ContentWrapper>
-      <ConfirmButton onClick={handleConfirm()}>Confirm</ConfirmButton>
+      <ConfirmButton onClick={() => setShowConfirmDialog(true)}>Confirm</ConfirmButton>
+      <PassFail
+        visible={showConfirmDialog}
+        setVisible={setShowConfirmDialog}
+        status="Confirm Meet & Greet"
+        initialMessage={FOSTER_EVALUATION_INITIAL_MESSAGES.FOSTER_IN_HOME.CONFIRM}
+        onConfirm={onConfirmMeetAndGreet}
+      />
     </ConfirmContainer>
   );
 }

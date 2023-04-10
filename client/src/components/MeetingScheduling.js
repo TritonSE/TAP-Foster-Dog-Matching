@@ -34,6 +34,8 @@ import MeetingSchedulingMeetTimesContainer from "./MeetingSchedulingMeetTimesCon
 import left from "../images/left.svg";
 import right from "../images/right.svg";
 import { AuthContext } from "../contexts/AuthContext";
+import ApplicationContext from "../contexts/ApplicationContext";
+
 import "../css/calendar.css";
 import "../css/meetingscheduling.css";
 
@@ -144,8 +146,6 @@ function timeEarlierThanNow(meetTime, selectedDate) {
   d1.setSeconds("00");
 
   const d2 = new Date();
-  console.log(d1.getTime() + " " + d2.getTime());
-  console.log(d1.toTimeString() + " vs " + d2.toTimeString());
   return d1.getTime() <= d2.getTime();
 }
 
@@ -154,6 +154,7 @@ function MeetingScheduling(props) {
   const [meetTimesContainer, setMeetTimesContainer] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const { currentUser } = React.useContext(AuthContext);
+  const { applicationState } = React.useContext(ApplicationContext);
 
   const weekday = [
     "Sunday,",
@@ -182,7 +183,7 @@ function MeetingScheduling(props) {
   const createNewInterview = (time) => {
     const reqBody = {
       user: currentUser._id,
-      ambassador: currentUser.ambassador,
+      ambassador: applicationState.ambassador,
       date: dateToHumanFormat(date),
       time: timeToHumanFormat(time),
       location: "[TBD]", // TODO: figure out later

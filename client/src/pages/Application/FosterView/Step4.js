@@ -11,6 +11,7 @@ import DogProfileCard from "../../../components/DogProfileCard";
 import DogCard from "../../../components/DogCard";
 import ApplicationContext from "../../../contexts/ApplicationContext";
 import { getDog } from "../../../services/dogs";
+import { updateApplication } from "../../../services/application";
 
 const searchingForMatchesContent = (
   <>
@@ -92,16 +93,21 @@ function Intro() {
 }
 
 function FosterMatches() {
-  const { applicationState } = React.useContext(ApplicationContext);
+  const { setApplicationState, applicationState } = React.useContext(ApplicationContext);
   const [matches, setMatches] = React.useState([]);
 
   React.useEffect(() => {
-    applicationState.selectedDogs.map((dogId) =>
-      getDog(dogId).then((response) => {
-        setMatches((prevState) => [...prevState, response.data.dog]);
-      })
-    );
-  }, [applicationState]);
+    const res = [];
+    Promise.all(
+      applicationState.selectedDogs.map((dogId) =>
+        getDog(dogId).then((response) => response.data.dog)
+      )
+    ).then((values) => {
+      values.map((val) => res.push(val));
+    });
+
+    setMatches(res);
+  }, []);
 
   const [curDog, setCurDog] = useState(null);
 
@@ -139,6 +145,7 @@ function FosterMatches() {
               closeModal={() => setCurDog(null)}
               prefArr={applicationState.preference}
               appId={applicationState._id}
+              setApplicationState={setApplicationState}
             />
           </FosterMatchesContentContainer>
         </FosterMatchesContainer>

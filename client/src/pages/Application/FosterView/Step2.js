@@ -20,7 +20,15 @@ function Intro() {
       textCard={
         <div>
           <p className="message-from-admin">
-            {applicationState.messages.stage1.replace(/\n/g, "\n\n")}
+            <div>
+              <p>Hello, {applicationState.firstName}</p>
+              <p>Congratulations!! Your foster application has been approved!</p>
+              <p>
+                Please click on Step 2 to schedule your initial interview with a TAP team member.
+              </p>
+              <p>Best,</p>
+              <p>The Animal Pad Team</p>
+            </div>
           </p>
           <img src={logo} alt="logo" />
         </div>
