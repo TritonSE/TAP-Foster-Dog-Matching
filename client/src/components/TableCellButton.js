@@ -19,7 +19,7 @@ import { Colors } from "./Theme";
 const TableCellButton = styled.div`
   background: ${(props) => props.color || Colors.lightBlue};
   border-radius: 5px;
-  width: 70px;
+  min-width: 70px;
   padding: 5px;
   display: flex;
   align-items: center;
