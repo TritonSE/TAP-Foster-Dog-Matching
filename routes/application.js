@@ -124,6 +124,21 @@ router.get("/pending", [requireAuthenticatedAdmin], (req, res, next) => {
     .catch((err) => next(err));
 });
 
+router.get("/all", [requireAuthenticatedAdmin], (req, res, next) => {
+  const options = { pending: false };
+  const adminRole = req.currentUser.role;
+  if (adminRole !== "management") {
+    options.ambassador = req.currentUser._id;
+  }
+  getApplications(options)
+    .then((applications) => {
+      res.status(200).json({
+        applications,
+      });
+    })
+    .catch((err) => next(err));
+});
+
 /**
  * GET /applications/:applicationId - Return an application by ID
  */

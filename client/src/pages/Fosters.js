@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Table from "../components/Table";
 import TableCellButton from "../components/TableCellButton";
@@ -8,66 +9,10 @@ import DefaultBody from "../components/DefaultBody";
 import { AuthContext } from "../contexts/AuthContext";
 import AmbassadorSelect from "../components/AmbassadorSelect";
 import CoordinatorSelect from "../components/CoordinatorSelect";
-import { getUser } from "../services/users";
+import { getPendingApplications } from "../services/application";
+import { getUsers } from "../services/users";
 import { getAdmin } from "../services/admins";
-import FosterProfile from "../components/FosterProfile";
 
-const DUMMY_REPEAT_FOSTERS_DATA = [
-  {
-    firstName: "Shelby",
-    createdAt: "04/16/21",
-    status: "Step 4: Foster Matching",
-    ambassador: "Shelby",
-    coordinator: "Kristin",
-    completedActionItems: false,
-  },
-  {
-    firstName: "Shelby",
-    createdAt: "04/16/21",
-    status: "Step 4: Foster Matching",
-    ambassador: "Shelby",
-    coordinator: "Jim",
-    completedActionItems: true,
-  },
-  {
-    firstName: "Shelby",
-    createdAt: "04/16/21",
-    status: "Step 4: Foster Matching",
-    ambassador: "Shelby",
-    coordinator: "Kristin",
-    completedActionItems: false,
-  },
-];
-
-const DUMMY_ALL_FOSTERS_DATA = [
-  {
-    firstName: "Shelby",
-    lastActive: "04/16/21",
-    accountActive: true,
-    currentlyFostering: "Yes",
-    pastFosters: 4,
-    ambassador: "Shelby",
-    coordinator: "Kristin",
-  },
-  {
-    firstName: "Shelby",
-    lastActive: "04/16/21",
-    accountActive: false,
-    currentlyFostering: "No",
-    pastFosters: 4,
-    ambassador: "Shelby",
-    coordinator: "Jim",
-  },
-  {
-    firstName: "Shelby",
-    lastActive: "04/16/21",
-    accountActive: true,
-    currentlyFostering: "Yes",
-    pastFosters: 3,
-    ambassador: "Shelby",
-    coordinator: "Kristin",
-  },
-];
 const Heading = styled.div`
   ${Typography.heading}
   margin-bottom: 30px;
@@ -108,23 +53,52 @@ function CompletedActionItemsCell({ completed }) {
     currentUser: { role },
   } = React.useContext(AuthContext);
 
+  const navigate = useNavigate();
+
   return (
     <SpacedCellContainer>
       {completed ? "Status updated" : "Waiting for update"}
       {role === "management" &&
         (completed ? (
-          <CellButton color={Colors.salmon}>Review</CellButton>
+          <CellButton color={Colors.salmon} onClick={() => navigate("/application")}>
+            Review
+          </CellButton>
         ) : (
-          <CellButton color={Colors.lightBlue}>View</CellButton>
+          <CellButton color={Colors.lightBlue} onClick={() => navigate("/application")}>
+            View
+          </CellButton>
         ))}
     </SpacedCellContainer>
   );
 }
 
 function RepeatFosters() {
-  const {
-    currentUser: { role },
-  } = React.useContext(AuthContext);
+  // const {
+  //   currentUser: { role },
+  // } = React.useContext(AuthContext);
+
+  const { currentUser, signedIn } = React.useContext(AuthContext);
+  const [repeatApplications, setRepeatApplications] = React.useState([]);
+
+  React.useEffect(() => {
+    getPendingApplications().then((applications) => {
+      setRepeatApplications(applications.data.applications);
+    });
+  }, [currentUser]);
+
+  const repeatFosters = repeatApplications.map((application) => {
+    const date = new Date(application.updatedAt);
+    application.updatedAt = date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
+    return {
+      firstName: application.firstName,
+      createdAt: application.updatedAt,
+      status: application.status,
+      ambassador: application.ambassador ? application.ambassador : "not yet assigned",
+      coordinator: application.coordinator ? application.coordinator : "not yet assigned",
+      completedActionItems: application.completedActionItems,
+      _id: application._id,
+    };
+  });
 
   const columns = React.useMemo(
     () => [
@@ -146,27 +120,23 @@ function RepeatFosters() {
     ],
     []
   );
-
   const rows = React.useMemo(
     () =>
-      // TODO: Fetch real data
-      DUMMY_REPEAT_FOSTERS_DATA.map((row) => ({
+      repeatFosters.map((row) => ({
         ...row,
         ambassador:
-          role === "ambassador" ? (
-            row.ambassador || "Not Assigned"
+          currentUser.role === "ambassador" ? (
+            row.ambassador.firstName || "Not Assigned"
           ) : (
-            // TODO: doesn't work until real data is used
             <AmbassadorSelect
               initialValue={row.ambassador && row.ambassador._id}
               applicationId={row._id}
             />
           ),
         coordinator:
-          role === "ambassador" ? (
-            row.coordinator || "Not Assigned"
+          currentUser.role === "ambassador" ? (
+            row.coordinator.firstName || "Not Assigned"
           ) : (
-            // TODO: doesn't work until real data is used
             <CoordinatorSelect
               initialValue={row.coordinator && row.coordinator._id}
               applicationId={row._id}
@@ -174,7 +144,7 @@ function RepeatFosters() {
           ),
         completedActionItems: <CompletedActionItemsCell completed={row.completedActionItems} />,
       })),
-    []
+    [repeatFosters]
   );
 
   return (
@@ -193,9 +163,7 @@ function AccountStatusCell({ active }) {
   return (
     <SpacedCellContainer>
       {active ? "Active" : "Inactive"}
-      <TableCellButton color={Colors.green} fontSize="12px">
-        View Profile
-      </TableCellButton>
+      <TableCellButton>View</TableCellButton>
       {!active && role === "management" && (
         <TableCellButton color={Colors.green}>Activate</TableCellButton>
       )}
@@ -204,47 +172,88 @@ function AccountStatusCell({ active }) {
 }
 
 function AllFosters() {
-  const [userData, setUserData] = useState([]);
-  const [loaded, setLoaded] = useState(false);
-  /*
-  useEffect(
-    () =>
-      getUsers().then((users) => {
-        console.log(users["data"]["users"]);
-        setUserData(
-          users["data"]["users"].map((user) => {
-            const newUser = { ...user };
-            // Set coordinator and ambassador names
-            if (user.coordinator && user.coordinator.firstName && user.coordinator.lastName) {
-              newUser.coordinator = user.coordinator.firstName + " " + user.coordinator.lastName;
-            }
-
-            if (user.ambassador && user.ambassador.firstName && user.ambassador.lastName)
-              newUser.ambassador = user.ambassador.firstName + " " + user.ambassador.lastName;
-
-            // Set currently fostering
-            if (user.currentlyFostering != null)
-              newUser.currentlyFostering = user.currentlyFostering ? "Yes" : "No";
-
-            // Format date
-            if (user.lastActive) {
-              const date = new Date(user.lastActive);
-              newUser.lastActive =
-                date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
-            }
-            return newUser;
-          })
-        );
-      }),
-    []
-  );
-  
-  */
-  useEffect(() => setLoaded(userData && userData.length > 0), [userData]);
-  const {
-    currentUser: { role },
-  } = React.useContext(AuthContext);
+  const { currentUser, signedIn } = React.useContext(AuthContext);
+  const [users, setUsers] = React.useState([]);
   const [fostersView, setFostersView] = React.useState("all");
+  const [ambassadorDone, setAmbassadorDone] = React.useState(false);
+  const [coordinatorDone, setCoordinatorDone] = React.useState(false);
+
+  React.useEffect(() => {
+    getUsers().then((data) => {
+      setUsers(data.data.applications);
+    });
+  }, [currentUser]);
+
+  React.useEffect(() => {
+    if (users.length > 0) {
+      const promises = users.map((user) =>
+        getAdmin(user.ambassador)
+          .then((admin) => {
+            if (admin.data.errors) {
+              user.ambassadorObj = { firstName: "N/A" };
+            } else {
+              user.ambassadorObj = admin.data.admin;
+            }
+          })
+          .catch(() => {
+            user.ambassadorObj = { firstName: "N/A" };
+          })
+      );
+      Promise.allSettled(promises).then(() => {
+        setAmbassadorDone(true);
+      });
+    }
+  }, [users]);
+
+  React.useEffect(() => {
+    if (users.length > 0) {
+      console.log(users);
+      const promises = users.map((user) =>
+        getAdmin(user.coordinator)
+          .then((admin) => {
+            if (admin.data.errors) {
+              user.coordinatorObj = { firstName: "N/A" };
+            } else {
+              user.coordinatorObj = admin.data.admin;
+            }
+          })
+          .catch(() => {
+            user.coordinatorObj = { firstName: "N/A" };
+          })
+      );
+
+      Promise.allSettled(promises).then(() => {
+        setCoordinatorDone(true);
+      });
+    }
+  }, [users]);
+
+  const [userRow, setUserRow] = React.useState([]);
+
+  React.useEffect(() => {
+    if (ambassadorDone && coordinatorDone) {
+      const row = users.map((user) => {
+        const date = new Date(user.lastActive);
+        user.lastActive = date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
+        return {
+          firstName: user.firstName,
+          lastActive: user.lastActive,
+          accountActive: user.accountActive,
+          currentlyFostering: user.currentlyFostering ? "Yes" : "No",
+          pastFosters: user.fosters.past.length,
+          ambassador:
+            typeof user.ambassadorObj !== "undefined" && user.ambassadorObj !== null
+              ? user.ambassadorObj.firstName
+              : "N/A",
+          coordinator: user.coordinatorObj ? user.coordinatorObj.firstName : "N/A",
+        };
+      });
+      setUserRow(row);
+    }
+  }, [ambassadorDone, coordinatorDone]);
+
+  const finished = userRow;
+
   const columns = React.useMemo(
     () => [
       {
@@ -275,7 +284,7 @@ function AllFosters() {
 
   const rows = React.useMemo(
     () =>
-      userData
+      userRow
         .filter((foster) => {
           switch (fostersView) {
             case "active":
@@ -293,14 +302,16 @@ function AllFosters() {
           coordinator: row.coordinator || "Not Assigned",
           accountActive: <AccountStatusCell active={row.accountActive} />,
         })),
-    [fostersView, loaded]
+    [fostersView, userRow]
   );
 
   return (
     <div>
       <HeadingContainer>
-        <Heading>{role === "management" ? "All Fosters" : "My Fosters Information"}</Heading>
-        {role === "management" && (
+        <Heading>
+          {currentUser.role === "management" ? "All Fosters" : "My Fosters Information"}
+        </Heading>
+        {currentUser.role === "management" && (
           <Select
             value={fostersView}
             onChange={setFostersView}
@@ -336,12 +347,6 @@ function Fosters() {
         {(role === "ambassador" || role === "management") && <RepeatFosters />}
         {(role === "management" || role === "coordinator") && <AllFosters />}
       </FostersContainer>
-      <FosterProfile
-        name="Amy C."
-        ambassadorName="Kristin"
-        coordinatorName="Andy L."
-        fosterHistory={[{ name: "Lolita" }, { name: "Flower" }]}
-      />
     </DefaultBody>
   );
 }

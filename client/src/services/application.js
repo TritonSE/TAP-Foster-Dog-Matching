@@ -49,3 +49,7 @@ export async function getApplication(applicationId) {
 export async function getPendingApplications() {
   return getData("application/pending");
 }
+
+export async function getAllApplications() {
+  return getData("application/all");
+}
