@@ -163,7 +163,7 @@ function AccountStatusCell({ active }) {
   return (
     <SpacedCellContainer>
       {active ? "Active" : "Inactive"}
-      <TableCellButton>View</TableCellButton>
+      <TableCellButton color="#8DC442">View Profile</TableCellButton>
       {!active && role === "management" && (
         <TableCellButton color={Colors.green}>Activate</TableCellButton>
       )}
@@ -186,19 +186,21 @@ function AllFosters() {
 
   React.useEffect(() => {
     if (users.length > 0) {
-      const promises = users.map((user) =>
-        getAdmin(user.ambassador)
-          .then((admin) => {
-            if (admin.data.errors) {
+      const promises = users
+        .filter((user) => user.ambassador != null)
+        .map((user) =>
+          getAdmin(user.ambassador._id)
+            .then((admin) => {
+              if (admin.data.errors) {
+                user.ambassadorObj = { firstName: "N/A" };
+              } else {
+                user.ambassadorObj = admin.data.admin;
+              }
+            })
+            .catch(() => {
               user.ambassadorObj = { firstName: "N/A" };
-            } else {
-              user.ambassadorObj = admin.data.admin;
-            }
-          })
-          .catch(() => {
-            user.ambassadorObj = { firstName: "N/A" };
-          })
-      );
+            })
+        );
       Promise.allSettled(promises).then(() => {
         setAmbassadorDone(true);
       });
@@ -206,21 +208,23 @@ function AllFosters() {
   }, [users]);
 
   React.useEffect(() => {
+    console.log(users);
     if (users.length > 0) {
-      console.log(users);
-      const promises = users.map((user) =>
-        getAdmin(user.coordinator)
-          .then((admin) => {
-            if (admin.data.errors) {
+      const promises = users
+        .filter((user) => user.coordinator != null)
+        .map((user) =>
+          getAdmin(user.coordinator._id)
+            .then((admin) => {
+              if (admin.data.errors) {
+                user.coordinatorObj = { firstName: "N/A" };
+              } else {
+                user.coordinatorObj = admin.data.admin;
+              }
+            })
+            .catch(() => {
               user.coordinatorObj = { firstName: "N/A" };
-            } else {
-              user.coordinatorObj = admin.data.admin;
-            }
-          })
-          .catch(() => {
-            user.coordinatorObj = { firstName: "N/A" };
-          })
-      );
+            })
+        );
 
       Promise.allSettled(promises).then(() => {
         setCoordinatorDone(true);
@@ -238,9 +242,9 @@ function AllFosters() {
         return {
           firstName: user.firstName,
           lastActive: user.lastActive,
-          accountActive: user.accountActive,
+          accountActive: user.accountStatus === "active",
           currentlyFostering: user.currentlyFostering ? "Yes" : "No",
-          pastFosters: user.fosters.past.length,
+          pastFosters: user.pastFosters ?? 0,
           ambassador:
             typeof user.ambassadorObj !== "undefined" && user.ambassadorObj !== null
               ? user.ambassadorObj.firstName
@@ -251,8 +255,6 @@ function AllFosters() {
       setUserRow(row);
     }
   }, [ambassadorDone, coordinatorDone]);
-
-  const finished = userRow;
 
   const columns = React.useMemo(
     () => [
