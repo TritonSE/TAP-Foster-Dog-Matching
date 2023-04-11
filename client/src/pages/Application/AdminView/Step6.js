@@ -9,6 +9,8 @@ import DogProfileSummary from "../../../components/DogProfileSummary";
 import { getDog } from "../../../services/dogs";
 import ApplicationContext from "../../../contexts/ApplicationContext";
 import FosterProfile from "../../../components/FosterProfile";
+import { getAdmin } from "../../../services/admins";
+import { getUser } from "../../../services/users";
 
 const InternalNotes = styled.div`
   width: 100%;
@@ -32,20 +34,37 @@ const Column = styled.div`
 
 function FosterAndDogInformation() {
   const { applicationState } = React.useContext(ApplicationContext);
+  const [fosterName, setFosterName] = useState("Foster name");
+  const [ambassadorName, setAmbassadorName] = useState("Ambassador name");
+  const [coordinatorName, setCoordinatorName] = useState("Coordinator name");
+  const [internalNotes, setInternalNotes] = useState("");
+  const [fosterHistory, setFosterHistory] = useState([]);
 
   const [dog, setDog] = useState();
+
   useEffect(() => {
     getDog(applicationState?.finalDog).then((res) => setDog(res.data.dog));
+    setFosterName(applicationState.firstName + " " + applicationState.lastName);
+    getAdmin(applicationState.ambassador).then((data) =>
+      setAmbassadorName(data.data.admin.firstName + " " + data.data.admin.lastName)
+    );
+    getAdmin(applicationState.coordinator).then((data) =>
+      setCoordinatorName(data.data.admin.firstName + " " + data.data.admin.lastName)
+    );
+    getUser(applicationState.user).then((data) => {
+      if (data.ok && data.data.user.internalNotes != null)
+        setInternalNotes(data.data.user.internalNotes);
+    });
   }, []);
 
   return (
     <Column>
       <FosterProfile
-        name="Amy C."
-        ambassadorName="Kristin"
-        coordinatorName="Andy L."
-        fosterHistory={[{ name: "Lolita" }, { name: "Flower" }]}
-        internalNotes="Lorem ipsum internal notes here"
+        name={fosterName}
+        ambassadorName={ambassadorName}
+        coordinatorName={coordinatorName}
+        fosterHistory={fosterHistory}
+        internalNotes={internalNotes}
       />
       <Meetings
         title="Dog Profile"
