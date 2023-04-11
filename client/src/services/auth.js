@@ -10,7 +10,6 @@
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import FIREBASE_AUTH_ERROR_MESSAGES from "../constants/FIREBASE_AUTH_ERROR_MESSAGES";
 import { auth } from "../utils/firebase-config";
-import { sendData } from "./data";
 
 /**
  * Sign a user in
