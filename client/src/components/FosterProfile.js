@@ -21,6 +21,7 @@ const ContentBackground = styled.div`
   background-color: white;
   border-radius: 13.85px;
   width: min-content;
+  padding: 12px;
 `;
 const Title = styled.div`
   color: white;
@@ -55,14 +56,14 @@ function FosterProfile(props) {
           <br />
           {props.coordinatorName ? "Coordinator: " + props.coordinatorName : ""}
         </p>
-        {props.internalNotes && (
+        {props.internalNotes && props.internalNotes !== "" && (
           <>
             <NotesTitle>Internal Notes:</NotesTitle>
             <br />
             {props.internalNotes}
           </>
         )}
-        {props.fosterHistory && (
+        {props.fosterHistory && props.fosterHistory.length !== 0 && (
           <ContentBox>
             <CardTitle>Foster History:</CardTitle>
 
