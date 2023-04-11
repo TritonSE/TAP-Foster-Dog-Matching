@@ -36,18 +36,26 @@ function FosterAndDogInformation() {
   const { applicationState } = React.useContext(ApplicationContext);
   const [fosterName, setFosterName] = useState("Foster name");
   const [ambassadorName, setAmbassadorName] = useState("Ambassador name");
+  const [ambassadorPhone, setAmbassadorPhone] = useState("Ambassador name");
+  const [ambassadorEmail, setAmbassadorEmail] = useState("Ambassador name");
   const [coordinatorName, setCoordinatorName] = useState("Coordinator name");
   const [internalNotes, setInternalNotes] = useState("");
   const [fosterHistory, setFosterHistory] = useState([]);
+  const [dogInternalNotes, setDogInternalNotes] = useState("");
 
   const [dog, setDog] = useState();
+  console.log(applicationState);
 
   useEffect(() => {
     getDog(applicationState?.finalDog).then((res) => setDog(res.data.dog));
     setFosterName(applicationState.firstName + " " + applicationState.lastName);
-    getAdmin(applicationState.ambassador).then((data) =>
-      setAmbassadorName(data.data.admin.firstName + " " + data.data.admin.lastName)
-    );
+    getAdmin(applicationState.ambassador).then((data) => {
+      const adminObj = data.data.admin;
+      setAmbassadorName(adminObj.firstName + " " + adminObj.lastName);
+      setAmbassadorPhone(adminObj.phone);
+      setAmbassadorEmail(adminObj.email);
+      console.log(adminObj);
+    });
     getAdmin(applicationState.coordinator).then((data) =>
       setCoordinatorName(data.data.admin.firstName + " " + data.data.admin.lastName)
     );
@@ -56,6 +64,13 @@ function FosterAndDogInformation() {
         setInternalNotes(data.data.user.internalNotes);
     });
   }, []);
+
+  useEffect(() => {
+    console.log("dog", dog);
+    if (dog != null && dog.internalNotes != null) {
+      setDogInternalNotes(dog.internalNotes);
+    }
+  }, [dog]);
 
   return (
     <Column>
@@ -73,12 +88,12 @@ function FosterAndDogInformation() {
           <Column>
             <StatusUpdate
               title="Ambassador Contact Info"
-              ambassador="Dhanush"
-              phone="123-456-7890"
-              email="test@tap.com"
+              ambassador={ambassadorName}
+              phone={ambassadorPhone}
+              email={ambassadorEmail}
               status="Not Matched"
             />
-            <InternalNotes>Internal Notes:</InternalNotes>
+            <InternalNotes>Internal Notes: {dogInternalNotes}</InternalNotes>
           </Column>
         }
       />
