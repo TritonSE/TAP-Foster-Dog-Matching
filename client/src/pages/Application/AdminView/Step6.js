@@ -91,7 +91,6 @@ function FosterAndDogInformation() {
               ambassador={ambassadorName}
               phone={ambassadorPhone}
               email={ambassadorEmail}
-              status="Not Matched"
             />
             <InternalNotes>Internal Notes: {dogInternalNotes}</InternalNotes>
           </Column>
