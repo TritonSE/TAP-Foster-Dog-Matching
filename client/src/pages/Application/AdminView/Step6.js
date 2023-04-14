@@ -8,6 +8,9 @@ import Meetings from "../../../components/Meeting";
 import DogProfileSummary from "../../../components/DogProfileSummary";
 import { getDog } from "../../../services/dogs";
 import ApplicationContext from "../../../contexts/ApplicationContext";
+import FosterProfile from "../../../components/FosterProfile";
+import { getAdmin } from "../../../services/admins";
+import { getUser } from "../../../services/users";
 
 const InternalNotes = styled.div`
   width: 100%;
@@ -31,17 +34,52 @@ const Column = styled.div`
 
 function FosterAndDogInformation() {
   const { applicationState } = React.useContext(ApplicationContext);
+  const [fosterName, setFosterName] = useState("Foster name");
+  const [ambassadorName, setAmbassadorName] = useState("Ambassador name");
+  const [ambassadorPhone, setAmbassadorPhone] = useState("Ambassador name");
+  const [ambassadorEmail, setAmbassadorEmail] = useState("Ambassador name");
+  const [coordinatorName, setCoordinatorName] = useState("Coordinator name");
+  const [internalNotes, setInternalNotes] = useState("");
+  const [fosterHistory, setFosterHistory] = useState([]);
+  const [dogInternalNotes, setDogInternalNotes] = useState("");
 
   const [dog, setDog] = useState();
+  console.log(applicationState);
+
   useEffect(() => {
     getDog(applicationState?.finalDog).then((res) => setDog(res.data.dog));
+    setFosterName(applicationState.firstName + " " + applicationState.lastName);
+    getAdmin(applicationState.ambassador).then((data) => {
+      const adminObj = data.data.admin;
+      setAmbassadorName(adminObj.firstName + " " + adminObj.lastName);
+      setAmbassadorPhone(adminObj.phone);
+      setAmbassadorEmail(adminObj.email);
+      console.log(adminObj);
+    });
+    getAdmin(applicationState.coordinator).then((data) =>
+      setCoordinatorName(data.data.admin.firstName + " " + data.data.admin.lastName)
+    );
+    getUser(applicationState.user).then((data) => {
+      if (data.ok && data.data.user.internalNotes != null)
+        setInternalNotes(data.data.user.internalNotes);
+    });
   }, []);
+
+  useEffect(() => {
+    console.log("dog", dog);
+    if (dog != null && dog.internalNotes != null) {
+      setDogInternalNotes(dog.internalNotes);
+    }
+  }, [dog]);
 
   return (
     <Column>
-      <Meetings
-        title="Foster  Profile"
-        // TODO
+      <FosterProfile
+        name={fosterName}
+        ambassadorName={ambassadorName}
+        coordinatorName={coordinatorName}
+        fosterHistory={fosterHistory}
+        internalNotes={internalNotes}
       />
       <Meetings
         title="Dog Profile"
@@ -50,12 +88,11 @@ function FosterAndDogInformation() {
           <Column>
             <StatusUpdate
               title="Ambassador Contact Info"
-              ambassador="Dhanush"
-              phone="123-456-7890"
-              email="test@tap.com"
-              status="Not Matched"
+              ambassador={ambassadorName}
+              phone={ambassadorPhone}
+              email={ambassadorEmail}
             />
-            <InternalNotes>Internal Notes:</InternalNotes>
+            <InternalNotes>Internal Notes: {dogInternalNotes}</InternalNotes>
           </Column>
         }
       />

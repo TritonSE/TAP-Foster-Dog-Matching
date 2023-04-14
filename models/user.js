@@ -54,5 +54,8 @@ module.exports = mongoose.model(
       type: String,
       required: true,
     },
+    internalNotes: {
+      type: String,
+    },
   })
 );
