@@ -89,7 +89,7 @@ function Application({ id }) {
   const [currentStep, setCurrentStep] = React.useState(0);
   const [currentSubStep, setCurrentSubStep] = React.useState("content");
   const [applicationView, setApplicationView] = React.useState(); // Note: change this to 'foster' or 'admin' to test different views
-  const [applicationId, setApplicationId] = React.useState(id); // || "629846dd3f626453c2ba9de6"); // TODO: remove hardcoded applicationId
+  const [applicationId, setApplicationId] = React.useState(id);
   const [applicationState, setApplicationState] = React.useState();
   const [loaded, setLoaded] = React.useState(false);
 
@@ -182,8 +182,7 @@ function Application({ id }) {
       {loaded && (
         <ApplicationContext.Provider value={applicationData}>
           <ApplicationContainer>
-            {/* TODO: fix path for admins */}
-            <ExitButton onClick={() => navigate("/dashboard")}>Exit</ExitButton>
+            <ExitButton onClick={() => navigate("/")}>Exit</ExitButton>
             <ApplicationProgress />
             <ApplicationContentContainer>
               {applicationState && applicationState.status === "rejected" ? (
