@@ -1,5 +1,9 @@
 import React from "react";
 import "../css/status.css";
+import styled from "styled-components";
+import { AuthContext } from "../contexts/AuthContext";
+import Input from "./Input";
+import { updateInterview } from "../services/interviews";
 
 /**
  * This component is to be used in conjunction with the meeting component to show
@@ -33,7 +37,47 @@ function StatusItem({ label, content, noLine, meetAndGreetView }) {
   );
 }
 
+const LocationInputField = styled(Input)`
+  font-size: inherit;
+`;
+
+const LocationInputMessage = styled.div`
+  font-size: 12px;
+`;
+
+function LocationInput({ interviewId, initialValue }) {
+  const PROMPT_MESSAGE = "Press enter to save.";
+  const SAVED_MESSAGE = "Saved!";
+  const [location, setLocation] = React.useState(initialValue);
+  const [message, setMessage] = React.useState(PROMPT_MESSAGE);
+
+  const handleKeyDown = React.useCallback(
+    (event) => {
+      if (event.key === "Enter") {
+        updateInterview(interviewId, { location }).then((response) => {
+          if (response.ok) {
+            setMessage(SAVED_MESSAGE);
+            setTimeout(() => setMessage(PROMPT_MESSAGE), 2000);
+          } else {
+            setMessage("Error saving.");
+          }
+        });
+      }
+    },
+    [location]
+  );
+
+  return (
+    <div>
+      <LocationInputField value={location} onChange={setLocation} onKeyDown={handleKeyDown} />
+      <LocationInputMessage>{message}</LocationInputMessage>
+    </div>
+  );
+}
+
 function StatusUpdate(props) {
+  const { currentUser } = React.useContext(AuthContext);
+
   return (
     <div className="status-card">
       <div className="card-title">
@@ -77,7 +121,13 @@ function StatusUpdate(props) {
         {props.location && (
           <StatusItem
             label="Location:"
-            content={props.location}
+            content={
+              currentUser.type === "admin" ? (
+                <LocationInput interviewId={props._id} initialValue={props.location} />
+              ) : (
+                props.location
+              )
+            }
             meetAndGreetView={props.meetAndGreetView}
             noLine
           />
