@@ -103,7 +103,6 @@ function ApplicationProgress() {
     React.useContext(ApplicationContext);
   const { isTablet } = useResponsive();
 
-  // TODO: Block onClick if step is not unlocked yet
   const handleStepClicked = React.useCallback(
     (index) => {
       if (applicationState.status !== "rejected") {
