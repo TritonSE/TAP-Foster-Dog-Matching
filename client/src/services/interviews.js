@@ -41,3 +41,15 @@ export async function getInterviews(interviewDate) {
 export async function createInterview(newInterview) {
   return sendData("interviews", "POST", newInterview);
 }
+
+/**
+ * Update an Interview
+ *
+ * @export
+ * @param {string} interviewId - Interview id to update
+ * @param {object} updatedInterview - updated Interview data
+ * @return {object} - updated Interview (as a makeRequest response. see data.js)
+ */
+export async function updateInterview(interviewId, updatedInterview) {
+  return sendData(`interviews/${interviewId}`, "PUT", updatedInterview);
+}

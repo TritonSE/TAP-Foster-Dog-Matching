@@ -1,6 +1,11 @@
 const express = require("express");
 const { body } = require("express-validator");
-const { getInterview, getInterviews, createInterview } = require("../services/interviews");
+const {
+  getInterview,
+  getInterviews,
+  createInterview,
+  updateInterview,
+} = require("../services/interviews");
 const { validateRequest } = require("../middleware/validation");
 const {
   requireAuthenticatedUser,
@@ -72,5 +77,27 @@ router.post("/", [...validators, validateRequest, requireAuthenticatedUser], (re
     })
     .catch((err) => next(err));
 });
+
+/**
+ * PUT /interviews/:interviewId - Update an interview
+ */
+router.put(
+  "/:interviewId",
+  [...validators.map((validator) => validator.optional()), validateRequest], // all fields for update are optional
+  (req, res, next) => {
+    updateInterview(req.params.interviewId, req.body)
+      .then((interview) => {
+        if (interview) {
+          return res.status(200).json({
+            interview,
+          });
+        }
+        return res.status(400).json({
+          errors: [{ message: `Something went wrong, interview could not be updated` }],
+        });
+      })
+      .catch((err) => next(err));
+  }
+);
 
 module.exports = router;

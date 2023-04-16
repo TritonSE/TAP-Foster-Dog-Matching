@@ -182,6 +182,7 @@ function Application({ id }) {
       {loaded && (
         <ApplicationContext.Provider value={applicationData}>
           <ApplicationContainer>
+            {/* TODO: fix path for admins */}
             <ExitButton onClick={() => navigate("/dashboard")}>Exit</ExitButton>
             <ApplicationProgress />
             <ApplicationContentContainer>

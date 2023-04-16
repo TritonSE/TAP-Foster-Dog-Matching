@@ -22,8 +22,22 @@ async function createInterview(rawInterview) {
   return interview;
 }
 
+/**
+ * Update an interview
+ * @param interviewId - id of interview to update
+ * @param updatedInterview - updated interview
+ */
+async function updateInterview(interviewId, updatedInterview) {
+  const updated = await Interview.findByIdAndUpdate(interviewId, updatedInterview, {
+    new: true,
+  }).exec();
+
+  return updated;
+}
+
 module.exports = {
   getInterview,
   getInterviews,
   createInterview,
+  updateInterview,
 };
