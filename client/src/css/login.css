@@ -96,6 +96,7 @@
 
 .error-message {
   color: red;
+  margin-top: 10px;
   position: absolute;
   bottom: 3%;
   text-align: center;
