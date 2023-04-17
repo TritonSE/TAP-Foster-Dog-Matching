@@ -36,8 +36,8 @@ function FosterAndDogInformation() {
   const { applicationState } = React.useContext(ApplicationContext);
   const [fosterName, setFosterName] = useState("Foster name");
   const [ambassadorName, setAmbassadorName] = useState("Ambassador name");
-  const [ambassadorPhone, setAmbassadorPhone] = useState("Ambassador name");
-  const [ambassadorEmail, setAmbassadorEmail] = useState("Ambassador name");
+  const [ambassadorPhone, setAmbassadorPhone] = useState("Ambassador phone");
+  const [ambassadorEmail, setAmbassadorEmail] = useState("Ambassador email");
   const [coordinatorName, setCoordinatorName] = useState("Coordinator name");
   const [internalNotes, setInternalNotes] = useState("");
   const [fosterHistory, setFosterHistory] = useState([]);

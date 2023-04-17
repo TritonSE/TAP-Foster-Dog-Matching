@@ -108,8 +108,10 @@ function Table({ columns, rows }) {
                     Object.values(row).filter((val) => typeof val !== "object")
                   )}-${index}`}
                 >
-                  {columns.map((column) => (
-                    <TableCell key={row[column.accessor]}>{row[column.accessor]}</TableCell>
+                  {columns.map((column, columnIndex) => (
+                    <TableCell key={`${row[column.accessor]} - ${columnIndex}`}>
+                      {row[column.accessor]}
+                    </TableCell>
                   ))}
                 </TableRow>
               </>

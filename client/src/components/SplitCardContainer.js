@@ -14,8 +14,10 @@ import React from "react";
 import styled from "styled-components";
 
 export const Background = styled.div`
+  max-width: 100%;
   width: 100%;
   border-radius: 35px;
+  max-width: 100%;
 `;
 
 export const GridContainer = styled.div`

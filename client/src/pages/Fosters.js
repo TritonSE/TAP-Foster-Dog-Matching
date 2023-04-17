@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Table from "../components/Table";
@@ -12,6 +12,9 @@ import CoordinatorSelect from "../components/CoordinatorSelect";
 import { getPendingApplications } from "../services/application";
 import { getUsers } from "../services/users";
 import { getAdmin } from "../services/admins";
+import FosterProfile from "../components/FosterProfile";
+import Portal from "../components/Portal";
+import X from "../images/whiteX.png";
 
 const Heading = styled.div`
   ${Typography.heading}
@@ -47,6 +50,37 @@ const SpacedCellContainer = styled.div`
   justify-content: space-between;
   gap: 20px;
 `;
+const XButton = styled.img`
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  width: 25px;
+  height: 25px;
+`;
+
+function ProfilePopupButton({ FosterData }) {
+  const [ProfilePopupActive, setProfilePopupActive] = useState(false);
+
+  return (
+    <>
+      {ProfilePopupActive && (
+        <div>
+          <Portal>
+            <XButton src={X} onClick={() => setProfilePopupActive(false)} />
+            <FosterProfile
+              name={FosterData.firstName + " " + FosterData.lastName}
+              ambassadorName={FosterData.ambassador}
+              coordinatorName={FosterData.coordinator}
+            />
+          </Portal>
+        </div>
+      )}
+      <TableCellButton onClick={() => setProfilePopupActive(true)} color="#8DC442">
+        View Profile
+      </TableCellButton>
+    </>
+  );
+}
 
 function CompletedActionItemsCell({ completed }) {
   const {
@@ -73,10 +107,6 @@ function CompletedActionItemsCell({ completed }) {
 }
 
 function RepeatFosters() {
-  // const {
-  //   currentUser: { role },
-  // } = React.useContext(AuthContext);
-
   const { currentUser, signedIn } = React.useContext(AuthContext);
   const [repeatApplications, setRepeatApplications] = React.useState([]);
 
@@ -155,15 +185,15 @@ function RepeatFosters() {
   );
 }
 
-function AccountStatusCell({ active }) {
+function AccountStatusCell({ active, data }) {
   const {
     currentUser: { role },
   } = React.useContext(AuthContext);
-
+  console.log(data);
   return (
     <SpacedCellContainer>
       {active ? "Active" : "Inactive"}
-      <TableCellButton>View</TableCellButton>
+      <ProfilePopupButton FosterData={data} />
       {!active && role === "management" && (
         <TableCellButton color={Colors.green}>Activate</TableCellButton>
       )}
@@ -186,19 +216,21 @@ function AllFosters() {
 
   React.useEffect(() => {
     if (users.length > 0) {
-      const promises = users.map((user) =>
-        getAdmin(user.ambassador)
-          .then((admin) => {
-            if (admin.data.errors) {
+      const promises = users
+        .filter((user) => user.ambassador != null)
+        .map((user) =>
+          getAdmin(user.ambassador._id)
+            .then((admin) => {
+              if (admin.data.errors) {
+                user.ambassadorObj = { firstName: "N/A" };
+              } else {
+                user.ambassadorObj = admin.data.admin;
+              }
+            })
+            .catch(() => {
               user.ambassadorObj = { firstName: "N/A" };
-            } else {
-              user.ambassadorObj = admin.data.admin;
-            }
-          })
-          .catch(() => {
-            user.ambassadorObj = { firstName: "N/A" };
-          })
-      );
+            })
+        );
       Promise.allSettled(promises).then(() => {
         setAmbassadorDone(true);
       });
@@ -206,21 +238,23 @@ function AllFosters() {
   }, [users]);
 
   React.useEffect(() => {
+    console.log(users);
     if (users.length > 0) {
-      console.log(users);
-      const promises = users.map((user) =>
-        getAdmin(user.coordinator)
-          .then((admin) => {
-            if (admin.data.errors) {
+      const promises = users
+        .filter((user) => user.coordinator != null)
+        .map((user) =>
+          getAdmin(user.coordinator._id)
+            .then((admin) => {
+              if (admin.data.errors) {
+                user.coordinatorObj = { firstName: "N/A" };
+              } else {
+                user.coordinatorObj = admin.data.admin;
+              }
+            })
+            .catch(() => {
               user.coordinatorObj = { firstName: "N/A" };
-            } else {
-              user.coordinatorObj = admin.data.admin;
-            }
-          })
-          .catch(() => {
-            user.coordinatorObj = { firstName: "N/A" };
-          })
-      );
+            })
+        );
 
       Promise.allSettled(promises).then(() => {
         setCoordinatorDone(true);
@@ -238,9 +272,9 @@ function AllFosters() {
         return {
           firstName: user.firstName,
           lastActive: user.lastActive,
-          accountActive: user.accountActive,
+          accountActive: user.accountStatus === "active",
           currentlyFostering: user.currentlyFostering ? "Yes" : "No",
-          pastFosters: user.fosters.past.length,
+          pastFosters: user.pastFosters ?? 0,
           ambassador:
             typeof user.ambassadorObj !== "undefined" && user.ambassadorObj !== null
               ? user.ambassadorObj.firstName
@@ -251,8 +285,6 @@ function AllFosters() {
       setUserRow(row);
     }
   }, [ambassadorDone, coordinatorDone]);
-
-  const finished = userRow;
 
   const columns = React.useMemo(
     () => [
@@ -300,7 +332,7 @@ function AllFosters() {
           ...row,
           ambassador: row.ambassador || "Not Assigned",
           coordinator: row.coordinator || "Not Assigned",
-          accountActive: <AccountStatusCell active={row.accountActive} />,
+          accountActive: <AccountStatusCell active={row.accountActive} data={row} />,
         })),
     [fostersView, userRow]
   );
