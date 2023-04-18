@@ -79,10 +79,7 @@ function FosterApplicationView({ setView, setApplicationData, applicationData, a
   };
 
   const onError = (args) => {
-    // TODO: implement onError
-    console.log("ERROR");
-    console.log(args);
-    setView("agreement"); // uncomment this to see the foster agreement w/o filling out the form
+    // setView("agreement"); // uncomment this to see the foster agreement w/o filling out the form
   };
   return (
     <PageSections sections={applicationSections}>

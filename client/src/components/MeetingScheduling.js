@@ -186,7 +186,7 @@ function MeetingScheduling(props) {
       ambassador: applicationState.ambassador,
       date: dateToHumanFormat(date),
       time: timeToHumanFormat(time),
-      location: "[TBD]", // TODO: figure out later
+      location: "[TBD]",
       internalNotes: "",
       stage: props.stage,
     };
