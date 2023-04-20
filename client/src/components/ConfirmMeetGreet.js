@@ -131,13 +131,7 @@ function ConfirmMeetGreet() {
       <ComponentHeader>Meet & Greet Information</ComponentHeader>
       <ContentWrapper>
         <InfoWrapper>
-          <StatusUpdate
-            title="Meet and Greet Info"
-            {...interview}
-            location=""
-            tapFacilityLocation={interview && interview.location}
-            meetAndGreetView
-          />
+          <StatusUpdate title="Meet and Greet Info" {...interview} meetAndGreetView />
         </InfoWrapper>
         <AfterWrapper>
           <After
