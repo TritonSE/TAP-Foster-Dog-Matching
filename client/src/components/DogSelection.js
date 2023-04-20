@@ -94,7 +94,7 @@ function DogSummaryWrap({ dog, active, onClick }) {
 }
 
 function DogSelection() {
-  const { applicationId, setApplicationState, applicationState } =
+  const { applicationId, setApplicationState, applicationState, goToStep } =
     React.useContext(ApplicationContext);
   const [showConfirmDialog, setShowConfirmDialog] = React.useState(false);
   const [current, setCurrent] = useState(-1);
@@ -123,9 +123,10 @@ function DogSelection() {
         finalDog: applicationState.selectedDogs[current],
         status: "Step 5: Meet & Greet",
       };
-      updateApplication(applicationId, reqBody).then((response) =>
-        setApplicationState(response.data.application)
-      );
+      updateApplication(applicationId, reqBody).then((response) => {
+        setApplicationState(response.data.application);
+        goToStep((step) => step + 1);
+      });
     },
     [applicationId, current]
   );

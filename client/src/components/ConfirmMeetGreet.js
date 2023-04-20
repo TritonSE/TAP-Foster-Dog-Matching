@@ -99,7 +99,7 @@ const ConfirmButton = styled.button`
 `;
 
 function ConfirmMeetGreet() {
-  const { applicationState, setApplicationState, applicationId } =
+  const { applicationState, setApplicationState, applicationId, goToStep } =
     React.useContext(ApplicationContext);
   const { interview } = useInterview(applicationState.user, APPLICATION_STAGES.MEET_AND_GREET);
   const [showConfirmDialog, setShowConfirmDialog] = React.useState(false);
@@ -117,9 +117,10 @@ function ConfirmMeetGreet() {
         },
         status: "Step 6: Foster in Home",
       };
-      updateApplication(applicationId, reqBody).then((response) =>
-        setApplicationState(response.data.application)
-      );
+      updateApplication(applicationId, reqBody).then((response) => {
+        setApplicationState(response.data.application);
+        goToStep((step) => step + 1);
+      });
       updateDog(applicationState?.finalDog, { category: "in home" });
     },
     [applicationId]
