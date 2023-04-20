@@ -8,6 +8,8 @@ import { getDogs } from "../services/dogs";
 import ApplicationContext from "../contexts/ApplicationContext";
 import { DataContext } from "../contexts/DataContext";
 import FosterProfile from "./FosterProfile";
+import Input from "./Input";
+import { updateApplication } from "../services/application";
 
 /**
  * This component is used as the fourth step of the
@@ -72,20 +74,6 @@ const TextBoxTitle = styled.span`
   line-height: 36px;
   font-size: 30px;
 `;
-const GeneralNotes = styled.span`
-  font-weight: 700;
-  font-size: 25px;
-  line-height: 30px;
-  text-align: left;
-`;
-
-const InternalNotes = styled.div`
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 30px;
-  text-align: left;
-  padding-top: 12px;
-`;
 const EditButton = styled.button`
   position: absolute;
   top: ${(props) => (props.topOffset ? props.topOffset : "0")};
@@ -103,12 +91,23 @@ const EditButtonParent = styled.div`
   position: relative;
 `;
 
-function FloatingEditButton(props) {
+function FloatingSaveButton(props) {
+  const [buttonText, setButtonText] = useState("Save");
+
+  const handleClick = useCallback(() => {
+    props.onClick().then(() => {
+      setButtonText("Saved!");
+      setTimeout(() => {
+        setButtonText("Save");
+      }, 2000);
+    });
+  }, [props.onClick]);
+
   return (
-    <EditButtonParent>
+    <EditButtonParent onClick={handleClick}>
       <EditButton topOffset={props.topOffset} leftOffset={props.leftOffset}>
-        <img src={PenIcon} alt="edit icon" />
-        <span>Edit</span>
+        <img src={PenIcon} alt="save icon" />
+        <span>{buttonText}</span>
       </EditButton>
     </EditButtonParent>
   );
@@ -234,6 +233,7 @@ function DogGrid(props) {
         return (
           <DogCard
             dogName={dog?.name}
+            // TODO: replace image hosting is done
             dogImage={GridImage3}
             updateCard={tryCheckDogCard}
             id={dog?._id}
@@ -256,10 +256,11 @@ const SubmitButton = styled.button`
 `;
 
 function FosterMatchingAdmin({ handleConfirm, selectedDogs }) {
-  const { applicationState } = React.useContext(ApplicationContext);
+  const { applicationId, applicationState } = React.useContext(ApplicationContext);
   const { allAmbassadors, allCoordinators } = React.useContext(DataContext);
   const [ambassador, setAmbassador] = React.useState({});
   const [coordinator, setCoordinator] = React.useState({});
+  const [internalNotes, setInternalNotes] = React.useState("");
 
   React.useEffect(() => {
     if (allAmbassadors)
@@ -267,6 +268,14 @@ function FosterMatchingAdmin({ handleConfirm, selectedDogs }) {
     if (allCoordinators)
       setCoordinator(allCoordinators.find((a) => a._id === applicationState.coordinator));
   }, [allCoordinators, allAmbassadors]);
+
+  React.useState(() => {
+    if (applicationState) {
+      setInternalNotes(applicationState.internalNotes);
+    }
+  }, [applicationState]);
+
+  const saveInternalNotes = () => updateApplication(applicationId, { internalNotes });
 
   return (
     <OuterContainer>
@@ -280,15 +289,14 @@ function FosterMatchingAdmin({ handleConfirm, selectedDogs }) {
               coordinatorName={coordinator.firstName + " " + coordinator.lastName}
             />
             <TextBox>
-              <TextBoxTitle>Internal Foster Notes</TextBoxTitle>
+              <TextBoxTitle>Internal Notes</TextBoxTitle>
               <TextLeftAlign>
-                <br />
-                <GeneralNotes>General Notes:</GeneralNotes>
-                <FloatingEditButton topOffset="-28px" leftOffset="calc(97% - 45px)" />
-                <br />
-                <InternalNotes>
-                  Looking for a medium size to large size dog. Does have other dogs at home...
-                </InternalNotes>
+                <FloatingSaveButton
+                  topOffset="-28px"
+                  leftOffset="calc(97% - 80px)"
+                  onClick={saveInternalNotes}
+                />
+                <Input value={internalNotes} onChange={setInternalNotes} numLines={10} />
               </TextLeftAlign>
             </TextBox>
           </FosterProfileContainer>

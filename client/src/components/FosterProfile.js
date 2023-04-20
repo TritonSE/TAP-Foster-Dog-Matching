@@ -14,7 +14,7 @@ const Background = styled.div`
   border-radius: 35px;
   text-align: center;
   flex: 1;
-  padding: 30px;
+  padding: 20px;
 `;
 const ContentBackground = styled.div`
   background-color: white;

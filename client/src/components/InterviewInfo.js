@@ -1,16 +1,16 @@
-import { useForm } from "react-hook-form";
 import React from "react";
-import { ControlledInput } from "./Input";
+import Input from "./Input";
 import PassFail from "./PassFail";
 import "../css/interviewInfo.css";
+import { updateApplication } from "../services/application";
+import ApplicationContext from "../contexts/ApplicationContext";
 
 function InterviewInfo(props) {
+  const { applicationId, applicationState } = React.useContext(ApplicationContext);
+  const [internalNotes, setInternalNotes] = React.useState("");
   const [showPassDialog, setShowPassDialog] = React.useState(false);
   const [showContingentDialog, setShowContingentDialog] = React.useState(false);
   const [showRejectDialog, setShowRejectDialog] = React.useState(false);
-  const { control } = useForm({
-    reValidateMode: "onChange",
-  });
 
   const onPass = () => {
     setShowPassDialog(true);
@@ -24,16 +24,29 @@ function InterviewInfo(props) {
     setShowContingentDialog(true);
   };
 
+  React.useState(() => {
+    if (applicationState) {
+      setInternalNotes(applicationState.internalNotes);
+    }
+  }, [applicationState]);
+
+  const handleOnConfirm = (callback) => () => {
+    // save internal notes
+    updateApplication(applicationId, { internalNotes }).then(() => {
+      callback();
+    });
+  };
+
   return (
     <div className="interview-info-wrapper">
       <div className="info-content">
         <h3 className="interview-info-title">{props.title}</h3>
         <div className="interview-info-input">
-          <ControlledInput
-            control={control}
+          <Input
+            value={internalNotes}
+            onChange={setInternalNotes}
             label="Internal Notes"
             numLines={12}
-            name="fosterInfo.restrictions"
             className="info-input"
           />
         </div>
@@ -56,7 +69,7 @@ function InterviewInfo(props) {
         setVisible={setShowPassDialog}
         status="Pass"
         initialMessage={props.passInitialMessage}
-        onConfirm={props.onPassConfirm}
+        onConfirm={handleOnConfirm(props.onPassConfirm)}
       />
       {props.contingent && (
         <PassFail
@@ -64,7 +77,7 @@ function InterviewInfo(props) {
           setVisible={setShowContingentDialog}
           status="Contingent"
           initialMessage={props.contingentInitialMessage}
-          onConfirm={props.onContingentConfirm}
+          onConfirm={handleOnConfirm(props.onContingentConfirm)}
         />
       )}
       <PassFail
@@ -72,7 +85,7 @@ function InterviewInfo(props) {
         setVisible={setShowRejectDialog}
         status="Reject"
         initialMessage={props.rejectInitialMessage}
-        onConfirm={props.onRejectConfirm}
+        onConfirm={handleOnConfirm(props.onRejectConfirm)}
       />
     </div>
   );
