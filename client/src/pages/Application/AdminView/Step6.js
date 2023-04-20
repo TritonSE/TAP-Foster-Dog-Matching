@@ -44,7 +44,6 @@ function FosterAndDogInformation() {
   const [dogInternalNotes, setDogInternalNotes] = useState("");
 
   const [dog, setDog] = useState();
-  console.log(applicationState);
 
   useEffect(() => {
     getDog(applicationState?.finalDog).then((res) => setDog(res.data.dog));
@@ -54,7 +53,6 @@ function FosterAndDogInformation() {
       setAmbassadorName(adminObj.firstName + " " + adminObj.lastName);
       setAmbassadorPhone(adminObj.phone);
       setAmbassadorEmail(adminObj.email);
-      console.log(adminObj);
     });
     getAdmin(applicationState.coordinator).then((data) =>
       setCoordinatorName(data.data.admin.firstName + " " + data.data.admin.lastName)
@@ -66,7 +64,6 @@ function FosterAndDogInformation() {
   }, []);
 
   useEffect(() => {
-    console.log("dog", dog);
     if (dog != null && dog.internalNotes != null) {
       setDogInternalNotes(dog.internalNotes);
     }
@@ -76,6 +73,7 @@ function FosterAndDogInformation() {
     <Column>
       <FosterProfile
         name={fosterName}
+        email={applicationState.email}
         ambassadorName={ambassadorName}
         coordinatorName={coordinatorName}
         fosterHistory={fosterHistory}

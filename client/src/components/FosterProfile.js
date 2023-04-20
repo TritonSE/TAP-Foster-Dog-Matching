@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import SplitCardContainer from "./SplitCardContainer";
 import DogCard from "./DogProfileCard";
 
 /*
@@ -13,20 +12,21 @@ import DogCard from "./DogProfileCard";
 const Background = styled.div`
   background-color: black;
   border-radius: 35px;
-  width: min-content;
   text-align: center;
-  padding: 5px 60px 60px 60px;
+  flex: 1;
+  padding: 30px;
 `;
 const ContentBackground = styled.div`
   background-color: white;
   border-radius: 13.85px;
-  width: min-content;
   padding: 12px;
 `;
 const Title = styled.div`
   color: white;
   font-size: 33px;
   padding-bottom: 20px;
+  font-weight: 700;
+  line-height: 40px;
 `;
 const CardTitle = styled.div`
   font-size: 30px;
@@ -39,23 +39,65 @@ const ContentBox = styled.div`
   border: 3px solid #8dc442;
   border-radius: 23.6px;
 `;
-const FullWidth = styled.div`
-  width: 100%;
-`;
 const LeftMargin = styled.div`
   margin-left: 20px;
+`;
+const TableRow = styled.tr`
+  border: solid;
+  border-width: 1px 0;
+`;
+const TableCell = styled.td`
+  padding: 16px 0 16px 47px;
+`;
+const TextBox = styled.div`
+  background-color: white;
+  border-radius: 25px;
+  margin-top: 12px;
+  padding: 5px 22px 0 22px;
+`;
+const TextBoxTitle = styled.span`
+  font-weight: 700;
+  line-height: 36px;
+  font-size: 30px;
+`;
+const FosterProfileTable = styled.table`
+  width: 100%;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 400;
+  border-collapse: collapse;
+  text-align: left;
+  tr:first-child {
+    border-top: none;
+  }
+  tr:last-child {
+    border-bottom: none;
+  }
 `;
 function FosterProfile(props) {
   return (
     <Background>
       <Title>Foster Profile</Title>
       <ContentBackground>
-        <CardTitle>{props.name}</CardTitle>
-        <p>
-          {props.ambassadorName ? "Ambassador: " + props.ambassadorName + " " : ""}
-          <br />
-          {props.coordinatorName ? "Coordinator: " + props.coordinatorName : ""}
-        </p>
+        <TextBox>
+          <TextBoxTitle>{props.name}</TextBoxTitle>
+          <FosterProfileTable border="1" frame="void" rules="rows">
+            <tbody>
+              <TableRow>
+                <TableCell>Email: </TableCell>
+                <TableCell>{props.email}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Ambassador: </TableCell>
+                <TableCell>{props.ambassadorName}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Coordinator: </TableCell>
+                <TableCell>{props.coordinatorName}</TableCell>
+              </TableRow>
+            </tbody>
+          </FosterProfileTable>
+        </TextBox>
         {props.internalNotes && props.internalNotes !== "" && (
           <>
             <NotesTitle>Internal Notes:</NotesTitle>
@@ -78,38 +120,5 @@ function FosterProfile(props) {
     </Background>
   );
 }
-/*
-function FosterProfile(props) {
-  return (
-    <Background>
-      <Title>Foster Profile</Title>
-      <ContentBackground>
-        <SplitCardContainer>
-          <FullWidth>
-            <CardTitle>{props.name}</CardTitle>
-          </FullWidth>
-          <FullWidth>
-            <CardTitle>Current</CardTitle>
-            <p>
-              {props.ambassadorName ? "Ambassador: " + props.ambassadorName + " ": ""}
-              {props.coordinatorName ? "Coordinator: " + props.coordinatorName : ""}
-            </p>
-            {props.fosterHistory && (
-              <ContentBox>
-                <CardTitle>Foster History:</CardTitle>
-                <SplitCardContainer style={{maxWidth: '100px !important'}}>
-                {props.fosterHistory.map((foster) => (
-                  <DogCard imageRef={foster.imageRef} name={foster.name} />
-                ))}
-                </SplitCardContainer>
-                
-              </ContentBox>
-            )}
-          </FullWidth>
-        </SplitCardContainer>
-      </ContentBackground>
-    </Background>
-  );
-}
-*/
+
 export default FosterProfile;

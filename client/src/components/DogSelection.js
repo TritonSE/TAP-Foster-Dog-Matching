@@ -131,8 +131,6 @@ function DogSelection() {
     [applicationId, current]
   );
 
-  useEffect(() => console.log(current), [current]);
-
   return (
     <Content>
       <Text>Select a dog to confirm Meet & Greet</Text>

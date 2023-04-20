@@ -1,10 +1,13 @@
-import { React, useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { Colors } from "./Theme";
 import SplitCardContainer from "./SplitCardContainer";
 import PenIcon from "../images/penicon.png";
 import GridImage3 from "../images/griddog3.png";
 import { getDogs } from "../services/dogs";
+import ApplicationContext from "../contexts/ApplicationContext";
+import { DataContext } from "../contexts/DataContext";
+import FosterProfile from "./FosterProfile";
 
 /**
  * This component is used as the fourth step of the
@@ -31,6 +34,8 @@ const FosterProfileContainer = styled.div`
   border-radius: 15px;
   padding: 5px 20px 20px 20px;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 `;
 const AvailableDogsContainer = styled.div`
   text-align: center;
@@ -57,51 +62,16 @@ const TitleText = styled.span`
 `;
 const TextBox = styled.div`
   background-color: white;
-  border-radius: 25px;
+  border-radius: 13.85px;
   margin-top: 12px;
   padding: 5px 22px 0 22px;
+  flex: 1;
 `;
 const TextBoxTitle = styled.span`
   font-weight: 700;
   line-height: 36px;
   font-size: 30px;
 `;
-const FosterProfileTable = styled.table`
-  width: 100%;
-  font-size: 20px;
-  line-height: 24px;
-  font-weight: 400;
-  border-collapse: collapse;
-  text-align: left;
-  tr:first-child {
-    border-top: none;
-  }
-  tr:last-child {
-    border-bottom: none;
-  }
-`;
-const TableRow = styled.tr`
-  border: solid;
-  border-width: 1px 0;
-`;
-
-const EmailDecoration = styled.span`
-  text-decoration-line: underline;
-`;
-
-const FlexContainer = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  gap: 12px;
-`;
-const UpdateContainer = styled.div`
-  font-size: 20px;
-  line-height: 20px;
-  text-align: center;
-  padding: 4px;
-  background-color: ${Colors.green};
-`;
-
 const GeneralNotes = styled.span`
   font-weight: 700;
   font-size: 25px;
@@ -116,19 +86,6 @@ const InternalNotes = styled.div`
   text-align: left;
   padding-top: 12px;
 `;
-const TableCell = styled.td`
-  padding: 16px 0 16px 47px;
-`;
-const ViewApplicationButton = styled.button`
-  background-color: ${Colors.green};
-  border-radius: 10px;
-  border: none;
-  font-size: 20px;
-  line-height: 24px;
-  padding: 5px 30px;
-  cursor: pointer;
-`;
-
 const EditButton = styled.button`
   position: absolute;
   top: ${(props) => (props.topOffset ? props.topOffset : "0")};
@@ -299,50 +256,29 @@ const SubmitButton = styled.button`
 `;
 
 function FosterMatchingAdmin({ handleConfirm, selectedDogs }) {
+  const { applicationState } = React.useContext(ApplicationContext);
+  const { allAmbassadors, allCoordinators } = React.useContext(DataContext);
+  const [ambassador, setAmbassador] = React.useState({});
+  const [coordinator, setCoordinator] = React.useState({});
+
+  React.useEffect(() => {
+    if (allAmbassadors)
+      setAmbassador(allAmbassadors.find((a) => a._id === applicationState.ambassador));
+    if (allCoordinators)
+      setCoordinator(allCoordinators.find((a) => a._id === applicationState.coordinator));
+  }, [allCoordinators, allAmbassadors]);
+
   return (
     <OuterContainer>
       <PaddingContainer>
         <SplitCardContainer>
           <FosterProfileContainer>
-            <TitleText>Foster Profile</TitleText>
-            <TextBox>
-              <TextBoxTitle>Shelby</TextBoxTitle>
-              <FosterProfileTable border="1" frame="void" rules="rows">
-                <tbody>
-                  <TableRow>
-                    <TableCell>Contact Info: </TableCell>
-                    <TableCell>
-                      123-456-7890
-                      <br />
-                      <EmailDecoration>shelby@gmail.com</EmailDecoration>
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>Currently Fostering?</TableCell>
-                    <TableCell>No</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>Matching Status</TableCell>
-                    <TableCell>
-                      <FlexContainer>
-                        <span>Step 4</span>
-                        <UpdateContainer>Status Updated</UpdateContainer>{" "}
-                      </FlexContainer>
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>Last Active</TableCell>
-                    <TableCell>4/23/2021</TableCell>
-                  </TableRow>
-                </tbody>
-              </FosterProfileTable>
-              <FloatingEditButton topOffset="-11px" leftOffset="calc(97% - 45px)" />
-              <br />
-              <br />
-              <ViewApplicationButton>View Application</ViewApplicationButton>
-              <br />
-              <br />
-            </TextBox>
+            <FosterProfile
+              name={applicationState.firstName + " " + applicationState.lastName}
+              email={applicationState.email}
+              ambassadorName={ambassador.firstName + " " + ambassador.lastName}
+              coordinatorName={coordinator.firstName + " " + coordinator.lastName}
+            />
             <TextBox>
               <TextBoxTitle>Internal Foster Notes</TextBoxTitle>
               <TextLeftAlign>
