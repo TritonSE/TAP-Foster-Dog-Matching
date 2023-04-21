@@ -1,4 +1,5 @@
 const express = require("express");
+const multer = require("multer");
 const { body } = require("express-validator");
 const {
   updateAdmin,
@@ -9,8 +10,10 @@ const {
 } = require("../services/admins");
 const { validateRequest } = require("../middleware/validation");
 const { requireAuthentication, requireAuthenticatedAdmin } = require("../middleware/auth");
+const { uploadImage } = require("../services/image");
 
 const router = express.Router();
+const upload = multer();
 
 const validators = [
   body("firstName").notEmpty().isString(),
@@ -23,7 +26,6 @@ const validators = [
     .withMessage("Password must have at least 8 characters"),
   body("phone").isString().isMobilePhone("en-US"),
   body("role").notEmpty().isString().isIn(Object.values(ADMIN_ROLES)),
-  body("photoURL").isString().isURL(),
   body("schedule").isObject(),
 ];
 
@@ -77,6 +79,25 @@ router.put(
           errors: [{ message: `Something went wrong, Admin could not be updated` }],
         });
       })
+      .catch((err) => next(err));
+  }
+);
+
+/**
+ * PUT /admins/photo/:adminId - Update a admin profile image
+ */
+router.put(
+  "/photo/:adminId",
+  [requireAuthenticatedAdmin, upload.single("image")],
+  (req, res, next) => {
+    const { adminId } = req.params;
+    uploadImage(`profile/${adminId}.jpg`, req.file)
+      .then((photoURL) => updateAdmin(adminId, { photoURL }))
+      .then((admin) =>
+        res.status(200).json({
+          admin,
+        })
+      )
       .catch((err) => next(err));
   }
 );
