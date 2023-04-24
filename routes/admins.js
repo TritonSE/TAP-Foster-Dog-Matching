@@ -32,10 +32,16 @@ const validators = [
  *
  * To only validate the fields (w/o creating an admin), set validateOnly: true in the body
  */
+// eslint-disable-next-line consistent-return
 router.post("/", [...validators, validateRequest], (req, res, next) => {
   const {
-    body: { validateOnly },
+    body: { signupKey, validateOnly },
   } = req;
+  if (!validateOnly && signupKey !== process.env.ADMIN_SIGNUP_KEY) {
+    return res.status(400).json({
+      message: "Invalid signup key",
+    });
+  }
   createAdmin(req.body, validateOnly)
     .then((admin) => {
       if (validateOnly) {
