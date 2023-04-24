@@ -14,7 +14,7 @@ import APPLICATION_STAGES from "../../../constants/APPLICATION_STAGES";
 import useInterview from "../../../hooks/useInterview";
 
 function InterviewInformation() {
-  const { applicationId, setApplicationState, applicationState } =
+  const { applicationId, setApplicationState, applicationState, goToStep } =
     React.useContext(ApplicationContext);
   const { interview } = useInterview(applicationState.user, APPLICATION_STAGES.INITIAL_INTERVIEW);
 
@@ -26,9 +26,10 @@ function InterviewInformation() {
         },
         status: "Step 3: Home Screen",
       };
-      updateApplication(applicationId, reqBody).then((response) =>
-        setApplicationState(response.data.application)
-      );
+      updateApplication(applicationId, reqBody).then((response) => {
+        setApplicationState(response.data.application);
+        goToStep((step) => step + 1);
+      });
     },
     [applicationId]
   );
