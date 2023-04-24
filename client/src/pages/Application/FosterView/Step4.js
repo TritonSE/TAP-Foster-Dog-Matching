@@ -11,7 +11,6 @@ import DogProfileCard from "../../../components/DogProfileCard";
 import DogCard from "../../../components/DogCard";
 import ApplicationContext from "../../../contexts/ApplicationContext";
 import { getDog } from "../../../services/dogs";
-import { updateApplication } from "../../../services/application";
 
 const searchingForMatchesContent = (
   <>
