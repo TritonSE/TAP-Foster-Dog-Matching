@@ -50,6 +50,7 @@ const FosterMatchesContentContainer = styled.div`
   flex: 1;
   height: 100%;
   box-sizing: border-box;
+  overflow-y: auto;
 `;
 
 const DogsContainer = styled.div`
