@@ -23,7 +23,9 @@ const validators = [
   body("date").notEmpty().isDate({ format: "MM/DD/YYYY" }),
   body("time")
     .notEmpty()
-    .matches("^((1[0-2]|0?[1-9]):([0-5][0-9]) - (1[0-2]|0?[1-9]):([0-5][0-9])([AaPp][Mm]))$"),
+    .matches(
+      "^((1[0-2]|0?[1-9]):([0-5][0-9])([AaPp][Mm])-(1[0-2]|0?[1-9]):([0-5][0-9])([AaPp][Mm]))$"
+    ),
   body("location").notEmpty().isString(),
   body("internalNotes").optional().isString(),
   body("stage").notEmpty().isString(),

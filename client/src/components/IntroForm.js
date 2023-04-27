@@ -13,10 +13,6 @@ import { getAuthErrorMessage, signInUser } from "../services/auth";
 import { createAdmin } from "../services/admins";
 import { createUser } from "../services/users";
 
-const ADMIN_SIGN_UP_KEYS = {
-  admin: process.env.REACT_APP_ADMIN_TOKEN,
-};
-
 function IntroForm(props) {
   let content;
   const navigate = useNavigate();
@@ -75,6 +71,7 @@ function IntroForm(props) {
       lastName,
       email,
       password,
+      signupKey,
     };
 
     if (props.accountType === "Admin") {
@@ -95,12 +92,6 @@ function IntroForm(props) {
             setFormType("signup-key");
           }
         });
-        return;
-      }
-      // Check if sign up key is correct
-      if (ADMIN_SIGN_UP_KEYS.admin !== signupKey) {
-        setError("Invalid sign up key.");
-        console.log(error);
         return;
       }
     }
