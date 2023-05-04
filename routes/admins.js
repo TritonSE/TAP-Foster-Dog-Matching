@@ -1,4 +1,5 @@
 const express = require("express");
+const { nanoid } = require("nanoid");
 const multer = require("multer");
 const { body } = require("express-validator");
 const {
@@ -91,7 +92,7 @@ router.put(
   [requireAuthenticatedAdmin, upload.single("image")],
   (req, res, next) => {
     const { adminId } = req.params;
-    uploadImage(`profile/${adminId}.jpg`, req.file)
+    uploadImage(`profile/${adminId}_${nanoid(6)}.jpg`, req.file)
       .then((photoURL) => updateAdmin(adminId, { photoURL }))
       .then((admin) =>
         res.status(200).json({

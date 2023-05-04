@@ -1,5 +1,6 @@
 const express = require("express");
 const multer = require("multer");
+const { nanoid } = require("nanoid");
 const { body } = require("express-validator");
 const { getDogs, getDog, createDog, updateDog } = require("../services/dogs");
 const { validateRequest } = require("../middleware/validation");
@@ -109,7 +110,7 @@ router.put(
   [requireAuthenticatedAdmin, upload.single("image")],
   (req, res, next) => {
     const { dogId, imageIndex } = req.params;
-    uploadImage(`dog/${dogId}/image_${imageIndex}.jpg`, req.file)
+    uploadImage(`dog/${dogId}/image_${imageIndex}_${nanoid(6)}.jpg`, req.file)
       .then((photoURL) => updateDog(dogId, { $set: { [`imageUrl.${imageIndex}`]: photoURL } }))
       .then((dog) =>
         res.status(200).json({

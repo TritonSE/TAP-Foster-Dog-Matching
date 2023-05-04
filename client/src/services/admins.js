@@ -6,7 +6,7 @@
  *
  */
 
-const { getData, sendData } = require("./data");
+const { getData, sendData, sendRawData } = require("./data");
 
 /**
  * Create an admin
@@ -50,4 +50,10 @@ export async function getAdmin(adminId) {
  */
 export async function getAllAdmins() {
   return getData("admins");
+}
+
+export async function updateAdminProfileImage(adminId, imageFile) {
+  const formData = new FormData();
+  formData.append("image", imageFile);
+  return sendRawData(`admins/photo/${adminId}`, "PUT", {}, formData);
 }
