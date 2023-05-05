@@ -140,8 +140,7 @@ function DogProfileSummary({ dog }) {
       <DogName>{dog.name}</DogName>
       <InfoWrapper>
         <LeftInfoWrapper>
-          {/* TODO: change src to dog.imageUrl[0] when image hosting is figured out */}
-          <DogPic src={Doggo} />
+          <DogPic src={dog.imageUrl} />
           <InlineInfo field="Age" value={dog.age + " year old"} />
           <InlineInfo field="Gender" value={dog.gender} />
           <InlineInfo field="Breed" value={dog.breed} />

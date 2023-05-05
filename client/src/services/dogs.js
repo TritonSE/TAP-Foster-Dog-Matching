@@ -6,7 +6,7 @@
  *
  */
 
-const { getData, sendData } = require("./data");
+const { getData, sendData, sendRawData } = require("./data");
 
 /**
  * Create a dog
@@ -50,4 +50,10 @@ export async function getDogs() {
  */
 export async function getDog(dogId) {
   return getData(`dogs/${dogId}`);
+}
+
+export async function updateDogProfileImage(dogId, imageFile) {
+  const formData = new FormData();
+  formData.append("image", imageFile);
+  return sendRawData(`dogs/photo/${dogId}`, "PUT", {}, formData);
 }

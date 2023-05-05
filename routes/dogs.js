@@ -103,15 +103,15 @@ router.put(
 );
 
 /**
- * PUT /dogs/photo/:dogId/:imageIndex - Update the `imageIndex`th dog profile image
+ * PUT /dogs/photo/:dogId - Update a dog profile image
  */
 router.put(
-  "/photo/:dogId/:imageIndex",
+  "/photo/:dogId",
   [requireAuthenticatedAdmin, upload.single("image")],
   (req, res, next) => {
-    const { dogId, imageIndex } = req.params;
-    uploadImage(`dog/${dogId}/image_${imageIndex}_${nanoid(6)}.jpg`, req.file)
-      .then((photoURL) => updateDog(dogId, { $set: { [`imageUrl.${imageIndex}`]: photoURL } }))
+    const { dogId } = req.params;
+    uploadImage(`dog/${dogId}_${nanoid(6)}.jpg`, req.file)
+      .then((imageUrl) => updateDog(dogId, { imageUrl }))
       .then((dog) =>
         res.status(200).json({
           dog,
