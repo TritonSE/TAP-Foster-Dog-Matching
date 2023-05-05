@@ -25,7 +25,6 @@ function DashboardCards() {
   // Get user from backend
   useEffect(() => {
     if (!signedIn) return;
-    console.log(currentUser);
     currentUser.applications.map((applicationId) =>
       getApplication(applicationId).then((application) => {
         const applicationsCopy = [];
@@ -37,7 +36,6 @@ function DashboardCards() {
   }, [signedIn, loaded]);
   // Load all application models from backend
   useEffect(() => {
-    console.log(applications);
     if (applications !== [] && applications.length === currentUser.applications.length)
       setLoaded(true);
   }, [applications]);
@@ -82,7 +80,7 @@ function DashboardCards() {
         currentUser.fosters.current.length !== 0 && <h1>Current Fosters</h1> &&
         currentUser.fosters.current.map((dog) => (
           <DashboardCard
-            imagePath={dog.imageUrl.length > 0 ? dog.imageUrl[0] : dogCollage}
+            imagePath={dog.imageUrl || dogCollage}
             imageAltText="Dog decoration image"
             cardText={dog.name}
             key={dog._id}
@@ -96,7 +94,7 @@ function DashboardCards() {
         currentUser.fosters.past.length !== 0 && <h1>Past Fosters</h1> &&
         currentUser.fosters.past.map((dog) => (
           <DashboardCard
-            imagePath={dog.imageUrl.length > 0 ? dog.imageUrl[0] : dogCollage}
+            imagePath={dog.imageUrl || dogCollage}
             imageAltText="Dog decoration image"
             cardText={dog.name}
             key={dog._id}

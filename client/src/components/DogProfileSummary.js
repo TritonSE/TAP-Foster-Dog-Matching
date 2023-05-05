@@ -140,7 +140,8 @@ function DogProfileSummary({ dog }) {
       <DogName>{dog.name}</DogName>
       <InfoWrapper>
         <LeftInfoWrapper>
-          <DogPic src={dog.imageUrl} />
+          {/* TODO: Replace placeholder dog image */}
+          <DogPic src={dog.imageUrl || Doggo} />
           <InlineInfo field="Age" value={dog.age + " year old"} />
           <InlineInfo field="Gender" value={dog.gender} />
           <InlineInfo field="Breed" value={dog.breed} />

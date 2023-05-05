@@ -161,7 +161,6 @@ function DogInfoBlock({ blockTitle, dogs, validator, loaded, setDogPopUp, setCur
               <>
                 {dogs.map((dog) => {
                   if (validator === dog.category) {
-                    // TODO: change imageRef to dog.imageUrl[0] once image hosting is set up
                     return (
                       <ClickableDogCard
                         onClick={() => {
@@ -169,7 +168,8 @@ function DogInfoBlock({ blockTitle, dogs, validator, loaded, setDogPopUp, setCur
                           setCurDog(dog);
                         }}
                       >
-                        <DogProfileCard name={dog.name} imageRef={Doggo} />
+                        {/* TODO: Replace placeholder dog image */}
+                        <DogProfileCard name={dog.name} imageRef={dog.imageUrl || Doggo} />
                       </ClickableDogCard>
                     );
                   }
