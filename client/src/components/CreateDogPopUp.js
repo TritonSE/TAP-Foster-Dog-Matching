@@ -189,7 +189,7 @@ function CreateDogPopUp(props) {
     createDog(reqBody)
       .then((response) => {
         if (response.ok && newImage) return updateDogProfileImage(response.data.dog._id, newImage);
-        return Promise.resolve(); // TODO: handle error??
+        return Promise.resolve({ ok: true }); // TODO: handle error??
       })
       .then((response) => {
         if (response.ok) {
@@ -218,7 +218,7 @@ function CreateDogPopUp(props) {
     updateDog(props.dog._id, reqBody)
       .then((response) => {
         if (response.ok && newImage) return updateDogProfileImage(props.dog._id, newImage);
-        return Promise.resolve(); // TODO: handle error??
+        return Promise.resolve({ ok: true }); // TODO: handle error??
       })
       .then((response) => {
         if (response.ok) {
