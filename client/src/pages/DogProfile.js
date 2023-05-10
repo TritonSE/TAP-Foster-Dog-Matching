@@ -12,7 +12,7 @@ import DefaultBody from "../components/DefaultBody";
 import DogProfileCard from "../components/DogProfileCard";
 import CreateDogPopUp from "../components/CreateDogPopUp";
 import Arrow from "../images/arrow.png";
-import Doggo from "../images/good-boi-2.png";
+import dogDefault from "../images/dog-default.png";
 import DogProfilePopUp from "../components/DogProfilePopUp";
 import CreateNew from "../images/createNewDog.png";
 
@@ -168,8 +168,7 @@ function DogInfoBlock({ blockTitle, dogs, validator, loaded, setDogPopUp, setCur
                           setCurDog(dog);
                         }}
                       >
-                        {/* TODO: Replace placeholder dog image */}
-                        <DogProfileCard name={dog.name} imageRef={dog.imageUrl || Doggo} />
+                        <DogProfileCard name={dog.name} imageRef={dog.imageUrl || dogDefault} />
                       </ClickableDogCard>
                     );
                   }

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Colors } from "./Theme";
 import SplitCardContainer from "./SplitCardContainer";
 import PenIcon from "../images/penicon.png";
-import GridImage3 from "../images/griddog3.png";
+import dogDefault from "../images/dog-default.png";
 import { getDogs } from "../services/dogs";
 
 /**
@@ -277,7 +277,7 @@ function DogGrid(props) {
         return (
           <DogCard
             dogName={dog?.name}
-            dogImage={GridImage3}
+            dogImage={dog.imageUrl || dogDefault}
             updateCard={tryCheckDogCard}
             id={dog?._id}
             setSelectedDogs={setSelectedDogs}

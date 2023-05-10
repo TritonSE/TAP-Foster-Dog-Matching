@@ -14,7 +14,7 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import Edit from "../images/pencil.png";
-import Doggo from "../images/good-boi.png";
+import dogDefault from "../images/dog-default.png";
 
 const ImageWrapper = styled.div`
   display: flex;
@@ -63,8 +63,7 @@ function DogImageInput({ initialValue, onChange }) {
 
   return (
     <ImageWrapper>
-      {/* TODO: Replace placeholder dog image */}
-      <DogPic src={imageUrl || Doggo} />
+      <DogPic src={imageUrl || dogDefault} />
       <EditWrapper onClick={openFileUploadDialog}>
         <EditImg src={Edit} />
         <EditText>{imageUrl ? "Edit" : "Add"}</EditText>
