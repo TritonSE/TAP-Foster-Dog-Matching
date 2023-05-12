@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import DefaultBody from "../components/DefaultBody";
 import DashboardCard from "../components/DashboardCard";
 import IconButton from "../components/IconButton";
-import dogCollage from "../images/dogcollage2.png";
+import dogCollage from "../images/dogcollage.png";
 import plus from "../images/plus.png";
 import { AuthContext } from "../contexts/AuthContext";
 import { device } from "../utils/useResponsive";
@@ -60,11 +60,6 @@ function DashboardCards() {
         applications.length !== 0 &&
         applications.map((application) => (
           <DashboardCard
-            // imagePath={ //TODO ADD IMAGE PATH
-            //   application.selectedDogs.length > 0 && application.selectedDogs[0].imageUrl.length > 0
-            //     ? application.selectedDogs[0].imageUrl[0]
-            //     : dogCollage
-            // }
             imagePath={dogCollage}
             imageAltText="Dog decoration image"
             cardText="Continue your application"
