@@ -11,7 +11,7 @@ import { ControlledRadios } from "./Radios";
 import { device } from "../utils/useResponsive";
 import { Colors } from "./Theme";
 import Meetings from "./Meeting";
-import doggo from "../images/good-boi.png";
+import doggo from "../images/dog.png";
 import logo from "../images/logo-inverted.png";
 import ApplicationContext from "../contexts/ApplicationContext";
 import PassFail from "./PassFail";

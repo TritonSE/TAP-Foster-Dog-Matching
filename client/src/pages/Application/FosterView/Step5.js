@@ -7,7 +7,7 @@ import MeetingScheduling from "../../../components/MeetingScheduling";
 import StatusUpdate from "../../../components/StatusUpdate";
 import Meetings from "../../../components/Meeting";
 import logo from "../../../images/logo-inverted.png";
-import doggo from "../../../images/good-boi.png";
+import doggo from "../../../images/dog.png";
 import ApplicationContext from "../../../contexts/ApplicationContext";
 import APPLICATION_STAGES from "../../../constants/APPLICATION_STAGES";
 import useInterview from "../../../hooks/useInterview";
