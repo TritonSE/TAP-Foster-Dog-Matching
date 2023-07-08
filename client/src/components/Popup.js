@@ -1,9 +1,8 @@
-import React, { useState, useContext } from "react";
+import React, { useRef, useState, useContext } from "react";
 import "../css/popup.css";
 import { AuthContext } from "../contexts/AuthContext";
 import edit from "../images/edit.png";
-import pfp from "../images/pfp.png";
-import { updateAdmin } from "../services/admins";
+import { updateAdmin, updateAdminProfileImage } from "../services/admins";
 
 function formatPhoneNumber(value) {
   // THANKS: https://tomduffytech.com/how-to-format-phone-number-in-react/
@@ -35,9 +34,12 @@ function formatPhoneNumber(value) {
 // Used to Profile.js for viewing and editing user's profile
 function Popup(props) {
   const [editing, setEditing] = useState(false);
+  const [profileImageURL, setProfileImageURL] = useState(props.profile.photoURL);
+  const [newProfileImage, setNewProfileImage] = useState(null);
   const [phone, setPhone] = useState(props.profile.phone);
   const [email, setEmail] = useState(props.profile.email);
   const [error, setError] = useState();
+  const fileInputRef = useRef(null);
   const { refetchCurrentUser } = useContext(AuthContext);
 
   // Event to change states (not editing, editing) based on whether or not
@@ -47,15 +49,33 @@ function Popup(props) {
   };
 
   const handleSave = () => {
-    updateAdmin(props.profile._id, { phone, email }).then((res) => {
-      if (res.ok) {
-        refetchCurrentUser();
-        setError();
-        toggleEditing();
-      } else {
-        setError(res.data.message);
-      }
-    });
+    updateAdmin(props.profile._id, { phone, email })
+      .then((res) => {
+        if (res.ok) {
+          setError();
+          toggleEditing();
+        } else {
+          setError(res.data.message);
+        }
+      })
+      .then(() => {
+        if (newProfileImage) {
+          return updateAdminProfileImage(props.profile._id, newProfileImage);
+        }
+        return Promise.resolve();
+      })
+      .then(refetchCurrentUser);
+  };
+
+  const openFileUploadDialog = () => {
+    fileInputRef.current.click();
+  };
+
+  const onFileInputChange = (event) => {
+    const file = event.target.files[0];
+    setNewProfileImage(file);
+    const fileUrl = URL.createObjectURL(file);
+    setProfileImageURL(fileUrl);
   };
 
   return (
@@ -74,14 +94,25 @@ function Popup(props) {
         <div className="box-section1">
           {!editing ? (
             <div className="pfp-container">
-              {/* TODO: replace with real profile image after we do image hosting */}
-              <img className="pfp" src={pfp} alt="My profile" />
+              <img className="pfp" src={profileImageURL} alt="My profile" />
             </div>
           ) : (
             <div className="pfp-container">
-              {/* TODO: replace with real profile image after we do image hosting */}
-              <img className="blurred-pfp" src={pfp} alt="My profile" />
-              <div className="edit-pfp-button">
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                onChange={onFileInputChange}
+                style={{ display: "none" }}
+              />
+              <img className="blurred-pfp" src={profileImageURL} alt="My profile" />
+              <div
+                className="edit-pfp-button"
+                onClick={openFileUploadDialog}
+                onKeyDown={openFileUploadDialog}
+                role="button"
+                tabIndex={0}
+              >
                 <div className="edit-pfp-button-text">Edit</div>
               </div>
             </div>

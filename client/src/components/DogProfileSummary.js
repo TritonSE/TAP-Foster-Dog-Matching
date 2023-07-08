@@ -40,7 +40,7 @@
 
 import React from "react";
 import styled from "styled-components";
-import Doggo from "../images/good-boi.png";
+import dogDefault from "../images/dog-default.png";
 import { device } from "../utils/useResponsive";
 
 const SummaryWrapper = styled.div`
@@ -136,8 +136,7 @@ function DogProfileSummary({ dog }) {
       <DogName>{dog.name}</DogName>
       <InfoWrapper>
         <LeftInfoWrapper>
-          {/* TODO: change src to dog.imageUrl[0] when image hosting is figured out */}
-          <DogPic src={Doggo} />
+          <DogPic src={dog.imageUrl || dogDefault} />
           <InlineInfo field="Age" value={dog.age + " year old"} />
           <InlineInfo field="Gender" value={dog.gender} />
           <InlineInfo field="Breed" value={dog.breed} />

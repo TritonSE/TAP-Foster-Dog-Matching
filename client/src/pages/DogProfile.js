@@ -12,7 +12,7 @@ import DefaultBody from "../components/DefaultBody";
 import DogProfileCard from "../components/DogProfileCard";
 import CreateDogPopUp from "../components/CreateDogPopUp";
 import Arrow from "../images/arrow.png";
-import Doggo from "../images/good-boi-2.png";
+import dogDefault from "../images/dog-default.png";
 import DogProfilePopUp from "../components/DogProfilePopUp";
 import CreateNew from "../images/createNewDog.png";
 
@@ -161,7 +161,6 @@ function DogInfoBlock({ blockTitle, dogs, validator, loaded, setDogPopUp, setCur
               <>
                 {dogs.map((dog) => {
                   if (validator === dog.category) {
-                    // TODO: change imageRef to dog.imageUrl[0] once image hosting is set up
                     return (
                       <ClickableDogCard
                         onClick={() => {
@@ -169,7 +168,7 @@ function DogInfoBlock({ blockTitle, dogs, validator, loaded, setDogPopUp, setCur
                           setCurDog(dog);
                         }}
                       >
-                        <DogProfileCard name={dog.name} imageRef={Doggo} />
+                        <DogProfileCard name={dog.name} imageRef={dog.imageUrl || dogDefault} />
                       </ClickableDogCard>
                     );
                   }

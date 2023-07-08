@@ -8,7 +8,7 @@ import styled from "styled-components";
 import StatusUpdate from "../../../components/StatusUpdate";
 import Meetings from "../../../components/Meeting";
 import logo from "../../../images/logo-inverted.png";
-import doggo from "../../../images/good-boi.png";
+import doggo from "../../../images/dog.png";
 import DogProfileSummary from "../../../components/DogProfileSummary";
 import ApplicationContext from "../../../contexts/ApplicationContext";
 import { getDog } from "../../../services/dogs";

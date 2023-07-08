@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import DefaultBody from "../components/DefaultBody";
 import DashboardCard from "../components/DashboardCard";
 import IconButton from "../components/IconButton";
-import dogCollage from "../images/dogcollage2.png";
+import dogCollage from "../images/dogcollage.png";
 import plus from "../images/plus.png";
 import { AuthContext } from "../contexts/AuthContext";
 import { device } from "../utils/useResponsive";
@@ -25,7 +25,6 @@ function DashboardCards() {
   // Get user from backend
   useEffect(() => {
     if (!signedIn) return;
-    console.log(currentUser);
     currentUser.applications.map((applicationId) =>
       getApplication(applicationId).then((application) => {
         const applicationsCopy = [];
@@ -37,7 +36,6 @@ function DashboardCards() {
   }, [signedIn, loaded]);
   // Load all application models from backend
   useEffect(() => {
-    console.log(applications);
     if (applications !== [] && applications.length === currentUser.applications.length)
       setLoaded(true);
   }, [applications]);
@@ -62,11 +60,6 @@ function DashboardCards() {
         applications.length !== 0 &&
         applications.map((application) => (
           <DashboardCard
-            // imagePath={ //TODO ADD IMAGE PATH
-            //   application.selectedDogs.length > 0 && application.selectedDogs[0].imageUrl.length > 0
-            //     ? application.selectedDogs[0].imageUrl[0]
-            //     : dogCollage
-            // }
             imagePath={dogCollage}
             imageAltText="Dog decoration image"
             cardText="Continue your application"
@@ -82,7 +75,7 @@ function DashboardCards() {
         currentUser.fosters.current.length !== 0 && <h1>Current Fosters</h1> &&
         currentUser.fosters.current.map((dog) => (
           <DashboardCard
-            imagePath={dog.imageUrl.length > 0 ? dog.imageUrl[0] : dogCollage}
+            imagePath={dog.imageUrl || dogCollage}
             imageAltText="Dog decoration image"
             cardText={dog.name}
             key={dog._id}
@@ -96,7 +89,7 @@ function DashboardCards() {
         currentUser.fosters.past.length !== 0 && <h1>Past Fosters</h1> &&
         currentUser.fosters.past.map((dog) => (
           <DashboardCard
-            imagePath={dog.imageUrl.length > 0 ? dog.imageUrl[0] : dogCollage}
+            imagePath={dog.imageUrl || dogCollage}
             imageAltText="Dog decoration image"
             cardText={dog.name}
             key={dog._id}

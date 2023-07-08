@@ -18,13 +18,11 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import DogProfileSummary from "./DogProfileSummary";
 import CreateDogPopUp from "./CreateDogPopUp";
-import AmbassadorContactInfo from "./AmbassadorContactInfo";
 import InternalFosterNotes from "./InternalFosterNotes";
 
 import { device } from "../utils/useResponsive";
 import whiteX from "../images/whiteX.png";
 import Edit from "../images/pencil.png";
-import pfp from "../images/pfp.png";
 import { getDog } from "../services/dogs";
 
 const BlurBackground = styled.div`
@@ -125,15 +123,6 @@ const RightWrapper = styled.div`
   }
 `;
 
-const RightTopWrapper = styled.div`
-  height: 55%;
-`;
-
-const RightBottomWrapper = styled.div`
-  height: 35%;
-  max-height: 300px;
-`;
-
 // edit portion styles
 const EditWrapper = styled.div`
   align-self: flex-end;
@@ -179,18 +168,7 @@ function DogProfilePopUp({ setDogPopUp, dog }) {
               <DogProfileSummary dog={curDog} />
             </LeftWrapper>
             <RightWrapper>
-              <RightTopWrapper>
-                <AmbassadorContactInfo
-                  name="Clara A."
-                  profilePic={pfp}
-                  phoneNumber="1234567890"
-                  email="Clara5@tap.com"
-                  status={false}
-                />
-              </RightTopWrapper>
-              <RightBottomWrapper>
-                <InternalFosterNotes internalNotes={curDog.internalNotes} />
-              </RightBottomWrapper>
+              <InternalFosterNotes internalNotes={curDog.internalNotes} />
             </RightWrapper>
           </DogProfileWrapper>
           <EditWrapper onClick={() => setEditDogPopUp(true)}>

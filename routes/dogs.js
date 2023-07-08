@@ -1,10 +1,14 @@
 const express = require("express");
+const multer = require("multer");
+const { nanoid } = require("nanoid");
 const { body } = require("express-validator");
 const { getDogs, getDog, createDog, updateDog } = require("../services/dogs");
 const { validateRequest } = require("../middleware/validation");
 const { requireAuthentication, requireAuthenticatedAdmin } = require("../middleware/auth");
+const { uploadImage } = require("../services/image");
 
 const router = express.Router();
+const upload = multer();
 
 const validators = [
   body("name").notEmpty().isString(),
@@ -12,7 +16,6 @@ const validators = [
   body("gender").notEmpty().isString(),
   body("weight").notEmpty().isNumeric(),
   body("breed").notEmpty().isString(),
-  body("imageUrl").notEmpty().isArray().isURL(),
   body("category").notEmpty().isIn(["new", "in home", "adopted"]),
   body("backgroundInfo").notEmpty().isString(),
   body("vettingInfo").notEmpty().isString(),
@@ -95,6 +98,25 @@ router.put(
           errors: [{ message: `Something went wrong, dog profile could not be updated` }],
         });
       })
+      .catch((err) => next(err));
+  }
+);
+
+/**
+ * PUT /dogs/photo/:dogId - Update a dog profile image
+ */
+router.put(
+  "/photo/:dogId",
+  [requireAuthenticatedAdmin, upload.single("image")],
+  (req, res, next) => {
+    const { dogId } = req.params;
+    uploadImage(`dog/${dogId}_${nanoid(6)}.jpg`, req.file)
+      .then((imageUrl) => updateDog(dogId, { imageUrl }))
+      .then((dog) =>
+        res.status(200).json({
+          dog,
+        })
+      )
       .catch((err) => next(err));
   }
 );

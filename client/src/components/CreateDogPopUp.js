@@ -18,10 +18,9 @@ import { ControlledInput } from "./Input";
 import { Colors } from "./Theme";
 import { device } from "../utils/useResponsive";
 import Select from "./Select";
-import DogImagesInput from "./DogImagesInput";
-import validUrl from "../utils/validUrl";
+import DogImageInput from "./DogImageInput";
 import X from "../images/X.png";
-import { createDog, updateDog } from "../services/dogs";
+import { createDog, updateDog, updateDogProfileImage } from "../services/dogs";
 
 const BlurBackground = styled.div`
   position: absolute;
@@ -95,11 +94,6 @@ const LeftTop = styled.div`
   }
 `;
 
-const LeftBottom = styled.div`
-  width: 100%;
-  justify-self: end;
-`;
-
 const RightWrapper = styled.div`
   width: 40%;
 `;
@@ -132,9 +126,7 @@ const Text = styled.p`
 
 function CreateDogPopUp(props) {
   // dropdowns and state management
-  const [imageArr, setImageArr] = useState([]);
-  const [imageCounter, setImageCounter] = useState(1);
-  const [error, setError] = useState(false);
+  const [newImage, setNewImage] = useState();
   const [gender, setGender] = useState(props.update ? props.dog.gender : "Male");
   const [category, setCategory] = useState(props.update ? props.dog.category : "New");
   // determine whether we are in update mode
@@ -180,90 +172,63 @@ function CreateDogPopUp(props) {
     defaultValues: initialVals(),
   });
 
-  // array of urls validator
-  // returns true if all items are valid urls, returns false otherwise
-  const checkUrl = (arr) => arr.reduce((aggregate, item) => aggregate && validUrl(item), true);
-
   // functions for creating a new dog
   const onSubmitCreate = (data) => {
-    // validate images
-    const filtered = imageArr.filter((item) => item !== "");
-    if (imageCounter !== filtered.length || !checkUrl(filtered)) {
-      // no image(s) provided or invalid urls provided
-      setError(true);
-    } else {
-      // image(s) are provided
-      setError(false);
-
-      // make post request to create a new dog
-      const reqBody = {
-        name: data.name,
-        age: parseInt(data.age, 10),
-        gender,
-        weight: parseInt(data.weight, 10),
-        breed: data.breed,
-        imageUrl: filtered,
-        category: "new",
-        backgroundInfo: data.backgroundInfo,
-        vettingInfo: data.vettingInfo,
-        internalNotes: data.internalNotes ? data.internalNotes : "",
-      };
-      createDog(reqBody).then((response) => {
-        // success - close the pop up
-        if (response.ok) props.setCreateNewPopUp(false);
+    // make post request to create a new dog
+    const reqBody = {
+      name: data.name,
+      age: parseInt(data.age, 10),
+      gender,
+      weight: parseInt(data.weight, 10),
+      breed: data.breed,
+      category: "new",
+      backgroundInfo: data.backgroundInfo,
+      vettingInfo: data.vettingInfo,
+      internalNotes: data.internalNotes ? data.internalNotes : "",
+    };
+    createDog(reqBody)
+      .then((response) => {
+        if (response.ok && newImage) return updateDogProfileImage(response.data.dog._id, newImage);
+        return Promise.resolve({ ok: true }); // TODO: handle error??
+      })
+      .then((response) => {
+        if (response.ok) {
+          // success - close the pop up
+          props.setCreateNewPopUp(false);
+        }
       });
-    }
   };
 
-  const onErrorCreate = () => {
-    // validate images
-    const filtered = imageArr.filter((item) => item !== "");
-    if (imageCounter !== filtered.length || !checkUrl(filtered)) {
-      // no image(s) provided or invalid urls provided
-      setError(true);
-    }
-  };
+  const onErrorCreate = () => {};
 
   // functions for updating a dog
   const onSubmitUpdate = (data) => {
-    // validate images
-    const filtered = imageArr.filter((item) => item !== "");
-    if (imageCounter !== filtered.length || !checkUrl(filtered)) {
-      // no image(s) provided or invalid urls provided
-      setError(true);
-    } else {
-      // image(s) are provided
-      setError(false);
-
-      // make post request to update an existing dog
-      const reqBody = {
-        name: data.name,
-        age: parseInt(data.age, 10),
-        gender,
-        weight: parseInt(data.weight, 10),
-        breed: data.breed,
-        imageUrl: filtered,
-        category,
-        backgroundInfo: data.backgroundInfo,
-        vettingInfo: data.vettingInfo,
-        internalNotes: data.internalNotes ? data.internalNotes : "",
-      };
-      updateDog(props.dog._id, reqBody).then((response) => {
-        if (response.ok)
+    // make post request to update an existing dog
+    const reqBody = {
+      name: data.name,
+      age: parseInt(data.age, 10),
+      gender,
+      weight: parseInt(data.weight, 10),
+      breed: data.breed,
+      category,
+      backgroundInfo: data.backgroundInfo,
+      vettingInfo: data.vettingInfo,
+      internalNotes: data.internalNotes ? data.internalNotes : "",
+    };
+    updateDog(props.dog._id, reqBody)
+      .then((response) => {
+        if (response.ok && newImage) return updateDogProfileImage(props.dog._id, newImage);
+        return Promise.resolve({ ok: true }); // TODO: handle error??
+      })
+      .then((response) => {
+        if (response.ok) {
           // success - close the pop up
           props.setEditDogPopUp(false);
+        }
       });
-    }
   };
 
-  const onErrorUpdate = () => {
-    // validate images
-    const filtered = imageArr.filter((item) => item !== "");
-    if (imageCounter !== filtered.length || !checkUrl(filtered)) {
-      // no image(s) provided or invalid urls provided
-      setError(true);
-    }
-  };
+  const onErrorUpdate = () => {};
 
   return (
     <BlurBackground>
@@ -280,6 +245,10 @@ function CreateDogPopUp(props) {
             <LeftWrapper>
               <LeftTop>
                 <Form.Column>
+                  <DogImageInput
+                    onChange={setNewImage}
+                    initialValue={update ? props.dog.imageUrl : undefined}
+                  />
                   <ControlledInput control={control} label="Name" name="name" required />
                   <ControlledInput
                     control={control}
@@ -316,15 +285,6 @@ function CreateDogPopUp(props) {
                   ) : undefined}
                 </Form.Column>
               </LeftTop>
-              <LeftBottom>
-                <DogImagesInput
-                  initialVals={update ? props.dog.imageUrl : undefined}
-                  setImageArr={setImageArr}
-                  error={error}
-                  setError={setError}
-                  setImageCounter={setImageCounter}
-                />
-              </LeftBottom>
             </LeftWrapper>
 
             <RightWrapper>

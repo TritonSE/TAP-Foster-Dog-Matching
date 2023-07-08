@@ -45,6 +45,17 @@ export async function getData(path, authenticated = true) {
   });
 }
 
+export async function sendRawData(path, method, headers, body, authenticated = true) {
+  if (authenticated) {
+    headers.Authorization = `Bearer ${await getJWTToken()}`;
+  }
+  return makeRequest(path, {
+    method,
+    headers,
+    body,
+  });
+}
+
 /**
  * Make request to API w/ JSON body (ie. POST, PUT, DELETE)
  *
@@ -59,12 +70,5 @@ export async function sendData(path, method, body, authenticated = true) {
   const headers = {
     "Content-Type": "application/json",
   };
-  if (authenticated) {
-    headers.Authorization = `Bearer ${await getJWTToken()}`;
-  }
-  return makeRequest(path, {
-    method,
-    headers,
-    body: JSON.stringify(body),
-  });
+  return sendRawData(path, method, headers, JSON.stringify(body), authenticated);
 }

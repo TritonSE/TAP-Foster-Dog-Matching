@@ -29,8 +29,8 @@ module.exports = mongoose.model(
       required: true,
     },
     imageUrl: {
-      type: [String],
-      required: true,
+      type: String,
+      required: false,
     },
     category: {
       type: String,

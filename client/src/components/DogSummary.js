@@ -10,7 +10,7 @@
 
 import React from "react";
 import styled from "styled-components";
-import DogHappy from "../images/DogHappy.png";
+import dogDefault from "../images/dog-default.png";
 
 const DogContainer = styled.div`
   width: 100%;
@@ -50,7 +50,7 @@ function DogSummary({ dog }) {
   return (
     <DogContainer>
       <Name>{dog.name}</Name>
-      <Image src={dog.image || DogHappy} />
+      <Image src={dog.imageUrl || dogDefault} />
       <Interest>
         <Text>Interest: </Text>
         <Text>{dog.preference} </Text>

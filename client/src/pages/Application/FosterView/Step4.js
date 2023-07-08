@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Meetings from "../../../components/Meeting";
 import logo from "../../../images/logo-inverted.png";
-import doggo from "../../../images/good-boi.png";
+import doggo from "../../../images/dog.png";
 import DogProfileCard from "../../../components/DogProfileCard";
 import DogCard from "../../../components/DogCard";
 import ApplicationContext from "../../../contexts/ApplicationContext";
@@ -138,6 +138,7 @@ function FosterMatches() {
             {/* info about dog when it is clicked */}
             <DogCard
               {...matches[curDog - 1]}
+              imageRef={matches[curDog - 1].imageUrl}
               isOpen={curDog}
               closeModal={() => setCurDog(null)}
               prefArr={applicationState.preference}
