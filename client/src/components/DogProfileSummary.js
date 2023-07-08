@@ -64,14 +64,12 @@ const LeftInfoWrapper = styled.div`
   width: 40%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 `;
 
 const RightInfoWrapper = styled.div`
   width: 50%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   ${device.mobile} {
     width: 40%;
   }
@@ -112,7 +110,6 @@ const Value = styled.div`
   margin: 0;
   font-size: 22px;
   overflow: auto;
-  height: 100%;
   max-height: 250px;
 
   ${device.tablet} {
@@ -121,8 +118,7 @@ const Value = styled.div`
 `;
 
 const TextBlob = styled.div`
-  height: 40%;
-  overflow: hidden;
+  margin-bottom: 10px;
 `;
 
 function InlineInfo({ field, value }) {

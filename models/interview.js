@@ -29,6 +29,7 @@ module.exports = mongoose.model(
       type: String,
       required: true,
     },
+    // i don't think this is used
     internalNotes: {
       type: String,
     },

@@ -94,24 +94,20 @@ function DogSummaryWrap({ dog, active, onClick }) {
 }
 
 function DogSelection() {
-  const { applicationId, setApplicationState, applicationState } =
+  const { applicationId, setApplicationState, applicationState, goToStep } =
     React.useContext(ApplicationContext);
   const [showConfirmDialog, setShowConfirmDialog] = React.useState(false);
   const [current, setCurrent] = useState(-1);
   const [matches, setMatches] = React.useState([]);
 
   useEffect(() => {
-    const res = [];
-
     Promise.all(
       applicationState.selectedDogs.map((dogId) =>
         getDog(dogId).then((response) => response.data.dog)
       )
     ).then((values) => {
-      values.map((val) => res.push(val));
+      setMatches(values);
     });
-
-    setMatches(res);
   }, []);
 
   const onConfirmMeetAndGreet = React.useCallback(
@@ -123,14 +119,13 @@ function DogSelection() {
         finalDog: applicationState.selectedDogs[current],
         status: "Step 5: Meet & Greet",
       };
-      updateApplication(applicationId, reqBody).then((response) =>
-        setApplicationState(response.data.application)
-      );
+      updateApplication(applicationId, reqBody).then((response) => {
+        setApplicationState(response.data.application);
+        goToStep((step) => step + 1);
+      });
     },
     [applicationId, current]
   );
-
-  useEffect(() => console.log(current), [current]);
 
   return (
     <Content>

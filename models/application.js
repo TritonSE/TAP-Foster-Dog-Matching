@@ -242,6 +242,9 @@ module.exports = mongoose.model(
         type: String,
         required: false,
       },
+      internalNotes: {
+        type: String,
+      },
     },
 
     { timestamps: {} }
