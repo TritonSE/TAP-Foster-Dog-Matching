@@ -137,10 +137,7 @@ function ConfirmMeetGreet() {
           <After
             dogMet={dog.name}
             dogHome={dog.name}
-            supplies={[
-              "Lorem Ipsum dolor sit amet, consectetur adipiscing elit.",
-              "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-            ]}
+            supplies={["Crates", "Leashes", "Collars", "Harnesses"]}
           />
         </AfterWrapper>
       </ContentWrapper>
