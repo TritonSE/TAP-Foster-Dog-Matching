@@ -130,7 +130,11 @@ function FosterMatches() {
             ) : (
               <DogsContainer>
                 {matches.map((dog, i) => (
-                  <DogProfileCard {...dog} onClick={() => setCurDog(i + 1)} />
+                  <DogProfileCard
+                    {...dog}
+                    imageRef={dog.imageUrl}
+                    onClick={() => setCurDog(i + 1)}
+                  />
                 ))}
               </DogsContainer>
             )}
