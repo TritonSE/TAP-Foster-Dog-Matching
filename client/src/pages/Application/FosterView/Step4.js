@@ -136,15 +136,17 @@ function FosterMatches() {
             )}
 
             {/* info about dog when it is clicked */}
-            <DogCard
-              {...matches[curDog - 1]}
-              imageRef={matches[curDog - 1].imageUrl}
-              isOpen={curDog}
-              closeModal={() => setCurDog(null)}
-              prefArr={applicationState.preference}
-              appId={applicationState._id}
-              setApplicationState={setApplicationState}
-            />
+            {curDog && (
+              <DogCard
+                {...matches[curDog - 1]}
+                imageRef={matches[curDog - 1].imageUrl}
+                isOpen={curDog}
+                closeModal={() => setCurDog(null)}
+                prefArr={applicationState.preference}
+                appId={applicationState._id}
+                setApplicationState={setApplicationState}
+              />
+            )}
           </FosterMatchesContentContainer>
         </FosterMatchesContainer>
       }
